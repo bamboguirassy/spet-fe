@@ -1,0 +1,47 @@
+<div class="card card-outline-danger bg-gray">
+    <div class="card-body">
+        <span class="title bg-white h6">Vous avez des préinscriptions actives.</span>
+        <!-- preinscription active -->
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive bg-white box-shadow">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Date délai</th>
+                                <th>Filière</th>
+                                <th>Niveau</th>
+                                <th>Année académique</th>
+                                <th>Type admission</th>
+                                <th>Type Passage</th>
+                                <th>Montant</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle">12/11/2019</td>
+                                <td class="align-middle text-truncate">Licence Informatique</td>
+                                <td class="align-middle text-truncate">Licence 1</td>
+                                <td class="align-middle text-truncate">2019/2020</td>
+                                <td class="align-middle text-truncate">Selection de dossier</td>
+                                <td class="align-middle text-truncate">
+                                    <span class="badge badge-success">Passant</span>
+                                </td>
+                                <td class="align-middle text-truncate">25000</td>
+                                <td class="align-middle">
+                                    <div class="btn-group" role="group">
+                                        <button (click)="startProcess(1)"  class="btn btn-outline-primary">
+                                            <i class="fa fa-address-card-o"></i> Finaliser mon
+                                            inscription</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- fin preinscription active -->
+    </div>
+</div>

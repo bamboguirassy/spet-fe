@@ -1,0 +1,52 @@
+<p-toast></p-toast>
+<div class="d-flex justify-content-center align-items-center w-100 h-100 register-container">
+    <div class="col-xl-4 col-md-6 col-10">
+        <div class="card border-0 box-shadow rounded-0">
+            <div class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
+                <!-- <i class="fa fa-registered" aria-hidden="true"></i> -->
+                <img src="/assets/img/logo_ut.jpg" alt="logo_ut">
+            </div>
+            <div class="card-body text-center pb-1">
+                <h2>GPE - Création de compte</h2>
+                <a routerLink="/login" class="transition">Vous possedez déja un compte? Connectez vous !</a>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-4">
+                    <div class="form-group">
+                        <input [formControl]="identifiant" class="form-control validation-field" placeholder="CNI, INE ou N° Passport" type="text"> 
+                        <small class="text-danger" *ngIf="form.get('identifiant').touched">
+                            <span *ngIf="form.get('identifiant').hasError('required')">Ces informations sont obligatoires</span>
+                            <span *ngIf="form.get('identifiant').hasError('minlength')">7 caractères au minimum</span>
+                        </small>       
+                    </div>
+                    <div class="form-group">
+                        <input [formControl]="email" class="form-control validation-field" placeholder="Email Universitaire" type="text"> 
+                        <small class="text-danger" *ngIf="form.get('email').touched">
+                            <span *ngIf="form.get('email').hasError('required')">L'émail est obligatoire</span>
+                            <span *ngIf="form.get('email').hasError('invalidEmail')">Adresse email invalide</span>
+                        </small> 
+                    </div>
+                    <div class="form-group">
+                        <input [formControl]="password" class="form-control validation-field" placeholder="Mot de passe" type="password" minlength="8">
+                         <small class="text-danger" *ngIf="form.get('password').touched">
+                            <span *ngIf="form.get('password').hasError('required')">Le mot de passe est obligatoire</span>
+                            <span *ngIf="form.get('password').hasError('minlength')">Le mot de passe est court, 8 caractères minimum exigés</span>
+                        </small>                     
+                    </div>
+                    <div class="form-group">
+                        <input [formControl]="confirmPassword" class="form-control validation-field" placeholder="Confirmation mot de passe" type="password">
+                        <small class="text-danger" *ngIf="form.get('confirmPassword').touched">
+                            <span *ngIf="form.get('confirmPassword').hasError('required')">La confirmation du mot de passe est obligatoire</span>
+                            <span *ngIf="form.get('confirmPassword').hasError('mismatchedPasswords')">Les mots de passe ne correspondent pas.</span>
+                        </small> 
+                    </div>
+                    <div class="form-group">
+                        <p class="terms">En créant votre compte, vous acceptez les <a class="transition terms" href="javascript:void(0);">conditions d'utilisation</a></p>                  
+                    </div>             
+                    <div class="form-group">
+                        <button [disabled]="!form.valid" class="btn btn-block" type="submit">Créer le compte</button>
+                    </div>
+                </form>  
+            </div>
+        </div>
+    </div>
+</div>

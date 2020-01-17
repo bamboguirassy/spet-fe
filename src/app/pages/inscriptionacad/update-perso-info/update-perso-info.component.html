@@ -1,0 +1,111 @@
+<form>
+    <div class="card  border-white">
+        <div class="card-body  bg-white ">
+            <div class="card-deck">
+                <div class="card bg-white text-center mt-sm-1 mt-md-1 border-white ">
+                    <div class="card-header shadow p-3"> Informations Personnelles &nbsp;&nbsp;&nbsp;<i
+                            class=" text-secondary fa fa-user"></i></div>
+                    <div class="card bg-white border-white mt-3 text-center ">
+                        <div class="card border-white bg-transparent col-md-12">
+                            <label for="AdresseMail">Adresse Mail</label>
+                            <input type="text" class="form-control" name="AdresseMail" id="AdresseMail">
+                        </div>
+                        <div class="form-inline border-white mt-2">
+                            <div class="card border-white col-sm-12">
+                                <label>Telephone 1</label>
+                                <input type="tel" class="form-control" name="Telephone1">
+                            </div>
+                            <div class="card border-white col-sm-12 text-center">
+                                <label>Telephone 2</label>
+                                <input type="tel" class="form-control" name="Telephone2">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card-header shadow p-3 mt-3 border-white"> Mon Adresse&nbsp;&nbsp;&nbsp;<i
+                                class="text-secondary fa fa-map-marker"></i></div>
+
+                        <div class="card-body border-white">
+                            <div class="card border-white">
+                                <label>Pays</label>
+                                <select class="form-control">
+                                    <option disabled selected> Choix du Pays</option>
+                                    <option>Senegal</option>
+                                    <option>Mali</option>
+                                    <option>Gambia</option>
+                                </select>
+                            </div>
+                            <div class="card border-white">
+                                <label>Ville</label>
+                                <input type="text" class="form-control" name="Ville">
+                            </div>
+                            <div class="card border-white">
+                                <label>Quartier</label>
+                                <input type="text" class="form-control" name="Quartier">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-white border-white text-center  col-md-6 col-sm-12">
+                    <div class="card-header border-white shadow p-3"> Situation Familiale&nbsp;&nbsp;&nbsp;<i
+                            class="text-secondary fa fa-users"></i></div>
+                    <div class="card-body border-white">
+                        <div class="card border-white">
+                            <label>Situation Matrimoniale</label>
+                            <select class="form-control">
+                                <option disabled selected></option>
+                                <option>Marié(e)</option>
+                                <option>Divorcé(e)</option>
+                                <option>Celibataire</option>
+                            </select>
+                        </div>
+                        <div class="form-inline mt-3">
+                            <div class="card border-white col-sm-12 border-top-0">
+                                <label for="Conjoint">Nom conjoint(e)</label>
+                                <input type="text" class="form-control" name="conjoint">
+                            </div>
+                            <div class="card border-white bg-white col-sm-12">
+                                <label for="Enfant"> Nombre Enfant(s)</label>
+                                <input type="number" class="form-control" name="Enfant" min="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header border-white shadow p-3"> Aides&nbsp;&nbsp;&nbsp;<i
+                            class="text-secondary fa fa-wheelchair"></i> </div>
+                    <div class="card-body border-white">
+                        <div class="card border-white form-group">
+                            <label>Handicap</label>
+                            <select class="form-control">
+                                <option disabled selected>Avez-vous un handicap ?</option>
+                                <option>Oui</option>
+                                <option>Non</option>
+                            </select>
+                        </div>
+                        <div class="card border-white form-group">
+                            <label>Type d'handicap</label>
+                            <select class="form-control">
+                                <option disabled selected></option>
+                                <option>Psychique</option>
+                                <option>Moteur</option>
+                                <option>Auditif</option>
+                            </select>
+                        </div>
+                        <div class="form-inline">
+                            <div class="card border-white form-group ml-xs-2 ml-sm-2">
+                                <label>Description handicap</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                            <div class="card  border-white form-group mr-xs-2 mr-sm-2">
+                                <label>Orphelin</label>
+                                <select class="form-control mt-sm-2 mt-md-2">
+                                    <option disabled selected></option>
+                                    <option>Oui</option>
+                                    <option>Non</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

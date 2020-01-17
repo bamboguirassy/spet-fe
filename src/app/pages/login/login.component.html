@@ -1,0 +1,64 @@
+<p-toast></p-toast>
+<div class="d-flex justify-content-center align-items-center w-100 h-100 login-container">
+    <div class="col-xl-4 col-md-6 col-10">
+        <div class="card border-0 box-shadow rounded-0">
+            <div [routerLink]="['']"
+            routerLinkActive="router-link-active" class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
+                <!-- <i class="fa fa-sign-in" aria-hidden="true"></i> -->
+                <img src="/assets/img/logo_ut.jpg" alt="logo_ut">
+            </div>
+            <div class="card-body text-center pb-1">
+                <h2>GPE - Connexion Etudiant</h2>
+                <a routerLink="/register" class="transition">Pas encore de compte ? Créez un compte dès maintenant</a><br>
+                <a target="_blank" class="transition" href="http://wifi.univ-thies.sn/recherchermail.php">J'ignore mon adresse email universitaire ?</a>                     
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-4">
+                    <div class="form-group">
+                        <input [formControl]="username" class="form-control validation-field" placeholder="Email Universitaire" type="text">                      
+                        <small class="text-danger" *ngIf="form.get('username').touched && form.get('username').hasError('required')">Email universitaire obligatoire</small>                              
+                        <small class="text-danger" *ngIf="form.get('username').touched && form.get('username').hasError('username')">Adresse email invalide</small>
+                    </div>
+                    <div class="form-group">
+                        <input [formControl]="password" class="form-control validation-field" placeholder="Mot de passe" type="password">
+                        <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('required')">Mot de passe obligatoire</small>                              
+                        <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('minlength')">Mot de passe court, 6 caracteres au minimum</small>
+                    </div>
+                    <div class="form-group d-flex justify-content-between">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="login-checkbox">
+                            <label class="custom-control-label" for="login-checkbox">Se souvenir de moi.</label>
+                        </div>
+                        <a class="transition pull-right" href="javascript:void(0);">Mot de passe oublié ?</a>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="!form.valid" class="btn btn-block" type="submit">Se connecter</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center bg-transparent">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x"></i>
+                        </span>
+                    </li>
+                    <li class="list-inline-item">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x"></i>
+                        </span>
+                    </li>
+                    <li class="list-inline-item">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-google fa-stack-1x"></i>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+       

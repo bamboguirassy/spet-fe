@@ -1,0 +1,103 @@
+<!-- element du tile -->
+<div class="col-md-12 mb-4" [routerLink]="['/parcours',inscription.id]" routerLinkActive="router-link-active">
+    <div class="flip">
+        <div class="content">
+            <div class="front">
+                <div class="card border-1 box-shadow rounded-0" [class.card-outline-success]="inscription?.passage=='P'" [class.card-outline-danger]="inscription?.passage=='R'"  [class.card-outline-warning]="inscription?.passage=='C'">
+                    <div class="card-header border-0 rounded-0 text-muted">
+                        <h5 class="mb-0">
+                            <i class="fa fa-user mr-2 text-success" placement="bottom"></i>
+                            {{inscription?.idclasse?.codeclasse}}
+                        </h5>
+                    </div>
+                    <div class="card-body pt-3">
+
+                        <div class="media">
+                            <div class="d-flex flex-column justify-content-center">
+                                <img class="rounded-circle" src="assets/img/users/default-user.jpg" width="80">
+                                <ul class="list-inline mb-0 mt-1 mx-auto fs-12 text-gray">
+                                    <li class="list-inline-item mr-0">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square-o fa-stack-2x"></i>
+                                            <i class="fa fa-facebook fa-stack-1x"></i>
+                                        </span>
+                                    </li>
+                                    <li class="list-inline-item mr-0">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square-o fa-stack-2x"></i>
+                                            <i class="fa fa-twitter fa-stack-1x"></i>
+                                        </span>
+                                    </li>
+                                    <li class="list-inline-item mr-0">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square-o fa-stack-2x"></i>
+                                            <i class="fa fa-google fa-stack-1x"></i>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="media-body ml-3">
+                                <div class="row">
+                                    <div class="col-4 text-gray text-right pr-0 font-italic text-truncate">
+                                        Etablissement:
+                                    </div>
+                                    <div class="col-8 pl-2 text-truncate" [title]="">
+                                        {{inscription?.idclasse?.idfiliere?.identite?.identiteparent?.libelleentite}}
+                                    </div>
+                                    <div class="col-4 text-gray text-right pr-0 font-italic text-truncate">
+                                        Département:
+                                    </div>
+                                    <div class="col-8 pl-2 text-truncate">
+                                        {{inscription?.idclasse?.idfiliere?.identite?.libelleentite}}</div>
+                                    <div class="col-4 text-gray text-right pr-0 font-italic text-truncate">Filière:
+                                    </div>
+                                    <div class="col-8 pl-2 text-truncate">
+                                        {{inscription?.idclasse?.idfiliere?.libellefiliere}}</div>
+                                    <div class="col-4 text-gray text-right pr-0 font-italic text-truncate">Niveau:
+                                    </div>
+                                    <div class="col-8 pl-2 text-truncate">
+                                        {{inscription?.idclasse?.idniveau?.libelleniveau}}</div>
+                                    <div class="col-4 text-gray text-right pr-0 font-italic text-truncate">Option:
+                                    </div>
+                                    <div class="col-8 pl-2 text-truncate">
+                                        {{inscription?.idspecialite?.libellespecialite }}</div>
+                                    <div class="col-4 text-gray text-right pr-0 font-italic text-truncate">Année:
+                                    </div>
+                                    <div class="col-8 pl-2 text-truncate fs-12 pt-2p">
+                                        {{inscription?.idclasse?.idanneeacad?.libelleanneeacad}}</div>
+                                    <div class="col-4 text-gray text-right pr-0 font-italic text-truncate">Passage:
+                                    </div>
+                                    <div class="col-8 pl-2 text-truncate fs-12 pt-2p">
+                                        <span class="badge badge-danger" *ngIf="inscription?.passage=='R'" >Redoublant</span>
+                                        <span class="badge badge-success" *ngIf="inscription?.passage=='P'" >Passant</span>
+                                        <span class="badge badge-warning" *ngIf="inscription?.passage=='C'" >Conditionnel</span>
+                                    </div>
+                                    <div class="col-4 text-gray text-right pr-0 font-italic text-truncate">Regime:
+                                    </div>
+                                    <div class="col-8 pl-2 text-truncate fs-12 pt-2p">
+                                        {{inscription?.idregimeinscription.libelleregimeinscription}}</div>
+                                    <div class="col-4 text-gray text-right pr-0 font-italic text-truncate">Date
+                                        Inscription:
+                                    </div>
+                                    <div class="col-8 pl-2 text-truncate fs-12 pt-2p">
+                                        {{inscription?.dateinscacad|date:'dd/MM/yyyy'}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="back">
+                <div class="card border-0 box-shadow rounded-0">
+                    <div class="card-header border-0 rounded-0 text-muted">
+
+                    </div>
+                    <div class="card-body pt-3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

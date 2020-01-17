@@ -1,0 +1,82 @@
+<h2>Bonjour cher(e) étudiant(e) </h2>
+<p>
+    vous aviez déposé une demande d'admission en <b>Master 1</b> en <b>génie logiciel</b> pour l'année académique
+    <b>2019-2020</b>.<br>
+    Vous avez été retenu(e) par <b>selection de dossier</b> en tant que <b>passant</b>.<br>
+    Le montant de votre inscription s'élève à <b>50.000FCFA</b>.
+</p>
+<div class="row">
+    <div class="col">
+        <div class="card border-0 box-shadow">
+            <div *ngIf="!confirmed" class="card-body widget-body">
+                <div class="row">
+                    <div *ngFor="let step of steps; let last = last" class="col-md-3 col-sm-6 col-12 step text-center">
+                        <div class="d-flex justify-content-center align-items-center text-white pl-2 pr-2 mb-2 rounded step-content"
+                            [class.bg-success]="step.valid" [class.bg-danger]="step.active"
+                            [class.confirmed]="confirmed">
+                            <i class="fa {{ step.icon }} mr-2" aria-hidden="true"></i>
+                            <span class="step-name">{{step.name}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngFor="let step of steps" [hidden]="!step.active" class="col">
+                    <div class="row">
+                        <h4 class="mt-3 mb-3"><i class="fa {{ step.icon }}"></i> {{step.name}}</h4>
+                    </div>
+
+                    <update-perso-info *ngIf="step.name=='Information Personnelle'"></update-perso-info>
+
+                    <infos-inscription *ngIf="step.name=='Information Inscription'"></infos-inscription>
+
+                    <update-photo *ngIf="step.name=='Mise à jour photo'"></update-photo>
+                    <!-- *ngIf="step.name=='Confirm Your Details'" -->
+
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <button class="btn btn-primary pull-left" (click)="prev()"><i
+                                class="fa fa-chevron-left arrow"></i>&nbsp; Etape précedente</button>
+                        <button *ngIf="!steps[steps.length-1].active" class="btn btn-primary pull-right"
+                            (click)="next()">Etape suivante &nbsp;<i class="fa fa-chevron-right arrow"></i></button>
+                        <button *ngIf="steps[steps.length-1].active" class="btn btn-primary pull-right"
+                            (click)="confirm()">Confirm &nbsp;<i class="fa fa-check arrow"></i></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div *ngIf="confirmed" class="card-body widget-body">
+
+                <div class="col bg-light p-5">
+                    <div
+                        class="d-flex justify-content-center align-items-center flex-column bg-light confirmed-content">
+                        <i class="fa fa-check text-success" aria-hidden="true"></i>
+                        <h2 class="p-3">That's all, thank you!</h2>
+                        <h5 class="p-3">Order number is: 308521089</h5>
+                        <p class="p-2">You will receive an email confirmation shortly at {{this.details.email}}</p>
+                        <i class="fa fa-print text-muted" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

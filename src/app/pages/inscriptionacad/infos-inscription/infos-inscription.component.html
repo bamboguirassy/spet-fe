@@ -1,0 +1,70 @@
+<form>
+    <div class="card-body">
+        <fieldset class="border p-2">
+            <legend class="w-auto" style="font-size:4vmin;">Formation & Modalité:</legend>
+            <div class="form-row">
+                <div class="col-sm-12 col-md-12 col-lg-6 form-group">
+                    <label style="font-weight: bold;">Modalité d'enseignement:</label>
+                    <select class="custom-select" name="modalite">
+                        <option disabled selected>Selectionnez une modalité d'enseignement</option>
+                        <option>Présentiel</option>
+                        <option>Distant</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                    <label style="font-weight: bold;">Regime d'inscription</label>
+                    <select class="custom-select" name="regime">
+                        <option disabled selected>Selectionnez une Regime d'inscription </option>
+                        <option>Régime normal payant</option>
+                        <option>Régime normal non payant</option>
+                    </select>
+                </div>
+            </div><br>
+            <div class="form-row">
+                <div class="col-sm-12 col-md-12 col-lg-6 form-group">
+                    <label style="font-weight: bold;">Spécialité:</label>
+                    <select class="custom-select" name="bourse">
+                        <option disabled selected>Selectionnez une spécialité</option>
+                        <option>Tronc commun</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                    <label style="font-weight: bold;">Cout de la formation:</label>
+                    <input class="form-control" type="number" name="cout" />
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="border p-2">
+            <legend class="w-auto" style="font-size:4vmin;">Informations du doctorant</legend>
+            <div class="form-row">
+                <div class="col-sm-12 col-md-12 col-lg-6 form-group">
+                    <label style="font-weight: bold;">Co-encadreur:</label>
+                    <input class="form-control" type="text" name="partenaire" />
+                </div>
+                <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                    <label style="font-weight: bold;">Encadreur:</label>
+                    <select class="custom-select">
+                        <option>Selectionnez un encadreur</option>
+                        <option>M.Fofona</option>
+                        <option>M.Thiam</option>
+                        <option>M.Diop</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 form-group">
+                    <label style="font-weight: bold;">Université partenaire:</label>
+                    <input class="form-control" type="text" name="partenaire" />
+                </div>
+                <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                    <label style="font-weight: bold;">Source de financement:</label>
+                    <input class="form-control" type="text" name="financement" />
+                </div>
+            </div>
+            <div class="card-actions mb-2 shadow">
+                <button class="btn btn-success float-right">
+                    <h5><i class="fas fa-money-check-alt fa-lg"></i>Procéder au paiement</h5>
+                </button>
+            </div>
+        </fieldset>
+    </div>
+
+</form>

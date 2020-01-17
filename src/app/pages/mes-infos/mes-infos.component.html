@@ -1,0 +1,341 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="card border-0 box-shadow mb-4">
+            <img class="card-img-top w-100" src="assets/img/users/default-user.jpg" alt="user">
+            <div class="card-body">
+                <h4 class="card-title text-center">{{etudiant?.prenometudiant}} {{etudiant?.nometudiant}}</h4>
+                <h5 class="card-title text-center text-info">Etudiant</h5>
+                <div class="dropdown-divider w-100"></div>
+                <div class="row">
+                    <div class="col-md-6 text-left">Numero dossier:</div>
+                    <div class="col-md-6 text-right"><strong class="d-inline-block">{{etudiant?.numinterne}}</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-left">Numero INE:</div>
+                    <div class="col-md-6 text-right"><strong class="d-inline-block">{{etudiant?.ine}}</strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-left">CNI/Passport:</div>
+                    <div class="col-md-6 text-right"><strong class="d-inline-block">{{etudiant?.cni}}</strong></div>
+                </div>
+                <div class="dropdown-divider w-100"></div>
+                <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
+                    <button (click)="openModal(modalContent, null)" type="button"
+                        class="btn btn-outline-warning btn-block">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Mettre à jour mes informations
+                    </button>
+                </div>
+                <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-1">
+                    <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
+                        class="btn btn-outline-primary btn-block mr-2">
+                        <i class="fa fa-folder" aria-hidden="true"></i> Mon dossier
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12 mb-1">
+                <p-toolbar>
+                    <div class="ui-toolbar-group-right">
+                        <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
+                            class="btn btn-outline-primary mr-2">
+                            <i class="fa fa-folder" aria-hidden="true"></i> Mon dossier
+                        </button>
+                        <button (click)="openModal(modalContent, null)" type="button" class="btn btn-outline-warning">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Mettre à jour mes informations
+                        </button>
+                    </div>
+                </p-toolbar>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <fieldset>
+                            <legend>Information Personnelle</legend>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Date Naissance</th>
+                                        <td>{{etudiant?.datenaiss|date:'dd/MM/yyyy'}}</td>
+                                        <th>Lieu Naissance</th>
+                                        <td>{{etudiant?.lieunaiss}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Region Naissance</th>
+                                        <td>{{etudiant?.regionnaiss}}</td>
+                                        <th>Pays Naissance</th>
+                                        <td>{{etudiant?.idpays?.nomFrFr}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Genre</th>
+                                        <td>
+                                            <span *ngIf="etudiant?.genre=='M'">Masculin</span>
+                                            <span *ngIf="etudiant?.genre=='F'">Feminin</span>
+                                        </td>
+                                        <th>Nationalité</th>
+                                        <td>{{etudiant?.nationalite?.nationalite}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Année Bac</th>
+                                        <td>{{etudiant?.anneeBac}}</td>
+                                        <th>Resultat du BAC</th>
+                                        <td>{{etudiant?.moyennebac}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Serie BAC</th>
+                                        <td>{{etudiant?.seriebac}}</td>
+                                        <th>Mention BAC</th>
+                                        <td>{{etudiant?.mentionbac}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Groupe Passage</th>
+                                        <td>{{etudiant?.groupepassage}}</td>
+                                        <th>Lycée de provenance</th>
+                                        <td>{{etudiant?.lyceedeprovenance}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Diplome d'entrée</th>
+                                        <td>{{etudiant?.diplomeentree}}</td>
+                                        <th>Handicap</th>
+                                        <td>{{etudiant?.handicap}}</td>
+                                    </tr>
+                                    <tr *ngIf="etudiant?.handicap=='Oui'">
+                                        <th>Type Handicap</th>
+                                        <td>{{etudiant?.typeHandicap}}</td>
+                                        <th>Description Handicap</th>
+                                        <td>{{etudiant?.descriptionHandicap}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Situration Matrimoniale</th>
+                                        <td>
+                                            <span *ngIf="etudiant?.situationMatrimoniale=='M'">Marié(e)</span>
+                                            <span *ngIf="etudiant?.situationMatrimoniale=='C'">Célibataire</span>
+                                            <span *ngIf="etudiant?.situationMatrimoniale=='D'">Divorcé(e)</span>
+                                            <span *ngIf="etudiant?.situationMatrimoniale=='V'">Veuf(Ve)</span>
+                                        </td>
+                                        <th>Nombre d'enfants</th>
+                                        <td>{{etudiant?.nbreenfant}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nom conjoint</th>
+                                        <td>{{etudiant?.nomconjoint}}</td>
+                                        <th>Orphelin</th>
+                                        <td>{{etudiant?.orphelin}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mt-2">
+                <div class="card">
+                    <div class="card-body">
+                        <fieldset>
+                            <legend>Information de Contact</legend>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Téléphone 1</th>
+                                        <td>{{etudiant?.teletudiant}}</td>
+                                        <th>Téléphone 2</th>
+                                        <td>{{etudiant?.teletudiant2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email Pro.</th>
+                                        <td>{{etudiant?.email}}</td>
+                                        <th>Email Univ.</th>
+                                        <td>{{etudiant?.emailUniv}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Personne à contacter</th>
+                                        <td>{{etudiant?.nomcontact}}</td>
+                                        <th>Tél. Contact</th>
+                                        <td>{{etudiant?.telcontact}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Adresse</th>
+                                        <td colspan="3">{{etudiant?.adruevilla}}, {{etudiant?.adquartier}},
+                                            {{etudiant?.adville}}, {{etudiant?.adpays?.nomFrFr}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<ng-template #modalContent>
+    <div class="modal-body bg-gray">
+        <div class="row">
+            <div class="col-12 vertical-tabs">
+                <form (ngSubmit)="updateEtudiant()" class="row px-3">
+                    <ul class="nav flex-column left col-3 border-0 rounded-0 mr-0 bg-light">
+                        <img class="w-100" src="assets/img/users/default-user.jpg">
+                        <li class="nav-item bg-light">
+                            <a class="nav-link" href="#contacts" data-toggle="tab">Contacts</a>
+                        </li>
+                        <li class="nav-item bg-light">
+                            <a class="nav-link" href="#etatCivil" data-toggle="tab">Etat Civil</a>
+                        </li>
+                        <li class="nav-item bg-light">
+                            <a class="nav-link active" href="#adresse" data-toggle="tab">Adresse</a>
+                        </li>
+                        <li class="nav-item bg-light">
+                            <a class="nav-link" href="#autres" data-toggle="tab">Autres Informations utiles</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content col-9 border-0">
+                        <div class="tab-pane active" id="contacts">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label form-control-label" for="email">Email</label>
+                                        <input [disabled]="etudiant?.email==currentUser?.email" [(ngModel)]="etudiant.email" class="form-control" type="text"
+                                            name="email" id="email">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label form-control-label" for="teletudiant">Telephone
+                                            1</label>
+                                        <input [(ngModel)]="etudiant.teletudiant" class="form-control" type="text"
+                                            name="teletudiant" id="teletudiant">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label form-control-label" for="teletudiant2">Telephone
+                                            2</label>
+                                        <input [(ngModel)]="etudiant.teletudiant2" class="form-control" type="text"
+                                            name="teletudiant2" id="teletudiant2">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label form-control-label" for="nomcontact">Nom Personne à
+                                            contacter</label>
+                                        <input [(ngModel)]="etudiant.nomcontact" class="form-control" type="text"
+                                            name="nomcontact" id="nomcontact">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label form-control-label" for="telcontact">Téléphone
+                                            Contact</label>
+                                        <input [(ngModel)]="etudiant.telcontact" class="form-control" type="text"
+                                            name="telcontact" id="telcontact">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="etatCivil">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label"
+                                        for="situationMatrimoniale">Situation Matrimoniale</label>
+                                    <input [(ngModel)]="etudiant.situationMatrimoniale" class="form-control" type="text"
+                                        name="situationMatrimoniale" id="situationMatrimoniale">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="nomconjoint">Nom
+                                        conjoint(e)</label>
+                                    <input [(ngModel)]="etudiant.nomconjoint" class="form-control" type="text"
+                                        name="nomconjoint" id="nomconjoint">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="nbreenfant">Nombre
+                                        d'enfants</label>
+                                    <input [(ngModel)]="etudiant.nbreenfant" class="form-control" type="text"
+                                        name="nbreenfant" id="nbreenfant">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="adresse">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="adpays">Pays</label>
+                                    <input [(ngModel)]="etudiant.adpays" class="form-control" type="text" name="adpays"
+                                        id="adpays">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="adville">Ville</label>
+                                    <input [(ngModel)]="etudiant.adville" class="form-control" type="text"
+                                        name="adville" id="adville">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="adquartier">Quartier</label>
+                                    <input [(ngModel)]="etudiant.adquartier" class="form-control" type="text"
+                                        name="adquartier" id="adquartier">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="adruevilla">Rue</label>
+                                    <input [(ngModel)]="etudiant.adruevilla" class="form-control" type="text"
+                                        name="adruevilla" id="adruevilla">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="autres">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="handicap">Handicap</label>
+                                    <input [(ngModel)]="etudiant.handicap" class="form-control" type="text"
+                                        name="handicap" id="handicap">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="typeHandicap">Type
+                                        Handicap</label>
+                                    <input [(ngModel)]="etudiant.typeHandicap" class="form-control" type="text"
+                                        name="typeHandicap" id="typeHandicap">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label"
+                                        for="descriptionHandicap">Description Handicap</label>
+                                    <input [(ngModel)]="etudiant.descriptionHandicap" class="form-control" type="text"
+                                        name="descriptionHandicap" id="descriptionHandicap">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="orphelin">Orphelin</label>
+                                    <input [(ngModel)]="etudiant.orphelin" class="form-control" type="text"
+                                        name="orphelin" id="orphelin">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 bg-white text-center py-1">
+                        <button class="btn btn-success mr-1" type="submit">Mettre à jour</button>
+                        <button type="button" class="btn btn-danger" (click)="closeModal()">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>
