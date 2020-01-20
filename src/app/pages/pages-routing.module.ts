@@ -13,8 +13,9 @@ import { OneEtudiantResolver } from './etudiant/one-etudiant.resolver';
 import { MultipleInscriptionacadResolver } from './inscriptionacad/multiple-inscriptionacad.resolver';
 import { CodeResolver } from './code-validator/code.resolver';
 import { FinaliserInscriptionComponent } from './inscriptionacad/finaliser-inscription/finaliser-inscription.component';
-import { OneInscriptionacadResolver } from './inscriptionacad/one-inscriptionacad.resolver';
 import { CodeValidatorComponent } from './code-validator/code-validator.component';
+import { MultiplePreinscriptionResolver } from './preinscription/multiple-preinscription.resolver';
+import { OnePreinscriptionResolver } from './preinscription/one-preinscription.resolver';
 
 
 const routes: Routes = [
@@ -28,9 +29,9 @@ const routes: Routes = [
       { path: 'systeme-lmd', component: SystemeLmdComponent, data: { breadcrumb: 'Le système LMD' } },
       { path: 'modalite-paiement', component: ModalitePaiementComponent, data: { breadcrumb: 'Les modalités de paiement' } },
       { path: 'mes-infos', component: MesInfosComponent, data: { breadcrumb: 'Mon compte' }, resolve: { etudiant: OneEtudiantResolver } },
-      { path: 'mon-parcours', component: MonParcoursComponent, data: { breadcrumb: 'Mon parcours' }, resolve: { inscriptions: MultipleInscriptionacadResolver } },
+      { path: 'mon-parcours', component: MonParcoursComponent, data: { breadcrumb: 'Mon parcours' }, resolve: { inscriptions: MultipleInscriptionacadResolver,preinscriptions:MultiplePreinscriptionResolver } },
       { path: 'parcours/:id', component: ParcoursDetailsComponent, data: { breadcrumb: 'Détails du parcours' } },
-      { path: 'finaliser-inscription/:id', component: FinaliserInscriptionComponent, data: { breadcrumb: 'Finaliser mon inscription' },resolve: {inscription: OneInscriptionacadResolver} },
+      { path: 'finaliser-inscription/:id', component: FinaliserInscriptionComponent, data: { breadcrumb: 'Finaliser mon inscription' },resolve: {preinscription: OnePreinscriptionResolver} },
       { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
     ]
   }

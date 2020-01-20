@@ -9,13 +9,13 @@ import { of } from 'rxjs';
 })
 export class MultiplePreinscriptionResolver implements Resolve<any> {
   resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): any | import("rxjs").Observable<any> | Promise<any> {
-    return this.preinscriptionSrv.findAll().pipe(map(data => {
+    return this.preinscriptionSrv.findActivePreinscriptionByEtudiant().pipe(map(data => {
       return data;
     }),
       catchError(error => {
         const message = `Retrieval error: ${error}`;
         this.preinscriptionSrv.httpSrv.handleError(error);
-        return of({ preinscriptions: null, error: message });
+        return of({ error: message });
       }));
   }
 

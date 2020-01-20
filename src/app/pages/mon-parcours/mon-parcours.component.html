@@ -3,9 +3,9 @@
         <statistique-inscription></statistique-inscription>
     </div>
 </div>
-<div class="row mb-2">
+<div class="row mb-2" *ngIf="preinscriptions">
     <div class="col-md-12">
-        <preinscription-active></preinscription-active>
+        <preinscription-active [preinscriptions]="preinscriptions"></preinscription-active>
     </div>
 </div>
 <div class="row mb-1">

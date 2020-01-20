@@ -20,6 +20,10 @@ export class EtudiantService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }
 
+  findByCni(cni: any) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'cni/' + cni);
+  }
+
   findMonCompteEtudiant() {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'mon-compte/');
   }
@@ -29,23 +33,23 @@ export class EtudiantService {
   }
 
   update(etudiant: Etudiant) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+etudiant.id+'/edit', etudiant);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + etudiant.id + '/edit', etudiant);
   }
 
   autoUpdate(etudiant: Etudiant) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+'update-infos/', etudiant);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + 'update-infos/', etudiant);
   }
 
   clone(original: Etudiant, clone: Etudiant) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+original.id+'/clone', clone);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + original.id + '/clone', clone);
   }
 
   remove(etudiant: Etudiant) {
-    return this.httpSrv.delete(this.getRoutePrefixWithSlash()+etudiant.id);
+    return this.httpSrv.delete(this.getRoutePrefixWithSlash() + etudiant.id);
   }
 
   removeSelection(etudiants: Etudiant[]) {
-    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',etudiants);
+    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', etudiants);
   }
 
   public getRoutePrefix(): string {
@@ -53,7 +57,7 @@ export class EtudiantService {
   }
 
   private getRoutePrefixWithSlash(): string {
-    return this.routePrefix+'/';
+    return this.routePrefix + '/';
   }
 
 }

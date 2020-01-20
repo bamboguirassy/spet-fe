@@ -1,4 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Preinscription } from '../../preinscription/preinscription';
+import { ActivatedRoute } from '@angular/router';
+import { Etudiant } from '../../etudiant/etudiant';
+import { EtudiantService } from '../../etudiant/etudiant.service';
 
 @Component({
   selector: 'app-finaliser-inscription',
@@ -10,8 +14,11 @@ export class FinaliserInscriptionComponent implements OnInit {
   public steps: any[];
   public showConfirm: boolean;
   public confirmed: boolean;
+  preinscription: Preinscription;
+  etudiant: Etudiant;
 
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute,
+    public etudiantSrv: EtudiantService) {
     this.steps = [
       { name: 'Information Personnelle', icon: 'fa-user', active: true, valid: false, hasError: false },
       { name: 'Information Inscription', icon: 'fa-pencil', active: false, valid: false, hasError: false },
@@ -21,6 +28,18 @@ export class FinaliserInscriptionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.preinscription = this.activatedRoute.snapshot.data['preinscription'];
+    this.findByCni();
+  }
+
+  findByCni() {
+    if (this.preinscription) {
+      this.etudiantSrv.findByCni(this.preinscription.cni)
+        .subscribe((data: any) => this.etudiant = data,
+          error => this.etudiantSrv.httpSrv.handleError(error));
+    } else {
+      this.etudiantSrv.httpSrv.notificationSrv.showError("Cni introuvable dans préinscription");
+    }
   }
 
   public next() {
