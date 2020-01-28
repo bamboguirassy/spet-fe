@@ -3,6 +3,8 @@ import { Preinscription } from '../../preinscription/preinscription';
 import { ActivatedRoute } from '@angular/router';
 import { Etudiant } from '../../etudiant/etudiant';
 import { EtudiantService } from '../../etudiant/etudiant.service';
+import { Inscriptionacad } from '../inscriptionacad';
+import { InscriptionacadService } from '../inscriptionacad.service';
 
 @Component({
   selector: 'app-finaliser-inscription',
@@ -14,22 +16,33 @@ export class FinaliserInscriptionComponent implements OnInit {
   public steps: any[];
   public showConfirm: boolean;
   public confirmed: boolean;
+  inscriptionacad: Inscriptionacad;
   preinscription: Preinscription;
   etudiant: Etudiant;
 
   constructor(private activatedRoute: ActivatedRoute,
-    public etudiantSrv: EtudiantService) {
+    public etudiantSrv: EtudiantService,
+    public inscriptionacadSrv: InscriptionacadService) {
     this.steps = [
       { name: 'Information Personnelle', icon: 'fa-user', active: true, valid: false, hasError: false },
       { name: 'Information Inscription', icon: 'fa-pencil', active: false, valid: false, hasError: false },
       { name: 'Mise à jour photo', icon: 'fa-image', active: false, valid: false, hasError: false },
       { name: 'Information Paiement', icon: 'fa-credit-card', active: false, valid: false, hasError: false },
-    ]
+    ];
+    this.inscriptionacad = new Inscriptionacad();
   }
 
   ngOnInit() {
     this.preinscription = this.activatedRoute.snapshot.data['preinscription'];
     this.findByCni();
+    this.findInscriptionacadByPreinscription();
+  }
+
+  findInscriptionacadByPreinscription() {
+    this.inscriptionacadSrv.getInscriptionacadByPreinscription(this.preinscription.id)
+      .subscribe((data: any) => {
+        this.inscriptionacad = data;
+      }, error => this.inscriptionacadSrv.httpSrv.handleError(error));
   }
 
   findByCni() {

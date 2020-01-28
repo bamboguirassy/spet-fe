@@ -16,6 +16,10 @@ export class InscriptionacadService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash());
   }
 
+  getInscriptionacadByPreinscription(id) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'preinscription/'+id);
+  }
+
   getInscriptionsEtudiant() {
     return this.httpSrv.get(this.getRoutePrefixWithSlash()+'mes-inscriptions/');
   }

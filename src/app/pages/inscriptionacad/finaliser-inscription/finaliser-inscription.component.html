@@ -32,11 +32,11 @@
                         <h4 class="mt-3 mb-3"><i class="fa {{ step.icon }}"></i> {{step.name}}</h4>
                     </div>
 
-                    <update-perso-info [etudiant]="etudiant" *ngIf="(step.name=='Information Personnelle') && etudiant"></update-perso-info>
+                    <update-perso-info (onUpdate)="next()" [etudiant]="etudiant" *ngIf="(step.name=='Information Personnelle') && etudiant"></update-perso-info>
 
-                    <infos-inscription *ngIf="step.name=='Information Inscription'"></infos-inscription>
+                    <infos-inscription [inscriptionacad]="inscriptionacad" (onSave)="next()" *ngIf="step.name=='Information Inscription'" [preinscription]="preinscription" [etudiant]="etudiant"></infos-inscription>
 
-                    <update-photo *ngIf="step.name=='Mise à jour photo'"></update-photo>
+                    <update-photo [etudiant]="etudiant" *ngIf="step.name=='Mise à jour photo'"></update-photo>
                     <!-- *ngIf="step.name=='Confirm Your Details'" -->
 
                 </div>

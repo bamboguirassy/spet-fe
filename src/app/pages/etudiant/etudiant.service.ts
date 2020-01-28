@@ -24,6 +24,22 @@ export class EtudiantService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'cni/' + cni);
   }
 
+  getSituationMatrimonialeValues(){
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'situation-matrimoniale/');
+  }
+
+  getHandicapValues(){
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'handicap/');
+  }
+
+  getOrphelinValues(){
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'orphelin/');
+  }
+
+  getTypeHandicapValues(){
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'type-handicap/');
+  }
+
   findMonCompteEtudiant() {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'mon-compte/');
   }

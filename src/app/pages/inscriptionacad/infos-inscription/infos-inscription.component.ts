@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Specialite } from '../../specialite/specialite';
+import { Inscriptionacad } from '../inscriptionacad';
+import { Preinscription } from '../../preinscription/preinscription';
+import { SpecialiteService } from '../../specialite/specialite.service';
+import { RegimeinscriptionService } from '../../regimeinscription/regimeinscription.service';
+import { Regimeinscription } from '../../regimeinscription/regimeinscription';
+import { Etudiant } from '../../etudiant/etudiant';
+import { InscriptionacadService } from '../inscriptionacad.service';
 
 @Component({
   selector: 'infos-inscription',
@@ -6,10 +14,58 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./infos-inscription.component.scss']
 })
 export class InfosInscriptionComponent implements OnInit {
+  specialites: Specialite[] = [];
+  regimeinscriptions: Regimeinscription[] = [];
+  @Input() preinscription: Preinscription;
+  @Input() etudiant: Etudiant;
+  @Input() inscriptionacad: Inscriptionacad=new Inscriptionacad();
+  @Output() onSave: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(public specialiteSrv: SpecialiteService,
+    public regimeinscriptionSrv: RegimeinscriptionService,
+    public inscriptionacadSrv: InscriptionacadService) {
+      if(!this.inscriptionacad.id){
+        this.inscriptionacad=new Inscriptionacad();
+      }
+  }
 
   ngOnInit() {
+    this.findSpecialiteByFiliere();
+    this.findRegimeInscriptions();
+  }
+
+  findSpecialiteByFiliere() {
+    this.specialiteSrv.findByFiliere(this.preinscription.idfiliere.id)
+      .subscribe((data: any) => {
+        this.specialites = data
+      }, error => this.specialiteSrv.httpSrv.handleError(error));
+  }
+
+  findRegimeInscriptions() {
+    this.regimeinscriptionSrv.findAll()
+      .subscribe((data: any) => {
+        this.regimeinscriptions = data
+      }, error => this.regimeinscriptionSrv.httpSrv.handleError(error));
+  }
+
+  createInscription() {
+    this.inscriptionacad.passage=this.preinscription.passage;
+    this.inscriptionacad.preinscirptionId=this.preinscription.id;
+    this.inscriptionacadSrv.create(this.inscriptionacad)
+      .subscribe((data: any) => {
+        this.inscriptionacad = data;
+        this.onSave.emit(data);
+      }, error => this.inscriptionacadSrv.httpSrv.handleError(error));
+  }
+
+  updateInscription() {
+    this.inscriptionacad.idregimeinscription = this.inscriptionacad.idregimeinscription.id;
+    this.inscriptionacad.idspecialite = this.inscriptionacad.idspecialite.id;
+    this.inscriptionacadSrv.update(this.inscriptionacad)
+      .subscribe((data: any) => {
+        this.inscriptionacad = data;
+        this.onSave.emit(data);
+      }, error => this.inscriptionacadSrv.httpSrv.handleError(error));
   }
 
 }

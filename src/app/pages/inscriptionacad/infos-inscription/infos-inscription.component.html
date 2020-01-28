@@ -1,70 +1,78 @@
-<form>
-    <div class="card-body">
-        <fieldset class="border p-2">
-            <legend class="w-auto" style="font-size:4vmin;">Formation & Modalité:</legend>
-            <div class="form-row">
-                <div class="col-sm-12 col-md-12 col-lg-6 form-group">
-                    <label style="font-weight: bold;">Modalité d'enseignement:</label>
-                    <select class="custom-select" name="modalite">
-                        <option disabled selected>Selectionnez une modalité d'enseignement</option>
-                        <option>Présentiel</option>
-                        <option>Distant</option>
-                    </select>
+<form *ngIf="!inscriptionacad.id" (submit)="createInscription()" #inscriptionForm="ngForm">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="border p-2">
+                <legend class="w-auto" style="font-size:4vmin;">Formation & Modalité:</legend>
+                <div class="form-row">
+                    <div class="col-sm-12 col-md-12 col-lg-6 form-group">
+                        <label style="font-weight: bold;">Spécialité:</label>
+                        <select required [(ngModel)]="inscriptionacad.idspecialite" class="custom-select"
+                            name="specialite">
+                            <option disabled selected>Selectionnez une spécialité</option>
+                            <option *ngFor="let specialite of specialites" [value]="specialite.id">
+                                {{specialite.libellespecialite}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                        <label style="font-weight: bold;">Regime d'inscription</label>
+                        <select required [(ngModel)]="inscriptionacad.idregimeinscription" class="custom-select"
+                            name="regime">
+                            <option disabled selected>Selectionnez une Regime d'inscription </option>
+                            <option [value]="regimeinscription.id" *ngFor="let regimeinscription of regimeinscriptions">
+                                {{regimeinscription.libelleregimeinscription}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="inscriptionacad.idregimeinscription==2 || inscriptionacad.idregimeinscription==4"
+                        class="form-group col-sm-12 col-md-12 col-lg-6">
+                        <label style="font-weight: bold;">Cout de la formation:</label>
+                        <input required [(ngModel)]="inscriptionacad.coutformation" class="form-control" type="number"
+                            name="cout" />
+                    </div>
                 </div>
-                <div class="form-group col-sm-12 col-md-12 col-lg-6">
-                    <label style="font-weight: bold;">Regime d'inscription</label>
-                    <select class="custom-select" name="regime">
-                        <option disabled selected>Selectionnez une Regime d'inscription </option>
-                        <option>Régime normal payant</option>
-                        <option>Régime normal non payant</option>
-                    </select>
-                </div>
-            </div><br>
-            <div class="form-row">
-                <div class="col-sm-12 col-md-12 col-lg-6 form-group">
-                    <label style="font-weight: bold;">Spécialité:</label>
-                    <select class="custom-select" name="bourse">
-                        <option disabled selected>Selectionnez une spécialité</option>
-                        <option>Tronc commun</option>
-                    </select>
-                </div>
-                <div class="form-group col-sm-12 col-md-12 col-lg-6">
-                    <label style="font-weight: bold;">Cout de la formation:</label>
-                    <input class="form-control" type="number" name="cout" />
-                </div>
-            </div>
-        </fieldset>
-        <fieldset class="border p-2">
-            <legend class="w-auto" style="font-size:4vmin;">Informations du doctorant</legend>
-            <div class="form-row">
-                <div class="col-sm-12 col-md-12 col-lg-6 form-group">
-                    <label style="font-weight: bold;">Co-encadreur:</label>
-                    <input class="form-control" type="text" name="partenaire" />
-                </div>
-                <div class="form-group col-sm-12 col-md-12 col-lg-6">
-                    <label style="font-weight: bold;">Encadreur:</label>
-                    <select class="custom-select">
-                        <option>Selectionnez un encadreur</option>
-                        <option>M.Fofona</option>
-                        <option>M.Thiam</option>
-                        <option>M.Diop</option>
-                    </select>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 form-group">
-                    <label style="font-weight: bold;">Université partenaire:</label>
-                    <input class="form-control" type="text" name="partenaire" />
-                </div>
-                <div class="form-group col-sm-12 col-md-12 col-lg-6">
-                    <label style="font-weight: bold;">Source de financement:</label>
-                    <input class="form-control" type="text" name="financement" />
-                </div>
-            </div>
-            <div class="card-actions mb-2 shadow">
-                <button class="btn btn-success float-right">
-                    <h5><i class="fas fa-money-check-alt fa-lg"></i>Procéder au paiement</h5>
-                </button>
-            </div>
-        </fieldset>
+            </fieldset>
+        </div>
+        <div class="card-footer">
+            <button [disabled]="inscriptionForm.invalid" type="submit"
+                class="btn btn-outline-primary pull-right">Valider inscription & Continuer</button>
+        </div>
     </div>
-
+</form>
+<form *ngIf="inscriptionacad.id" (submit)="updateInscription()" #inscriptionEditForm="ngForm">
+    <div class="card">
+        <div class="card-body">
+            <fieldset class="border p-2">
+                <legend class="w-auto" style="font-size:4vmin;">Formation & Modalité:</legend>
+                <div class="form-row">
+                    <div class="col-sm-12 col-md-12 col-lg-6 form-group">
+                        <label style="font-weight: bold;">Spécialité:</label>
+                        <select required [(ngModel)]="inscriptionacad.idspecialite.id" class="custom-select"
+                            name="specialite">
+                            <option disabled selected>Selectionnez une spécialité</option>
+                            <option *ngFor="let specialite of specialites" [value]="specialite.id">
+                                {{specialite.libellespecialite}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                        <label style="font-weight: bold;">Regime d'inscription</label>
+                        <select required [(ngModel)]="inscriptionacad.idregimeinscription.id" class="custom-select"
+                            name="regime">
+                            <option disabled selected>Selectionnez une Regime d'inscription </option>
+                            <option [value]="regimeinscription.id" *ngFor="let regimeinscription of regimeinscriptions">
+                                {{regimeinscription.libelleregimeinscription}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="inscriptionacad.idregimeinscription.id==2 || inscriptionacad.idregimeinscription.id==4"
+                        class="form-group col-sm-12 col-md-12 col-lg-6">
+                        <label style="font-weight: bold;">Cout de la formation:</label>
+                        <input required [(ngModel)]="inscriptionacad.coutformation" class="form-control" type="number"
+                            name="cout" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="card-footer">
+            <button [disabled]="inscriptionEditForm.invalid" type="submit"
+                class="btn btn-outline-primary pull-right">Valider inscription & Continuer</button>
+        </div>
+    </div>
 </form>

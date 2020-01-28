@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { Etudiant } from '../../etudiant/etudiant';
 
 @Component({
   selector: 'update-photo',
@@ -9,6 +10,8 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 export class UpdatePhotoComponent implements OnInit {
 
   title = 'angular-image-uploader';
+
+  @Input() etudiant: Etudiant;
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
