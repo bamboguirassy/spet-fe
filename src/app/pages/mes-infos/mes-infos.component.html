@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-lg-4">
         <div class="card border-0 box-shadow mb-4">
             <img class="card-img-top w-100" src="assets/img/users/default-user.jpg" alt="user">
             <div class="card-body">
@@ -36,9 +36,9 @@
             </div>
         </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-lg-8">
         <div class="row">
-            <div class="col-md-12 mb-1">
+            <div class="col-sm-12 mb-1">
                 <p-toolbar>
                     <div class="ui-toolbar-group-right">
                         <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
@@ -51,12 +51,12 @@
                     </div>
                 </p-toolbar>
             </div>
-            <div class="col-md-12">
+            <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
                         <fieldset>
                             <legend>Information Personnelle</legend>
-                            <table class="table">
+                            <table class="table table-responsive">
                                 <tbody>
                                     <tr>
                                         <th>Date Naissance</th>
@@ -107,7 +107,7 @@
                                         <th>Type Handicap</th>
                                         <td>{{etudiant?.typeHandicap}}</td>
                                         <th>Description Handicap</th>
-                                        <td>{{etudiant?.descriptionHandicap}}</td>
+                                        <td [innerHtml]="etudiant?.descriptionHandicap"></td>
                                     </tr>
                                     <tr>
                                         <th>Situration Matrimoniale</th>
@@ -137,7 +137,7 @@
                     <div class="card-body">
                         <fieldset>
                             <legend>Information de Contact</legend>
-                            <table class="table">
+                            <table class="table table-responsive">
                                 <tbody>
                                     <tr>
                                         <th>Téléphone 1</th>
@@ -149,7 +149,9 @@
                                         <th>Email Pro.</th>
                                         <td>{{etudiant?.email}}</td>
                                         <th>Email Univ.</th>
-                                        <td>{{etudiant?.emailUniv}}</td>
+                                        <td>
+                                            <span class="badge badge-danger">{{etudiant?.emailUniv}}</span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Personne à contacter</th>
@@ -201,8 +203,9 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="col-form-label form-control-label" for="email">Email</label>
-                                        <input [disabled]="etudiant?.email==currentUser?.email" [(ngModel)]="etudiant.email" class="form-control" type="text"
-                                            name="email" id="email">
+                                        <input [disabled]="etudiant?.email==currentUser?.email"
+                                            [(ngModel)]="etudiant.email" class="form-control" type="text" name="email"
+                                            id="email">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -244,13 +247,25 @@
                         <div class="tab-pane" id="etatCivil">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-form-label form-control-label"
-                                        for="situationMatrimoniale">Situation Matrimoniale</label>
-                                    <input [(ngModel)]="etudiant.situationMatrimoniale" class="form-control" type="text"
-                                        name="situationMatrimoniale" id="situationMatrimoniale">
+                                    <label class="col-form-label form-control-label" for="regionnaiss">Région de
+                                        naissance</label>
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="regions" name="regionnaiss"
+                                        id="regionnaiss" [(ngModel)]="selectedRegion"
+                                        placeholder="Selectionner une region" optionLabel="label" [showClear]="bool">
+                                    </p-dropdown>
                                 </div>
                             </div>
                             <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label"
+                                        for="situationMatrimoniale">Situation Matrimoniale</label>
+                                    <p-selectButton [style]="{'width':'100%'}" name="situationMatrimoniale"
+                                        id="situationMatrimoniale" [options]="situationMatrimoniales"
+                                        [(ngModel)]="selectedSituationMatromoniale" optionLabel="label">
+                                    </p-selectButton>
+                                </div>
+                            </div>
+                            <div class="col-md-12" *ngIf="selectedSituationMatromoniale.value=='M'">
                                 <div class="form-group">
                                     <label class="col-form-label form-control-label" for="nomconjoint">Nom
                                         conjoint(e)</label>
@@ -261,18 +276,18 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="col-form-label form-control-label" for="nbreenfant">Nombre
-                                        d'enfants</label>
-                                    <input [(ngModel)]="etudiant.nbreenfant" class="form-control" type="text"
-                                        name="nbreenfant" id="nbreenfant">
+                                        d'enfants</label><br>
+                                    <p-spinner size="1" [(ngModel)]="etudiant.nbreenfant" name="nbreenfant"
+                                        id="nbreenfant"></p-spinner>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="adresse">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-form-label form-control-label" for="adpays">Pays</label>
-                                    <input [(ngModel)]="etudiant.adpays" class="form-control" type="text" name="adpays"
-                                        id="adpays">
+                                    <label class="col-form-label form-control-label" for="adpays">Pays adresse</label>
+                                    <input value="Sénégal" [disabled]="true" class="form-control" type="text"
+                                        name="adpays" id="adpays">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -300,32 +315,34 @@
                         <div class="tab-pane" id="autres">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-form-label form-control-label" for="handicap">Handicap</label>
-                                    <input [(ngModel)]="etudiant.handicap" class="form-control" type="text"
-                                        name="handicap" id="handicap">
+                                    <label class="col-form-label form-control-label" for="handicap">Avez vous un handicap ?</label>
+                                    <p-selectButton [style]="{'width':'100%'}" [options]="handicaps" [(ngModel)]="selectedHandicap"
+                                        optionLabel="label" name="handicap" id="handicap"></p-selectButton>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12" *ngIf="selectedHandicap?.value=='Oui'">
                                 <div class="form-group">
                                     <label class="col-form-label form-control-label" for="typeHandicap">Type
-                                        Handicap</label>
-                                    <input [(ngModel)]="etudiant.typeHandicap" class="form-control" type="text"
-                                        name="typeHandicap" id="typeHandicap">
+                                        Handicap</label><br>
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="handicapTypes"
+                                        [(ngModel)]="selectedTypeHandicap" placeholder="Selectionner type handicap"
+                                        optionLabel="libelle" [showClear]="bool" name="typeHandicap" id="typeHandicap">
+                                    </p-dropdown>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12" *ngIf="selectedHandicap?.value=='Oui'">
                                 <div class="form-group">
                                     <label class="col-form-label form-control-label"
                                         for="descriptionHandicap">Description Handicap</label>
-                                    <input [(ngModel)]="etudiant.descriptionHandicap" class="form-control" type="text"
-                                        name="descriptionHandicap" id="descriptionHandicap">
+                                    <p-editor [(ngModel)]="etudiant.descriptionHandicap" [style]="{'height':'100px'}"
+                                        name="descriptionHandicap" id="descriptionHandicap"></p-editor>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-form-label form-control-label" for="orphelin">Orphelin</label>
-                                    <input [(ngModel)]="etudiant.orphelin" class="form-control" type="text"
-                                        name="orphelin" id="orphelin">
+                                    <label class="col-form-label form-control-label" for="orphelin">Êtes-vous orphelin ?</label>
+                                    <p-selectButton [style]="{'width':'100%'}" name="orphelin" id="orphelin" [options]="orphelins"
+                                        [(ngModel)]="selectedOrphelin" optionLabel="label"></p-selectButton>
                                 </div>
                             </div>
                         </div>
@@ -339,3 +356,4 @@
         </div>
     </div>
 </ng-template>
+<p-toast></p-toast>

@@ -8,17 +8,15 @@ import { EtudiantService } from './etudiant.service';
   providedIn: 'root'
 })
 export class OneEtudiantResolver implements Resolve<any> {
-  resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot) {
+  resolve(route: import('@angular/router').ActivatedRouteSnapshot, state: import('@angular/router').RouterStateSnapshot) {
     return this.etudiantSrv.findMonCompteEtudiant().pipe(map(data => {
       return data;
     }),
-    catchError(error => {
-      this.etudiantSrv.httpSrv.handleError(error);
-      const message = `Retrieval error: ${error}`;
-      return of({ etudiant: null, error: message });
+    catchError(errorData => {
+      return of({ etudiant: null, error: errorData });
     }));
   }
 
-  constructor(public etudiantSrv:EtudiantService) { }
+  constructor(public etudiantSrv: EtudiantService) { }
 }
 

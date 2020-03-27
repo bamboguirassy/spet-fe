@@ -11,7 +11,7 @@ export class ConfirmationComponent implements AfterContentInit {
   ngAfterContentInit(): void {
     this.authSrv.confirmRegistration(this.activatedRoute.snapshot.params.id)
       .subscribe((data: any) => {
-        this.notificatonSrv.showSuccess("Le compte associé au mail " + data.email + " est confirmé. Merci de vous connecter avec vos identifiants");
+        this.notificatonSrv.showSuccess('Le compte associé au mail ' + data.email + ' est confirmé. Merci de vous connecter avec vos identifiants');
         this.router.navigate(['login']);
       }, error => {
         this.authSrv.httpSrv.handleError(error);
@@ -19,8 +19,8 @@ export class ConfirmationComponent implements AfterContentInit {
   }
 
   constructor(public authSrv: AuthService,
-    public activatedRoute: ActivatedRoute,
-    public router: Router, public notificatonSrv: NotificationService) { }
+              public activatedRoute: ActivatedRoute,
+              public router: Router, public notificatonSrv: NotificationService) { }
 
 
 

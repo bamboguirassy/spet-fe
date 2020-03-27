@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TokenManagerService } from './token-manager.service';
 import { NotificationService } from './notification.service';
 import { Router } from '@angular/router';
@@ -17,9 +17,9 @@ export class HttpService {
   private retUrl = '';
 
   constructor(private httpSrv: HttpClient,
-    public tokenManager: TokenManagerService,
-    public notificationSrv: NotificationService,
-    public router: Router) {
+              public tokenManager: TokenManagerService,
+              public notificationSrv: NotificationService,
+              public router: Router) {
     this.customUrl = 'http://127.0.0.1:8000/api/';
   }
 
@@ -27,7 +27,7 @@ export class HttpService {
     if (!this.httpOptions) {
       this.httpOptions = {
         headers: new HttpHeaders({
-          'Authorization': this.tokenManager.getTokenName() + ' ' + this.tokenManager.getToken(),
+          Authorization: this.tokenManager.getTokenName() + ' ' + this.tokenManager.getToken(),
         }),
         reportProgress: true,
         observe: 'events'
@@ -38,11 +38,11 @@ export class HttpService {
   }
 
   createAuthorizationHeader(): any {
-    let headers = new HttpHeaders({
-      'Authorization': this.tokenManager.getTokenName() + ' ' + this.tokenManager.getToken(),
+    const headers = new HttpHeaders({
+      Authorization: this.tokenManager.getTokenName() + ' ' + this.tokenManager.getToken(),
     });
     this.httpOptions = {
-      headers: headers
+      headers
     };
     return this.httpOptions;
   }

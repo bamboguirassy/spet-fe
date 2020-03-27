@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { Preinscription } from '../preinscription';
 import { Router } from '@angular/router';
@@ -12,13 +11,13 @@ import { Router } from '@angular/router';
 export class PreinscriptionActiveComponent implements OnInit {
   @Input() preinscriptions: Preinscription[];
 
-  constructor(public httpSrv:HttpService, public router:Router) { }
+  constructor(public httpSrv: HttpService, public router: Router) { }
 
   ngOnInit() {
   }
 
-  startProcess(idPreinscription:number){
-    this.httpSrv.setRetUrl('finaliser-inscription/'+idPreinscription);
+  startProcess(idPreinscription: number) {
+    this.httpSrv.setRetUrl('finaliser-inscription/' + idPreinscription);
     this.router.navigate(['validator']);
   }
 

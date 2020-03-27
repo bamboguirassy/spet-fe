@@ -1,0 +1,35 @@
+<form (ngSubmit)="applyEmailChange()" #emailForm="ngForm">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Changer l'adresse email du compte</h4>
+            <code class="text-muted" style="font-size: 12px;">
+                Si vous avez déja tenté de créer votre compte et que vous aviez remarqué
+                 que l'adresse email à la quelle le mail de confirmation est envoyé
+                  n'est pas le votre ou que vous ne l'utilisez plus, alors vous êtes sur la bonne interface... 
+            </code>
+            <hr>
+            <div class="form-group">
+                <label for="idinscription">Numero Inscription</label>
+                <input [required]="true" type="number" [(ngModel)]="recoveryData.idInscription" name="idinscription"
+                    id="idinscription" class="form-control" placeholder="Numéro Inscription Acad"
+                    aria-describedby="helpidinscriptionId">
+                <small id="helpidinscriptionId" class="text-muted">Verifier sur votre carte étudiant</small>
+            </div>
+            <div class="form-group">
+                <label for="derniereAnneeInscription">Dernière année inscription</label>
+                <p-dropdown [style]="{'width': '100%'}" name="derniereAnneeInscription" [required]="true"
+                    [options]="anneeacads" [(ngModel)]="recoveryData.selectedAnnee"
+                    placeholder="Selectionner votre derniere année d'insccription" optionLabel="libelleanneeacad"
+                    [showClear]="true"></p-dropdown>
+            </div>
+            <div class="form-group">
+                <label for="email">Votre adresse email actuelle</label>
+                <input [required]="true" type="email" [(ngModel)]="recoveryData.email" name="email" id="email"
+                    class="form-control" placeholder="Email">
+            </div>
+        </div>
+        <div class="card-footer">
+            <button [disabled]="emailForm.invalid" type="submit" class="btn btn-primary">Confirmer</button>
+        </div>
+    </div>
+</form>

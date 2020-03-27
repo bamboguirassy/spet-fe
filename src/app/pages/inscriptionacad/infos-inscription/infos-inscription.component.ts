@@ -18,14 +18,14 @@ export class InfosInscriptionComponent implements OnInit {
   regimeinscriptions: Regimeinscription[] = [];
   @Input() preinscription: Preinscription;
   @Input() etudiant: Etudiant;
-  @Input() inscriptionacad: Inscriptionacad=new Inscriptionacad();
+  @Input() inscriptionacad: Inscriptionacad = new Inscriptionacad();
   @Output() onSave: EventEmitter<any> = new EventEmitter();
 
   constructor(public specialiteSrv: SpecialiteService,
-    public regimeinscriptionSrv: RegimeinscriptionService,
-    public inscriptionacadSrv: InscriptionacadService) {
-      if(!this.inscriptionacad.id){
-        this.inscriptionacad=new Inscriptionacad();
+              public regimeinscriptionSrv: RegimeinscriptionService,
+              public inscriptionacadSrv: InscriptionacadService) {
+      if (!this.inscriptionacad.id) {
+        this.inscriptionacad = new Inscriptionacad();
       }
   }
 
@@ -37,20 +37,20 @@ export class InfosInscriptionComponent implements OnInit {
   findSpecialiteByFiliere() {
     this.specialiteSrv.findByFiliere(this.preinscription.idfiliere.id)
       .subscribe((data: any) => {
-        this.specialites = data
+        this.specialites = data;
       }, error => this.specialiteSrv.httpSrv.handleError(error));
   }
 
   findRegimeInscriptions() {
     this.regimeinscriptionSrv.findAll()
       .subscribe((data: any) => {
-        this.regimeinscriptions = data
+        this.regimeinscriptions = data;
       }, error => this.regimeinscriptionSrv.httpSrv.handleError(error));
   }
 
   createInscription() {
-    this.inscriptionacad.passage=this.preinscription.passage;
-    this.inscriptionacad.preinscirptionId=this.preinscription.id;
+    this.inscriptionacad.passage = this.preinscription.passage;
+    this.inscriptionacad.preinscirptionId = this.preinscription.id;
     this.inscriptionacadSrv.create(this.inscriptionacad)
       .subscribe((data: any) => {
         this.inscriptionacad = data;

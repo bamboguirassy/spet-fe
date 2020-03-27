@@ -21,6 +21,10 @@ export class AuthService {
     req.subscribe((data: any) => {
       this.currentUserManager.next(data);
       this.currentUser = data;
+      if (this.currentUser.idgroup.codegroupe !== 'ETU') {
+        confirm('Cette application est destinée aux étudiant');
+        this.logout();
+      }
     },
       error => console.log(error));
     return req;
@@ -36,14 +40,14 @@ export class AuthService {
     this.httpSrv.router.navigate(['login']);
   }
 
-  confirmRegistration(id:number){
-    return this.httpSrv.get('public/registration-confirmation/'+id);
+  confirmRegistration(id: number) {
+    return this.httpSrv.get('public/registration-confirmation/' + id);
   }
 
   getRoles(): string[] {
     let roles: string[] = [];
     if (this.currentUser) {
-      roles=this.currentUser.idgroup.roles;
+      roles = this.currentUser.idgroup.roles;
     }
     return roles;
   }

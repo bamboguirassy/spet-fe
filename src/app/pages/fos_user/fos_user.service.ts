@@ -20,16 +20,20 @@ export class FosUserService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }
 
-  create(fos_user: FosUser) {
-    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', fos_user);
+  create(fosuser: FosUser) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', fosuser);
   }
 
   registerEtudiant(accountData: any) {
     return this.httpSrv.post('public/register-etudiant', accountData);
   }
 
-  update(fos_user: FosUser) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+fos_user.id+'/edit', fos_user);
+  emailChange(recoveryMailData: any) {
+    return this.httpSrv.post('public/change-mail', recoveryMailData);
+  }
+
+  update(fosuser: FosUser) {
+    return this.httpSrv.put(this.getRoutePrefixWithSlash()+fosuser.id+'/edit', fosuser);
   }
 
   clone(original: FosUser, clone: FosUser) {

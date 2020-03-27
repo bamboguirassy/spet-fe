@@ -5,6 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register.component';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { ConfirmDialogModule, ConfirmationService, DropdownModule, DynamicDialogConfig, DialogService, PasswordModule } from 'primeng/primeng';
+import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdialog';
+import { SharedComponentModule } from '../shared/shared-component/shared-component.module';
 
 export const routes = [
   { path: '', component: RegisterComponent },
@@ -17,11 +20,17 @@ export const routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule,
+    DynamicDialogModule,
+    DropdownModule,
+    PasswordModule,
+    SharedComponentModule
   ],
   declarations: [
     RegisterComponent,
     ConfirmationComponent
-  ]
+  ],
+  providers: [ConfirmationService, DialogService]
 })
 export class RegisterModule { }

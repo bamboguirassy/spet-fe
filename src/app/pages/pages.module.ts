@@ -7,7 +7,7 @@ import { BlankComponent } from './blank/blank.component';
 import { SearchComponent } from './search/search.component';
 
 import {TableModule} from 'primeng/table';
-import { ContextMenuModule, MenuModule, ButtonModule, CardModule, FieldsetModule, ToolbarModule, TabViewModule, MessageService } from 'primeng/primeng';
+import { ContextMenuModule, MenuModule, ButtonModule, CardModule, FieldsetModule, ToolbarModule, TabViewModule, DropdownModule, SelectButtonModule, SpinnerModule, EditorModule } from 'primeng/primeng';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
@@ -88,7 +88,11 @@ import { UpdatePhotoComponent } from './inscriptionacad/update-photo/update-phot
     FilterPipeModule,
     NgxChartsModule,
     DataViewModule,
-    ImageCropperModule
+    ImageCropperModule,
+    DropdownModule,
+    SelectButtonModule,
+    SpinnerModule,
+    EditorModule
   ]
 })
 export class PagesModule { }

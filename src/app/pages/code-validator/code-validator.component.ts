@@ -17,18 +17,18 @@ export class CodeValidatorComponent implements OnInit {
   secureCode: number;
 
   constructor(public router: Router, public fb: FormBuilder,
-    public authSrv: AuthService, private tokenManager: TokenManagerService,
-    public activatedRoute: ActivatedRoute) { }
+              public authSrv: AuthService, private tokenManager: TokenManagerService,
+              public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.secureCode = this.activatedRoute.snapshot.data['code'];
+    this.secureCode = this.activatedRoute.snapshot.data.code;
     if (this.secureCode) {
-      this.authSrv.httpSrv.notificationSrv.showInfo("Un code confirmation a été envoyé par email, merci de le saisir.");
+      this.authSrv.httpSrv.notificationSrv.showInfo('Un code confirmation a été envoyé par email, merci de le saisir.');
     }
     this.form = this.fb.group({
-      'code': ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
+      code: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
     });
-    this.code = this.form.controls['code'];
+    this.code = this.form.controls.code;
   }
 
   onSubmit() {
