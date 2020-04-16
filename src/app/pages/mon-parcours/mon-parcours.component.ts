@@ -10,20 +10,16 @@ import { Preinscription } from '../preinscription/preinscription';
   styleUrls: ['./mon-parcours.component.scss']
 })
 export class MonParcoursComponent implements OnInit {
-  public type: string = 'grid';
+  public type = 'grid';
   public searchText: string;
   inscriptions: Inscriptionacad[] = [];
-  preinscriptions: Preinscription[]=[];
+  preinscriptions: Preinscription[] = [];
   constructor(public inscriptionAcadSrv: InscriptionacadService,
-    public activatedRoute: ActivatedRoute) { }
+              public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.inscriptions = this.activatedRoute.snapshot.data['inscriptions'];
-    this.preinscriptions = this.activatedRoute.snapshot.data['preinscriptions'];
-  }
-
-  public toggle(type) {
-    this.type = type;
+    this.inscriptions = this.activatedRoute.snapshot.data.inscriptions;
+    this.preinscriptions = this.activatedRoute.snapshot.data.preinscriptions;
   }
 
 }

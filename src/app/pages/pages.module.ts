@@ -21,13 +21,10 @@ import { BackTopComponent } from '../theme/components/back-top/back-top.componen
 import { UserMenuComponent } from '../theme/components/user-menu/user-menu.component';
 import { MesInfosComponent } from './mes-infos/mes-infos.component';
 import { MonParcoursComponent } from './mon-parcours/mon-parcours.component';
-import { ParcoursItemComponent } from './mon-parcours/parcours-item/parcours-item.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { StatistiqueInscriptionComponent } from './statistique-inscription/statistique-inscription.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ParcoursDetailsComponent } from './mon-parcours/parcours-details/parcours-details.component';
-import { StatistiqueParcoursComponent } from './mon-parcours/statistique-parcours/statistique-parcours.component';
 import { SystemeLmdComponent } from './systeme-lmd/systeme-lmd.component';
 import { ModalitePaiementComponent } from './modalite-paiement/modalite-paiement.component';
 import {DataViewModule} from 'primeng/dataview';
@@ -38,6 +35,9 @@ import { UpdatePersoInfoComponent } from './inscriptionacad/update-perso-info/up
 import { InfosInscriptionComponent } from './inscriptionacad/infos-inscription/infos-inscription.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { UpdatePhotoComponent } from './inscriptionacad/update-photo/update-photo.component';
+import { BourseComponent } from './bourse/bourse.component';
+import { InscriptionPedagogiqueComponent } from './inscription-pedagogique/inscription-pedagogique.component';
+import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.component';
 
 
 
@@ -56,11 +56,8 @@ import { UpdatePhotoComponent } from './inscriptionacad/update-photo/update-phot
     UserMenuComponent,
     MesInfosComponent,
     MonParcoursComponent,
-    ParcoursItemComponent,
     StatistiqueInscriptionComponent,
     DashboardComponent,
-    ParcoursDetailsComponent,
-    StatistiqueParcoursComponent,
     SystemeLmdComponent,
     ModalitePaiementComponent,
     PreinscriptionActiveComponent,
@@ -68,7 +65,10 @@ import { UpdatePhotoComponent } from './inscriptionacad/update-photo/update-phot
     FinaliserInscriptionComponent,
     UpdatePersoInfoComponent,
     InfosInscriptionComponent,
-    UpdatePhotoComponent
+    UpdatePhotoComponent,
+    BourseComponent,
+    InscriptionPedagogiqueComponent,
+    NoteEvaluationComponent
   ],
   imports: [
     CommonModule,
