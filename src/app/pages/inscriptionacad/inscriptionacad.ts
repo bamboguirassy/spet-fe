@@ -25,6 +25,7 @@ export class Inscriptionacad {
     decisionConseil: string;
     idregimeinscription: any;
     idspecialite: any;
+    idclasse: any;
     //temporal fields
     preinscirptionId: any;
 }

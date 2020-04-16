@@ -13,6 +13,7 @@ export class OneEtudiantResolver implements Resolve<any> {
       return data;
     }),
     catchError(errorData => {
+      this.etudiantSrv.httpSrv.handleError(errorData);
       return of({ etudiant: null, error: errorData });
     }));
   }

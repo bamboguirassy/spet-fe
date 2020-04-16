@@ -36,5 +36,8 @@ export class Etudiant {
     nbreenfant: string;
     nomcontact: string;
     telcontact: string;
-    adpays:Pays
+    adpays: Pays;
+    idpays: Pays;
+    nationalite: Pays;
+    typeOrphelin: string;
 }

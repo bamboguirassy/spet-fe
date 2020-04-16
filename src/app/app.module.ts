@@ -18,6 +18,8 @@ import { ToastModule } from 'primeng/toast';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { FormBuilder } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 
@@ -30,8 +32,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     ToastModule,
     NgHttpLoaderModule.forRoot(),
-    NgbModule
-  ],
+    NgbModule,
+    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
+    ],
   declarations: [
     AppComponent,
     NotFoundComponent

@@ -22,11 +22,11 @@ export class AuthService {
       this.currentUserManager.next(data);
       this.currentUser = data;
       if (this.currentUser.idgroup.codegroupe !== 'ETU') {
-        confirm('Cette application est destinée aux étudiant');
+        confirm('Cette application est destinée aux étudiants');
         this.logout();
       }
     },
-      error => console.log(error));
+      error => {});
     return req;
   }
 

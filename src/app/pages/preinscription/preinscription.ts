@@ -4,7 +4,7 @@ export class Preinscription {
     idanneeacad: any;
     idniveau: any;
     cni: string;
-    idtypeadmission: string;
+    idtypeadmission: any;
     ine: string;
     passage: string;
     prenometudiant: string;

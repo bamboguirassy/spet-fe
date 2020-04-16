@@ -12,10 +12,10 @@ export class FooterComponent implements OnInit {
 
   public settings: Settings;
 
-  private currentYear:number;
-  constructor(public appSettings:AppSettings) {
-      this.settings = this.appSettings.settings;
-      this.currentYear=new Date().getFullYear();
+  currentYear: number;
+  constructor(public appSettings: AppSettings) {
+    this.settings = this.appSettings.settings;
+    this.currentYear = new Date().getFullYear();
   }
 
   ngOnInit() {

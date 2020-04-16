@@ -4,11 +4,15 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { ToastModule } from 'primeng/toast';
-import { PasswordModule } from 'primeng/primeng';
+import { PasswordModule, ProgressSpinnerModule } from 'primeng/primeng';
 import { SharedComponentModule } from '../shared/shared-component/shared-component.module';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { UpdatePasswordConfirmationComponent } from './update-password-confirmation/update-password-confirmation.component';
 
 export const routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full' }
+  { path: 'login', component: LoginComponent },
+  { path: 'forgotpassword', component: ForgotPasswordComponent },
+  { path: 'resetpassword/:token', component: UpdatePasswordConfirmationComponent },
 ];
 
 @NgModule({
@@ -19,9 +23,9 @@ export const routes = [
     RouterModule.forChild(routes),
     ToastModule,
     PasswordModule,
-    SharedComponentModule
+    SharedComponentModule,
   ],
-  declarations: [LoginComponent]
+  declarations: [LoginComponent, ForgotPasswordComponent, UpdatePasswordConfirmationComponent]
 })
 
 export class LoginModule { }

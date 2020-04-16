@@ -5,6 +5,7 @@ import { FosUserService } from '../fos_user/fos_user.service';
 import { FosUser } from '../fos_user/fos_user';
 import { ConfirmationService, DialogService } from 'primeng/api';
 import { EmailUpdateComponent } from '../shared/shared-component/email-update/email-update.component';
+import { Etudiant } from '../etudiant/etudiant';
 
 @Component({
     selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent implements AfterViewInit {
     public email: AbstractControl;
     public password: AbstractControl;
     public confirmPassword: AbstractControl;
-    public createdUser: FosUser;
+    public etudiant: Etudiant;
 
     constructor(router: Router, fb: FormBuilder,
                 public fosUserSrv: FosUserService,
@@ -44,9 +45,9 @@ export class RegisterComponent implements AfterViewInit {
         if (this.form.valid) {
             this.fosUserSrv.registerEtudiant(values)
                 .subscribe((data: any) => {
-                    this.createdUser = data;
+                    this.etudiant = data;
                     this.confirmationService.confirm({
-                        message: 'Un mail de confirmation est envoyé à ' + data.email + '. Merci de le consulter',
+                        message: 'Un mail de confirmation est envoyé à ' + this.etudiant.email + '. Merci de le consulter',
                         accept: () => {
                             const ref = this.dialogService.open(EmailUpdateComponent, {
                                 header: 'Mise à jour de l\'adresse email',
@@ -55,7 +56,7 @@ export class RegisterComponent implements AfterViewInit {
                             ref.onClose.subscribe((user: FosUser) => {
                                 if (user) {
                                     this.fosUserSrv.httpSrv.notificationSrv
-                                        .showSuccess('Un mail de confirmation est envoyé au nouveau mail: ' + user.email);
+                                        .showSuccess('Un mail de confirmation est envoyé au nouveau mail indiqué');
                                 }
                                 this.router.navigate(['login']);
                             });

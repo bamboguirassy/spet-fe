@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register.component';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
-import { ConfirmDialogModule, ConfirmationService, DropdownModule, DynamicDialogConfig, DialogService, PasswordModule } from 'primeng/primeng';
+import { ConfirmDialogModule, ConfirmationService, DropdownModule, DialogService, PasswordModule, ProgressSpinnerModule, InputMaskModule } from 'primeng/primeng';
 import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdialog';
 import { SharedComponentModule } from '../shared/shared-component/shared-component.module';
 
@@ -25,7 +25,9 @@ export const routes = [
     DynamicDialogModule,
     DropdownModule,
     PasswordModule,
-    SharedComponentModule
+    SharedComponentModule,
+    ProgressSpinnerModule,
+    InputMaskModule
   ],
   declarations: [
     RegisterComponent,

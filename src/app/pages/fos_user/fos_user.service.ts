@@ -20,6 +20,18 @@ export class FosUserService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }
 
+  resetPassword(email: string) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'public/reset-password/', email);
+  }
+
+  updatePassword(updateData: any) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'public/update-password/', updateData);
+  }
+
+  checkToken(token: string) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'public/check-token/', token);
+  }
+
   create(fosuser: FosUser) {
     return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', fosuser);
   }
@@ -33,19 +45,19 @@ export class FosUserService {
   }
 
   update(fosuser: FosUser) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+fosuser.id+'/edit', fosuser);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + fosuser.id + '/edit', fosuser);
   }
 
   clone(original: FosUser, clone: FosUser) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+original.id+'/clone', clone);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + original.id + '/clone', clone);
   }
 
   remove(fos_user: FosUser) {
-    return this.httpSrv.delete(this.getRoutePrefixWithSlash()+fos_user.id);
+    return this.httpSrv.delete(this.getRoutePrefixWithSlash() + fos_user.id);
   }
 
   removeSelection(fos_users: FosUser[]) {
-    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',fos_users);
+    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', fos_users);
   }
 
   public getRoutePrefix(): string {
@@ -53,7 +65,7 @@ export class FosUserService {
   }
 
   private getRoutePrefixWithSlash(): string {
-    return this.routePrefix+'/';
+    return this.routePrefix + '/';
   }
 
 }

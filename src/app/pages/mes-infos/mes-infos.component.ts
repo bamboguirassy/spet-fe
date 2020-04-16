@@ -23,6 +23,8 @@ export class MesInfosComponent implements OnInit {
   selectedHandicap: any;
   selectedTypeHandicap: any;
   selectedOrphelin: any;
+  selectedTypeOrphelin: any;
+  updateForm: Etudiant;
 
   currentUser: FosUser;
 
@@ -77,6 +79,12 @@ export class MesInfosComponent implements OnInit {
 
   ];
 
+  typeOrphelins = [
+    { type: 'Orphelin de père', libelle: 'Orphelin de père' },
+    { type: 'Orphelin de mère', libelle: 'Orphelin de mère' },
+    { type: 'Orphelin des deux', libelle: 'Orphelin des deux' },
+  ];
+
   setDefaultValues() {
     // set region de naissance
     this.regions.forEach(region => {
@@ -89,6 +97,13 @@ export class MesInfosComponent implements OnInit {
     this.orphelins.forEach(orphelin => {
       if (orphelin.value === this.etudiant.orphelin) {
         this.selectedOrphelin = orphelin;
+        return;
+      }
+    });
+    // set type orphelin
+    this.typeOrphelins.forEach(typeOrphelin => {
+      if (typeOrphelin.type === this.etudiant.typeOrphelin) {
+        this.selectedTypeOrphelin = typeOrphelin;
         return;
       }
     });
@@ -126,9 +141,10 @@ export class MesInfosComponent implements OnInit {
   ngOnInit() {
     if (this.activatedRoute.snapshot.data.etudiant.error) {
       confirm(this.activatedRoute.snapshot.data.etudiant.error.error.message);
-      this.router.navigate(['']);
+      this.router.navigate(['login']);
     } else {
       this.etudiant = this.activatedRoute.snapshot.data.etudiant;
+      this.updateForm = Object.assign({}, this.etudiant);
       this.setDefaultValues();
     }
 
@@ -149,24 +165,31 @@ export class MesInfosComponent implements OnInit {
   }
 
   updateEtudiant() {
-    this.etudiant.situationMatrimoniale = this.selectedSituationMatromoniale.value;
-    this.etudiant.orphelin = this.selectedOrphelin.value;
-    this.etudiant.handicap = this.selectedHandicap.value;
+    this.updateForm.situationMatrimoniale = this.selectedSituationMatromoniale.value;
+    this.updateForm.orphelin = this.selectedOrphelin.value;
+    this.updateForm.handicap = this.selectedHandicap.value;
     if (this.selectedHandicap.value === 'Oui') {
-      this.etudiant.typeHandicap = this.selectedTypeHandicap.type;
+      this.updateForm.typeHandicap = this.selectedTypeHandicap.type;
     } else {
-      this.etudiant.typeHandicap = '';
-      this.etudiant.descriptionHandicap = '';
+      this.updateForm.typeHandicap = '';
+      this.updateForm.descriptionHandicap = '';
     }
-    this.etudiant.regionnaiss = this.selectedRegion.value;
+    if (this.selectedOrphelin.value === 'Oui') {
+      this.updateForm.typeOrphelin = this.selectedTypeOrphelin.type;
+    } else {
+      this.updateForm.typeOrphelin = '';
+    }
+    this.updateForm.regionnaiss = this.selectedRegion.value;
     if (this.selectedSituationMatromoniale.value !== 'M') {
-      this.etudiant.nomconjoint = '';
+      this.updateForm.nomconjoint = '';
     }
 
-    this.etudiantSrv.update(this.etudiant)
+    this.etudiantSrv.update(this.updateForm)
       .subscribe((data: any) => {
         this.etudiant = data;
+        this.updateForm = data;
         this.modalRef.close(data);
+        this.etudiantSrv.httpSrv.notificationSrv.showSuccess('Informations mises à jour avec succès');
       }, error => this.etudiantSrv.httpSrv.handleError(error));
   }
 
