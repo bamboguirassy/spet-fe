@@ -1,83 +1,10 @@
-<div class="row mb-1">
+<!-- <div class="row mb-1">
     <div class="col-md-12">
         <statistique-inscription></statistique-inscription>
     </div>
-</div>
+</div> -->
 <div class="row mb-2" *ngIf="preinscriptions">
     <div class="col-md-12">
         <preinscription-active [preinscriptions]="preinscriptions"></preinscription-active>
-    </div>
-</div>
-<div class="row mb-1">
-    <div class="col">
-        <div class="input-group mb-3 box-shadow">
-            <div class="input-group-prepend">
-                <span class="input-group-text border-top-0 border-left-0 border-bottom-0"><i
-                        class="fa fa-search"></i></span>
-            </div>
-            <input type="text" [(ngModel)]="searchText" placeholder="Rechercher dans la liste"
-                class="form-control border-0">
-            <div class="input-group-append">
-                <span (click)="toggle('grid')" class="input-group-text border-top-0 border-right-0 border-bottom-0"><i
-                        class="fa fa-th"></i></span>
-                <span (click)="toggle('list')" class="input-group-text border-top-0 border-right-0 border-bottom-0"><i
-                        class="fa fa-list"></i></span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div *ngIf="type=='grid'" class="row">
-    <div class="col-md-6" *ngFor="let inscription of inscriptions|filterBy:searchText">
-        <parcours-item [inscription]="inscription"></parcours-item>
-    </div>
-</div>
-
-<div *ngIf="type=='list'" class="row">
-    <div class="col-12">
-        <div class="table-responsive bg-white box-shadow">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Classe</th>
-                        <th>Année académique</th>
-                        <th>Option (Spécialité)</th>
-                        <th>Type Passage</th>
-                        <th>Regime Inscription</th>
-                        <th>Date Inscription</th>
-                        <th>Montant</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let inscription of inscriptions|filterBy:searchText">
-                        <td class="align-middle">
-                            <img class="rounded-circle" src="assets/img/users/default-user.jpg" width="40">
-                        </td>
-                        <td class="align-middle text-truncate">{{inscription?.idclasse?.codeclasse}}</td>
-                        <td class="align-middle text-truncate"> {{inscription?.idclasse?.idanneeacad?.libelleanneeacad}}
-                        </td>
-                        <td class="align-middle text-truncate">{{inscription?.idspecialite?.codespecialite }}</td>
-                        <td class="align-middle text-truncate">
-                            <span class="badge badge-danger" *ngIf="inscription?.passage=='R'">Redoublant</span>
-                            <span class="badge badge-success" *ngIf="inscription?.passage=='P'">Passant</span>
-                            <span class="badge badge-warning" *ngIf="inscription?.passage=='C'">Conditionnel</span>
-                        </td>
-                        <td class="align-middle text-truncate">
-                            {{inscription?.idregimeinscription.libelleregimeinscription}}</td>
-                        <td class="align-middle text-truncate">{{inscription?.dateinscacad|date:'dd/MM/yyyy'}}</td>
-                        <td class="align-middle">- FCFA</td>
-                        <td class="align-middle">
-                            <div class="btn-group" role="group">
-                                <button [routerLink]="['/parcours',inscription?.id]"
-                                    routerLinkActive="router-link-active" class="btn btn-outline-primary btn-sm"><i
-                                        class="fa fa-eye"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 </div>

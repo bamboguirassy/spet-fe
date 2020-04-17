@@ -16,11 +16,11 @@ export class UserMenuComponent implements OnInit {
 
   ngOnInit() {
     this.authSrv.currentUserProvider.subscribe(data => this.currentUser = data,
-      error => this.authSrv.httpSrv.handleError(error));
+      error => {});
     this.authSrv.getCurrentUser();
   }
 
-  logout(){
+  logout() {
     this.authSrv.logout();
   }
 

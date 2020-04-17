@@ -13,7 +13,6 @@ export class MultipleInscriptionacadResolver implements Resolve<any> {
       return data;
     }),
       catchError(error => {
-        console.log(error);
         const message = `Retrieval error: ${error}`;
         this.inscriptionacadSrv.httpSrv.handleError(error);
         return of({ inscriptionacads: null, error: message });

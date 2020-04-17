@@ -1,5 +1,5 @@
 {
-  "name": "startng-seed",
+  "name": "spet-gpe",
   "version": "2.9.0",
   "scripts": {
     "ng": "ng",
@@ -19,7 +19,9 @@
     "@angular/forms": "8.2.14",
     "@angular/platform-browser": "8.2.14",
     "@angular/platform-browser-dynamic": "8.2.14",
+    "@angular/pwa": "^0.901.0",
     "@angular/router": "8.2.14",
+    "@angular/service-worker": "^8.2.14",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
     "@swimlane/ngx-charts": "^12.1.0",
     "bootstrap": "4.3.1",

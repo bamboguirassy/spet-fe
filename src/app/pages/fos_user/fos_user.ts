@@ -19,4 +19,5 @@ export class FosUser {
         statut: string;
         last_activity: string;
         idgroup: any;
+        profession: any;
 }

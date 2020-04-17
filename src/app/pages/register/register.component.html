@@ -7,15 +7,16 @@
                 <img style="border-radius: 50%;margin-left: 5px;" width="150" height="150"  src="/assets/img/logo_ut.jpg" alt="logo_ut">
             </div>
             <div class="card-body text-center pb-1">
-                <h2>GPE - Création de compte</h2>
-                <a routerLink="/login" class="transition">Vous possedez déja un compte? Connectez vous !</a>
+                <h2>Spet - Inscription</h2>
+                <a routerLink="/login" class="transition">Je posséde déja un compte !</a>
 
                 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-4">
                     <div class="form-group">
-                        <input [formControl]="identifiant" class="form-control validation-field" placeholder="Saisir le numero de dossier" type="number"> 
+                        <label for="identifiant">Numéro de dossier (Numéro carte étudiant)</label>
+                        <p-inputMask [style]="{'width':'100%'}" mask="99999999999" formControlName="identifiant" placeholder="Numéro de dossier (numéro carte étudiant)"></p-inputMask>
                         <small class="text-danger" *ngIf="form.get('identifiant').touched">
                             <span *ngIf="form.get('identifiant').hasError('required')">Ces informations sont obligatoires</span>
-                            <span *ngIf="form.get('identifiant').hasError('minlength')">7 caractères au minimum</span>
+                            <span *ngIf="form.get('identifiant').hasError('minlength')">11 caractères au minimum</span>
                         </small>       
                     </div>
                     <!-- <div class="form-group">
@@ -26,24 +27,26 @@
                         </small> 
                     </div> -->
                     <div class="form-group">
-                        <input  pPassword promptLabel="Saisir un mot de passe" weakLabel="Mot de passe faible" mediumLabel="Mot de passe moyen" strongLabel="Mot de passe robuste" [formControl]="password" class="form-control validation-field" placeholder="Mot de passe" type="password" minlength="8">
+                        <label for="password">Nouveau mot de passe</label>
+                        <input  pPassword promptLabel="Saisir nouveau mot de passe" weakLabel="Mot de passe faible" mediumLabel="Mot de passe moyen" strongLabel="Mot de passe robuste" name="password" id="password" [formControl]="password" class="form-control validation-field" placeholder="Mot de passe" type="password" minlength="8">
                          <small class="text-danger" *ngIf="form.get('password').touched">
                             <span *ngIf="form.get('password').hasError('required')">Le mot de passe est obligatoire</span>
                             <span *ngIf="form.get('password').hasError('minlength')">Le mot de passe est court, 8 caractères minimum exigés</span>
                         </small>                     
                     </div>
                     <div class="form-group">
-                        <input pPassword promptLabel="Confirmer le mot de passe" [formControl]="confirmPassword" class="form-control validation-field" placeholder="Confirmation mot de passe" type="password">
+                        <label for="confirmPassword">Confirmation nouveau mot de passe</label>
+                        <input [formControl]="confirmPassword" class="form-control validation-field" placeholder="Confirmation mot de passe" type="password" name="confirmPassword" id="confirmPassword">
                         <small class="text-danger" *ngIf="form.get('confirmPassword').touched">
                             <span *ngIf="form.get('confirmPassword').hasError('required')">La confirmation du mot de passe est obligatoire</span>
                             <span *ngIf="form.get('confirmPassword').hasError('mismatchedPasswords')">Les mots de passe ne correspondent pas.</span>
                         </small> 
                     </div>
                     <div class="form-group">
-                        <p class="terms">En créant votre compte, vous acceptez les <a class="transition terms" href="javascript:void(0);">conditions d'utilisation</a></p>                  
-                    </div>             
+                        <p class="terms">En créant votre compte, vous acceptez les <a class="transition terms" href="javascript:void(0);">conditions d'utilisation</a></p>
+                    </div>
                     <div class="form-group">
-                        <button [disabled]="!form.valid" class="btn btn-block" type="submit">Créer le compte</button>
+                        <button id="registerBtn" [disabled]="!form.valid" class="btn btn-block" type="submit">Créer le compte</button>
                     </div>
                 </form>  
             </div>

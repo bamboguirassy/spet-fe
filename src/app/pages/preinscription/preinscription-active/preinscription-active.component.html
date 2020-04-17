@@ -20,7 +20,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let preinscription of preinscriptions">
-                                <td class="align-middle">{{preinscription?.datedelai|date:'dd/mm/yyyy'}}</td>
+                                <td class="align-middle">{{preinscription?.datedelai|date:'dd/MM/yyyy'}}</td>
                                 <td class="align-middle text-truncate">{{preinscription?.idfiliere?.codefiliere}}</td>
                                 <td class="align-middle text-truncate">{{preinscription?.idniveau?.libelleniveau}}</td>
                                 <td class="align-middle text-truncate">{{preinscription?.idanneeacad?.libelleanneeacad}}</td>

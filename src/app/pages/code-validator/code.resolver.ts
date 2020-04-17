@@ -17,7 +17,6 @@ export class CodeResolver implements Resolve<Number> {
             return data;
         }),
             catchError(error => {
-                console.log(error);
                 const message = `Retrieval error: ${error}`;
                 return of({ etudiant: null, error: message });
             }));

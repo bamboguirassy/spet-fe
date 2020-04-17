@@ -21,10 +21,10 @@ export class LoginComponent implements AfterViewInit {
     public password: AbstractControl;
 
     constructor(router: Router, fb: FormBuilder,
-                public authSrv: AuthService,
-                private tokenManager: TokenManagerService,
-                public dialogService: DialogService,
-                 ) {
+        public authSrv: AuthService,
+        private tokenManager: TokenManagerService,
+        public dialogService: DialogService,
+    ) {
         this.router = router;
         this.form = fb.group({
             username: ['', Validators.compose([Validators.required, emailValidator])],
@@ -50,12 +50,12 @@ export class LoginComponent implements AfterViewInit {
     openEmailChangeComponent() {
         const ref = this.dialogService.open(EmailUpdateComponent, {
             header: 'Mise à jour de l\'adresse email',
-            width: '70%'
+            width: '80%'
         });
         ref.onClose.subscribe((user: FosUser) => {
             if (user) {
                 this.authSrv.httpSrv.notificationSrv
-                    .showSuccess('Un mail de confirmation est envoyé au nouveau mail: ' + user.email);
+                    .showSuccess('Un mail de confirmation est envoyé au nouveau mail indiqué');
             }
         });
     }

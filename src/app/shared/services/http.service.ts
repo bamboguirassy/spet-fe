@@ -20,7 +20,8 @@ export class HttpService {
               public tokenManager: TokenManagerService,
               public notificationSrv: NotificationService,
               public router: Router) {
-    this.customUrl = 'http://127.0.0.1:8000/api/';
+    // this.customUrl = 'http://127.0.0.1:8000/api/';
+    this.customUrl = 'https://gpe-ws.univ-thies.sn/api/';
   }
 
   createAuthorizationHeaderWithProgress(): any {
@@ -39,7 +40,7 @@ export class HttpService {
 
   createAuthorizationHeader(): any {
     const headers = new HttpHeaders({
-      Authorization: this.tokenManager.getTokenName() + ' ' + this.tokenManager.getToken(),
+      Authorization: this.tokenManager.getTokenName() + ' ' + this.tokenManager.getToken()
     });
     this.httpOptions = {
       headers
@@ -68,7 +69,6 @@ export class HttpService {
   }
 
   handleError(error: any) {
-    console.log(error);
     this.notificationSrv.showError(error.error.message);
     if (error.error.code == 401) {
       this.router.navigate(['login']);
