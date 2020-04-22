@@ -3,8 +3,193 @@
         <statistique-inscription></statistique-inscription>
     </div>
 </div> -->
-<div class="row mb-2" *ngIf="preinscriptions">
-    <div class="col-md-12">
-        <preinscription-active [preinscriptions]="preinscriptions"></preinscription-active>
+<!-- {{inscriptions|json}} -->
+<section class="container-fluid">
+    <div class="row">
+        <h1>Parcours étudiant</h1>
     </div>
-</div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div id="accordion">
+                <div class="card ">
+                    <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h5 class="mb-0">
+                            <i class="fa fa-briefcase"></i>
+                            <a class="btn btn-link">
+                                2019-2020-Licence 3- Informatique
+                            </a>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+
+                            <div class="card card-responsive">
+                               <div class="card-body">
+                                    <!-- <div  class="float-right">
+                                        <a href="#" class="btn btn-sm-block btn-outline-warning " style="margin-bottom: 5px"><i class="fa fa-edit"></i> Inscription pédagogique</a>
+                                        <a href="#" class="btn btn-sm-block btn-outline-warning" style="margin-bottom: 5px"
+                                           ><i class="fa fa-eye"></i> Voir mes notes</a>
+                                    </div> -->
+                                    <p-toolbar>
+                                        <div class="ui-toolbar-group-right">
+                                            
+                                        <button href="#" class="btn btn-sm-block btn-outline-warning mb-1 mr-2" style="margin-bottom: 5px"><i class="fa fa-edit"></i> Inscription pédagogique</button>
+                                        <button href="#" class="btn btn-sm-block btn-outline-warning mb-1 mr-2" style="margin-bottom: 5px"
+                                           ><i class="fa fa-eye"></i> Voir mes notes</button>
+                                    </div>
+                                       
+                                    </p-toolbar>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <i class="fa fa-university"></i>  <b> Etablissement </b>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card card-responsive">
+                                                <table class="table table-responsive-sm">
+                                                    <tr>
+                                                        <th> Etablissement</th><td><a class="float-right">UFR des Sciences et Techniques</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> Département</th><td> <a class="float-right">Informatique</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th > Classe</th><td><a class="float-right">L3 Informatique</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th > Spécialité</th><td> <a class="float-right">Génie logiciel</a></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <i class="fa fa-mortar-board"></i> <b> Formation </b>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card">
+                                                <table class="table table-responsive-sm">
+                                                    <tr>
+                                                        <th> Passage</th><td><a class="float-right"><span class="badge badge-success badge-pill">passant</span></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> Date d'inscription</th><td><a class="float-right">15/04/2020</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th > Mode d'enseignement</th><td><a class="float-right">présentiel</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th > Etat inscription</th><td><a class="float-right"><span class="badge badge-success badge-pill">validée</span></a></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header ">
+                                            <i class="fa fa-money"></i>  <b> Information financier </b>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card">
+                                                <table class="table table-responsive-sm">
+                                                    <tr>
+                                                        <th> Montant inscription</th><td><a class="float-right"><span class="badge badge-primary badge-pill">25000 FCFA</span></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Mode paiement</th><td> <a class="float-right">banque athlantque</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Quitance</th><td> <a class="float-right">CDF5455</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th >Régime</th><td><a class="float-right">Régime normal non payant</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th >Cout de la formation </th><td><a class="float-right"><span class="badge badge-primary badge-pill">0 FCFA</span></a></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <i class="fa fa-bar-chart" ></i>  <b>  Résultat scolaire </b>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card">
+                                                <table class="table table-responsive-sm">
+                                                    <tr>
+                                                        <th>Moyenne annuel</th><td><a class="float-right"><span class="badge badge-success badge-pill">13</span></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Total crédit</th><td><a class="float-right"><span class="badge badge-primary badge-pill">60</span></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Crédit capitalisé</th><td><a class="float-right"><span class="badge badge-primary badge-pill">60</span></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th >Décision du conseil</th><td> <a class="float-right">passe en classe suppérieur</a></td>
+                                                    </tr>
+
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <h5 class="mb-0">
+                            <i class="fa fa-briefcase"></i>
+                            <a class="btn btn-link" >
+                                2018-2019- Licence 2-Informatique
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <h5 class="mb-0">
+                            <i class="fa fa-briefcase"></i>
+                            <a class="btn btn-link">
+                                2017-2018 Licence 3-Informatique
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
