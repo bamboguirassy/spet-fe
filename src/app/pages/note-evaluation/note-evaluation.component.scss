@@ -1,6 +1,8 @@
-.card {
-    display: block;
+ 
+.card-header.collapsed [aria-expanded="false"] {
+    background: #F7F7F7;
 }
-
- #collapseBtn[aria-expanded="true"] {background-color:red;color:white}
- #collapseBtn[aria-expanded="false"] {background-color:gray;color:black}
+.card-header:not(.collapsed)[aria-expanded="true"]  {
+    background: #dd1b16;
+    color: white;
+}

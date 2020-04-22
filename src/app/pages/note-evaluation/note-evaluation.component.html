@@ -16,15 +16,14 @@
                 <div id="accordion1" role="tablist" aria-multiselectable="true">
                     <article>
                         <div class="card">
-                            <div class="card-header card-crl" role="tab" id="collapseBtn" aria-expanded="false">
+                            <div class="card-header"  data-toggle="collapse" id="headingOne"  aria-expanded="true" data-target="#collapseOne" aria-controls="collapseOne" >
                                 <h2 class="mb-0">
-                                    <a data-toggle="collapse" id="collapseBtn" class="card-crl" data-parent="#accordion1" href="#section1ContentId" 
-                                        aria-controls="section1ContentId">
+                                    <a>
                                         <span>Licence 1 Informatique</span>
                                     </a>
                                 </h2>
                             </div>
-                            <div class="collapse" id="section1ContentId" role="tabpanel" aria-labelledby="collapseBtn">
+                            <div class="collapse show" id="collapseOne" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion1">
 
                                 <div class="card-body">
                                     <div class="card-header">
@@ -204,16 +203,15 @@
                     <!-- fin -->
                     <article>
                         <div class="card">
-                            <div class="card-header card-crl" role="tab" id="section2HeaderId">
+                            <div class="card-header collapsed" role="tab" data-toggle="collapse" id="headingTwo"  aria-expanded="false" data-target="#collapseTwo" aria-controls="collapseTwo">
                                 <h2 class="mb-0">
-                                    <a data-toggle="collapse" style="color: #565656;" data-parent="#accordion1" href="#section2ContentId" aria-expanded="true"
-                                        aria-controls="section1ContentId">
-                                        Licence 2 Informatique
+                                    <a >
+                                      <span>Licence 2 Informatique</span>  
                                     </a>
                                 </h2>
                             </div>
 
-                            <div class="collapse" id="section2ContentId" role="tabpanel" aria-labelledby="section2HeaderId">
+                            <div class="collapse" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion1">
 
                                 <div class="card-body">
                                     <div class="card-header">
@@ -354,16 +352,15 @@
 
                     <article>
                         <div class="card">
-                            <div class="card-header card-crl" role="tab" id="section3HeaderId">
+                            <div class="card-header" role="tab" class="card-header collapsed" role="tab" data-toggle="collapse" id="headingThree"  aria-expanded="false" data-target="#collapseThree" aria-controls="collapseThree">
                                 <h2 class="mb-0">
-                                    <a data-toggle="collapse" style="color: #565656;" data-parent="#accordion1" href="#section3ContentId" aria-expanded="true"
-                                        aria-controls="section3ContentId">
-                                        Licence 3 Informatique
+                                    <a>
+                                      <span> Licence 3 Informatique</span> 
                                     </a>
                                 </h2>
                             </div>
 
-                            <div class="collapse" id="section3ContentId" role="tabpanel" aria-labelledby="section3HeaderId">
+                            <div class="collapse" id="collapseThree" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion1">
 
                                 <div class="card-body">
                                     <div class="card-header">
@@ -503,16 +500,15 @@
                     <!--  -->
                     <article>
                         <div class="card">
-                            <div class="card-header card-crl" role="tab" id="section4HeaderId">
+                            <div class="card-header collapsed" role="tab" data-toggle="collapse" id="headingFour"  aria-expanded="false" data-target="#collapseFour" aria-controls="collapseFour">
                                 <h2 class="mb-0">
-                                    <a data-toggle="collapse" style="color: #565656;" data-parent="#accordion1" href="#section4ContentId" aria-expanded="true"
-                                        aria-controls="section4ContentId">
-                                        Master 1 Informatique
+                                    <a >
+                                       <span>Master 1 Informatique</span> 
                                     </a>
                                 </h2>
                             </div>
 
-                            <div class="collapse" id="section4ContentId" role="tabpanel" aria-labelledby="section4HeaderId">
+                            <div class="collapse" id="collapseFour" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion1">
 
                                 <div class="card-body">
                                     <div class="card-header">
