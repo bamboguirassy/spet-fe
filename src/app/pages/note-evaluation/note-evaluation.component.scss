@@ -1,3 +1,6 @@
 .card {
     display: block;
 }
+
+ #collapseBtn[aria-expanded="true"] {background-color:red;color:white}
+ #collapseBtn[aria-expanded="false"] {background-color:gray;color:black}
