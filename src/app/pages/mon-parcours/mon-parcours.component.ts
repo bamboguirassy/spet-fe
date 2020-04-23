@@ -15,11 +15,13 @@ export class MonParcoursComponent implements OnInit {
   inscriptions: Inscriptionacad[] = [];
   preinscriptions: Preinscription[] = [];
   constructor(public inscriptionAcadSrv: InscriptionacadService,
-              public activatedRoute: ActivatedRoute) { }
+              public activatedRoute: ActivatedRoute) { 
+              }
 
   ngOnInit() {
     this.inscriptions = this.activatedRoute.snapshot.data.inscriptions;
     this.preinscriptions = this.activatedRoute.snapshot.data.preinscriptions;
+    
   }
 
 }

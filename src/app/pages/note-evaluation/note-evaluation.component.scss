@@ -1,0 +1,8 @@
+ 
+.card-header.collapsed [aria-expanded="false"] {
+    background: #F7F7F7;
+}
+.card-header:not(.collapsed)[aria-expanded="true"]  {
+    background: #dd1b16;
+    color: white;
+}
