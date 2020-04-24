@@ -1,243 +1,200 @@
 <section class="card">
     <div class="container-fluid">
-
-        <br>
-        <br>
-        <h1 class="card-header text-center">Gestion des notes de l'anneé 2019-2020</h1>
-        <br>
-        <br>
-
+        <div class="card-header mt-1">
+            Vous êtes sur l'interface des notes de votre parcours.
+            Les notes affichées ici sont à titre d'information. <br>
+            Vous trouverez ici toutes vos notes présentes et futures. <br>
+            Au cas vous noteriez une incoherence sur une note,
+            merci de vos rapprocher du service pédagogique de votre établissement.
+            Cela vous éviterait des erreurs après la déliberation et échapper ainsi aux reclamations.
+        </div>
         <div class="card">
-
-
             <img class="card-img-top" src="holder.js/100x180/" alt="">
             <div class="card-body">
 
                 <div id="accordion1" role="tablist" aria-multiselectable="true">
                     <article>
                         <div class="card">
-                            <div class="card-header" data-toggle="collapse" id="headingOne" aria-expanded="true" data-target="#collapseOne" aria-controls="collapseOne">
-                                <h2 class="mb-0">
+                            <div class="card-header" data-toggle="collapse" id="headingOne" aria-expanded="true"
+                                data-target="#collapseOne" aria-controls="collapseOne">
+                                <h5 class="mb-0">
                                     <a>
                                         <span>Licence 1 Informatique</span>
                                     </a>
-                                </h2>
+                                </h5>
                             </div>
-                            <div class="collapse show" id="collapseOne" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion1">
-
-                                <div class="card-body">
-                                    <div class="card-header">
-                                        <div class="form-group">
-                                            <label for="">Selectionner la session</label>
-                                            <select class="form-control" name="" id="">
-                                                <option>Session 1</option>
-                                                <option>Session 2</option>
-                                                <option>Session de rattrapage</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h4 class="card-header">Service web</h4>
-                                                    <table class="table table-responsive-sm">
-
-                                                        <thead>
-                                                            <tr>
-
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tr class="list-group">
-
-
-                                                            <th> Devoir 1</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                            <span >(30%)</span>
-                                                                           
-                                                                        </a> 
-                                                                <a class="float-right">
-                                                                    <span class="badge badge-secondary badge-pill">13</span>
-                                                                </a>
+                            <div class="collapse show" id="collapseOne" role="tabpanel" aria-labelledby="headingOne"
+                                data-parent="#accordion1">
+                                <!-- debut session card -->
+                                <div class="card border-secondary">
+                                    <div class="card-body">
+                                        <h4 class="card-header">Deuxième Session</h4>
+                                        <!-- debut ec card -->
+                                        <div class="card">
+                                            <div class="card-body" style="overflow-y: auto;">
+                                                <h4 class="card-title">Service web - INF2421</h4>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Evaluation</th>
+                                                            <th>Pondération</th>
+                                                            <th>Note</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td scope="row">1</td>
+                                                            <td>Devoir 1</td>
+                                                            <td>30%</td>
+                                                            <td>
+                                                                <span class="badge badge-secondary badge-pill">13</span>
                                                             </td>
                                                         </tr>
-                                                        <tr class="list-group">
-                                                            
-                                                                <th> Examen 1</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                <a class="float-right">
-                                                                    <span >(70%)</span>
-                                                                   
-                                                                </a> 
-                                                                <a class="float-right"> <span class="badge badge-secondary badge-pill">10</span></a>
+                                                        <tr>
+                                                            <td colspan="2">Moyenne</td>
+                                                            <td colspan="2">
+                                                                <span class="badge badge-danger">Non disponible</span>
                                                             </td>
                                                         </tr>
-                                                    </table>
-                                                    <div class="card-footer">
-                                                        Moyenne :
-                                                        <span class="badge badge-danger pull-right">non disponible
-                                                        </span>
-                                                    </div>
-                                                </div>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h4 class="card-header">Littérature</h4>
-                                                    <table class="table table-responsive-sm">
-
-                                                        <thead>
-                                                            <tr>
-
-
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tr class="list-group">
-                                                                <th>Devoir 1</th>
-                                                                <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(30%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">10</span></a>
-                                                                </td>
-
-                                                           
-
+                                        <!-- fin ec card -->
+                                        <!-- debut ec card -->
+                                        <div class="card">
+                                            <div class="card-body" style="overflow-y: auto;">
+                                                <h4 class="card-title">Littérature - INF2422</h4>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Evaluation</th>
+                                                            <th>Pondération</th>
+                                                            <th>Note</th>
                                                         </tr>
-                                                        <tr class="list-group">
-                                                                <th>Devoir 2</th>
-                                                                <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(30%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">10</span></a>
-                                                                </td>
-                                                                
-
-                            
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td scope="row">1</td>
+                                                            <td>Devoir 1</td>
+                                                            <td>30%</td>
+                                                            <td>
+                                                                <span class="badge badge-secondary badge-pill">10</span>
+                                                            </td>
                                                         </tr>
-                                                        <tr class="list-group">
-                                                                <th>Examen 1</th>
-                                                                <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(40%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"><span class="badge badge-danger badge-pill">non disponible</span></a>
-                                                                </td>
-                                                            
+                                                        <tr>
+                                                            <td colspan="2">Moyenne</td>
+                                                            <td colspan="2">
+                                                                <span class="badge badge-danger">Non disponible</span>
+                                                            </td>
                                                         </tr>
-                                                    </table>
-                                                    <div class="card-footer">
-                                                        Moyenne :
-                                                        <span class="badge badge-danger pull-right">non disponible
-                                                        </span>
-                                                    </div>
-                                                </div>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h4 class="card-header">Statistiques</h4>
-                                                    <table class="table table-responsive-sm-6">
-                                                        <thead>
-                                                            <tr>
-
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tr class="list-group">
-                                                            
-                                                                <th>Devoir 1</th>
-                                                                <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(40%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">10</span></a>
-                                                                </td>
-                                                        
-
-                                                        </tr>
-
-
-                                                        <tr class="list-group">
-
-                                                                <th>Examen 1</th>
-                                                                <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(60%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">10</span></a>
-                                                                </td>
-
-                                                        </tr>
-                                                    </table>
-                                                    <div class="card-footer center">
-                                                        Moyenne :
-                                                        <span class="badge badge-primary">10</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h4 class="card-header">Technique</h4>
-
-                                                    <table class="table table-responsive-sm">
-                                                        <thead>
-                                                            <tr>
-
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tr class="list-group">
-                                                                <th>Projet 1</th>
-                                                                <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(40%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">12</span></a>
-                                                                </td>
-
-                                                           
-                                                        </tr>
-
-
-                                                        <tr class="list-group">
-                                                                <th>Examen 1</th>
-                                                                <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(60%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">12</span></a>
-                                                                </td>
-
-                                                        </tr>
-                                                    </table>
-
-                                                    <div class="card-footer center">
-                                                        Moyenne :
-                                                        <span class="badge badge-danger">non disponible</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        <!-- fin ec card -->
                                     </div>
-
                                 </div>
+                                <!-- fin session card -->
+                                <!-- debut session card -->
+                                <div class="card border-secondary">
+                                    <div class="card-body">
+                                        <h4 class="card-header">Première Session</h4>
+                                        <!-- debut ec card -->
+                                        <div class="card">
+                                            <div class="card-body" style="overflow-y: auto;">
+                                                <h4 class="card-title">Service web - INF2421</h4>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Evaluation</th>
+                                                            <th>Pondération</th>
+                                                            <th>Note</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td scope="row">1</td>
+                                                            <td>Devoir 1</td>
+                                                            <td>30%</td>
+                                                            <td>
+                                                                <span class="badge badge-secondary badge-pill">13</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td scope="row">2</td>
+                                                            <td>Examen 1</td>
+                                                            <td>70%</td>
+                                                            <td>
+                                                                <span class="badge badge-secondary badge-pill">10</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">Moyenne</td>
+                                                            <td colspan="2">
+                                                                <span class="badge badge-danger">Non disponible</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!-- fin ec card -->
+                                        <!-- debut ec card -->
+                                        <div class="card">
+                                            <div class="card-body" style="overflow-y: auto;">
+                                                <h4 class="card-title">Littérature - INF2422</h4>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Evaluation</th>
+                                                            <th>Pondération</th>
+                                                            <th>Note</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td scope="row">1</td>
+                                                            <td>Devoir 1</td>
+                                                            <td>30%</td>
+                                                            <td>
+                                                                <span class="badge badge-secondary badge-pill">10</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td scope="row">2</td>
+                                                            <td>Devoir 2</td>
+                                                            <td>30%</td>
+                                                            <td>
+                                                                <span class="badge badge-secondary badge-pill">10</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td scope="row">3</td>
+                                                            <td>Examen 1</td>
+                                                            <td>40%</td>
+                                                            <td>
+                                                                <span class="badge badge-danger">Non disponible</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">Moyenne</td>
+                                                            <td colspan="2">
+                                                                <span class="badge badge-danger">Non disponible</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!-- fin ec card -->
+                                    </div>
+                                </div>
+                                <!-- fin session card -->
                             </div>
 
                         </div>
@@ -245,16 +202,17 @@
                     <!-- fin -->
                     <article>
                         <div class="card">
-                            <div class="card-header collapsed" role="tab" data-toggle="collapse" id="headingTwo" aria-expanded="false" data-target="#collapseTwo"
-                                aria-controls="collapseTwo">
-                                <h2 class="mb-0">
+                            <div class="card-header collapsed" role="tab" data-toggle="collapse" id="headingTwo"
+                                aria-expanded="false" data-target="#collapseTwo" aria-controls="collapseTwo">
+                                <h5 class="mb-0">
                                     <a>
                                         <span>Licence 2 Informatique</span>
                                     </a>
-                                </h2>
+                                </h5>
                             </div>
 
-                            <div class="collapse" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion1">
+                            <div class="collapse" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo"
+                                data-parent="#accordion1">
 
                                 <div class="card-body">
                                     <div class="card-header">
@@ -282,36 +240,43 @@
                                                         <tr class="list-group">
 
                                                             <th>Devoir 1</th>
-                                                                <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(30%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">12</span></a>
-                                                                </td>
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(30%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">12</span></a>
+                                                            </td>
 
                                                         </tr>
                                                         <tr class="list-group">
-                                                                <th>Devoir 2</th>
-                                                                <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(30%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                </td>
-                                                           
+                                                            <th>Devoir 2</th>
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(30%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
+
                                                         </tr>
                                                         <tr class="list-group">
-                                                                <th>Examen 1</th>
-                                                                <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(40%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right">   <span class="badge badge-danger badge-pill">non disponible</span></a>
-                                                                </td>
-                                                            
+                                                            <th>Examen 1</th>
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(40%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-danger badge-pill">non
+                                                                        disponible</span></a>
+                                                            </td>
+
                                                         </tr>
 
                                                     </table>
@@ -336,29 +301,33 @@
                                                         </thead>
                                                         <tr class="list-group">
 
-                                                          
+
                                                             <th>Devoir 1 </th>
-                                                          
-                                                                    <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                            <a class="float-right">
-                                                                                <span >(40%)</span>
-                                                                               
-                                                                            </a> 
-                                                                            <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                        </td>
-                                                            
+
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(40%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
+
 
                                                         </tr>
                                                         <tr class="list-group">
                                                             <th>Examen 1</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(60%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">13</span></a>
-                                                                </td>
-                                                           
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(60%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">13</span></a>
+                                                            </td>
+
                                                         </tr>
 
                                                     </table>
@@ -382,27 +351,32 @@
                                                         </thead>
                                                         <tr class="list-group">
                                                             <th>Projet 1</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(40%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">11</span></a>
-                                                                </td>
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(40%)</span>
 
-                                                           
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">11</span></a>
+                                                            </td>
+
+
 
                                                         </tr>
                                                         <tr class="list-group">
                                                             <th>Examen </th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(60%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-danger badge-pill">non dispoonible</span></a>
-                                                                </td>
-                                                          
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(60%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-danger badge-pill">non
+                                                                        dispoonible</span></a>
+                                                            </td>
+
                                                         </tr>
 
                                                     </table>
@@ -424,16 +398,18 @@
 
                     <article>
                         <div class="card">
-                            <div class="card-header" role="tab" class="card-header collapsed" role="tab" data-toggle="collapse" id="headingThree" aria-expanded="false"
+                            <div class="card-header" role="tab" class="card-header collapsed" role="tab"
+                                data-toggle="collapse" id="headingThree" aria-expanded="false"
                                 data-target="#collapseThree" aria-controls="collapseThree">
-                                <h2 class="mb-0">
+                                <h5 class="mb-0">
                                     <a>
                                         <span> Licence 3 Informatique</span>
                                     </a>
-                                </h2>
+                                </h5>
                             </div>
 
-                            <div class="collapse" id="collapseThree" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion1">
+                            <div class="collapse" id="collapseThree" role="tabpanel" aria-labelledby="headingThree"
+                                data-parent="#accordion1">
 
                                 <div class="card-body">
                                     <div class="card-header">
@@ -460,36 +436,43 @@
                                                         </thead>
                                                         <tr class="list-group">
                                                             <th>Devoir 1</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(30%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                </td>
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(30%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
 
                                                         </tr>
                                                         <tr class="list-group">
                                                             <th>Devoir 2</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(30%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">12</span></a>
-                                                                </td>
-                                                            
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(30%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">12</span></a>
+                                                            </td>
+
                                                         </tr>
                                                         <tr class="list-group">
                                                             <th>Examen </th>
-                                                            
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(40%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-danger badge-pill">non disponible</span></a>
-                                                                </td>
+
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(40%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-danger badge-pill">non
+                                                                        disponible</span></a>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                     <div class="card-footer">
@@ -505,28 +488,32 @@
                                                 <div class="card-body">
                                                     <h4 class="card-header">Probabilités</h4>
                                                     <table class="table table-responsive-sm">
-                                    
+
                                                         <tr class="list-group">
                                                             <th>Devoir 1</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(40%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                </td>
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(40%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
 
                                                         </tr>
                                                         <tr class="list-group">
                                                             <th>Examen 1 </th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(60%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                </td>
-                                                            
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(60%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
+
                                                         </tr>
 
                                                     </table>
@@ -551,25 +538,29 @@
                                                         </thead>
                                                         <tr class="list-group">
                                                             <th> Projet 1</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(40%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                </td>
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(40%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
 
                                                         </tr>
                                                         <tr class="list-group">
                                                             <th>Examen 1</th>
 
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(60%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                </td>
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(60%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
                                                         </tr>
 
                                                     </table>
@@ -590,16 +581,17 @@
                     <!--  -->
                     <article>
                         <div class="card">
-                            <div class="card-header collapsed" role="tab" data-toggle="collapse" id="headingFour" aria-expanded="false" data-target="#collapseFour"
-                                aria-controls="collapseFour">
-                                <h2 class="mb-0">
+                            <div class="card-header collapsed" role="tab" data-toggle="collapse" id="headingFour"
+                                aria-expanded="false" data-target="#collapseFour" aria-controls="collapseFour">
+                                <h5 class="mb-0">
                                     <a>
                                         <span>Master 1 Informatique</span>
                                     </a>
-                                </h2>
+                                </h5>
                             </div>
 
-                            <div class="collapse" id="collapseFour" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion1">
+                            <div class="collapse" id="collapseFour" role="tabpanel" aria-labelledby="headingFour"
+                                data-parent="#accordion1">
 
                                 <div class="card-body">
                                     <div class="card-header">
@@ -618,41 +610,48 @@
                                                 <div class="card-body">
                                                     <h4 class="card-header">JS22</h4>
                                                     <table class="table table-responsive-sm">
-                                                       
+
                                                         <tr class="list-group">
                                                             <th>Devoir 1</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(30%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                </td>
-                                                       
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(30%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
+
 
                                                         </tr>
                                                         <tr class="list-group">
                                                             <th>Devoir 2</th>
-                                                           
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(30%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                </td>
+
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(30%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
                                                         </tr>
                                                         <tr class="list-group">
                                                             <th>Examen</th>
-                                                            
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(40%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-danger badge-pill">non disponible</span></a>
-                                                                </td>
-                                                            
+
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(40%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-danger badge-pill">non
+                                                                        disponible</span></a>
+                                                            </td>
+
                                                         </tr>
                                                     </table>
                                                     <div class="card-footer">
@@ -676,25 +675,29 @@
                                                         </thead>
                                                         <tr class="list-group">
                                                             <th>Devoir 1</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(30%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                </td>
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(30%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
 
                                                         </tr>
                                                         <tr class="list-group">
                                                             <th>Examen 1</th>
-                                                           
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(70%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">12</span></a>
-                                                                </td>
+
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(70%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">12</span></a>
+                                                            </td>
                                                         </tr>
 
                                                     </table>
@@ -711,28 +714,32 @@
                                                     <h4 class="card-header">Techniques de communication</h4>
                                                     <table class="table table-responsive-sm">
 
-                                                        
+
                                                         <tr class="list-group">
                                                             <th>Projet 1</th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(30%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">10</span></a>
-                                                                </td>
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(30%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">10</span></a>
+                                                            </td>
 
                                                         </tr>
                                                         <tr class="list-group">
                                                             <th>Examen </th>
-                                                            <td class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a class="float-right">
-                                                                        <span >(70%)</span>
-                                                                       
-                                                                    </a> 
-                                                                    <a class="float-right"> <span class="badge badge-secondary badge-pill">15</span></a>
-                                                                </td>
-                                                           
+                                                            <td
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <a class="float-right">
+                                                                    <span>(70%)</span>
+
+                                                                </a>
+                                                                <a class="float-right"> <span
+                                                                        class="badge badge-secondary badge-pill">15</span></a>
+                                                            </td>
+
                                                         </tr>
 
                                                     </table>
