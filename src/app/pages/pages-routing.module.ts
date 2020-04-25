@@ -18,6 +18,7 @@ import { OnePreinscriptionResolver } from './preinscription/one-preinscription.r
 import { BourseComponent } from './bourse/bourse.component';
 import { InscriptionPedagogiqueComponent } from './inscription-pedagogique/inscription-pedagogique.component';
 import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.component';
+import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedagogique.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,10 @@ const routes: Routes = [
       {
         path: 'ma-bourse', component: BourseComponent,
         data: { breadcrumb: 'Etat des bourses' }
+      },
+      {
+        path: 'dossier-pedagogique', component: DossierPedagogiqueComponent,
+        data: { breadcrumb: 'Mon dossier pédagogique' }
       },
       {
         path: 'inscription-pedagogique/:id', component: InscriptionPedagogiqueComponent,

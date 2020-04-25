@@ -38,6 +38,7 @@ import { UpdatePhotoComponent } from './inscriptionacad/update-photo/update-phot
 import { BourseComponent } from './bourse/bourse.component';
 import { InscriptionPedagogiqueComponent } from './inscription-pedagogique/inscription-pedagogique.component';
 import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.component';
+import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedagogique.component';
 
 
 
@@ -68,7 +69,8 @@ import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.compo
     UpdatePhotoComponent,
     BourseComponent,
     InscriptionPedagogiqueComponent,
-    NoteEvaluationComponent
+    NoteEvaluationComponent,
+    DossierPedagogiqueComponent
   ],
   imports: [
     CommonModule,
