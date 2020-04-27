@@ -19,6 +19,7 @@ import { BourseComponent } from './bourse/bourse.component';
 import { InscriptionPedagogiqueComponent } from './inscription-pedagogique/inscription-pedagogique.component';
 import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.component';
 import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedagogique.component';
+import { UserProfileComponent } from './fos_user/user-profile/user-profile.component';
 
 
 const routes: Routes = [
@@ -66,6 +67,13 @@ const routes: Routes = [
         resolve: {
           inscriptions: MultipleInscriptionacadResolver,
           preinscriptions: MultiplePreinscriptionResolver
+        }
+      },
+      {
+        path: 'profile', component: UserProfileComponent,
+        data: { breadcrumb: 'Mon Profile' },
+        resolve: {
+          etudiant: OneEtudiantResolver,
         }
       },
       {

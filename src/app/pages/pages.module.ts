@@ -39,6 +39,7 @@ import { BourseComponent } from './bourse/bourse.component';
 import { InscriptionPedagogiqueComponent } from './inscription-pedagogique/inscription-pedagogique.component';
 import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.component';
 import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedagogique.component';
+import { UserProfileComponent } from './fos_user/user-profile/user-profile.component';
 
 
 
@@ -70,7 +71,8 @@ import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedag
     BourseComponent,
     InscriptionPedagogiqueComponent,
     NoteEvaluationComponent,
-    DossierPedagogiqueComponent
+    DossierPedagogiqueComponent,
+    UserProfileComponent
   ],
   imports: [
     CommonModule,
