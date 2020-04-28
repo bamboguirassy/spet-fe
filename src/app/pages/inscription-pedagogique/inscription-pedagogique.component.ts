@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-inscription-pedagogique',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InscriptionPedagogiqueComponent implements OnInit {
 
-  constructor() { }
+  data: any;
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.data = this.activatedRoute.snapshot.data.inscriptionpedagData;
   }
 
 }

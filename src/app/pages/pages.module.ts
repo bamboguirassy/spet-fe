@@ -39,6 +39,7 @@ import { BourseComponent } from './bourse/bourse.component';
 import { InscriptionPedagogiqueComponent } from './inscription-pedagogique/inscription-pedagogique.component';
 import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.component';
 import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedagogique.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -95,7 +96,8 @@ import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedag
     SelectButtonModule,
     SpinnerModule,
     EditorModule,
-    InputMaskModule
+    InputMaskModule,
+    NgbModule
   ]
 })
 export class PagesModule { }

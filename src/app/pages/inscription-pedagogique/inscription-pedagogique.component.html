@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header collapsed">
-        <i class="fa fa-folder-open"></i> Inscriptions pédagogiques
+        <i class="fa fa-folder-open"></i> Inscriptions pédagogiques - {{data.inscriptionacad.idclasse.idniveau.libelleniveau}} {{data.inscriptionacad.idclasse.idfiliere.libellefiliere}} {{data.inscriptionacad.idclasse.idanneeacad.libelleanneeacad}}
       </div>
       <!-- .panel-heading -->
       <div class="card-body">
@@ -42,24 +42,22 @@
               <div class="card-body">
                 <ul class="list-group">
                   <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Ues Validées
-                    <span class="badge badge-success badge-pill">8</span>
+                    Ues niveau Validées
+                    <span class="badge badge-success badge-pill">{{data.nombreUeNiveauValide}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Nombre UE Inscrites
-                    <span class="badge badge-primary badge-pill">8</span>
+                    Ues antérieures Validées
+                    <span class="badge badge-success badge-pill">{{data.nombreUeAnterieurValide}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Nombre Total UE Niveau
-                    <span class="badge badge-primary badge-pill">8</span>
+                    Nombre total UE Inscrites
+                    <span class="badge badge-primary badge-pill">{{data.nombreUeInscrit}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     Nombre Semestre
-                    <span class="badge badge-primary badge-pill">2</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Total Crédit
-                    <span class="badge badge-primary badge-pill">60</span>
+                    <span class="badge badge-primary badge-pill">
+                      {{data.semestreData.length}}
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -67,12 +65,12 @@
           </div>
           <div class="col-lg-8">
             <div id="accordion">
-              <div class="card">
+              <div class="card" *ngFor="let semestreData of data.semestreData">
                 <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne"
                   aria-expanded="true" aria-controls="collapseOne">
                   <h5 class="mb-0">
                     <a class="btn btn-link">
-                      <i class="fa fa-info-circle"></i> Semestre 3
+                      <i class="fa fa-info-circle"></i> {{semestreData.semestre.libellesemestre}}
                     </a>
                   </h5>
                 </div>
@@ -85,73 +83,18 @@
                           <th>Libellé</th>
                           <th>Type UE</th>
                           <th>Crédit</th>
+                          <th>Validée</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Mathematique(INF230)</td>
-                          <td>UE Fondamentale</td>
-                          <td>4</td>
-                        </tr>
-                        <tr>
-                          <td>Réseaux Télécoms(INF231)</td>
-                          <td>UE Fondamentale</td>
-                          <td>12</td>
-                        </tr>
-                        <tr>
-                          <td>Informatique(INF233)</td>
-                          <td>UE Fondamentale</td>
-                          <td>12</td>
-                        </tr>
-                        <tr>
-                          <td>Humanité et entreprises (INF234)</td>
-                          <td>UE Fondamentale</td>
-                          <td>3</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo"
-                  aria-expanded="false" aria-controls="collapseTwo">
-                  <h5 class="mb-0 ">
-                    <a class="btn btn-link">
-                      <i class="fa fa-info-circle"></i> Semestre 4
-                    </a>
-                  </h5>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                  <div class="card-body table-responsive">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>Libellé</th>
-                          <th>Type UE</th>
-                          <th>Crédit</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>RESEAUX ET TELECOMS(INF241)</td>
-                          <td>UE Fondamentale</td>
-                          <td>4</td>
-                        </tr>
-                        <tr>
-                          <td>INFORMATIQUE(INF241)</td>
-                          <td>UE Fondamentale</td>
-                          <td>12</td>
-                        </tr>
-                        <tr>
-                          <td>INFORMATIQUE(INF242)</td>
-                          <td>UE Fondamentale</td>
-                          <td>12</td>
-                        </tr>
-                        <tr>
-                          <td>HUMANITES ET ENTREPRISES(INF243)</td>
-                          <td>UE Fondamentale</td>
-                          <td>3</td>
+                        <tr *ngFor="let inscriptionpedagData of semestreData.inscriptionpedagData">
+                          <td>{{inscriptionpedagData.ueanneeacad.libelleue}} ({{inscriptionpedagData.inspedag.idue.codeue}})</td>
+                          <td>{{inscriptionpedagData.inspedag.idue.idtypeue.libelletypeue}}</td>
+                          <td>{{inscriptionpedagData.ueanneeacad.credit}}</td>
+                          <td>
+                            <span class="badge badge-success" *ngIf="inscriptionpedagData.inspedag.valide">Validée</span>
+                            <span class="badge badge-warning"  *ngIf="!inscriptionpedagData.inspedag.valide">Non encore validée</span>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -169,7 +112,7 @@
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                   <div class="card-body table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" *ngIf="data.inspedagAnterieurs.length">
                       <thead>
                         <tr>
                           <th>Libellé</th>
@@ -178,18 +121,14 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>RESEAUX ET TELECOMS(INF241)</td>
-                          <td>UE Fondamentale</td>
-                          <td>4</td>
-                        </tr>
-                        <tr>
-                          <td>INFORMATIQUE(INF241)</td>
-                          <td>UE Fondamentale</td>
-                          <td>12</td>
+                        <tr *ngFor="let insueAnt of data.inspedagAnterieurs">
+                          <td>{{insueAnt.idue.idtypeue.libelletypeue}}</td>
+                          <td>{{insueAnt.idue.idtypeue.libelletypeue}}</td>
+                          <td>{{insueAnt.ueanneeacad.credit}}</td>
                         </tr>
                       </tbody>
                     </table>
+                    <span class="badge badge-warning" *ngIf="!data.inspedagAnterieurs.length">Vous n'êtes inscrits à aucune UE antérieure</span>
                   </div>
                 </div>
               </div>

@@ -19,6 +19,7 @@ import { BourseComponent } from './bourse/bourse.component';
 import { InscriptionPedagogiqueComponent } from './inscription-pedagogique/inscription-pedagogique.component';
 import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.component';
 import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedagogique.component';
+import { MultipleInscriptionpedagResolver } from './inscriptionpedag/multiple-inscriptionpedag.resolver';
 
 
 const routes: Routes = [
@@ -54,7 +55,10 @@ const routes: Routes = [
       },
       {
         path: 'inscription-pedagogique/:id', component: InscriptionPedagogiqueComponent,
-        data: { breadcrumb: 'Mes inscriptions pédagogiques' }
+        data: {
+          breadcrumb: 'Mes inscriptions pédagogiques',
+        },
+        resolve: { inscriptionpedagData: MultipleInscriptionpedagResolver }
       },
       {
         path: 'note-evaluation/:id', component: NoteEvaluationComponent,

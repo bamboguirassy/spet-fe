@@ -21,7 +21,6 @@ export class MonParcoursComponent implements OnInit {
   ngOnInit() {
     this.inscriptions = this.activatedRoute.snapshot.data.inscriptions;
     this.preinscriptions = this.activatedRoute.snapshot.data.preinscriptions;
-    
   }
 
 }
