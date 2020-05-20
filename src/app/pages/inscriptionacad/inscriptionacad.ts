@@ -28,6 +28,7 @@ export class Inscriptionacad {
     idclasse: any;
     idmodaliteenseignement: any;
     idmodepaiement: any;
-    //temporal fields
+    idfiliere: any;
+    // temporal fields
     preinscirptionId: any;
 }

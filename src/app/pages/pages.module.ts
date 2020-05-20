@@ -40,6 +40,7 @@ import { InscriptionPedagogiqueComponent } from './inscription-pedagogique/inscr
 import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.component';
 import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedagogique.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserProfileComponent } from './fos_user/user-profile/user-profile.component';
 
 
 
@@ -71,7 +72,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BourseComponent,
     InscriptionPedagogiqueComponent,
     NoteEvaluationComponent,
-    DossierPedagogiqueComponent
+    DossierPedagogiqueComponent,
+    UserProfileComponent
   ],
   imports: [
     CommonModule,
