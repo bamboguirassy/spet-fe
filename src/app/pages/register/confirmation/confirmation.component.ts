@@ -22,6 +22,7 @@ export class ConfirmationComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.authSrv.confirmRegistration(this.activatedRoute.snapshot.params.id)
       .subscribe((data: any) => {
+        alert('Le compte associé au mail ' + data.email + ' est confirmé. Merci de vous connecter avec vos identifiants');
         this.notificatonSrv.showSuccess('Le compte associé au mail ' + data.email + ' est confirmé. Merci de vous connecter avec vos identifiants');
         this.confirmed = true;
         this.router.navigate(['login']);

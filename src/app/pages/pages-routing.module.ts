@@ -20,6 +20,7 @@ import { InscriptionPedagogiqueComponent } from './inscription-pedagogique/inscr
 import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.component';
 import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedagogique.component';
 import { MultipleInscriptionpedagResolver } from './inscriptionpedag/multiple-inscriptionpedag.resolver';
+import { MultipleBourseEtudiantResolver } from './bourse/multiple-bourse_etudiant.resolver';
 
 
 const routes: Routes = [
@@ -46,8 +47,9 @@ const routes: Routes = [
         data: { breadcrumb: 'Mon compte' }, resolve: { etudiant: OneEtudiantResolver }
       },
       {
-        path: 'ma-bourse', component: BourseComponent,
-        data: { breadcrumb: 'Etat des bourses' }
+        path: 'bourse', component: BourseComponent,
+        data: { breadcrumb: 'Etat des bourses' },
+        resolve: {bourseData: MultipleBourseEtudiantResolver}
       },
       {
         path: 'dossier-pedagogique', component: DossierPedagogiqueComponent,

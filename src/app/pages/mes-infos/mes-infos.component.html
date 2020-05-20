@@ -21,6 +21,10 @@
                 </div>
                 <div class="dropdown-divider w-100"></div>
                 <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
+                    <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
+                        class="btn btn-outline-primary  btn-block mb-1 mr-2">
+                        <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
+                    </button>
                     <button (click)="openModal(modalContent, null)" type="button"
                         class="btn btn-outline-warning btn-block">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Mettre à jour mes informations
@@ -56,27 +60,31 @@
                 <div class="card">
                     <div class="card-body">
                         <fieldset>
-                            <legend>Information Personnelle</legend>
+                            <legend>Informations Personnelles</legend>
                             <table class="table table-responsive">
                                 <tbody>
                                     <tr>
                                         <th>Date Naissance</th>
                                         <td>{{etudiant?.datenaiss|date:'dd/MM/yyyy'}}
-                                            <span *ngIf="!etudiant?.datenaiss" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.datenaiss" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Lieu Naissance</th>
                                         <td>{{etudiant?.lieunaiss}}
-                                            <span *ngIf="!etudiant?.lieunaiss" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.lieunaiss" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Region Naissance</th>
                                         <td>{{etudiant?.regionnaiss}}
-                                            <span *ngIf="!etudiant?.regionnaiss" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.regionnaiss" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Pays Naissance</th>
                                         <td>{{etudiant?.idpays?.nomFrFr}}
-                                            <span *ngIf="!etudiant?.idpays?.nomFrFr" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.idpays?.nomFrFr" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -84,62 +92,74 @@
                                         <td>
                                             <span *ngIf="etudiant?.genre=='M'">Masculin</span>
                                             <span *ngIf="etudiant?.genre=='F'">Feminin</span>
-                                            <span *ngIf="!etudiant?.genre" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.genre" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Nationalité</th>
                                         <td>{{etudiant?.nationalite?.nationalite}}
-                                            <span *ngIf="!etudiant?.nationalite?.nationalite" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.nationalite?.nationalite"
+                                                class="badge badge-danger">Non renseigné</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Année Bac</th>
                                         <td>{{etudiant?.anneeBac}}
-                                            <span *ngIf="!etudiant?.anneeBac" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.anneeBac" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Resultat du BAC</th>
                                         <td>{{etudiant?.moyennebac}}
-                                            <span *ngIf="!etudiant?.moyennebac" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.moyennebac" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Serie BAC</th>
                                         <td>{{etudiant?.seriebac}}
-                                            <span *ngIf="!etudiant?.seriebac" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.seriebac" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Mention BAC</th>
                                         <td>{{etudiant?.mentionbac}}
-                                            <span *ngIf="!etudiant?.mentionbac" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.mentionbac" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Groupe Passage</th>
                                         <td>{{etudiant?.groupepassage}}
-                                            <span *ngIf="!etudiant?.groupepassage" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.groupepassage" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Lycée de provenance</th>
                                         <td>{{etudiant?.lyceedeprovenance}}
-                                            <span *ngIf="!etudiant?.lyceedeprovenance" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.lyceedeprovenance" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Diplome d'entrée</th>
                                         <td>{{etudiant?.diplomeentree}}
-                                            <span *ngIf="!etudiant?.diplomeentree" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.diplomeentree" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Handicap</th>
                                         <td>{{etudiant?.handicap}}
-                                            <span *ngIf="!etudiant?.handicap" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.handicap" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                     </tr>
                                     <tr *ngIf="etudiant?.handicap=='Oui'">
                                         <th>Type Handicap</th>
                                         <td>{{etudiant?.typeHandicap}}
-                                            <span *ngIf="!etudiant?.typeHandicap" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.typeHandicap" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Description Handicap</th>
                                         <td>
                                             <div [innerHtml]="etudiant?.descriptionHandicap"></div>
-                                            <span *ngIf="!etudiant?.descriptionHandicap" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.descriptionHandicap" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -149,7 +169,8 @@
                                             <span *ngIf="etudiant?.situationMatrimoniale=='C'">Célibataire</span>
                                             <span *ngIf="etudiant?.situationMatrimoniale=='D'">Divorcé(e)</span>
                                             <span *ngIf="etudiant?.situationMatrimoniale=='V'">Veuf(Ve)</span>
-                                            <span *ngIf="!etudiant?.situationMatrimoniale" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.situationMatrimoniale"
+                                                class="badge badge-danger">Non renseigné</span>
                                         </td>
                                         <th>Nombre d'enfants</th>
                                         <td>{{etudiant?.nbreenfant}}</td>
@@ -157,17 +178,20 @@
                                     <tr>
                                         <th>Nom conjoint</th>
                                         <td>{{etudiant?.nomconjoint}}
-                                            <span *ngIf="!etudiant?.nomconjoint" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.nomconjoint" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Orphelin</th>
                                         <td>{{etudiant?.orphelin}}
-                                            <span *ngIf="!etudiant?.orphelin" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.orphelin" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                     </tr>
                                     <tr *ngIf="etudiant?.orphelin=='Oui'">
                                         <th>Type Orphelin</th>
                                         <td>{{etudiant?.typeOrphelin}}
-                                            <span *ngIf="!etudiant?.typeOrphelin" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.typeOrphelin" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th></th>
                                         <td></td>
@@ -182,39 +206,45 @@
                 <div class="card">
                     <div class="card-body">
                         <fieldset>
-                            <legend>Information de Contact</legend>
+                            <legend>Contacts</legend>
                             <table class="table table-responsive">
                                 <tbody>
                                     <tr>
                                         <th>Téléphone 1</th>
-                                        <td>{{etudiant?.teletudiant}} 
-                                            <span *ngIf="!etudiant?.teletudiant" class="badge badge-danger">Non renseigné</span>
+                                        <td>{{etudiant?.teletudiant}}
+                                            <span *ngIf="!etudiant?.teletudiant" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Téléphone 2</th>
                                         <td>{{etudiant?.teletudiant2}}
-                                            <span *ngIf="!etudiant?.teletudiant2" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.teletudiant2" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Email Pro.</th>
+                                        <th>Email Perso.</th>
                                         <td>{{etudiant?.email}}
-                                            <span *ngIf="!etudiant?.email" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.email" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Email Univ.</th>
                                         <td>
                                             <span class="badge badge-danger">{{etudiant?.emailUniv}}
-                                                <span *ngIf="!etudiant?.emailUniv" class="badge badge-danger">Non renseigné</span>
+                                                <span *ngIf="!etudiant?.emailUniv" class="badge badge-danger">Non
+                                                    renseigné</span>
                                             </span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Personne à contacter</th>
                                         <td>{{etudiant?.nomcontact}}
-                                            <span *ngIf="!etudiant?.nomcontact" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.nomcontact" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                         <th>Tél. Contact</th>
                                         <td>{{etudiant?.telcontact}}
-                                            <span *ngIf="!etudiant?.telcontact" class="badge badge-danger">Non renseigné</span>
+                                            <span *ngIf="!etudiant?.telcontact" class="badge badge-danger">Non
+                                                renseigné</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -256,7 +286,8 @@
                                                 1</label>
                                             <p-inputMask placeholder="Numéro téléphone primaire"
                                                 [style]="{'width':'100%'}" mask="+221999999999"
-                                                [(ngModel)]="updateForm.teletudiant" name="teletudiant" id="teletudiant">
+                                                [(ngModel)]="updateForm.teletudiant" name="teletudiant"
+                                                id="teletudiant">
                                             </p-inputMask>
                                         </div>
                                     </div>
@@ -354,30 +385,33 @@
                                 <div class="row">
                                     <div class="col-md-12 col-lg-6">
                                         <div class="form-group">
-                                            <label class="col-form-label form-control-label" for="adpays">Pays adresse</label>
-                                            <input value="Sénégal" [disabled]="true" class="form-control" type="text" name="adpays"
-                                                id="adpays">
+                                            <label class="col-form-label form-control-label" for="adpays">Pays
+                                                adresse</label>
+                                            <input value="Sénégal" [disabled]="true" class="form-control" type="text"
+                                                name="adpays" id="adpays">
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="col-form-label form-control-label" for="adville">Ville</label>
-                                            <input [(ngModel)]="updateForm.adville" class="form-control" type="text" name="adville"
-                                                id="adville">
+                                            <input [(ngModel)]="updateForm.adville" class="form-control" type="text"
+                                                name="adville" id="adville">
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-6">
                                         <div class="form-group">
-                                            <label class="col-form-label form-control-label" for="adquartier">Quartier</label>
-                                            <input [(ngModel)]="updateForm.adquartier" class="form-control" type="text" name="adquartier"
-                                                id="adquartier">
+                                            <label class="col-form-label form-control-label"
+                                                for="adquartier">Quartier</label>
+                                            <input [(ngModel)]="updateForm.adquartier" class="form-control" type="text"
+                                                name="adquartier" id="adquartier">
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-6">
                                         <div class="form-group">
-                                            <label class="col-form-label form-control-label" for="adruevilla">Rue</label>
-                                            <input [(ngModel)]="updateForm.adruevilla" class="form-control" type="text" name="adruevilla"
-                                                id="adruevilla">
+                                            <label class="col-form-label form-control-label"
+                                                for="adruevilla">Rue</label>
+                                            <input [(ngModel)]="updateForm.adruevilla" class="form-control" type="text"
+                                                name="adruevilla" id="adruevilla">
                                         </div>
                                     </div>
                                 </div>
@@ -395,8 +429,9 @@
                                         <div class="form-group">
                                             <label class="col-form-label form-control-label" for="handicap">Avez vous un
                                                 handicap ?</label>
-                                            <p-selectButton [style]="{'width':'100%'}" [options]="handicaps" [(ngModel)]="selectedHandicap"
-                                                optionLabel="label" name="handicap" id="handicap"></p-selectButton>
+                                            <p-selectButton [style]="{'width':'100%'}" [options]="handicaps"
+                                                [(ngModel)]="selectedHandicap" optionLabel="label" name="handicap"
+                                                id="handicap"></p-selectButton>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-6" *ngIf="selectedHandicap?.value=='Oui'">
@@ -404,24 +439,29 @@
                                             <label class="col-form-label form-control-label" for="typeHandicap">Type
                                                 Handicap</label><br>
                                             <p-dropdown [style]="{'width':'100%'}" [options]="handicapTypes"
-                                                [(ngModel)]="selectedTypeHandicap" placeholder="Selectionner type handicap"
-                                                optionLabel="libelle" [showClear]="true" name="typeHandicap" id="typeHandicap">
+                                                [(ngModel)]="selectedTypeHandicap"
+                                                placeholder="Selectionner type handicap" optionLabel="libelle"
+                                                [showClear]="true" name="typeHandicap" id="typeHandicap">
                                             </p-dropdown>
                                         </div>
                                     </div>
                                     <div class="col-md-12" *ngIf="selectedHandicap?.value=='Oui'">
                                         <div class="form-group">
-                                            <label class="col-form-label form-control-label" for="descriptionHandicap">Description
+                                            <label class="col-form-label form-control-label"
+                                                for="descriptionHandicap">Description
                                                 Handicap</label>
-                                                <textarea class="form-control" name="descriptionHandicap" id="descriptionHandicap" cols="30" rows="10"></textarea>
+                                            <textarea class="form-control" name="descriptionHandicap"
+                                                id="descriptionHandicap" cols="30" rows="10"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-6">
                                         <div class="form-group">
-                                            <label class="col-form-label form-control-label" for="orphelin">Êtes-vous orphelin
+                                            <label class="col-form-label form-control-label" for="orphelin">Êtes-vous
+                                                orphelin
                                                 ?</label>
-                                            <p-selectButton [style]="{'width':'100%'}" name="orphelin" id="orphelin" [options]="orphelins"
-                                                [(ngModel)]="selectedOrphelin" optionLabel="label">
+                                            <p-selectButton [style]="{'width':'100%'}" name="orphelin" id="orphelin"
+                                                [options]="orphelins" [(ngModel)]="selectedOrphelin"
+                                                optionLabel="label">
                                             </p-selectButton>
                                         </div>
                                     </div>
@@ -430,8 +470,9 @@
                                             <label class="col-form-label form-control-label" for="typeOrphelin">Type
                                                 Orphelin</label><br>
                                             <p-dropdown [style]="{'width':'100%'}" [options]="typeOrphelins"
-                                                [(ngModel)]="selectedTypeOrphelin" placeholder="Selectionner type orphelin"
-                                                optionLabel="libelle" [showClear]="true" name="typeOrphelin" id="typeOrphelin">
+                                                [(ngModel)]="selectedTypeOrphelin"
+                                                placeholder="Selectionner type orphelin" optionLabel="libelle"
+                                                [showClear]="true" name="typeOrphelin" id="typeOrphelin">
                                             </p-dropdown>
                                         </div>
                                     </div>

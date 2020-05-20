@@ -2,7 +2,10 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header collapsed">
-        <i class="fa fa-folder-open"></i> Inscriptions pédagogiques - {{data.inscriptionacad.idclasse.idniveau.libelleniveau}} {{data.inscriptionacad.idclasse.idfiliere.libellefiliere}} {{data.inscriptionacad.idclasse.idanneeacad.libelleanneeacad}}
+        <i class="fa fa-folder-open"></i> Inscriptions pédagogiques -
+        {{data.inscriptionacad.idclasse.idniveau.libelleniveau}}
+        {{data.inscriptionacad.idclasse.idfiliere.libellefiliere}}
+        {{data.inscriptionacad.idclasse.idanneeacad.libelleanneeacad}}
       </div>
       <!-- .panel-heading -->
       <div class="card-body">
@@ -64,75 +67,58 @@
             </div>
           </div>
           <div class="col-lg-8">
-            <div id="accordion">
-              <div class="card" *ngFor="let semestreData of data.semestreData">
-                <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne"
-                  aria-expanded="true" aria-controls="collapseOne">
-                  <h5 class="mb-0">
-                    <a class="btn btn-link">
-                      <i class="fa fa-info-circle"></i> {{semestreData.semestre.libellesemestre}}
-                    </a>
-                  </h5>
+            <p-accordion>
+              <p-accordionTab *ngFor="let semestreData of data.semestreData; let i=index"
+                [header]="semestreData?.semestre?.libellesemestre" [selected]="i==0">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Libellé</th>
+                        <th>Type UE</th>
+                        <th>Crédit</th>
+                        <th>Validée</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let inscriptionpedagData of semestreData.inscriptionpedagData">
+                        <td>{{inscriptionpedagData?.ueanneeacad?.libelleue}}
+                          ({{inscriptionpedagData?.inspedag?.idue?.codeue}})</td>
+                        <td>{{inscriptionpedagData?.inspedag?.idue?.idtypeue?.libelletypeue}}</td>
+                        <td>{{inscriptionpedagData?.ueanneeacad?.credit}}</td>
+                        <td>
+                          <span class="badge badge-success" *ngIf="inscriptionpedagData.inspedag.valide">Validée</span>
+                          <span class="badge badge-warning" *ngIf="!inscriptionpedagData.inspedag.valide">Non encore
+                            validée</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                  <div class="card-body table-responsive">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>Libellé</th>
-                          <th>Type UE</th>
-                          <th>Crédit</th>
-                          <th>Validée</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let inscriptionpedagData of semestreData.inscriptionpedagData">
-                          <td>{{inscriptionpedagData.ueanneeacad.libelleue}} ({{inscriptionpedagData.inspedag.idue.codeue}})</td>
-                          <td>{{inscriptionpedagData.inspedag.idue.idtypeue.libelletypeue}}</td>
-                          <td>{{inscriptionpedagData.ueanneeacad.credit}}</td>
-                          <td>
-                            <span class="badge badge-success" *ngIf="inscriptionpedagData.inspedag.valide">Validée</span>
-                            <span class="badge badge-warning"  *ngIf="!inscriptionpedagData.inspedag.valide">Non encore validée</span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+              </p-accordionTab>
+              <p-accordionTab header="UEs antérieurement non validées">
+                <div class="table-responsive">
+                  <table class="table table-hover" *ngIf="data.inspedagAnterieurs.length">
+                    <thead>
+                      <tr>
+                        <th>Libellé</th>
+                        <th>Type UE</th>
+                        <th>Crédit</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let insueAnt of data.inspedagAnterieurs">
+                        <td>{{insueAnt?.idue?.idtypeue?.libelletypeue}}</td>
+                        <td>{{insueAnt?.idue?.idtypeue?.libelletypeue}}</td>
+                        <td>{{insueAnt?.ueanneeacad?.credit}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <span class="badge badge-warning" *ngIf="!data.inspedagAnterieurs.length">Vous n'êtes inscrits à
+                    aucune UE antérieure</span>
                 </div>
-              </div>
-              <div class="card">
-                <div class="card-header collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree"
-                  aria-expanded="false" aria-controls="collapseThree">
-                  <h5 class="mb-0">
-                    <a class="btn btn-link">
-                      <span class="fa fa-ban"></span> UEs antérieurement non validées
-                    </a>
-                  </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                  <div class="card-body table-responsive">
-                    <table class="table table-hover" *ngIf="data.inspedagAnterieurs.length">
-                      <thead>
-                        <tr>
-                          <th>Libellé</th>
-                          <th>Type UE</th>
-                          <th>Crédit</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let insueAnt of data.inspedagAnterieurs">
-                          <td>{{insueAnt.idue.idtypeue.libelletypeue}}</td>
-                          <td>{{insueAnt.idue.idtypeue.libelletypeue}}</td>
-                          <td>{{insueAnt.ueanneeacad.credit}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <span class="badge badge-warning" *ngIf="!data.inspedagAnterieurs.length">Vous n'êtes inscrits à aucune UE antérieure</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+              </p-accordionTab>
+            </p-accordion>
           </div>
         </div>
       </div>

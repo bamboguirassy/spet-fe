@@ -13,7 +13,7 @@
                 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-4">
                     <div class="form-group">
                         <label for="identifiant">Numéro de dossier (Numéro carte étudiant)</label>
-                        <p-inputMask [style]="{'width':'100%'}" mask="99999999999" formControlName="identifiant" placeholder="Numéro de dossier (numéro carte étudiant)"></p-inputMask>
+                        <input  class="form-control validation-field" type="number" formControlName="identifiant" placeholder="Numéro de dossier (numéro carte étudiant)">
                         <small class="text-danger" *ngIf="form.get('identifiant').touched">
                             <span *ngIf="form.get('identifiant').hasError('required')">Ces informations sont obligatoires</span>
                             <span *ngIf="form.get('identifiant').hasError('minlength')">11 caractères au minimum</span>

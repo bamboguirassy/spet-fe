@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-bourse',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bourse.component.scss']
 })
 export class BourseComponent implements OnInit {
+  bourseData: any[];
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.bourseData = this.activatedRoute.snapshot.data.bourseData;
   }
 
 }
