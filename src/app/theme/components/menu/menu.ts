@@ -19,7 +19,7 @@ export const horizontalMenuItems = [
     new Menu (20, 'Mon dossier', '/mes-infos', null, 'user', null, false, 0),
     new Menu (30, 'Mon parcours', '/mon-parcours', null, 'list', null, false, 0),
     // new Menu (40, 'Modalités de paiement', '/modalite-paiement', null, 'credit-card-alt', null, false, 0),
-    // new Menu (40, 'Ma bourse', '/bourse', null, 'money', null, false, 0),
+    new Menu (40, 'Ma bourse', '/bourse', null, 'money', null, false, 0),
     // new Menu (40, 'Resultats et réclamations', null, null, 'file-text-o', null, true, 0),
     // new Menu (45, 'Blank', '/blank', null, 'file-o', null, false, 40),
     // new Menu (46, 'Error', '/pagenotfound', null, 'exclamation-circle', null, false, 40),
