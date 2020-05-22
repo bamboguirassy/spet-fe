@@ -8,7 +8,7 @@ import { ReclamationBourse } from './reclamation_bourse';
 })
 export class ReclamationBourseService {
 
-  private routePrefix: string = 'reclamation_bourse';
+  private routePrefix = 'reclamationBourse';
 
   constructor(public httpSrv: HttpService) { }
 
@@ -20,24 +20,28 @@ export class ReclamationBourseService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }
 
-  create(reclamation_bourse: ReclamationBourse) {
-    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', reclamation_bourse);
+  findMesReclamations() {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'mes-reclamations/');
   }
 
-  update(reclamation_bourse: ReclamationBourse) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+reclamation_bourse.id+'/edit', reclamation_bourse);
+  create(reclamationBourse: ReclamationBourse) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', reclamationBourse);
+  }
+
+  update(reclamationBourse: ReclamationBourse) {
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + reclamationBourse.id + '/edit', reclamationBourse);
   }
 
   clone(original: ReclamationBourse, clone: ReclamationBourse) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+original.id+'/clone', clone);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + original.id + '/clone', clone);
   }
 
-  remove(reclamation_bourse: ReclamationBourse) {
-    return this.httpSrv.delete(this.getRoutePrefixWithSlash()+reclamation_bourse.id);
+  remove(reclamationBourse: ReclamationBourse) {
+    return this.httpSrv.delete(this.getRoutePrefixWithSlash() + reclamationBourse.id);
   }
 
-  removeSelection(reclamation_bourses: ReclamationBourse[]) {
-    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',reclamation_bourses);
+  removeSelection(reclamationBourses: ReclamationBourse[]) {
+    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', reclamationBourses);
   }
 
   public getRoutePrefix(): string {
@@ -45,7 +49,7 @@ export class ReclamationBourseService {
   }
 
   private getRoutePrefixWithSlash(): string {
-    return this.routePrefix+'/';
+    return this.routePrefix + '/';
   }
 
 }
