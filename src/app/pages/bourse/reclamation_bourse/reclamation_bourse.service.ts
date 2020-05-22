@@ -20,10 +20,6 @@ export class ReclamationBourseService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }
 
-  findMesReclamations() {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'mes-reclamations/');
-  }
-
   create(reclamationBourse: ReclamationBourse) {
     return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', reclamationBourse);
   }
