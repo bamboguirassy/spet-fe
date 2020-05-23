@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { HistoriqueEtatDemande } from './historique_etat_demande';
+import { DemandeDocument } from '../demande_document';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class HistoriqueEtatDemandeService {
 
   findAll() {
     return this.httpSrv.get(this.getRoutePrefixWithSlash());
+  }
+
+  findByReclamation(demande: DemandeDocument) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'demande/' + demande.id);
   }
 
   findOneById(id: number) {
