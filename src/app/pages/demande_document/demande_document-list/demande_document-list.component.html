@@ -39,6 +39,8 @@
               <colgroup>
                 <col>
                 <col>
+                <col>
+                <col>
               </colgroup>
             </ng-template>
             <ng-template pTemplate="header">
@@ -48,6 +50,9 @@
                 </th>
                 <th [pSortableColumn]="'type'" pResizableColumn>
                   Type <p-sortIcon [field]="'type'"></p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'date'" pResizableColumn>
+                  Date <p-sortIcon [field]="'date'"></p-sortIcon>
                 </th>
                 <th [pSortableColumn]="'intitule'" pResizableColumn>
                   Intitule <p-sortIcon [field]="'intitule'"></p-sortIcon>
@@ -62,6 +67,9 @@
                 </td>
                 <td class="ui-resizable-column">
                   {{ demande_document.type }}
+                </td>
+                <td class="ui-resizable-column">
+                  {{ demande_document.date }}
                 </td>
                 <td class="ui-resizable-column">
                   {{ demande_document.intitule }}

@@ -22,6 +22,8 @@ import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedag
 import { MultipleInscriptionpedagResolver } from './inscriptionpedag/multiple-inscriptionpedag.resolver';
 import { MultipleBourseEtudiantResolver } from './bourse/multiple-bourse_etudiant.resolver';
 import { UserProfileComponent } from './fos_user/user-profile/user-profile.component';
+import { demandeDocumentRoutes } from './demande_document/demande_document.routes';
+import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
 
 
 const routes: Routes = [
@@ -87,6 +89,8 @@ const routes: Routes = [
         data: { breadcrumb: 'Finaliser mon inscription' }, resolve: { preinscription: OnePreinscriptionResolver }
       },
       { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
+      demandeDocumentRoutes,
+      reclamationBourseRoutes
     ]
   }
 ];

@@ -6,7 +6,7 @@ import { MultipleReclamationBourseResolver } from './multiple-reclamation_bourse
 import { OneReclamationBourseResolver } from './one-reclamation_bourse.resolver';
 
 const reclamationBourseRoutes: Route = {
-    path: 'reclamation_bourse', children: [
+    path: 'reclamationbourse', children: [
         { path: '', component: ReclamationBourseListComponent, resolve: { reclamation_bourses: MultipleReclamationBourseResolver } },
         { path: 'new', component: ReclamationBourseNewComponent },
         { path: ':id', component: ReclamationBourseShowComponent, resolve: { reclamation_bourse: OneReclamationBourseResolver } }
