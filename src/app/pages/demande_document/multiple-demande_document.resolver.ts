@@ -8,8 +8,8 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class MultipleDemandeDocumentResolver implements Resolve<any> {
-  resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): any | import("rxjs").Observable<any> | Promise<any> {
-    return this.demande_documentSrv.findAll().pipe(map(data => {
+  resolve(route: import('@angular/router').ActivatedRouteSnapshot, state: import('@angular/router').RouterStateSnapshot): any | import('rxjs').Observable<any> | Promise<any> {
+    return this.demande_documentSrv.findMesDemandes().pipe(map(data => {
       return data;
     }),
       catchError(error => {
