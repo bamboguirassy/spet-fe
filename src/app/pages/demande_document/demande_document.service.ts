@@ -16,6 +16,10 @@ export class DemandeDocumentService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash());
   }
 
+  findMesDemandes() {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'mes-demandes/');
+  }
+
   findOneById(id: number) {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }
@@ -25,19 +29,19 @@ export class DemandeDocumentService {
   }
 
   update(demande_document: DemandeDocument) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+demande_document.id+'/edit', demande_document);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + demande_document.id + '/edit', demande_document);
   }
 
   clone(original: DemandeDocument, clone: DemandeDocument) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+original.id+'/clone', clone);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + original.id + '/clone', clone);
   }
 
   remove(demande_document: DemandeDocument) {
-    return this.httpSrv.delete(this.getRoutePrefixWithSlash()+demande_document.id);
+    return this.httpSrv.delete(this.getRoutePrefixWithSlash() + demande_document.id);
   }
 
   removeSelection(demande_documents: DemandeDocument[]) {
-    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',demande_documents);
+    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', demande_documents);
   }
 
   public getRoutePrefix(): string {
@@ -45,7 +49,7 @@ export class DemandeDocumentService {
   }
 
   private getRoutePrefixWithSlash(): string {
-    return this.routePrefix+'/';
+    return this.routePrefix + '/';
   }
 
 }
