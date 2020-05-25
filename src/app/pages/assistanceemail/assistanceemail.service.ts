@@ -13,7 +13,11 @@ export class AssistanceEmailService {
   constructor(public httpSrv: HttpService) { }
 
   findAll() {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash());
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'per-app/spet');
+  }
+
+  sendMail(mail) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'send-mail/', mail);
   }
 
   findOneById(id: number) {
@@ -25,19 +29,19 @@ export class AssistanceEmailService {
   }
 
   update(assistanceEmail: AssistanceEmail) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+assistanceEmail.id+'/edit', assistanceEmail);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + assistanceEmail.id + '/edit', assistanceEmail);
   }
 
   clone(original: AssistanceEmail, clone: AssistanceEmail) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+original.id+'/clone', clone);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + original.id + '/clone', clone);
   }
 
   remove(assistanceEmail: AssistanceEmail) {
-    return this.httpSrv.delete(this.getRoutePrefixWithSlash()+assistanceEmail.id);
+    return this.httpSrv.delete(this.getRoutePrefixWithSlash() + assistanceEmail.id);
   }
 
   removeSelection(assistanceEmails: AssistanceEmail[]) {
-    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',assistanceEmails);
+    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', assistanceEmails);
   }
 
   public getRoutePrefix(): string {
@@ -45,7 +49,7 @@ export class AssistanceEmailService {
   }
 
   private getRoutePrefixWithSlash(): string {
-    return this.routePrefix+'/';
+    return this.routePrefix + '/';
   }
 
 }
