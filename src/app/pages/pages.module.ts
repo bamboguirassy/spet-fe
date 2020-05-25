@@ -56,6 +56,12 @@ import { NoteEvaluationComponent } from './note-evaluation/note-evaluation.compo
 import { DossierPedagogiqueComponent } from './dossier-pedagogique/dossier-pedagogique.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserProfileComponent } from './fos_user/user-profile/user-profile.component';
+import { DemandeDocumentListComponent } from './demande_document/demande_document-list/demande_document-list.component';
+import { ReclamationBourseListComponent } from './bourse/reclamation_bourse/reclamation_bourse-list/reclamation_bourse-list.component';
+import { ReclamationBourseNewComponent } from './bourse/reclamation_bourse/reclamation_bourse-new/reclamation_bourse-new.component';
+import { ReclamationBourseShowComponent } from './bourse/reclamation_bourse/reclamation_bourse-show/reclamation_bourse-show.component';
+import { DemandeDocumentShowComponent } from './demande_document/demande_document-show/demande_document-show.component';
+import { DemandeDocumentNewComponent } from './demande_document/demande_document-new/demande_document-new.component';
 
 
 
@@ -88,7 +94,9 @@ import { UserProfileComponent } from './fos_user/user-profile/user-profile.compo
     InscriptionPedagogiqueComponent,
     NoteEvaluationComponent,
     DossierPedagogiqueComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ReclamationBourseListComponent, ReclamationBourseNewComponent, ReclamationBourseShowComponent,
+    DemandeDocumentListComponent, DemandeDocumentNewComponent, DemandeDocumentShowComponent
   ],
     imports: [
         CommonModule,
