@@ -12,8 +12,12 @@
                 <p-accordionTab [header]="inscriptionacad.idclasse.idanneeacad.libelleanneeacad + '-' + inscriptionacad.idclasse.idniveau.libelleniveau+ '-'+
                 inscriptionacad.idclasse.idfiliere.libellefiliere" *ngFor="let inscriptionacad of inscriptions; let i=index" [selected]="i==0">
                     <p-toolbar>
-                        <div class="ui-toolbar-group-right">
 
+                       <div class="ui-toolbar-group-left">
+                           <button ngbTooltip="Faire une demande" placement="bottom" class="mr-2" type="text" pButton label="Doc. Administratif" (click)="showDialog()"></button>
+                       </div>
+
+                        <div class="ui-toolbar-group-right">
                             <button [routerLink]="['/inscription-pedagogique',inscriptionacad.id]"
                                 class="btn btn-sm-block btn-outline-secondary mb-1 mr-2" style="margin-bottom: 5px"><i
                                     class="fa fa-edit"></i> Inscription
@@ -23,8 +27,70 @@
                                     class="fa fa-eye"></i> Voir mes
                                 notes <span class="badge badge-danger">bientôt disponible</span> </button>
                         </div>
+
                     </p-toolbar>
+
                     <hr>
+
+                    <p-dialog [(visible)]="display" [style]="{width: '70vw'}">
+                        <p-header>
+                            <p-toolbar>
+                                <div class="ui-toolbar-group-left">
+                                    <button class="mr-1" pButton type="button" label="New" icon="pi pi-plus"></button>
+                                    <button pButton type="button" label="Upload" icon="pi pi-upload" class="ui-button-warning"></button>
+                                </div>
+
+                                <div class="ui-toolbar-group-right">
+                                    <button class="mr-1" pButton type="button" icon="pi pi-search"></button>
+                                    <button pButton type="button" icon="pi pi-calendar" class="ui-button-success"></button>
+                                </div>
+                            </p-toolbar>
+                        </p-header>
+
+                        <div class="content mt-2">
+                            <h4>Document Administratif</h4>
+                            <form (ngSubmit)="sendAdministratifDocRequest(inscriptionacad)">
+                                <div class="form-row align-items-center">
+                                    <div class="col-5">
+                                        <label class="sr-only" for="doc">Document</label>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fa fa-file-archive-o"></i>
+                                                </div>
+                                            </div>
+                                            <select  class="form-control" id="doc" pInputText>
+                                                <option>Carte étudiante</option>
+                                                <option>Certificat d’inscription</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <label class="sr-only" for="demande-type">Type de demande</label>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fa fa-files-o"></i>
+                                                </div>
+                                            </div>
+                                            <select type="text" class="form-control" id="demande-type" pInputText>
+                                                <option>Nouvelle demande</option>
+                                                <option>Demande de duplicata</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="submit" class="btn btn-primary mb-2 btn-block">Envoyer</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <p-footer>
+                            buttons
+                        </p-footer>
+                    </p-dialog>
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
