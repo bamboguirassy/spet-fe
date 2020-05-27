@@ -16,51 +16,45 @@
 
                         <div class="ui-toolbar-group-left">
                             <button ngbTooltip="Faire une demande" placement="bottom" class="mr-2" type="text" pButton
-                                    label="Doc. Administratif" (click)="showDialog()"></button>
+                                    label="Doc. Administratif" (click)="showDocAdminRequestDialog(inscriptionacad)"></button>
+                            <button ngbTooltip="Faire une demande" placement="bottom" class="mr-2" type="text" pButton
+                                    label="Doc. Pédagogique" (click)="showDocPedagRequestDialog(inscriptionacad)"></button>
                         </div>
 
                         <div class="ui-toolbar-group-right">
                             <button [routerLink]="['/inscription-pedagogique',inscriptionacad.id]"
                                     class="btn btn-sm-block btn-outline-secondary mb-1 mr-2" style="margin-bottom: 5px">
-                                <i
-                                        class="fa fa-edit"></i> Inscription
-                                pédagogique
+                                <i class="fa fa-edit"></i> Inscription pédagogique
                             </button>
                             <button [disabled]="true" [routerLink]="['/note-evaluation',inscriptionacad.id]" href="#"
                                     class="btn btn-sm-block btn-outline-primary mb-1 mr-2" style="margin-bottom: 5px"><i
-                                    class="fa fa-eye"></i> Voir mes
-                                notes <span class="badge badge-danger">bientôt disponible</span></button>
+                                    class="fa fa-eye"></i> Voir mes notes <span class="badge badge-danger">bientôt disponible</span>
+                            </button>
                         </div>
-
                     </p-toolbar>
-
                     <hr>
-
                     <p-dialog [(visible)]="display" [style]="{width: '75vw'}">
                         <p-header>
                             <p-toolbar>
                                 <div class="ui-toolbar-group-left">
-                                    <button pButton type="button" label="Historique" icon="pi pi-history"
-                                            class="ui-button-text mr-1"></button>
-                                    <button routerLink="/demandedocument" pButton type="button" label="Mes demandes" icon="pi pi-file"
-                                            class="ui-button-warning"></button>
-                                </div>
-
-                                <div class="ui-toolbar-group-right">
-                                    <button pButton type="button" icon="pi pi-calendar"
-                                            class="ui-button-success"></button>
+                                    <button routerLink="/demandedocument" pButton type="button" label="Mes demandes"
+                                            icon="pi pi-file"
+                                            class="ui-button-warning">
+                                    </button>
                                 </div>
                             </p-toolbar>
                         </p-header>
-
                         <div class="content mt-2">
-                            <h4>Document Administratif</h4>
-                            <form #data="ngForm" (ngSubmit)="sendAdministratifDocRequest(inscriptionacad)">
+                            <h4 class="text-center text-uppercase py-3 {{requestDocAdmin ? 'text-primary': 'text-warning'}}">
+                                <i class="fa fa-files-o mr-1"></i>
+                                Demande de document {{requestDocAdmin ? 'administratif' : 'pédagogique'}}
+                            </h4>
+                            <form #data="ngForm" (ngSubmit)="requestDocument()">
                                 <div class="row">
                                     <div class="col-md-6 form-group">
-                                        <label>Document Administratif</label>
+                                        <label>Type de Document</label>
                                         <select name="type" class="form-control" [(ngModel)]="dd.typedocument" required>
-                                            <option *ngFor="let td of typedocuments | typedocument: 'administrative'"
+                                            <option *ngFor="let td of typedocuments | typedocument: source"
                                                     [value]="td.id">{{td.libelletypedocument}}</option>
                                         </select>
                                     </div>
@@ -75,12 +69,7 @@
                                 <button [disabled]="data.invalid" type="submit" class="btn btn-primary">Envoyer</button>
                             </form>
                         </div>
-
-                        <p-footer>
-                            buttons
-                        </p-footer>
                     </p-dialog>
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">

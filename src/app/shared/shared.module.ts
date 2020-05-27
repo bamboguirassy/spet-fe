@@ -9,7 +9,6 @@ import { DeletablePipe } from './pipes/deletable.pipe';
 import { TypedocumentPipe } from './pipes/typedocument.pipe';
 
 
-
 @NgModule({
   declarations: [
     ClonablePipe,
@@ -18,7 +17,7 @@ import { TypedocumentPipe } from './pipes/typedocument.pipe';
     ListablePipe,
     ShowablePipe,
     DeletablePipe,
-    TypedocumentPipe
+    TypedocumentPipe,
   ],
   imports: [
     CommonModule
@@ -30,7 +29,7 @@ import { TypedocumentPipe } from './pipes/typedocument.pipe';
     ListablePipe,
     ShowablePipe,
     DeletablePipe,
-    TypedocumentPipe
+    TypedocumentPipe,
   ]
 })
 export class SharedModule { }

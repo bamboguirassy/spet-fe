@@ -21,10 +21,12 @@ export class MonParcoursComponent implements OnInit {
 
     /** @var dd Object d'une demande de document */
     dd = new DemandeDocument();
-    display = false;
+    requestDocAdmin = false;
     typedocuments: Typedocument[];
     etats: EtatDemandeDocument[];
-
+    source = '';
+    display = false;
+    inscriptionacad: Inscriptionacad;
 
     constructor(
         public inscriptionAcadSrv: InscriptionacadService,
@@ -38,17 +40,30 @@ export class MonParcoursComponent implements OnInit {
         this.etats = this.activatedRoute.snapshot.data.etats;
     }
 
-    showDialog() {
+    showDocAdminRequestDialog(inscriptionacad: Inscriptionacad) {
+        this.inscriptionacad = inscriptionacad;
+        this.requestDocAdmin = true;
         this.display = true;
+        this.source = 'administrative';
     }
 
-    sendAdministratifDocRequest(inscriptionacad: Inscriptionacad) {
-        this.dd.etat_actuel = this.etats[0].id; // En Attente d'Approbation
-        this.dd.inscriptionacad = inscriptionacad.id;
+    showDocPedagRequestDialog(inscriptionacad: Inscriptionacad) {
+        this.inscriptionacad = inscriptionacad;
+        this.requestDocAdmin = false;
+        this.display = true;
+        this.source = 'pedagogique';
+    }
+
+    requestDocument() {
+        this.dd.etatActuel = this.etats[0].id; // En Attente d'Approbation -> default
+        this.dd.inscriptionacad = this.inscriptionacad.id;
         this.demandeDocumentSrv.create(this.dd).subscribe(
-            dd => this.demandeDocumentSrv.httpSrv.notificationSrv.showSuccess('Demande envoyée avec succès'),
-            error => console.log(error)
+            () => {
+                this.demandeDocumentSrv.httpSrv.notificationSrv.showSuccess('Demande envoyée avec succès');
+                this.dd = new DemandeDocument();
+                this.display = false;
+            },
+            error => this.demandeDocumentSrv.httpSrv.handleError(error)
         );
     }
-
 }
