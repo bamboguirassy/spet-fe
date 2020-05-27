@@ -10,79 +10,69 @@
         <div class="col-md-12 col-lg-12 col-sm-12">
             <p-accordion>
                 <p-accordionTab [header]="inscriptionacad.idclasse.idanneeacad.libelleanneeacad + '-' + inscriptionacad.idclasse.idniveau.libelleniveau+ '-'+
-                inscriptionacad.idclasse.idfiliere.libellefiliere" *ngFor="let inscriptionacad of inscriptions; let i=index" [selected]="i==0">
+                inscriptionacad.idclasse.idfiliere.libellefiliere"
+                                *ngFor="let inscriptionacad of inscriptions; let i=index" [selected]="i==0">
                     <p-toolbar>
 
-                       <div class="ui-toolbar-group-left">
-                           <button ngbTooltip="Faire une demande" placement="bottom" class="mr-2" type="text" pButton label="Doc. Administratif" (click)="showDialog()"></button>
-                       </div>
+                        <div class="ui-toolbar-group-left">
+                            <button ngbTooltip="Faire une demande" placement="bottom" class="mr-2" type="text" pButton
+                                    label="Doc. Administratif" (click)="showDialog()"></button>
+                        </div>
 
                         <div class="ui-toolbar-group-right">
                             <button [routerLink]="['/inscription-pedagogique',inscriptionacad.id]"
-                                class="btn btn-sm-block btn-outline-secondary mb-1 mr-2" style="margin-bottom: 5px"><i
-                                    class="fa fa-edit"></i> Inscription
-                                pédagogique</button>
+                                    class="btn btn-sm-block btn-outline-secondary mb-1 mr-2" style="margin-bottom: 5px">
+                                <i
+                                        class="fa fa-edit"></i> Inscription
+                                pédagogique
+                            </button>
                             <button [disabled]="true" [routerLink]="['/note-evaluation',inscriptionacad.id]" href="#"
-                                class="btn btn-sm-block btn-outline-primary mb-1 mr-2" style="margin-bottom: 5px"><i
+                                    class="btn btn-sm-block btn-outline-primary mb-1 mr-2" style="margin-bottom: 5px"><i
                                     class="fa fa-eye"></i> Voir mes
-                                notes <span class="badge badge-danger">bientôt disponible</span> </button>
+                                notes <span class="badge badge-danger">bientôt disponible</span></button>
                         </div>
 
                     </p-toolbar>
 
                     <hr>
 
-                    <p-dialog [(visible)]="display" [style]="{width: '70vw'}">
+                    <p-dialog [(visible)]="display" [style]="{width: '75vw'}">
                         <p-header>
                             <p-toolbar>
                                 <div class="ui-toolbar-group-left">
-                                    <button class="mr-1" pButton type="button" label="New" icon="pi pi-plus"></button>
-                                    <button pButton type="button" label="Upload" icon="pi pi-upload" class="ui-button-warning"></button>
+                                    <button pButton type="button" label="Historique" icon="pi pi-history"
+                                            class="ui-button-text mr-1"></button>
+                                    <button routerLink="/demandedocument" pButton type="button" label="Mes demandes" icon="pi pi-file"
+                                            class="ui-button-warning"></button>
                                 </div>
 
                                 <div class="ui-toolbar-group-right">
-                                    <button class="mr-1" pButton type="button" icon="pi pi-search"></button>
-                                    <button pButton type="button" icon="pi pi-calendar" class="ui-button-success"></button>
+                                    <button pButton type="button" icon="pi pi-calendar"
+                                            class="ui-button-success"></button>
                                 </div>
                             </p-toolbar>
                         </p-header>
 
                         <div class="content mt-2">
                             <h4>Document Administratif</h4>
-                            <form (ngSubmit)="sendAdministratifDocRequest(inscriptionacad)">
-                                <div class="form-row align-items-center">
-                                    <div class="col-5">
-                                        <label class="sr-only" for="doc">Document</label>
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="fa fa-file-archive-o"></i>
-                                                </div>
-                                            </div>
-                                            <select  class="form-control" id="doc" pInputText>
-                                                <option>Carte étudiante</option>
-                                                <option>Certificat d’inscription</option>
-                                            </select>
-                                        </div>
+                            <form #data="ngForm" (ngSubmit)="sendAdministratifDocRequest(inscriptionacad)">
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>Document Administratif</label>
+                                        <select name="type" class="form-control" [(ngModel)]="dd.typedocument" required>
+                                            <option *ngFor="let td of typedocuments | typedocument: 'administrative'"
+                                                    [value]="td.id">{{td.libelletypedocument}}</option>
+                                        </select>
                                     </div>
-                                    <div class="col-5">
-                                        <label class="sr-only" for="demande-type">Type de demande</label>
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="fa fa-files-o"></i>
-                                                </div>
-                                            </div>
-                                            <select type="text" class="form-control" id="demande-type" pInputText>
-                                                <option>Nouvelle demande</option>
-                                                <option>Demande de duplicata</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <button type="submit" class="btn btn-primary mb-2 btn-block">Envoyer</button>
+                                    <div class="col-md-6 form-group">
+                                        <label>Nature de la demande</label>
+                                        <select name="nature" [(ngModel)]="dd.nature" class="form-control" required>
+                                            <option value="nouvelle">Nouvelle demande</option>
+                                            <option value="duplicata">Demande de duplicata</option>
+                                        </select>
                                     </div>
                                 </div>
+                                <button [disabled]="data.invalid" type="submit" class="btn btn-primary">Envoyer</button>
                             </form>
                         </div>
 
@@ -108,7 +98,7 @@
                                             </tr>
                                             <tr>
                                                 <th> Département</th>
-                                                <td> <a
+                                                <td><a
                                                         class="float-right">{{inscriptionacad.idspecialite.idfiliere.identite.libelleentite}}</a>
                                                 </td>
                                             </tr>
@@ -120,7 +110,7 @@
                                             </tr>
                                             <tr>
                                                 <th> Spécialité</th>
-                                                <td> <a
+                                                <td><a
                                                         class="float-right">{{inscriptionacad.idspecialite.libellespecialite}}</a>
                                                 </td>
                                             </tr>
@@ -142,11 +132,11 @@
                                                 <td>
                                                     <a class="float-right">
                                                         <span class="badge badge-success badge-pill"
-                                                            *ngIf="inscriptionacad.passage == 'P'">Passant</span>
+                                                              *ngIf="inscriptionacad.passage == 'P'">Passant</span>
                                                         <span class="badge badge-warning badge-pill"
-                                                            *ngIf="inscriptionacad.passage == 'C'">Conditionnel</span>
+                                                              *ngIf="inscriptionacad.passage == 'C'">Conditionnel</span>
                                                         <span class="badge badge-danger badge-pill"
-                                                            *ngIf="inscriptionacad.passage == 'R'">Redoublant</span>
+                                                              *ngIf="inscriptionacad.passage == 'R'">Redoublant</span>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -166,11 +156,11 @@
                                                 <th> Etat inscription</th>
                                                 <td>
                                                     <span class="badge badge-success badge-pill"
-                                                        *ngIf="inscriptionacad.etat == 'V'">Validée</span>
+                                                          *ngIf="inscriptionacad.etat == 'V'">Validée</span>
                                                     <span class="badge badge-warning badge-pill"
-                                                        *ngIf="inscriptionacad.etat == 'I'">Instance</span>
+                                                          *ngIf="inscriptionacad.etat == 'I'">Instance</span>
                                                     <span class="badge badge-error badge-pill"
-                                                        *ngIf="inscriptionacad.etat == 'S'">Suspendu</span>
+                                                          *ngIf="inscriptionacad.etat == 'S'">Suspendu</span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -191,34 +181,34 @@
                                             <tr>
                                                 <th>Moyenne annuelle</th>
                                                 <td><a *ngIf="inscriptionacad.moyenneAnnuelle" class="float-right"><span
-                                                            class="badge badge-success badge-pill">{{inscriptionacad.moyenneAnnuelle}}</span></a>
+                                                        class="badge badge-success badge-pill">{{inscriptionacad.moyenneAnnuelle}}</span></a>
                                                     <span *ngIf="!inscriptionacad.moyenneAnnuelle"
-                                                        class="badge badge-danger float-right">Non disponible</span>
+                                                          class="badge badge-danger float-right">Non disponible</span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Total crédit</th>
                                                 <td><a *ngIf="inscriptionacad.totalCredit" class="float-right"><span
-                                                            class="badge badge-primary badge-pill">{{inscriptionacad.totalCredit}}</span></a>
+                                                        class="badge badge-primary badge-pill">{{inscriptionacad.totalCredit}}</span></a>
                                                     <span *ngIf="!inscriptionacad.totalCredit"
-                                                        class="badge badge-danger float-right">Non disponible</span>
+                                                          class="badge badge-danger float-right">Non disponible</span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Crédit capitalisé</th>
                                                 <td><a *ngIf="inscriptionacad.creditCapitalise"
-                                                        class="float-right"><span
-                                                            class="badge badge-primary badge-pill">{{inscriptionacad.creditCapitalise}}</span></a>
+                                                       class="float-right"><span
+                                                        class="badge badge-primary badge-pill">{{inscriptionacad.creditCapitalise}}</span></a>
                                                     <span *ngIf="!inscriptionacad.creditCapitalise"
-                                                        class="badge badge-danger float-right">Non disponible</span>
+                                                          class="badge badge-danger float-right">Non disponible</span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Décision du conseil</th>
-                                                <td> <a *ngIf="inscriptionacad.decisionConseil"
-                                                        class="float-right">{{inscriptionacad.decisionConseil}}</a>
+                                                <td><a *ngIf="inscriptionacad.decisionConseil"
+                                                       class="float-right">{{inscriptionacad.decisionConseil}}</a>
                                                     <span *ngIf="!inscriptionacad.decisionConseil"
-                                                        class="badge badge-danger float-right">Non disponible</span>
+                                                          class="badge badge-danger float-right">Non disponible</span>
                                                 </td>
                                             </tr>
                                         </table>

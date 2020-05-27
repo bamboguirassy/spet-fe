@@ -48,6 +48,7 @@ export class DemandeDocumentListComponent implements OnInit {
     }
 
     this.demande_documents = this.activatedRoute.snapshot.data.demande_documents;
+    console.log(this.demande_documents);
   }
 
   viewDemandeDocument(demande_document: DemandeDocument) {

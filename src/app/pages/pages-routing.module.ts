@@ -24,6 +24,8 @@ import { MultipleBourseEtudiantResolver } from './bourse/multiple-bourse_etudian
 import { UserProfileComponent } from './fos_user/user-profile/user-profile.component';
 import { demandeDocumentRoutes } from './demande_document/demande_document.routes';
 import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
+import {MultipleTypedocumentResolver} from './typedocument/multiple-typedocument.resolver';
+import {MultipleEtatDemandeDocumentResolver} from './demande_document/etat_demande_document/multiple-etat_demande_document.resolver';
 
 
 const routes: Routes = [
@@ -74,7 +76,9 @@ const routes: Routes = [
         data: { breadcrumb: 'Mon parcours' },
         resolve: {
           inscriptions: MultipleInscriptionacadResolver,
-          preinscriptions: MultiplePreinscriptionResolver
+          preinscriptions: MultiplePreinscriptionResolver,
+          typedocuments: MultipleTypedocumentResolver,
+          etats: MultipleEtatDemandeDocumentResolver
         }
       },
       {

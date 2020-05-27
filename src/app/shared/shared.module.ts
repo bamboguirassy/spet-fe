@@ -6,6 +6,7 @@ import { CreablePipe } from './pipes/creable.pipe';
 import { ListablePipe } from './pipes/listable.pipe';
 import { ShowablePipe } from './pipes/showable.pipe';
 import { DeletablePipe } from './pipes/deletable.pipe';
+import { TypedocumentPipe } from './pipes/typedocument.pipe';
 
 
 
@@ -16,7 +17,8 @@ import { DeletablePipe } from './pipes/deletable.pipe';
     CreablePipe,
     ListablePipe,
     ShowablePipe,
-    DeletablePipe
+    DeletablePipe,
+    TypedocumentPipe
   ],
   imports: [
     CommonModule
@@ -27,7 +29,8 @@ import { DeletablePipe } from './pipes/deletable.pipe';
     CreablePipe,
     ListablePipe,
     ShowablePipe,
-    DeletablePipe
+    DeletablePipe,
+    TypedocumentPipe
   ]
 })
 export class SharedModule { }
