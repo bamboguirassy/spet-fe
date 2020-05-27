@@ -81,8 +81,8 @@
                                 <td class="ui-resizable-column">
                                     {{ demande_document.typedocument.libelletypedocument }}
                                 </td>
-                                <td class="ui-resizable-column">
-                                    {{ demande_document.date }}
+                                <td class="ui-resizable-column"> Le
+                                    {{ demande_document.date | date: 'dd MMM, yyyy'}}
                                 </td>
                                 <td class="ui-resizable-column">
                                     {{ demande_document.intitule }}
