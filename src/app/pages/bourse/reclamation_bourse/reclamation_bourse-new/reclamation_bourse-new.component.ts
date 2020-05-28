@@ -1,40 +1,73 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ReclamationBourse } from '../reclamation_bourse';
 import { ReclamationBourseService } from '../reclamation_bourse.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { BourseEtudiant } from '../../bourse_etudiant';
+import { NgbModal } from '../../../../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { BourseEtudiantService } from '../../bourse_etudiant.service';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'app-reclamation_bourse-new',
   templateUrl: './reclamation_bourse-new.component.html',
   styleUrls: ['./reclamation_bourse-new.component.scss']
 })
 export class ReclamationBourseNewComponent implements OnInit {
-  reclamation_bourse: ReclamationBourse;
-  constructor(public reclamation_bourseSrv: ReclamationBourseService,
-    public notificationSrv: NotificationService,
-    public router: Router, public location: Location) {
-    this.reclamation_bourse = new ReclamationBourse();
+  // tslint:disable-next-line:variable-name
+  reclamationBourse: ReclamationBourse;
+  // tslint:disable-next-line:variable-name
+  reclamationBourses: ReclamationBourse ;
+  bourses: BourseEtudiant[] = [];
+  @Output() created: EventEmitter<ReclamationBourse> = new EventEmitter();
+
+  constructor(public reclamationBourseSrv: ReclamationBourseService,
+              public bourseEtudiantSrv: BourseEtudiantService,
+
+              public notificationSrv: NotificationService, public router: Router, public location: Location, public modalSercive: NgbModal,
+              public activatedRoute: ActivatedRoute,
+             ) {
+                this.reclamationBourse = new ReclamationBourse();
   }
 
   ngOnInit() {
+    this.bourses = this.activatedRoute.snapshot.data.bourses;
+    this.reclamationBourses = this.activatedRoute.snapshot.data.reclamationBourses;
   }
 
   saveReclamationBourse() {
-    this.reclamation_bourseSrv.create(this.reclamation_bourse)
+    this.reclamationBourseSrv.create(this.reclamationBourse)
       .subscribe((data: any) => {
+        this.created.emit(data);
+        this.closeModal();
         this.notificationSrv.showInfo('ReclamationBourse créé avec succès');
-        this.reclamation_bourse = new ReclamationBourse();
-      }, error => this.reclamation_bourseSrv.httpSrv.handleError(error));
+        this.router.navigate([this.reclamationBourseSrv.getRoutePrefix(), data.id]);
+        this.reclamationBourse = new ReclamationBourse();
+      }, error => this.reclamationBourseSrv.httpSrv.handleError(error)
+    );
   }
 
   saveReclamationBourseAndExit() {
-    this.reclamation_bourseSrv.create(this.reclamation_bourse)
+    this.reclamationBourseSrv.create(this.reclamationBourse)
       .subscribe((data: any) => {
-        this.router.navigate([this.reclamation_bourseSrv.getRoutePrefix(), data.id]);
-      }, error => this.reclamation_bourseSrv.httpSrv.handleError(error));
+        this.created.emit(data);
+        this.closeModal();
+        this.router.navigate([this.reclamationBourseSrv.getRoutePrefix(), data.id]);
+        this.reclamationBourse = new ReclamationBourse();
+      }, error => this.reclamationBourseSrv.httpSrv.handleError(error));
   }
 
+
+
+public closeModal() {
+  this.modalSercive.dismissAll('Cross click');
 }
+
+
+
+}
+
+
 

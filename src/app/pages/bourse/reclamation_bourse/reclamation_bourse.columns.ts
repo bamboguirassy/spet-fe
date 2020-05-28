@@ -1,3 +1,4 @@
+// tslint:disable-next-line:variable-name
 const reclamation_bourseColumns = [
             { header: 'Date', field: 'date', dataKey: 'date' },
             { header: 'Objet', field: 'objet', dataKey: 'objet' },
@@ -10,4 +11,4 @@ const allowedReclamationBourseFieldsForFilter = [
     'message',
 ];
 
-export { reclamation_bourseColumns,allowedReclamationBourseFieldsForFilter };
+export { reclamation_bourseColumns, allowedReclamationBourseFieldsForFilter };

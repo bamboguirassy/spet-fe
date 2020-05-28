@@ -8,16 +8,16 @@ import { ReclamationBourseService } from './reclamation_bourse.service';
   providedIn: 'root'
 })
 export class OneReclamationBourseResolver implements Resolve<any> {
-  resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot) {
-    return this.reclamation_bourseSrv.findOneById(route.params.id).pipe(map(data => {
+  resolve(route: import('@angular/router').ActivatedRouteSnapshot, state: import('@angular/router').RouterStateSnapshot) {
+    return this.reclamationBourseSrv.findOneById(route.params.id).pipe(map(data => {
       return data;
     }),
     catchError(error => {
       const message = `Retrieval error: ${error}`;
-      return of({ reclamation_bourse: null, error: message });
+      return of({ reclamationBourse: null, error: message });
     }));
   }
 
-  constructor(public reclamation_bourseSrv:ReclamationBourseService) { }
+  constructor(public reclamationBourseSrv: ReclamationBourseService) { }
 }
 

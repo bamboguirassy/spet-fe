@@ -1,59 +1,97 @@
-<p-toast></p-toast>
-<p-fieldset *ngIf="'ReclamationBourse'|showable" legend="Affichage des informations - Utilisateur" [toggleable]="true">
-  <p-toolbar>
-    <button *ngIf="'ReclamationBourse'|editable" type="button" class="btn btn-outline-warning pull-right ml-1"
-      [routerLink]="['/'+reclamation_bourseSrv.getRoutePrefix(),reclamation_bourse.id,'edit']"><i
-        class="fa fa-pencil-square-o ml-1"></i>
-      Modifier</button>
-    <button *ngIf="'ReclamationBourse'|clonable"
-      [routerLink]="['/'+reclamation_bourseSrv.getRoutePrefix(),reclamation_bourse.id,'clone']" type="button"
-      class="btn btn-outline-secondary pull-right ml-1">
-      <i class="fa fa-clone" aria-hidden="true"></i> Cloner
-    </button>
-    <button *ngIf="'ReclamationBourse'|deletable" type="button" class="btn btn-outline-danger pull-right ml-1"
-      (click)="removeReclamationBourse()"><i class="fa fa-trash-o"></i> Supprimer</button>
-    <button type="button" class="btn btn-outline-secondary pull-left ml-1" (click)="location.back()"><i
-        class="fa fa-reply"></i> Retour</button>
-  </p-toolbar>
-  <p-tabView>
-    <p-tabPanel header="Détails">
-      <p-fieldset [legend]="reclamation_bourse.id">
-        <table class="table">
-          <tr>
-            <th>Date</th>
-            <td>{{ reclamation_bourse.date }}</td>
-          </tr>
-          <tr>
-            <th>Objet</th>
-            <td>{{ reclamation_bourse.objet }}</td>
-          </tr>
-          <tr>
-            <th>Message</th>
-            <td>{{ reclamation_bourse.message }}</td>
-          </tr>
-        </table>
-        <p-toolbar>
-          <button *ngIf="'ReclamationBourse'|editable" type="button" class="btn btn-outline-warning pull-right ml-1"
-            [routerLink]="['/'+reclamation_bourseSrv.getRoutePrefix(),reclamation_bourse.id,'edit']"><i
-              class="fa fa-pencil-square-o ml-1"></i>
-            Modifier</button>
-          <button *ngIf="'ReclamationBourse'|clonable"
-            [routerLink]="['/'+reclamation_bourseSrv.getRoutePrefix(),reclamation_bourse.id,'clone']" type="button"
-            class="btn btn-outline-secondary pull-right ml-1">
-            <i class="fa fa-clone" aria-hidden="true"></i> Cloner
-          </button>
-          <button *ngIf="'ReclamationBourse'|deletable" type="button" class="btn btn-outline-danger pull-right ml-1"
-            (click)="removeReclamationBourse()"><i class="fa fa-trash-o"></i> Supprimer</button>
-          <button type="button" class="btn btn-outline-secondary pull-left ml-1" (click)="location.back()"><i
-              class="fa fa-reply"></i> Retour</button>
-          <button *ngIf="'ReclamationBourse'|showable" type="button" class="btn btn-secondary ml-1" (click)="refresh()">
-            <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
-          </button>
-        </p-toolbar>
-      </p-fieldset>
-    </p-tabPanel>
-    <p-tabPanel header="Liste associée">
 
-    </p-tabPanel>
-  </p-tabView>
+<p-toast></p-toast>
+<p-fieldset  legend="Affichage des informations - Reclamation" [toggleable]="true">
+    <p-toolbar>
+        <button  type="button" class="btn btn-outline-warning pull-right ml-1"
+                ><i
+                class="fa fa-pencil-square-o ml-1"></i>
+            Modifier
+        </button>
+        <button *ngIf="'ReclamationBourse'|clonable"
+                [routerLink]="['/'+reclamationBourseSrv.getRoutePrefix(),reclamationBourse.id,'clone']" type="button"
+                class="btn btn-outline-secondary pull-right ml-1">
+            <i class="fa fa-clone" aria-hidden="true"></i> Cloner
+        </button>
+        <button *ngIf="'ReclamationBourse'|deletable" type="button" class="btn btn-outline-danger pull-right ml-1"
+                (click)="removeReclamationBourse()"><i class="fa fa-trash-o"></i> Supprimer
+        </button>
+        <button type="button" class="btn btn-outline-secondary pull-left ml-1" (click)="location.back()"><i
+                class="fa fa-reply"></i> Retour
+        </button>
+    </p-toolbar>
+    <p-tabView>
+        <p-tabPanel header="Détails">
+            <p-fieldset [legend]="reclamationBourse.id">
+                <table class="table">
+                    <tr>
+                        <th>Date</th>
+                        <td>Le {{ reclamationBourse.date | date: 'dd MMM, yyyy' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Objet</th>
+                        <td>{{ reclamationBourse.objet }}</td>
+                    </tr>
+                    <tr>
+                        <th>Message</th>
+                        <td>{{ reclamationBourse.message }}</td>
+                    </tr>
+                    
+
+                </table>
+            </p-fieldset>
+          </p-tabPanel>
+            <p-tabPanel header="Historique">
+            <p-fieldset [legend]="'Historique des états'">
+                <ng-container *ngFor="let hed of historiqueEtats.reverse(); let i = index">
+                    <div class="card my-1"
+                         [ngStyle]="{'boxShadow': '0 2px 4px' + hed.etat.codeCouleur}">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12"><span
+                                        class="font-weight-bold text-uppercase">État: </span><span
+                                        class="badge"
+                                        [ngStyle]="{'backgroundColor': hed.etat.codeCouleur}">{{ hed.etat.libelle }}</span>
+                                </div>
+                                <div class="col-md-6 col-sm-12"><span class="font-weight-bold text-uppercase">Date de mis en état: </span>
+                                    <span class="text-capitalize"> le {{hed.date | date: 'dd MMM, yyyy'}}</span></div>
+                            </div>
+                        </div>
+                    </div> <!-- End of card -->
+                    <div class="my-2" style="font-size: 2em">
+                        <i title="État précédent" *ngIf="i >= 0 && historiqueEtats[i+1]" class="fa fa-long-arrow-down" [ngStyle]="{'color': historiqueEtats[i+1].etat.codeCouleur}"></i>
+                    </div>
+                </ng-container>
+            </p-fieldset>
+        </p-tabPanel>
+
+        <p-tabPanel header="Liste associée">
+
+        </p-tabPanel>
+    </p-tabView>
+    <p-toolbar>
+        <button *ngIf="'ReclamationBourse'|editable" type="button"
+                class="btn btn-outline-warning pull-right ml-1"
+                [routerLink]="['/'+reclamationBourseSrv.getRoutePrefix(),reclamationBourse.id,'edit']"><i
+                class="fa fa-pencil-square-o ml-1"></i>
+            Modifier
+        </button>
+        <button *ngIf="'ReclamationBourse'|clonable"
+                [routerLink]="['/'+reclamationBourseSrv.getRoutePrefix(),reclamationBourse.id,'clone']"
+                type="button"
+                class="btn btn-outline-secondary pull-right ml-1">
+            <i class="fa fa-clone" aria-hidden="true"></i> Cloner
+        </button>
+        <button *ngIf="'ReclamationBourse'|deletable" type="button"
+                class="btn btn-outline-danger pull-right ml-1"
+                (click)="removeReclamationBourse()"><i class="fa fa-trash-o"></i> Supprimer
+        </button>
+        <button type="button" class="btn btn-outline-secondary pull-left ml-1" (click)="location.back()"><i
+                class="fa fa-reply"></i> Retour
+        </button>
+        <button *ngIf="'ReclamationBourse'|showable" type="button" class="btn btn-secondary ml-1"
+                (click)="refresh()">
+            <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
+        </button>
+    </p-toolbar>
 </p-fieldset>
+
