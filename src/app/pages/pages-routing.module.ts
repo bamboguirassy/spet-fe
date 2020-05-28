@@ -26,13 +26,8 @@ import { demandeDocumentRoutes } from './demande_document/demande_document.route
 import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
 import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assistanceemail.resolver';
 import { ContactComponent } from './dashboard/contact/contact.component';
-<<<<<<< HEAD
 import { MultipleTypedocumentResolver } from './typedocument/multiple-typedocument.resolver';
 import { MultipleEtatDemandeDocumentResolver } from './demande_document/etat_demande_document/multiple-etat_demande_document.resolver';
-=======
-import {MultipleTypedocumentResolver} from './typedocument/multiple-typedocument.resolver';
-import {MultipleEtatDemandeDocumentResolver} from './demande_document/etat_demande_document/multiple-etat_demande_document.resolver';
->>>>>>> 46e58e8f3b783c128d810814e865db07efe83796
 
 
 const routes: Routes = [
