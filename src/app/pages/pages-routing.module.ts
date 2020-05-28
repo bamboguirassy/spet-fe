@@ -24,10 +24,13 @@ import { MultipleBourseEtudiantResolver } from './bourse/multiple-bourse_etudian
 import { UserProfileComponent } from './fos_user/user-profile/user-profile.component';
 import { demandeDocumentRoutes } from './demande_document/demande_document.routes';
 import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
+
 import {MultipleTypedocumentResolver} from './typedocument/multiple-typedocument.resolver';
 import {MultipleEtatDemandeDocumentResolver} from './demande_document/etat_demande_document/multiple-etat_demande_document.resolver';
 import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assistanceemail.resolver';
 import { ContactComponent } from './dashboard/contact/contact.component';
+
+
 
 
 const routes: Routes = [

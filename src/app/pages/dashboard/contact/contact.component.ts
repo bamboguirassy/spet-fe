@@ -29,7 +29,6 @@ export class ContactComponent implements OnInit {
         
   ngOnInit() {
     this.assistances = this.acivatedRoute.snapshot.data['assistants'];
-    console.log(this.assistances);
   }
   EnvoiMail() {
     this.newMail.message = "<div style='background-color:orangered; text-align:center; color:white;'><h3>Problème de l'étudiant</h3></div><div" + this.message + "</div>";
