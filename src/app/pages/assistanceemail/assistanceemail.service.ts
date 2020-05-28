@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { AssistanceEmail } from './assistanceemail';
+import { NewMail } from './NewMail';
 
 @Injectable({
   providedIn: 'root'

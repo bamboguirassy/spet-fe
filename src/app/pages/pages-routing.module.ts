@@ -24,6 +24,8 @@ import { MultipleBourseEtudiantResolver } from './bourse/multiple-bourse_etudian
 import { UserProfileComponent } from './fos_user/user-profile/user-profile.component';
 import { demandeDocumentRoutes } from './demande_document/demande_document.routes';
 import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
+import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assistanceemail.resolver';
+import { ContactComponent } from './dashboard/contact/contact.component';
 
 
 const routes: Routes = [
@@ -33,7 +35,7 @@ const routes: Routes = [
     children: [
       {
         path: '', component: DashboardComponent, pathMatch: 'full',
-        resolve: { etudiant: OneEtudiantResolver }
+        resolve: { etudiant: OneEtudiantResolver, assistants: MultipleAssistanceEmailResolver}
       },
       { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
       {
@@ -89,6 +91,12 @@ const routes: Routes = [
         data: { breadcrumb: 'Finaliser mon inscription' }, resolve: { preinscription: OnePreinscriptionResolver }
       },
       { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
+      {
+        path: 'contact', component: ContactComponent,
+        resolve: {
+          assistants: MultipleAssistanceEmailResolver,
+        }
+      },
       demandeDocumentRoutes,
       reclamationBourseRoutes
     ]
