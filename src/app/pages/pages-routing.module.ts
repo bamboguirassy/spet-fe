@@ -24,13 +24,10 @@ import { MultipleBourseEtudiantResolver } from './bourse/multiple-bourse_etudian
 import { UserProfileComponent } from './fos_user/user-profile/user-profile.component';
 import { demandeDocumentRoutes } from './demande_document/demande_document.routes';
 import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
-<<<<<<< HEAD
-import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assistanceemail.resolver';
-import { ContactComponent } from './dashboard/contact/contact.component';
-=======
 import {MultipleTypedocumentResolver} from './typedocument/multiple-typedocument.resolver';
 import {MultipleEtatDemandeDocumentResolver} from './demande_document/etat_demande_document/multiple-etat_demande_document.resolver';
->>>>>>> ab8ea2c4c09c97a66279e830d6620ecf219fe123
+import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assistanceemail.resolver';
+import { ContactComponent } from './dashboard/contact/contact.component';
 
 
 const routes: Routes = [

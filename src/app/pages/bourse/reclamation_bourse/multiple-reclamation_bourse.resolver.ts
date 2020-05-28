@@ -9,16 +9,16 @@ import { of } from 'rxjs';
 })
 export class MultipleReclamationBourseResolver implements Resolve<any> {
   resolve(route: import('@angular/router').ActivatedRouteSnapshot, state: import('@angular/router').RouterStateSnapshot): any | import('rxjs').Observable<any> | Promise<any> {
-    return this.reclamation_bourseSrv.findMesReclamations().pipe(map(data => {
+    return this.reclamationBourseSrv.findMesReclamations().pipe(map(data => {
       return data;
     }),
       catchError(error => {
         const message = `Retrieval error: ${error}`;
-        this.reclamation_bourseSrv.httpSrv.handleError(error);
-        return of({ reclamation_bourses: null, error: message });
+        this.reclamationBourseSrv.httpSrv.handleError(error);
+        return of({ reclamationBourses: null, error: message });
       }));
   }
 
-  constructor(public reclamation_bourseSrv: ReclamationBourseService) { }
+  constructor(public reclamationBourseSrv: ReclamationBourseService) { }
 }
 
