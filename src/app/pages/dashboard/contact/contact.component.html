@@ -2,9 +2,9 @@
         <form [formGroup]="contactForm">
             <div class="mb-3">
                 <select class="form-control validation-field"
-                    [(ngModel)]="newMail.typeAssistance" type="text" name="type"
-                    formControlName="type">
-                    <option selected disabled value="">Choisissez le type de votre problème
+                    [(ngModel)]="newMail.typeAssistance" name="mm"
+                    formControlName="type" required >
+                    <option [attr.selected] = "true" disabled>choisissez le type de votre problème
                     </option>
                     <ng-container *ngFor="let assistance of assistances">
                         <option [value]="assistance.id">{{assistance.typeAssistance}}
@@ -38,7 +38,8 @@
                 <input type="file" class="custom-file-input" id="customFile" name="fichier" formControlName="fichier" [ngModel]="file" multiple>
                 <label class="custom-file-label" for="customFile">choississez un fichier</label>
                 
-              </div>                                  -->
+              </div> -->
+              
             <button class="btn btn-success float-right" [disabled]="!contactForm.valid"
                 (click)="EnvoiMail()">Contacter</button>
         </form>
