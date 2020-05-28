@@ -88,7 +88,8 @@
                                     {{ demande_document.intitule }}
                                 </td>
                                 <td class="ui-resizable-column">
-                                    <span class="badge" [ngStyle]="{'backgroundColor': demande_document.etatActuel.codeCouleur}">{{ demande_document.etatActuel.libelle }}</span>
+                                    <span class="badge"
+                                          [ngStyle]="{'backgroundColor': demande_document.etatActuel.codeCouleur}">{{ demande_document.etatActuel.libelle }}</span>
                                 </td>
                                 <td class="ui-resizable-column text-center">
                                     <a [routerLink]="['./', demande_document.id]">
