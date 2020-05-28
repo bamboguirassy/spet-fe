@@ -7,7 +7,22 @@ import { BlankComponent } from './blank/blank.component';
 import { SearchComponent } from './search/search.component';
 
 import {TableModule} from 'primeng/table';
-import { ContextMenuModule, MenuModule, ButtonModule, CardModule, FieldsetModule, ToolbarModule, TabViewModule, DropdownModule, SelectButtonModule, SpinnerModule, EditorModule, InputMaskModule, AccordionModule } from 'primeng/primeng';
+import {
+    ContextMenuModule,
+    MenuModule,
+    ButtonModule,
+    CardModule,
+    FieldsetModule,
+    ToolbarModule,
+    TabViewModule,
+    DropdownModule,
+    SelectButtonModule,
+    SpinnerModule,
+    EditorModule,
+    InputMaskModule,
+    AccordionModule,
+    OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule
+} from 'primeng/primeng';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
@@ -84,32 +99,36 @@ import { ContactComponent } from './dashboard/contact/contact.component';
     ReclamationBourseListComponent, ReclamationBourseNewComponent, ReclamationBourseShowComponent,
     DemandeDocumentListComponent, DemandeDocumentNewComponent, DemandeDocumentShowComponent, ContactComponent
   ],
-  imports: [
-    CommonModule,
-    PagesRoutingModule,
-    TableModule,
-    ContextMenuModule,
-    MenuModule,
-    ToastModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ButtonModule,
-    CardModule,
-    FieldsetModule,
-    ToolbarModule,
-    TabViewModule,
-    SharedModule,
-    FilterPipeModule,
-    NgxChartsModule,
-    DataViewModule,
-    ImageCropperModule,
-    DropdownModule,
-    SelectButtonModule,
-    SpinnerModule,
-    EditorModule,
-    InputMaskModule,
-    NgbModule,
-    AccordionModule
-  ]
+    imports: [
+        CommonModule,
+        PagesRoutingModule,
+        TableModule,
+        ContextMenuModule,
+        MenuModule,
+        ToastModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ButtonModule,
+        CardModule,
+        FieldsetModule,
+        ToolbarModule,
+        TabViewModule,
+        SharedModule,
+        FilterPipeModule,
+        NgxChartsModule,
+        DataViewModule,
+        ImageCropperModule,
+        DropdownModule,
+        SelectButtonModule,
+        SpinnerModule,
+        EditorModule,
+        InputMaskModule,
+        NgbModule,
+        AccordionModule,
+        OverlayPanelModule,
+        DialogModule,
+        SplitButtonModule,
+        InputTextModule
+    ]
 })
 export class PagesModule { }
