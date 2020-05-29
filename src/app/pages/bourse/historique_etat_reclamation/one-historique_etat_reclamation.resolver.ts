@@ -8,8 +8,8 @@ import { HistoriqueEtatReclamationService } from './historique_etat_reclamation.
   providedIn: 'root'
 })
 export class OneHistoriqueEtatReclamationResolver implements Resolve<any> {
-  resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot) {
-    return this.historique_etat_reclamationSrv.findOneById(route.params.id).pipe(map(data => {
+  resolve(route: import('@angular/router').ActivatedRouteSnapshot, state: import('@angular/router').RouterStateSnapshot) {
+    return this.historiqueEtatReclamationSrv.findOneById(route.params.id).pipe(map(data => {
       return data;
     }),
     catchError(error => {
@@ -18,6 +18,6 @@ export class OneHistoriqueEtatReclamationResolver implements Resolve<any> {
     }));
   }
 
-  constructor(public historique_etat_reclamationSrv:HistoriqueEtatReclamationService) { }
+  constructor(public historiqueEtatReclamationSrv: HistoriqueEtatReclamationService) { }
 }
 

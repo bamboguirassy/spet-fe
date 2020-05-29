@@ -15,12 +15,17 @@ export const verticalMenuItems = [
 
 export const horizontalMenuItems = [
     new Menu (1, 'Accueil', '/', null, 'tachometer', null, false, 0),
-    new Menu (10, 'Le système LMD', '/systeme-lmd', null, 'bookmark-o', null, false, 0),
-    new Menu (20, 'Mon dossier', '/mes-infos', null, 'user', null, false, 0),
-    new Menu (30, 'Mon parcours', '/mon-parcours', null, 'list', null, false, 0),
+    new Menu (20, 'Mon dossier', null, null, 'user', null, true, 0),
+    new Menu (21, 'Mes Informations', '/mes-infos', null, 'info', null, false, 20),
+    new Menu (22, 'Mon parcours', '/mon-parcours', null, 'graduation-cap', null, false, 20),
     // new Menu (40, 'Modalités de paiement', '/modalite-paiement', null, 'credit-card-alt', null, false, 0),
-    new Menu (40, 'Ma bourse', '/bourse', null, 'money', null, false, 0),
-    // new Menu (40, 'Resultats et réclamations', null, null, 'file-text-o', null, true, 0),
+    new Menu (30, 'Ma bourse', null, null, 'money', null, true, 0),
+    new Menu (31, 'Les états', '/bourse', null, 'credit-card', null, false, 30),
+    new Menu (32, 'Mes réclamations', '/reclamationbourse', null, 'exclamation', null, false, 30),
+    new Menu (40, 'Demandes de documents', '/demandedocument', null, 'file-text-o', null, false, 0),
+    new Menu (50, 'Liens utiles', null, null, 'link', null, true, 0),
+    new Menu (51, 'Le système LMD', '/systeme-lmd', null, 'bookmark-o', null, false, 50),
+
     // new Menu (45, 'Blank', '/blank', null, 'file-o', null, false, 40),
     // new Menu (46, 'Error', '/pagenotfound', null, 'exclamation-circle', null, false, 40),
     // new Menu (200, 'External Link', null, 'http://themeseason.com', 'external-link', '_blank', false, 0)

@@ -8,7 +8,7 @@ import { ReclamationBourse } from './reclamation_bourse';
 })
 export class ReclamationBourseService {
 
-  private routePrefix = 'reclamationBourse';
+  private routePrefix = 'reclamationbourse';
 
   constructor(public httpSrv: HttpService) { }
 

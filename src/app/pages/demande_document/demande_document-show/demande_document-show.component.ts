@@ -16,10 +16,12 @@ export class DemandeDocumentShowComponent implements OnInit {
 
     demande_document: DemandeDocument;
     historiqueEtats: HistoriqueEtatDemande[] = [];
+    colors: string[] = [];
 
-    constructor(public activatedRoute: ActivatedRoute, public historiqueEtatSvr: HistoriqueEtatDemandeService,
-                public demande_documentSrv: DemandeDocumentService, public location: Location,
-                public router: Router, public notificationSrv: NotificationService) {
+    constructor(
+        public activatedRoute: ActivatedRoute, public historiqueEtatSvr: HistoriqueEtatDemandeService,
+        public demande_documentSrv: DemandeDocumentService, public location: Location,
+        public router: Router, public notificationSrv: NotificationService) {
     }
 
     ngOnInit() {
@@ -29,8 +31,11 @@ export class DemandeDocumentShowComponent implements OnInit {
 
     findHistoriqueEtatDemande(demande: DemandeDocument) {
         this.historiqueEtatSvr.findByDemande(demande).subscribe(
-            historiqueEtats => {
-                this.historiqueEtats = historiqueEtats as any;
+            (historiqueEtats: any) => {
+                this.historiqueEtats = historiqueEtats.reverse();
+                for (let i = 1; i < this.historiqueEtats.length; i++) {
+                    this.colors.push(this.historiqueEtats[i].etat.codeCouleur); // ajoute la couleur de l'état précéent
+                }
             },
             error => this.demande_documentSrv.httpSrv.handleError(error)
         );
@@ -47,6 +52,5 @@ export class DemandeDocumentShowComponent implements OnInit {
             .subscribe((data: any) => this.demande_document = data,
                 error => this.demande_documentSrv.httpSrv.handleError(error));
     }
-
 }
 

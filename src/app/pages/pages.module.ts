@@ -62,6 +62,7 @@ import { ReclamationBourseNewComponent } from './bourse/reclamation_bourse/recla
 import { ReclamationBourseShowComponent } from './bourse/reclamation_bourse/reclamation_bourse-show/reclamation_bourse-show.component';
 import { DemandeDocumentShowComponent } from './demande_document/demande_document-show/demande_document-show.component';
 import { DemandeDocumentNewComponent } from './demande_document/demande_document-new/demande_document-new.component';
+import { ContactComponent } from './dashboard/contact/contact.component';
 
 
 
@@ -96,7 +97,7 @@ import { DemandeDocumentNewComponent } from './demande_document/demande_document
     DossierPedagogiqueComponent,
     UserProfileComponent,
     ReclamationBourseListComponent, ReclamationBourseNewComponent, ReclamationBourseShowComponent,
-    DemandeDocumentListComponent, DemandeDocumentNewComponent, DemandeDocumentShowComponent
+    DemandeDocumentListComponent, DemandeDocumentNewComponent, DemandeDocumentShowComponent, ContactComponent
   ],
     imports: [
         CommonModule,

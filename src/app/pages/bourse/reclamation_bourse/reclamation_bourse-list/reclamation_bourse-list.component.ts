@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ReclamationBourse } from '../reclamation_bourse';
 import { ReclamationBourseService } from '../reclamation_bourse.service';
 import { reclamation_bourseColumns, allowedReclamationBourseFieldsForFilter } from '../reclamation_bourse.columns';
+import { BourseEtudiant } from '../../bourse_etudiant';
 
 
 @Component({
@@ -16,7 +17,9 @@ import { reclamation_bourseColumns, allowedReclamationBourseFieldsForFilter } fr
 })
 export class ReclamationBourseListComponent implements OnInit {
 
-  reclamation_bourses: ReclamationBourse[] = [];
+  // tslint:disable-next-line:variable-name
+  reclamationBourses: ReclamationBourse[] = [];
+  bourses: BourseEtudiant[] = [];
   selectedReclamationBourses: ReclamationBourse[];
   selectedReclamationBourse: ReclamationBourse;
   clonedReclamationBourses: ReclamationBourse[];
@@ -29,61 +32,66 @@ export class ReclamationBourseListComponent implements OnInit {
 
 
   constructor(private activatedRoute: ActivatedRoute,
-              public reclamation_bourseSrv: ReclamationBourseService, public exportSrv: ExportService,
+              public reclamationBourseSvr: ReclamationBourseService, public exportSrv: ExportService,
               private router: Router, public authSrv: AuthService,
               public notificationSrv: NotificationService) { }
 
   ngOnInit() {
     if (this.authSrv.checkShowAccess('ReclamationBourse')) {
-      this.cMenuItems.push({ label: 'Afficher détails', icon: 'pi pi-eye', command: (event) => this.viewReclamationBourse(this.selectedReclamationBourse) });
+      this.cMenuItems.push({ label: 'Afficher détails', icon: 'pi pi-eye',
+       command: (event) => this.viewReclamationBourse(this.selectedReclamationBourse) });
     }
     if (this.authSrv.checkEditAccess('ReclamationBourse')) {
-      this.cMenuItems.push({ label: 'Modifier', icon: 'pi pi-pencil', command: (event) => this.editReclamationBourse(this.selectedReclamationBourse) });
+      this.cMenuItems.push({ label: 'Modifier', icon: 'pi pi-pencil',
+      command: (event) => this.editReclamationBourse(this.selectedReclamationBourse) });
     }
     if (this.authSrv.checkCloneAccess('ReclamationBourse')) {
-      this.cMenuItems.push({ label: 'Cloner', icon: 'pi pi-clone', command: (event) => this.cloneReclamationBourse(this.selectedReclamationBourse) });
+      this.cMenuItems.push({ label: 'Cloner', icon: 'pi pi-clone',
+       command: (event) => this.cloneReclamationBourse(this.selectedReclamationBourse) });
     }
     if (this.authSrv.checkDeleteAccess('ReclamationBourse')) {
-      this.cMenuItems.push({ label: 'Supprimer', icon: 'pi pi-times', command: (event) => this.deleteReclamationBourse(this.selectedReclamationBourse) });
+      this.cMenuItems.push({ label: 'Supprimer', icon:
+      'pi pi-times', command: (event) => this.deleteReclamationBourse(this.selectedReclamationBourse) });
     }
 
-    this.reclamation_bourses = this.activatedRoute.snapshot.data.reclamation_bourses;
+    this.reclamationBourses = this.activatedRoute.snapshot.data.reclamationBourses;
+    // this.bourses = this.activatedRoute.snapshot.data.bourses;
   }
 
-  viewReclamationBourse(reclamation_bourse: ReclamationBourse) {
-      this.router.navigate([this.reclamation_bourseSrv.getRoutePrefix(), reclamation_bourse.id]);
+  viewReclamationBourse(reclamationBourse: ReclamationBourse) {
+      this.router.navigate([this.reclamationBourseSvr.getRoutePrefix(), reclamationBourse.id]);
 
   }
 
-  editReclamationBourse(reclamation_bourse: ReclamationBourse) {
-      this.router.navigate([this.reclamation_bourseSrv.getRoutePrefix(), reclamation_bourse.id, 'edit']);
+  editReclamationBourse(reclamationBourse: ReclamationBourse) {
+      this.router.navigate([this.reclamationBourseSvr.getRoutePrefix(), reclamationBourse.id, 'edit']);
   }
 
-  cloneReclamationBourse(reclamation_bourse: ReclamationBourse) {
-      this.router.navigate([this.reclamation_bourseSrv.getRoutePrefix(), reclamation_bourse.id, 'clone']);
+  cloneReclamationBourse(reclamationBourse: ReclamationBourse) {
+      this.router.navigate([this.reclamationBourseSvr.getRoutePrefix(), reclamationBourse.id, 'clone']);
   }
 
-  deleteReclamationBourse(reclamation_bourse: ReclamationBourse) {
-      this.reclamation_bourseSrv.remove(reclamation_bourse)
-        .subscribe(data => this.refreshList(), error => this.reclamation_bourseSrv.httpSrv.handleError(error));
+  deleteReclamationBourse(reclamationBourse: ReclamationBourse) {
+      this.reclamationBourseSvr.remove(reclamationBourse)
+        .subscribe(data => this.refreshList(), error => this.reclamationBourseSvr.httpSrv.handleError(error));
   }
 
-  deleteSelectedReclamationBourses(reclamation_bourse: ReclamationBourse) {
-    this.reclamation_bourseSrv.removeSelection(this.selectedReclamationBourses)
-      .subscribe(data => this.refreshList(), error => this.reclamation_bourseSrv.httpSrv.handleError(error));
+  deleteSelectedReclamationBourses(reclamationBourse: ReclamationBourse) {
+    this.reclamationBourseSvr.removeSelection(this.selectedReclamationBourses)
+      .subscribe(data => this.refreshList(), error => this.reclamationBourseSvr.httpSrv.handleError(error));
   }
 
   refreshList() {
-    this.reclamation_bourseSrv.findAll()
-      .subscribe((data: any) => this.reclamation_bourses = data, error => this.reclamation_bourseSrv.httpSrv.handleError(error));
+    this.reclamationBourseSvr.findMesReclamations()
+      .subscribe((data: any) => this.reclamationBourses = data, error => this.reclamationBourseSvr.httpSrv.handleError(error));
   }
 
   exportPdf() {
-    this.exportSrv.exportPdf(this.tableColumns, this.reclamation_bourses, 'reclamation_bourses');
+    this.exportSrv.exportPdf(this.tableColumns, this.reclamationBourses, 'reclamationBourses');
   }
 
   exportExcel() {
-    this.exportSrv.exportExcel(this.reclamation_bourses);
+    this.exportSrv.exportExcel(this.reclamationBourses);
   }
 
   saveAsExcelFile(buffer: any, fileName: string): void {
