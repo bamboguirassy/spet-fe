@@ -32,9 +32,9 @@ export class DemandeDocumentShowComponent implements OnInit {
     findHistoriqueEtatDemande(demande: DemandeDocument) {
         this.historiqueEtatSvr.findByDemande(demande).subscribe(
             (historiqueEtats: any) => {
-                this.historiqueEtats = historiqueEtats.reverse();
-                for (let i = 1; i < this.historiqueEtats.length; i++) {
-                    this.colors.push(this.historiqueEtats[i].etat.codeCouleur); // ajoute la couleur de l'état précéent
+                this.historiqueEtats = historiqueEtats.reverse(); // recupérer les états par le plus récent
+                for (let i = 1; i < this.historiqueEtats.length; i++) { // débuter par le premier état précédent
+                    this.colors.push(this.historiqueEtats[i].etat.codeCouleur); // ajouter la couleur de chaque état précédent
                 }
             },
             error => this.demande_documentSrv.httpSrv.handleError(error)
