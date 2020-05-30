@@ -15,7 +15,7 @@ export class MultipleBourseEtudiantResolver implements Resolve<any> {
       catchError(error => {
         const message = `Retrieval error: ${error}`;
         this.bourseEtudiantSrv.httpSrv.handleError(error);
-        return of({ bourse_etudiants: null, error: message });
+        return of({ bourseEtudiants: null, error: message });
       }));
   }
 

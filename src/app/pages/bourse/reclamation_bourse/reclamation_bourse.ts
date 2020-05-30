@@ -3,7 +3,7 @@ import { EtatReclamationBourse } from '../etat_reclamation_bourse/etat_reclamati
 import { Etudiant } from '../../etudiant/etudiant';
 
 export class ReclamationBourse {
-    id: any;
+    id?: any;
     date: string;
     objet: string;
     message: string;

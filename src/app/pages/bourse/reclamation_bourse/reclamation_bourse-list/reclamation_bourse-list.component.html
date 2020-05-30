@@ -58,7 +58,9 @@
                 <th [pSortableColumn]="'date'" pResizableColumn>
                   Date <p-sortIcon [field]="'date'"></p-sortIcon>
                 </th>
-                
+                <th [pSortableColumn]="'action'" pResizableColumn>
+                Action <p-sortIcon [field]="'action'"></p-sortIcon>
+                </th>
                 
               </tr>
             </ng-template>
@@ -76,6 +78,9 @@
                 </td>
                 <td class="ui-resizable-column">
                   {{ reclamationBourse.date }}
+                </td>
+                <td class="ui-resizable-column">
+                <button [routerLink]="['/reclamationbourse',reclamationBourse.id]"><i class="fa fa-eye"></i></button>  
                 </td>
               </tr>
             </ng-template>

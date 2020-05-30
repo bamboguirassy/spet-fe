@@ -18,20 +18,17 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label class="col-form-label form-control-label" for="objet">Objet</label>
-                    <input [(ngModel)]="reclamationBourse.objet" class="form-control" type="text" name="objet" id="objet">
+                    <input required [(ngModel)]="reclamationBourse.objet" class="form-control" type="text" name="objet" id="objet">
                 </div>
             </div>
+
             <div class="col-lg-6">
                 <div class="form-group">
                     <label class="col-form-label form-control-label" for="message">Message</label>
-                    <p-editor name="message" styleClass="editor-dimensions" [(ngModel)]="reclamationBourse.message" [style]="{'height':'200px'}">
-                       
-                    </p-editor> <br>
-                    <button pButton type="button" label="Clear" icon="pi pi-times" (click)="reclamationBourse.message=null"></button>
+                    <p-editor  name="message" styleClass="editor-dimensions" [(ngModel)]="reclamationBourse.message" [style]="{'height':'200px'}">
 
-                    
-            
-
+                    </p-editor>   
+                    <p innerHTML="reclamationBourse.message"></p>    
 
                 </div>
               
@@ -44,9 +41,11 @@
                 <i class="fa fa-eraser" aria-hidden="true"></i>
                 Vider le formulaire</button>
 
-            <button [disabled]="reclamation_bourseForm.invalid" type="button" (click)="saveReclamationBourse()" class="btn btn-outline-primary pull-right">
+            <button [disabled]="reclamation_bourseForm.invalid" type="button" (click)="saveReclamationBourse()" 
+            class="btn btn-outline-primary pull-right">
                 <i class="fa fa-save" aria-hidden="true"></i>
-                Enregistrer </button>
+                Envoyer </button>
+
         </p-toolbar>
     </p-card>
 

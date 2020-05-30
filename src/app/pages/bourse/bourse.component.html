@@ -44,7 +44,9 @@
                             <span class="ui-column-title">Montant</span>
                             {{line?.bourseEtudiant?.montantBourse}}</td>
                         <td>
-                            <button icon="pi pi-exclamation-triangle"  type="button" routerLinkActive="router-link-active"   (click)="toggleAddModal()" pButton label="Faire une réclamation"
+                            <button icon="pi pi-exclamation-triangle" 
+                             type="button" routerLinkActive="router-link-active" 
+                               (click)="toggleAddModal(line)" pButton label="Faire une réclamation"
                                 class="ui-button ui-button-warning"></button>
                         </td>
                     </tr>

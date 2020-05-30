@@ -1,5 +1,5 @@
 
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ReclamationBourse } from '../reclamation_bourse';
 import { ReclamationBourseService } from '../reclamation_bourse.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -22,6 +22,7 @@ export class ReclamationBourseNewComponent implements OnInit {
   reclamationBourses: ReclamationBourse ;
   bourses: BourseEtudiant[] = [];
   @Output() created: EventEmitter<ReclamationBourse> = new EventEmitter();
+  @Input() seletecbourse: BourseEtudiant;
 
   constructor(public reclamationBourseSrv: ReclamationBourseService,
               public bourseEtudiantSrv: BourseEtudiantService,
@@ -38,6 +39,12 @@ export class ReclamationBourseNewComponent implements OnInit {
   }
 
   saveReclamationBourse() {
+    // const tempBourseEtudiant = this.reclamationBourse.bourseEtudiant;
+    // // this.reclamationBourse.bourseEtudiant = this.seletecbourse.id;
+    // // const tempEtudiant = this.reclamationBourse.etudiant;
+    // // this.reclamationBourse.etudiant = this.reclamationBourse.etudiant.id;
+    // const tempEtatActuel = this.reclamationBourse.etatActuel;
+    // this.reclamationBourse.etatActuel = this.reclamationBourse.etatActuel.id;
     this.reclamationBourseSrv.create(this.reclamationBourse)
       .subscribe((data: any) => {
         this.created.emit(data);
@@ -45,22 +52,15 @@ export class ReclamationBourseNewComponent implements OnInit {
         this.notificationSrv.showInfo('ReclamationBourse créé avec succès');
         this.router.navigate([this.reclamationBourseSrv.getRoutePrefix(), data.id]);
         this.reclamationBourse = new ReclamationBourse();
-      }, error => this.reclamationBourseSrv.httpSrv.handleError(error)
-    );
+      }, error => {
+        // this.reclamationBourse.bourseEtudiant = tempBourseEtudiant;
+        // this.reclamationBourse.etatActuel = tempEtatActuel;
+        // this.reclamationBourse.etudiant = tempEtudiant;
+
+
+        this.reclamationBourseSrv.httpSrv.handleError(error);
+      } );
   }
-
-  saveReclamationBourseAndExit() {
-    this.reclamationBourseSrv.create(this.reclamationBourse)
-      .subscribe((data: any) => {
-        this.created.emit(data);
-        this.closeModal();
-        this.router.navigate([this.reclamationBourseSrv.getRoutePrefix(), data.id]);
-        this.reclamationBourse = new ReclamationBourse();
-      }, error => this.reclamationBourseSrv.httpSrv.handleError(error));
-  }
-
-
-
 public closeModal() {
   this.modalSercive.dismissAll('Cross click');
 }

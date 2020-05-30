@@ -21,7 +21,7 @@
     </p-toolbar>
     <p-tabView>
         <p-tabPanel header="Détails">
-            <p-fieldset [legend]="reclamationBourse.id">
+            <p-fieldset [legend]="reclamationBourse.objet">
                 <table class="table">
                     <tr>
                         <th>Date</th>
@@ -35,13 +35,16 @@
                         <th>Message</th>
                         <td>{{ reclamationBourse.message }}</td>
                     </tr>
+                    <tr>
+                        <th>Etat</th>
+                      <td><span class="badge"[ngStyle]="{'backgroundColor': reclamationBourse.etatActuel.codeCouleur}"> {{ reclamationBourse.etatActuel.libelle}}</span> </td>
+                    </tr>
                     
 
                 </table>
             </p-fieldset>
           </p-tabPanel>
-            <p-tabPanel header="Historique">
-            <p-fieldset [legend]="'Historique des états'">
+          <h3>historique des Etats</h3>
                 <ng-container *ngFor="let hed of historiqueEtats.reverse(); let i = index">
                     <div class="card my-1"
                          [ngStyle]="{'boxShadow': '0 2px 4px' + hed.etat.codeCouleur}">
@@ -61,8 +64,6 @@
                         <i title="État précédent" *ngIf="i >= 0 && historiqueEtats[i+1]" class="fa fa-long-arrow-down" [ngStyle]="{'color': historiqueEtats[i+1].etat.codeCouleur}"></i>
                     </div>
                 </ng-container>
-            </p-fieldset>
-        </p-tabPanel>
 
         <p-tabPanel header="Liste associée">
 
