@@ -15,10 +15,10 @@
                     <p-toolbar>
 
                         <div class="ui-toolbar-group-left">
-                            <button ngbTooltip="Faire une demande" placement="bottom" class="mr-2" type="text" pButton
-                                    label="Doc. Administratif" (click)="showDocAdminRequestDialog(inscriptionacad)"></button>
-                            <button ngbTooltip="Faire une demande" placement="bottom" class="mr-2" type="text" pButton
-                                    label="Doc. Pédagogique" (click)="showDocPedagRequestDialog(inscriptionacad)"></button>
+                            <button type="button" ngbTooltip="Faire une demande" placement="bottom" class="mr-2 mb-1 btn btn-outline-primary"
+                                    (click)="showDocAdminRequestDialog(inscriptionacad)">Doc. Administratif</button>
+                            <button type="button" ngbTooltip="Faire une demande" placement="bottom" class="mr-2 mb-1 btn btn-outline-warning"
+                                    (click)="showDocPedagRequestDialog(inscriptionacad)">Doc. Pédagogique</button>
                         </div>
 
                         <div class="ui-toolbar-group-right">
@@ -33,43 +33,6 @@
                         </div>
                     </p-toolbar>
                     <hr>
-                    <p-dialog [(visible)]="display" [style]="{width: '75vw'}">
-                        <p-header>
-                            <p-toolbar>
-                                <div class="ui-toolbar-group-left">
-                                    <button routerLink="/demandedocument" pButton type="button" label="Mes demandes"
-                                            icon="pi pi-file"
-                                            class="ui-button-warning">
-                                    </button>
-                                </div>
-                            </p-toolbar>
-                        </p-header>
-                        <div class="content mt-2">
-                            <h4 class="text-center text-uppercase py-3 {{requestDocAdmin ? 'text-primary': 'text-warning'}}">
-                                <i class="fa fa-files-o mr-1"></i>
-                                Demande de document {{requestDocAdmin ? 'administratif' : 'pédagogique'}}
-                            </h4>
-                            <form #data="ngForm" (ngSubmit)="requestDocument()">
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label>Type de Document</label>
-                                        <select name="type" class="form-control" [(ngModel)]="dd.typedocument" required>
-                                            <option *ngFor="let td of typedocuments | typedocument: source"
-                                                    [value]="td.id">{{td.libelletypedocument}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <label>Nature de la demande</label>
-                                        <select name="nature" [(ngModel)]="dd.nature" class="form-control" required>
-                                            <option value="nouvelle">Nouvelle demande</option>
-                                            <option value="duplicata">Demande de duplicata</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <button [disabled]="data.invalid" type="submit" class="btn btn-primary">Envoyer</button>
-                            </form>
-                        </div>
-                    </p-dialog>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
@@ -209,5 +172,45 @@
                 </p-accordionTab>
             </p-accordion>
         </div>
+        <p-dialog [(visible)]="display" [baseZIndex]="10000" [resizable]="true">
+            <p-header>
+                <p-toolbar>
+                    <div class="ui-toolbar-group-left">
+                        <button routerLink="/demandedocument" pButton type="button" label="Mes demandes"
+                                icon="pi pi-file"
+                                class="ui-button-warning">
+                        </button>
+                    </div>
+                </p-toolbar>
+            </p-header>
+            <div class="ui-dialog-content mt-2">
+                <h4 class="text-center text-uppercase py-3 {{requestDocAdmin ? 'text-primary': 'text-warning'}}">
+                    <i class="fa fa-files-o mr-1"></i>
+                    Demande de document {{requestDocAdmin ? 'administratif' : 'pédagogique'}}
+                </h4>
+                <form #data="ngForm" (ngSubmit)="requestDocument()">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 form-group">
+                            <label>Type de Document
+                                <select name="type" class="form-control" [(ngModel)]="dd.typedocument"
+                                        required>
+                                    <option *ngFor="let td of typedocuments | typedocument: source"
+                                            [value]="td.id">{{td.libelletypedocument}}</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 form-group">
+                            <label>Nature de la demande
+                                <select name="nature" [(ngModel)]="dd.nature" class="form-control" required>
+                                    <option value="nouvelle">Nouvelle demande</option>
+                                    <option value="duplicata">Demande de duplicata</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <button [disabled]="data.invalid" type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </p-dialog>
     </div>
 </div>

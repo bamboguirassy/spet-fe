@@ -32,28 +32,33 @@
                     </tr>
                     <tr>
                         <th>État actuel</th>
-                        <td><span class="badge" [ngStyle]="{'backgroundColor': demande_document.etatActuel.codeCouleur}">{{ demande_document.etatActuel.libelle }}</span></td>
+                        <td><span class="badge"
+                                  [ngStyle]="{'backgroundColor': demande_document.etatActuel.codeCouleur}">{{ demande_document.etatActuel.libelle }}</span>
+                        </td>
                     </tr>
                 </table>
             </p-fieldset>
             <p-fieldset [legend]="'Historique des états'">
-                <ng-container *ngFor="let hed of historiqueEtats.reverse(); let i = index">
+                <ng-container *ngFor="let hed of historiqueEtats; let i = index">
                     <div class="card my-1"
-                         [ngStyle]="{'boxShadow': '0 2px 4px' + hed.etat.codeCouleur}">
+                         [ngStyle]="{'boxShadow': '0 2px 4px ' + hed.etat.codeCouleur}">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12"><span
                                         class="font-weight-bold text-uppercase">État: </span><span
                                         class="badge"
-                                        [ngStyle]="{'backgroundColor': hed.etat.codeCouleur}">{{ hed.etat.libelle }}</span>
+                                        [ngStyle]="{backgroundColor: hed.etat.codeCouleur}">{{ hed.etat.libelle }}</span>
                                 </div>
                                 <div class="col-md-6 col-sm-12"><span class="font-weight-bold text-uppercase">Date de mis en état: </span>
                                     <span class="text-capitalize"> le {{hed.date | date: 'dd MMM, yyyy'}}</span></div>
                             </div>
                         </div>
                     </div> <!-- End of card -->
-                    <div class="my-2" style="font-size: 2em">
-                        <i title="État précédent" *ngIf="i >= 0 && historiqueEtats[i+1]" class="fa fa-long-arrow-down" [ngStyle]="{'color': historiqueEtats[i+1].etat.codeCouleur}"></i>
+                    <div *ngIf="i >= 0 && historiqueEtats[i+1]" class="my-2"
+                         title="{{historiqueEtats.length-i-1 === 1 ? 'État initial': 'État précédent'}}"
+                         style="font-size: 1.5em"
+                         [ngStyle]="{color: colors[i]}">{{historiqueEtats.length - i - 1}}
+                        <i class="fa fa-long-arrow-down"></i>
                     </div>
                 </ng-container>
             </p-fieldset>

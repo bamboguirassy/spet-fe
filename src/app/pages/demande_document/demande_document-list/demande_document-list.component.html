@@ -28,10 +28,10 @@
                              [scrollable]="true" scrollHeight="400px" [globalFilterFields]="globalFilterFields"
                              dataKey="id">
                         <ng-template pTemplate="caption">
-                            Liste des demande_documents<br>
+                            Liste des demande documents<br>
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                            <input type="text" pInputText size="50" placeholder="Rechercher dans le tableau"
-                                   (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                            <input type="text" pInputText placeholder="Rechercher dans le tableau" style="width: 50%"
+                                   (input)="tt.filterGlobal($event.target.value, 'contains')">
                             <div class="ui-helper-clearfix" style="text-align: left">
                                 <button *ngIf="'DemandeDocument'|listable" type="button" pButton icon="pi pi-file-pdf"
                                         iconPos="left"
@@ -88,12 +88,12 @@
                                     {{ demande_document.intitule }}
                                 </td>
                                 <td class="ui-resizable-column">
-                                    <span class="badge" [ngStyle]="{'backgroundColor': demande_document.etatActuel.codeCouleur}">{{ demande_document.etatActuel.libelle }}</span>
+                                    <span class="badge"
+                                          [ngStyle]="{'backgroundColor': demande_document.etatActuel.codeCouleur}">{{ demande_document.etatActuel.libelle }}</span>
                                 </td>
                                 <td class="ui-resizable-column text-center">
-                                    <a [routerLink]="['./', demande_document.id]">
-                                        <i class="pi pi-eye" style="font-size: 2em"></i>
-                                    </a>
+                                    <button label="Détails" [routerLink]="['./', demande_document.id]" pButton
+                                            icon="pi pi-eye"></button>
                                 </td>
                             </tr>
                         </ng-template>
