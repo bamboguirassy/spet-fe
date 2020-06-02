@@ -25,11 +25,10 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label class="col-form-label form-control-label" for="message">Message</label>
-                    <p-editor  name="message" styleClass="editor-dimensions" [(ngModel)]="reclamationBourse.message" [style]="{'height':'200px'}">
+                    <p-editor name="message" styleClass="editor-dimensions" [(ngModel)]="reclamationBourse.message" [style]="{'height':'200px'}">
 
-                    </p-editor>   
-                    <p innerHTML="reclamationBourse.message"></p>    
-
+                    </p-editor>      
+                 <div [innerHtml]="reclamationBourse.message"></div>
                 </div>
               
             </div>

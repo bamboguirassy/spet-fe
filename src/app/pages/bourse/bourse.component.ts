@@ -14,7 +14,7 @@ import { ReclamationBourse } from './reclamation_bourse/reclamation_bourse';
 })
 export class BourseComponent implements OnInit {
   bourseData: any;
-  seletecbourse: BourseEtudiant;
+  seletectedbourse: BourseEtudiant;
   reclamationBourses = [];
 
 
@@ -28,16 +28,17 @@ export class BourseComponent implements OnInit {
     this.bourseData = this.activatedRoute.snapshot.data.bourseData;
     this.reclamationBourses = this.activatedRoute.snapshot.data.reclamationBourses;
   }
-  toggleAddModal(bourseData) {
-    this.seletecbourse = bourseData;
+  // tslint:disable-next-line:no-shadowed-variable
+  toggleAddModal(BourseEtudiant) {
+    // this.seletectedbourse = BourseEtudiant;
     const modalRef = this.modalSrv.open(ReclamationBourseNewComponent, {
       size: 'lg',
       centered: true,
       keyboard: false,
       backdrop: 'static'
     });
-    console.log(this.seletecbourse);
-    modalRef.componentInstance.seletecbourse = this.seletecbourse;
+    // console.log(this.seletectedbourse);
+    // modalRef.componentInstance.seletectedbourse = this.seletectedbourse;
 
     modalRef.componentInstance.created
       .subscribe((reclamationBourse: ReclamationBourse) => {

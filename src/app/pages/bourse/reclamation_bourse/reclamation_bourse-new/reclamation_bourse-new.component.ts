@@ -22,7 +22,7 @@ export class ReclamationBourseNewComponent implements OnInit {
   reclamationBourses: ReclamationBourse ;
   bourses: BourseEtudiant[] = [];
   @Output() created: EventEmitter<ReclamationBourse> = new EventEmitter();
-  @Input() seletecbourse: BourseEtudiant;
+  @Input() seletectedbourse: BourseEtudiant;
 
   constructor(public reclamationBourseSrv: ReclamationBourseService,
               public bourseEtudiantSrv: BourseEtudiantService,
@@ -40,9 +40,9 @@ export class ReclamationBourseNewComponent implements OnInit {
 
   saveReclamationBourse() {
     // const tempBourseEtudiant = this.reclamationBourse.bourseEtudiant;
-    // // this.reclamationBourse.bourseEtudiant = this.seletecbourse.id;
-    // // const tempEtudiant = this.reclamationBourse.etudiant;
-    // // this.reclamationBourse.etudiant = this.reclamationBourse.etudiant.id;
+    // this.reclamationBourse.bourseEtudiant = this.seletectedbourse.id;
+    // const tempEtudiant = this.reclamationBourse.etudiant;
+    // this.reclamationBourse.etudiant = this.reclamationBourse.etudiant.id;
     // const tempEtatActuel = this.reclamationBourse.etatActuel;
     // this.reclamationBourse.etatActuel = this.reclamationBourse.etatActuel.id;
     this.reclamationBourseSrv.create(this.reclamationBourse)
