@@ -9,44 +9,61 @@
                         <code style="font-weight: bolder;">{{etudiant?.emailUniv}}</code>.</b>
                 </p>
                 <h2>Bienvenue dans votre <b>Espace Etudiant</b></h2>
-                La messagerie de l’université est accessible à l’adresse <a target="_blank"
-                    href="http://mail.univ-thies.sn">mail.univ-thies.sn</a> ou directement
-                sur <a target="_blank" href="https://gmail.com.">gmail.com.</a>.<br>
-                Pour recevoir vos paramètres de connexion à la messagerie,
-                vous devez <code>impérativement</code> mettre à jour vos informations personnelles
-                en cliquant sur le bouton <span class="text-danger">Mettre à jour mes informations</span>
-                au niveau votre dossier.<br>
-                Pour tout problème d’accès à votre messagerie, veillez contacter le service support à l’adresse
-                <a
-                    href="mailto:supportit@univ-thies.sn?subject=Assistance sur la messagerie">supportit@univ-thies.sn</a>
-                ou remplir le formulaire se trouvant sur <a href="http://support.univ-thies.sn/" target="_blank"
-                    rel="noopener noreferrer">http://support.univ-thies.sn/</a>. <br>
-                Il vous permettra :
-                <ul class="container">
-                    <li>D’être informé des actualités de l’université de Thiès</li>
-                    <li>D’envoyer et de recevoir des mails sécurisés</li>
-                    <li>
-                        D’accéder aux services :
-                        <ul class="container">
-                            <li>Drive : pour le travail collaboratif</li>
-                            <li>Meet et Hangout pour la vidéoconférence entre groupes
-                                de projet</li>
-                            <li>Sites : pour la création de page personnelle</li>
-                        </ul>
-                    </li>
-                    <li>
-                        D’accéder à la plateforme d’enseignement à distance <a target="_blank"
-                            href="https://fad.univ-thies.sn">fad.univ-thies.sn </a>
-                    </li>
-                </ul>
-                Pour tout problème technique lié à la plateforme espace étudiant, veuillez contacter le service
-                assistance à l’adresse
-                <a
-                    href="mailto:assistance@univ-thies.sn?subject=Assistance sur l'espace étudiant">assistance@univ-thies.sn</a><br>
-                <br>
-                Merci de contacter la DSOS si vous constatez des erreurs sur vos informations personnelles non
-                modifiables ou pour toute information complémentaire: <a
-                    href="mailto:dsos@univ-thies.sn?subject=Demande d'informations complementaires dans Spet">dsos@univ-thies.sn</a>
+                <div class="card-group">
+                    <div class="card">
+                        <div class="card-body">
+                            La messagerie de l’université est accessible à l’adresse <a target="_blank"
+                                href="http://mail.univ-thies.sn">mail.univ-thies.sn</a> ou directement
+                            sur <a target="_blank" href="https://gmail.com.">gmail.com.</a>.<br>
+                            Pour recevoir vos paramètres de connexion à la messagerie,
+                            vous devez <code>impérativement</code> mettre à jour vos informations personnelles
+                            en cliquant sur le bouton <span class="text-danger">Mettre à jour mes informations</span>
+                            au niveau votre dossier.<br>
+                            Pour tout problème d’accès à votre messagerie, veillez contacter le service support à
+                            l’adresse
+                            <a
+                                href="mailto:supportit@univ-thies.sn?subject=Assistance sur la messagerie">supportit@univ-thies.sn</a>
+                            ou remplir le formulaire se trouvant sur <a href="http://support.univ-thies.sn/"
+                                target="_blank" rel="noopener noreferrer">http://support.univ-thies.sn/</a>. <br>
+                            Il vous permettra :
+                            <ul class="container">
+                                <li>D’être informé des actualités de l’université de Thiès</li>
+                                <li>D’envoyer et de recevoir des mails sécurisés</li>
+                                <li>
+                                    D’accéder aux services :
+                                    <ul class="container">
+                                        <li>Drive : pour le travail collaboratif</li>
+                                        <li>Meet et Hangout pour la vidéoconférence entre groupes
+                                            de projet</li>
+                                        <li>Sites : pour la création de page personnelle</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    D’accéder à la plateforme d’enseignement à distance <a target="_blank"
+                                        href="https://fad.univ-thies.sn">fad.univ-thies.sn </a>
+                                </li>
+                            </ul>
+                            Pour tout problème technique lié à la plateforme espace étudiant, veuillez contacter le
+                            service
+                            assistance à l’adresse
+                            <a
+                                href="mailto:assistance@univ-thies.sn?subject=Assistance sur l'espace étudiant">assistance@univ-thies.sn</a><br>
+                            <br>
+                            Merci de contacter la DSOS si vous constatez des erreurs sur vos informations personnelles
+                            non
+                            modifiables ou pour toute information complémentaire: <a
+                                href="mailto:dsos@univ-thies.sn?subject=Demande d'informations complementaires dans Spet">dsos@univ-thies.sn</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-header">
+                                Vous rencontrez des problèmes ?
+                            </div>
+                            <app-contact></app-contact>
+                        </div>
+                    </div>
+                </div>
                 <div class="row mb-4">
                     <div class="col">
                         <div class="card-group">
@@ -71,12 +88,8 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header text-white text-center" style="background-color: orangered;">
-                                    Contactez nous</div>
                                 <div class="card-body">
-                                   <app-contact></app-contact>
-
-                                    <!-- <p class="card-text">
+                                    <p class="card-text">
                                         Tout en valorisant les atouts économiques et culturels de son site
                                         d’implantation, elle remplit les missions classiques de formation et de
                                         recherche en mettant l’accent sur les volets technologique, professionnel et sur
@@ -118,7 +131,7 @@
                                         La particularité de l’Université de Thiès réside dans la diversité de sa
                                         composition. Il s’agit, en effet, de la fédération de structures de formation et
                                         de recherches déjà existantes et des structures nouvellement créées.
-                                    </p> -->
+                                    </p>
                                 </div>
                             </div>
                             <div class="card" routerLinkActive="router-link-active">

@@ -32,7 +32,7 @@ export class ReclamationBourseListComponent implements OnInit {
 
 
   constructor(private activatedRoute: ActivatedRoute,
-              public reclamationBourseSvr: ReclamationBourseService, public exportSrv: ExportService,
+              public reclamationBourseSrv: ReclamationBourseService, public exportSrv: ExportService,
               private router: Router, public authSrv: AuthService,
               public notificationSrv: NotificationService) { }
 
@@ -59,31 +59,31 @@ export class ReclamationBourseListComponent implements OnInit {
   }
 
   viewReclamationBourse(reclamationBourse: ReclamationBourse) {
-      this.router.navigate([this.reclamationBourseSvr.getRoutePrefix(), reclamationBourse.id]);
+      this.router.navigate([this.reclamationBourseSrv.getRoutePrefix(), reclamationBourse.id]);
 
   }
 
   editReclamationBourse(reclamationBourse: ReclamationBourse) {
-      this.router.navigate([this.reclamationBourseSvr.getRoutePrefix(), reclamationBourse.id, 'edit']);
+      this.router.navigate([this.reclamationBourseSrv.getRoutePrefix(), reclamationBourse.id, 'edit']);
   }
 
   cloneReclamationBourse(reclamationBourse: ReclamationBourse) {
-      this.router.navigate([this.reclamationBourseSvr.getRoutePrefix(), reclamationBourse.id, 'clone']);
+      this.router.navigate([this.reclamationBourseSrv.getRoutePrefix(), reclamationBourse.id, 'clone']);
   }
 
   deleteReclamationBourse(reclamationBourse: ReclamationBourse) {
-      this.reclamationBourseSvr.remove(reclamationBourse)
-        .subscribe(data => this.refreshList(), error => this.reclamationBourseSvr.httpSrv.handleError(error));
+      this.reclamationBourseSrv.remove(reclamationBourse)
+        .subscribe(data => this.refreshList(), error => this.reclamationBourseSrv.httpSrv.handleError(error));
   }
 
   deleteSelectedReclamationBourses(reclamationBourse: ReclamationBourse) {
-    this.reclamationBourseSvr.removeSelection(this.selectedReclamationBourses)
-      .subscribe(data => this.refreshList(), error => this.reclamationBourseSvr.httpSrv.handleError(error));
+    this.reclamationBourseSrv.removeSelection(this.selectedReclamationBourses)
+      .subscribe(data => this.refreshList(), error => this.reclamationBourseSrv.httpSrv.handleError(error));
   }
 
   refreshList() {
-    this.reclamationBourseSvr.findMesReclamations()
-      .subscribe((data: any) => this.reclamationBourses = data, error => this.reclamationBourseSvr.httpSrv.handleError(error));
+    this.reclamationBourseSrv.findMesReclamations()
+      .subscribe((data: any) => this.reclamationBourses = data, error => this.reclamationBourseSrv.httpSrv.handleError(error));
   }
 
   exportPdf() {

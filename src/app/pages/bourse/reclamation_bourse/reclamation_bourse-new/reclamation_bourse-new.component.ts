@@ -2,68 +2,45 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ReclamationBourse } from '../reclamation_bourse';
 import { ReclamationBourseService } from '../reclamation_bourse.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { BourseEtudiant } from '../../bourse_etudiant';
-import { NgbModal } from '../../../../../../node_modules/@ng-bootstrap/ng-bootstrap';
-import { BourseEtudiantService } from '../../bourse_etudiant.service';
+import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'app-reclamation_bourse-new',
+  selector: 'app-reclamationbourse-new',
   templateUrl: './reclamation_bourse-new.component.html',
   styleUrls: ['./reclamation_bourse-new.component.scss']
 })
 export class ReclamationBourseNewComponent implements OnInit {
-  // tslint:disable-next-line:variable-name
   reclamationBourse: ReclamationBourse;
-  // tslint:disable-next-line:variable-name
-  reclamationBourses: ReclamationBourse ;
-  bourses: BourseEtudiant[] = [];
-  @Output() created: EventEmitter<ReclamationBourse> = new EventEmitter();
-  @Input() seletectedbourse: BourseEtudiant;
+  bourseEtudiant: BourseEtudiant;
 
   constructor(public reclamationBourseSrv: ReclamationBourseService,
-              public bourseEtudiantSrv: BourseEtudiantService,
-
-              public notificationSrv: NotificationService, public router: Router, public location: Location, public modalSercive: NgbModal,
-              public activatedRoute: ActivatedRoute,
-             ) {
-                this.reclamationBourse = new ReclamationBourse();
+              public ref: DynamicDialogRef, public config: DynamicDialogConfig
+  ) {
+    this.reclamationBourse = new ReclamationBourse();
   }
 
   ngOnInit() {
-    this.bourses = this.activatedRoute.snapshot.data.bourses;
-    this.reclamationBourses = this.activatedRoute.snapshot.data.reclamationBourses;
+    this.bourseEtudiant = this.config.data.bourseEtudiant;
   }
 
   saveReclamationBourse() {
-    // const tempBourseEtudiant = this.reclamationBourse.bourseEtudiant;
-    // this.reclamationBourse.bourseEtudiant = this.seletectedbourse.id;
-    // const tempEtudiant = this.reclamationBourse.etudiant;
-    // this.reclamationBourse.etudiant = this.reclamationBourse.etudiant.id;
-    // const tempEtatActuel = this.reclamationBourse.etatActuel;
-    // this.reclamationBourse.etatActuel = this.reclamationBourse.etatActuel.id;
+    if (this.bourseEtudiant) {
+      this.reclamationBourse.bourseEtudiant = this.bourseEtudiant.id;
+    }
     this.reclamationBourseSrv.create(this.reclamationBourse)
       .subscribe((data: any) => {
-        this.created.emit(data);
-        this.closeModal();
-        this.notificationSrv.showInfo('ReclamationBourse créé avec succès');
-        this.router.navigate([this.reclamationBourseSrv.getRoutePrefix(), data.id]);
+        this.ref.close(data);
+        this.reclamationBourseSrv.httpSrv.notificationSrv.showInfo('ReclamationBourse créé avec succès');
+        this.reclamationBourseSrv.httpSrv.router.navigate([this.reclamationBourseSrv.getRoutePrefix(), data.id]);
         this.reclamationBourse = new ReclamationBourse();
       }, error => {
-        // this.reclamationBourse.bourseEtudiant = tempBourseEtudiant;
-        // this.reclamationBourse.etatActuel = tempEtatActuel;
-        // this.reclamationBourse.etudiant = tempEtudiant;
-
-
         this.reclamationBourseSrv.httpSrv.handleError(error);
-      } );
+      });
   }
-public closeModal() {
-  this.modalSercive.dismissAll('Cross click');
-}
+  public closeModal() {
+    this.ref.close('Cross click');
+  }
 
 
 

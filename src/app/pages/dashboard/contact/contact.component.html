@@ -4,7 +4,7 @@
                 <select class="form-control validation-field"
                     [(ngModel)]="newMail.typeAssistance" name="mm"
                     formControlName="type" required >
-                    <option [attr.selected] = "true" disabled>choisissez le type de votre problème
+                    <option [attr.selected] = "true" disabled>Choisir le type de problème
                     </option>
                     <ng-container *ngFor="let assistance of assistances">
                         <option [value]="assistance.id">{{assistance.typeAssistance}}
@@ -18,7 +18,7 @@
             </div>
            
             <div class="mb-3"> 
-                <label>Decrivez votre problème</label>
+                <label>Donner une description claire du problème</label>
                 <p-editor [(ngModel)]="message" formControlName="description"
                     [style]="{'height':'150px'}">
                         <p-header>
@@ -40,7 +40,6 @@
                 <label class="custom-file-label" for="customFile">choississez un fichier</label>
                 
               </div> -->
-              
             <button class="btn btn-success float-right" [disabled]="!contactForm.valid"
                 (click)="EnvoiMail()">Contacter</button>
         </form>

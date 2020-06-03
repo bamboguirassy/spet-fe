@@ -1,24 +1,13 @@
 <p-toast></p-toast>
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        <p-fieldset legend="Liste des demande documents" [toggleable]="true">
+        <p-fieldset legend="Liste des demandes de document" [toggleable]="true">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <p-toolbar>
                         <button *ngIf="'DemandeDocument'|listable" type="button" class="btn btn-outline-secondary"
                                 (click)="refreshList()">
                             <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
-                        </button>
-                        <button *ngIf="'DemandeDocument'|deletable" (click)="deleteSelectedDemandeDocuments()"
-                                type="button"
-                                class="btn btn-outline-danger pull-right ml-1">
-                            <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer selection
-                        </button>
-                        <button *ngIf="'DemandeDocument'|creable"
-                                [routerLink]="['/'+demande_documentSrv.getRoutePrefix(),'new']"
-                                routerLinkActive="router-link-active" type="button"
-                                class="btn btn-outline-primary pull-right ml-1">
-                            <i class="fa fa-plus-square-o" aria-hidden="true"></i> Nouveau
                         </button>
                     </p-toolbar>
                     <p-table #tt [value]="demande_documents" [paginator]="true" [rows]="50" sortMode="multiple"
@@ -28,7 +17,7 @@
                              [scrollable]="true" scrollHeight="400px" [globalFilterFields]="globalFilterFields"
                              dataKey="id">
                         <ng-template pTemplate="caption">
-                            Liste des demande documents<br>
+                            Liste des demandes de document<br>
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                             <input type="text" pInputText placeholder="Rechercher dans le tableau" style="width: 50%"
                                    (input)="tt.filterGlobal($event.target.value, 'contains')">
@@ -49,13 +38,11 @@
                                 <col>
                                 <col>
                                 <col>
+                                <col>
                             </colgroup>
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th style="width: 3em">
-                                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                                </th>
                                 <th [pSortableColumn]="'type'" pResizableColumn>
                                     Type
                                     <p-sortIcon [field]="'type'"></p-sortIcon>
@@ -69,15 +56,12 @@
                                     <p-sortIcon [field]="'intitule'"></p-sortIcon>
                                 </th>
                                 <th [pSortableColumn]="'Etat'" pResizableColumn>État</th>
-                                <th [pSortableColumn]="'Historique'" pResizableColumn>Historique</th>
+                                <th>Actions</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-demande_document let-editing="editing">
                             <tr [pEditableRow]="demande_document" [pSelectableRow]="demande_document"
                                 [pContextMenuRow]="demande_document">
-                                <td style="width: 3em">
-                                    <p-tableCheckbox [value]="demande_document"></p-tableCheckbox>
-                                </td>
                                 <td class="ui-resizable-column">
                                     {{ demande_document.typedocument.libelletypedocument }}
                                 </td>
@@ -99,11 +83,11 @@
                         </ng-template>
                         <ng-template pTemplate="footer" let-columns>
                             <tr>
-                                <td style="width: 3em">
-                                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                                </td>
                                 <td>Type</td>
+                                <td>Date</td>
                                 <td>Intitule</td>
+                                <td>Etat Actuel</td>
+                                <td>Actions</td>
                             </tr>
                         </ng-template>
                     </p-table>
