@@ -17,6 +17,7 @@ export class ReclamationBourseShowComponent implements OnInit {
 
   reclamationBourse: ReclamationBourse;
   historiqueEtats: HistoriqueEtatReclamation[] = [];
+  colors: string[] = [];
 
   constructor(public activatedRoute: ActivatedRoute,
               public reclamationBourseSrv: ReclamationBourseService, public location: Location,
@@ -30,11 +31,14 @@ export class ReclamationBourseShowComponent implements OnInit {
   }
   findHistoriqueEtatReclamation(reclamation: ReclamationBourse) {
     this.historiqueEtatReclamationSrv.findByReclamation(reclamation).subscribe(
-        historiqueEtats => {
-            this.historiqueEtats = historiqueEtats as any;
-        },
-        error => this.reclamationBourseSrv.httpSrv.handleError(error)
-    );
+      (historiqueEtats: any) => {
+                   this.historiqueEtats = historiqueEtats.reverse(); // recupérer les états par le plus récent
+                   for (let i = 1; i < this.historiqueEtats.length; i++) { // débuter par le premier état précédent
+                       this.colors.push(this.historiqueEtats[i].etat.codeCouleur); // ajouter la couleur de chaque état précédent
+                  }
+              },
+             error => this.reclamationBourseSrv.httpSrv.handleError(error)
+           );
 }
 
   removeReclamationBourse() {

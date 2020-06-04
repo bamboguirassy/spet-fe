@@ -6,21 +6,24 @@ import { BourseEtudiant } from './bourse_etudiant';
 import { BourseEtudiantService } from './bourse_etudiant.service';
 import { ReclamationBourseService } from './reclamation_bourse/reclamation_bourse.service';
 import { ReclamationBourse } from './reclamation_bourse/reclamation_bourse';
+import { DialogService } from 'primeng/api';
 
 @Component({
   selector: 'app-bourse',
   templateUrl: './bourse.component.html',
-  styleUrls: ['./bourse.component.scss']
+  styleUrls: ['./bourse.component.scss'],
+  providers: [DialogService]
 })
 export class BourseComponent implements OnInit {
   bourseData: any;
+  seletectedbourse: BourseEtudiant;
   reclamationBourses = [];
 
 
 
   constructor(private activatedRoute: ActivatedRoute,
-              public modalSrv: NgbModal, public BourseSvr: BourseEtudiantService,
-              public reclamationBourseSrv: ReclamationBourseService,
+    public modalSrv: DialogService, public BourseSvr: BourseEtudiantService,
+    public reclamationBourseSrv: ReclamationBourseService,
   ) { }
 
   ngOnInit() {
@@ -28,21 +31,14 @@ export class BourseComponent implements OnInit {
     this.reclamationBourses = this.activatedRoute.snapshot.data.reclamationBourses;
   }
 
-
-
-  toggleAddModal() {
-    const modalRef = this.modalSrv.open(ReclamationBourseNewComponent, {
-      size: 'lg',
-      centered: true,
-      keyboard: false,
-      backdrop: 'static'
+  toggleNewReclamationModal(selectedBourseEtudiant) {
+    this.modalSrv.open(ReclamationBourseNewComponent, {
+      data: {
+        bourseEtudiant: selectedBourseEtudiant
+      },
+      width: '70%',
+      header: 'Nouvelle réclamation'
     });
-
-    modalRef.componentInstance.created
-      .subscribe((reclamationBourse: ReclamationBourse) => {
-        this.reclamationBourses.push(reclamationBourse);
-        this.reclamationBourses = [...this.reclamationBourses];
-      });
   }
 }
 

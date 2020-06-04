@@ -8,16 +8,16 @@ import { BourseEtudiantService } from './bourse_etudiant.service';
   providedIn: 'root'
 })
 export class OneBourseEtudiantResolver implements Resolve<any> {
-  resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot) {
-    return this.bourse_etudiantSrv.findOneById(route.params.id).pipe(map(data => {
+  resolve(route: import('@angular/router').ActivatedRouteSnapshot, state: import('@angular/router').RouterStateSnapshot) {
+    return this.bourseEtudiantSrv.findOneById(route.params.id).pipe(map(data => {
       return data;
     }),
     catchError(error => {
       const message = `Retrieval error: ${error}`;
-      return of({ bourse_etudiant: null, error: message });
+      return of({ bourseEtudiant: null, error: message });
     }));
   }
 
-  constructor(public bourse_etudiantSrv:BourseEtudiantService) { }
+  constructor(public bourseEtudiantSrv: BourseEtudiantService) { }
 }
 

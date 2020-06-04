@@ -21,7 +21,8 @@
                     <tr *ngIf="line.bourseEtudiant">
                         <td>
                             <span class="ui-column-title">Mois</span>
-                            {{line?.mois}}</td>
+                            <b>{{line?.mois}}</b>
+                        </td>
                         <td>
                             <span class="ui-column-title">Prénoms</span>
                             {{line?.bourseEtudiant?.prenoms}}</td>
@@ -39,26 +40,37 @@
                             {{line?.bourseEtudiant?.lieuNaissance}}</td>
                         <td>
                             <span class="ui-column-title">Taux Bourse</span>
-                            {{line?.bourseEtudiant?.tauxBourse}}</td>
+                            <span class="badge badge-pill badge-info">
+                                {{line?.bourseEtudiant?.tauxBourse}}
+                            </span>
+                        </td>
                         <td>
                             <span class="ui-column-title">Montant</span>
-                            {{line?.bourseEtudiant?.montantBourse}}</td>
+                            <span class="badge badge-pill badge-primary">
+                                {{line?.bourseEtudiant?.montantBourse}} FCFA
+                            </span>
+                        </td>
                         <td>
-                            <button icon="pi pi-exclamation-triangle"  type="button" routerLinkActive="router-link-active"   (click)="toggleAddModal()" pButton label="Faire une réclamation"
-                                class="ui-button ui-button-warning"></button>
+                            <button icon="pi pi-exclamation-triangle" type="button" (click)="toggleNewReclamationModal(line?.bourseEtudiant)"
+                                pButton label="Faire une réclamation" class="ui-button ui-button-warning"></button>
                         </td>
                     </tr>
                     <tr *ngIf="!line.bourseEtudiant">
                         <td>
                             <span class="ui-column-title">Mois</span>
-                            {{line?.mois}}</td>
+                            <b>{{line?.mois}}</b>
+                        </td>
                         <td colspan="7" style="text-align: center; overflow: auto;">
                             <span class="badge badge-danger">Vous n'êtes pas sur les états des bourses du mois de
                                 {{line?.mois}} {{ bourseContent.annee }}</span>
                         </td>
                         <td>
-                            <button icon="pi pi-exclamation-triangle" label="Faire un réclamation" pButton
-                                class="ui-button ui-button-warning" type="button" routerLinkActive="router-link-active"   (click)="toggleAddModal()" pButton label="Faire une réclamation"></button>
+                            <div class="actions">
+                                <button icon="pi pi-exclamation-triangle" label="Faire un réclamation" pButton
+                                    class="ui-button ui-button-warning" type="button"
+                                    routerLinkActive="router-link-active" (click)="toggleNewReclamationModal(null)" pButton
+                                    label="Faire une réclamation"></button>
+                            </div>
                         </td>
                     </tr>
                 </ng-template>
@@ -66,4 +78,5 @@
         </div>
     </p-tabPanel>
 </p-tabView>
-<span class="badge badge-warning" *ngIf="!bourseData.length">Aucune information de bourse n'est encore disponible.</span>
+<span class="badge badge-warning" *ngIf="!bourseData.length">Aucune information de bourse n'est encore
+    disponible.</span>

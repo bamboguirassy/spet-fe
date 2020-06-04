@@ -1,5 +1,6 @@
 export class BourseEtudiant {
-    id: any;
+  [x: string]: any;
+    id?: any;
     prenoms: string;
     nom: string;
     dateNaissance: string;

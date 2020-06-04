@@ -63,6 +63,7 @@ import { ReclamationBourseShowComponent } from './bourse/reclamation_bourse/recl
 import { DemandeDocumentShowComponent } from './demande_document/demande_document-show/demande_document-show.component';
 import { DemandeDocumentNewComponent } from './demande_document/demande_document-new/demande_document-new.component';
 import { ContactComponent } from './dashboard/contact/contact.component';
+import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdialog';
 
 
 
@@ -128,7 +129,11 @@ import { ContactComponent } from './dashboard/contact/contact.component';
         OverlayPanelModule,
         DialogModule,
         SplitButtonModule,
-        InputTextModule
+        InputTextModule,
+        DynamicDialogModule
+    ],
+    entryComponents: [
+      ReclamationBourseNewComponent
     ]
 })
 export class PagesModule { }
