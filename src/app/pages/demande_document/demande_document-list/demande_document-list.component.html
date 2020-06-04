@@ -91,7 +91,7 @@
                                     <span class="badge"
                                           [ngStyle]="{'backgroundColor': demande_document.etatActuel.codeCouleur}">{{ demande_document.etatActuel.libelle }}</span>
                                 </td>
-                                <td class="ui-resizable-column text-center">
+                                <td class="ui-resizable-column">
                                     <button label="Détails" [routerLink]="['./', demande_document.id]" pButton
                                             icon="pi pi-eye"></button>
                                 </td>
@@ -99,11 +99,23 @@
                         </ng-template>
                         <ng-template pTemplate="footer" let-columns>
                             <tr>
-                                <td style="width: 3em">
+                                <th style="width: 3em">
                                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                                </td>
-                                <td>Type</td>
-                                <td>Intitule</td>
+                                </th>
+                                <th [pSortableColumn]="'type'" pResizableColumn>
+                                    Type
+                                    <p-sortIcon [field]="'type'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'date'" pResizableColumn>
+                                    Date
+                                    <p-sortIcon [field]="'date'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'intitule'" pResizableColumn>
+                                    Intitule
+                                    <p-sortIcon [field]="'intitule'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'Etat'" pResizableColumn>État</th>
+                                <th [pSortableColumn]="'Historique'" pResizableColumn>Historique</th>
                             </tr>
                         </ng-template>
                     </p-table>
