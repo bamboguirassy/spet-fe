@@ -7,6 +7,7 @@ import {AssistanceEmailService} from '../assistanceemail/assistanceemail.service
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
+    styles: ['.list-group-item:hover { background-color: #dd1b16; color: white; } '],
     encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent implements AfterViewInit, OnInit {
