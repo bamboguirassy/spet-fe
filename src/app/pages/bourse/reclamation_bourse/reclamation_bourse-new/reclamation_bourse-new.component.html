@@ -9,15 +9,33 @@
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    <label class="col-form-label form-control-label" for="objet">Objet de la réclamation</label>
-                    <input required [(ngModel)]="reclamationBourse.objet" class="form-control" type="text" name="objet" id="objet">
+                    <label class="col-form-label form-control-label" for="objet">Objet de la réclamation</label> <br>
+                    <select class="browser-default custom-select" [(ngModel)]="reclamationBourse.objet" name="objet" id="objet">
+                        <option value="Omission">Omission</option>
+                        <option value="Chantgement de Taux">Chantgement de Taux</option>
+                        <option value="Nouvelle Attribution">Nouvelle Attribution</option>
+                        <option value="Renouvellement">Renouvellement</option>
+                        <option value="Erreur de Donnée">Erreur de Donnée</option>
+                        <option value="Transfert de Bourse">Transfert de Bourse</option>
+                        <option value="Subvention">Subvention</option>
+                        <option value="Probleme de paiement">Problème de Paiement</option>
+                        <option value="Autres">Autres
+                            
+                        </option>
+
+                    </select>
+                    <div class="form-group" *ngIf="reclamationBourse.objet == 'Autres'">
+                            <label class="col-form-label form-control-label"  for="objet">Spécifier votre réclamation</label>
+                            <input type="text" class="form-control" id="objet1" name="objet1" required>
+                            
+                          </div>
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label class="col-form-label form-control-label" for="message">Message</label>
+                    <label class="col-form-label form-control-label"  for="message">Message</label>
                     <p-editor name="message" styleClass="editor-dimensions" [(ngModel)]="reclamationBourse.message" [style]="{'height':'200px'}">
-                    </p-editor>      
+                    </p-editor>
                 </div>
             </div>
         </div>
@@ -25,8 +43,7 @@
         <!-- fin body -->
         <p-toolbar>
             <button class="btn-outline-danger" type="button" pButton (click)="closeModal()" label="Annuler" icon="pi pi-times"></button>
-            <button [disabled]="reclamationBourseForm.invalid" type="button" (click)="saveReclamationBourse()" 
-            class="btn btn-outline-primary pull-right ml-1">
+            <button [disabled]="reclamationBourseForm.invalid" type="button" (click)="saveReclamationBourse()" class="btn btn-outline-primary pull-right ml-1">
                 <i class="fa fa-save" aria-hidden="true"></i>
                 Envoyer </button>
             <button type="reset" class="btn btn-secondary pull-right">

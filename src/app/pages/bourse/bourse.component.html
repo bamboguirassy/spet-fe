@@ -52,7 +52,7 @@
                         </td>
                         <td>
                             <button icon="pi pi-exclamation-triangle" type="button" (click)="toggleNewReclamationModal(line?.bourseEtudiant)"
-                                pButton label="Faire une réclamation" class="ui-button ui-button-warning"></button>
+                                pButton class="ui-button ui-button-warning"></button>
                         </td>
                     </tr>
                     <tr *ngIf="!line.bourseEtudiant">
@@ -66,10 +66,10 @@
                         </td>
                         <td>
                             <div class="actions">
-                                <button icon="pi pi-exclamation-triangle" label="Faire un réclamation" pButton
+                                <button icon="pi pi-exclamation-triangle"  pButton
                                     class="ui-button ui-button-warning" type="button"
                                     routerLinkActive="router-link-active" (click)="toggleNewReclamationModal(null)" pButton
-                                    label="Faire une réclamation"></button>
+                                   ></button>
                             </div>
                         </td>
                     </tr>
