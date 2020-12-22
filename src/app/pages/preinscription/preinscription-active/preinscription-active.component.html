@@ -20,7 +20,11 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let preinscription of preinscriptions">
-                                <td class="align-middle">{{preinscription?.datedelai|date:'dd/MM/yyyy'}}</td>
+                                <td class="align-middle">
+                                    <span class="badge badge-danger">
+                                        {{preinscription?.datedelai|date:'dd/MM/yyyy'}}
+                                    </span>
+                                </td>
                                 <td class="align-middle text-truncate">{{preinscription?.idfiliere?.codefiliere}}</td>
                                 <td class="align-middle text-truncate">{{preinscription?.idniveau?.libelleniveau}}</td>
                                 <td class="align-middle text-truncate">{{preinscription?.idanneeacad?.libelleanneeacad}}</td>
@@ -34,8 +38,8 @@
                                 <td class="align-middle">
                                     <div class="btn-group" role="group">
                                         <button (click)="startProcess(preinscription.id)"  class="btn btn-outline-primary">
-                                            <i class="fa fa-address-card-o"></i> Finaliser mon
-                                            inscription</button>
+                                            <i class="fa fa-pencil-square" aria-hidden="true"></i> S'inscrire
+                                        </button>
                                     </div>
                                 </td>
                             </tr>

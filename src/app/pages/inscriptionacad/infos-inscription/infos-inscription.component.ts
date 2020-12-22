@@ -7,6 +7,8 @@ import { RegimeinscriptionService } from '../../regimeinscription/regimeinscript
 import { Regimeinscription } from '../../regimeinscription/regimeinscription';
 import { Etudiant } from '../../etudiant/etudiant';
 import { InscriptionacadService } from '../inscriptionacad.service';
+import { Modepaiement } from '../../modepaiement/modepaiement';
+import { ModepaiementService } from '../../modepaiement/modepaiement.service';
 
 @Component({
   selector: 'infos-inscription',
@@ -16,22 +18,33 @@ import { InscriptionacadService } from '../inscriptionacad.service';
 export class InfosInscriptionComponent implements OnInit {
   specialites: Specialite[] = [];
   regimeinscriptions: Regimeinscription[] = [];
+  modepaiements: Modepaiement[] = [];
   @Input() preinscription: Preinscription;
   @Input() etudiant: Etudiant;
   @Input() inscriptionacad: Inscriptionacad = new Inscriptionacad();
   @Output() onSave: EventEmitter<any> = new EventEmitter();
+  @Output() onPrevious: EventEmitter<any> = new EventEmitter();
 
   constructor(public specialiteSrv: SpecialiteService,
-              public regimeinscriptionSrv: RegimeinscriptionService,
-              public inscriptionacadSrv: InscriptionacadService) {
-      if (!this.inscriptionacad.id) {
-        this.inscriptionacad = new Inscriptionacad();
-      }
+    public regimeinscriptionSrv: RegimeinscriptionService,
+    public inscriptionacadSrv: InscriptionacadService,
+    public modepaiementSrv: ModepaiementService) {
+    if (!this.inscriptionacad.id) {
+      this.inscriptionacad = new Inscriptionacad();
+    }
   }
 
   ngOnInit() {
     this.findSpecialiteByFiliere();
     this.findRegimeInscriptions();
+    if (this.preinscription.paiementConfirme) {
+      this.modepaiementSrv.findAll()
+      .subscribe((data: any) => {
+        this.modepaiements = data;
+      }, err => this.modepaiementSrv.httpSrv.handleError(err));
+      // si paiement déja effectué, mettre le montant payé
+      this.inscriptionacad.montantinscriptionacad = this.preinscription.montant;
+    }
   }
 
   findSpecialiteByFiliere() {
@@ -51,6 +64,7 @@ export class InfosInscriptionComponent implements OnInit {
   createInscription() {
     this.inscriptionacad.passage = this.preinscription.passage;
     this.inscriptionacad.preinscirptionId = this.preinscription.id;
+    this.inscriptionacad.idmodepaiement = this.inscriptionacad.idmodepaiement.id;
     this.inscriptionacadSrv.create(this.inscriptionacad)
       .subscribe((data: any) => {
         this.inscriptionacad = data;
@@ -61,11 +75,16 @@ export class InfosInscriptionComponent implements OnInit {
   updateInscription() {
     this.inscriptionacad.idregimeinscription = this.inscriptionacad.idregimeinscription.id;
     this.inscriptionacad.idspecialite = this.inscriptionacad.idspecialite.id;
+    this.inscriptionacad.idmodepaiement = this.inscriptionacad.idmodepaiement.id;
     this.inscriptionacadSrv.update(this.inscriptionacad)
       .subscribe((data: any) => {
         this.inscriptionacad = data;
         this.onSave.emit(data);
       }, error => this.inscriptionacadSrv.httpSrv.handleError(error));
+  }
+
+  goToPrevious() {
+    this.onPrevious.emit();
   }
 
 }

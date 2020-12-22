@@ -7,22 +7,22 @@
     <div class="row" style="margin-top: 5%;">
         <div class="text-center col-md-8">
             <h5>Redimension de la photo</h5>
-            <image-cropper 
-            [imageChangedEvent]="imageChangedEvent" 
-            [maintainAspectRatio]="true" 
-            [aspectRatio]="4 / 4"
-            [resizeToWidth]="256" 
-            format="png" 
-            (imageCropped)="imageCropped($event)" 
-            (imageLoaded)="imageLoaded()"
-            (cropperReady)="cropperReady()" 
-            (loadImageFailed)="loadImageFailed()"></image-cropper>
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
+                [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
         </div>
         <div class="text-center col-md-4">
             <h5>Prévisualisation</h5>
             <img [src]="croppedImage" />
-            <br><br>
-            <button type="button" class="btn btn-outline-primary">Mettre à jour la photo</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mt-3">
+            <button class="btn btn-primary pull-left" (click)="goToPrevious()">
+                <i class="fa fa-chevron-left arrow"></i>
+                &nbsp; Etape précedente
+            </button>
+            <button type="button" class="btn btn-outline-primary pull-right" (click)="uploadPhoto()">Mettre à jour la photo</button>
         </div>
     </div>
 </div>

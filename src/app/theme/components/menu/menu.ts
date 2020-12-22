@@ -25,6 +25,9 @@ export const horizontalMenuItems = [
     new Menu (40, 'Demandes de documents', '/demandedocument', null, 'file-text-o', null, false, 0),
     new Menu (50, 'Liens utiles', null, null, 'link', null, true, 0),
     new Menu (51, 'Le système LMD', '/systeme-lmd', null, 'bookmark-o', null, false, 50),
+    new Menu (60, 'Admin', null, null, 'cog', null, true, 0),
+    new Menu (61, 'Inscriptions', '/inscriptionacad', null, 'pencil', null, false, 60),
+    new Menu (62, 'Dossiers Etudiant', '/dossieretudiant', null, 'folder', null, false, 60),
 
     // new Menu (45, 'Blank', '/blank', null, 'file-o', null, false, 40),
     // new Menu (46, 'Error', '/pagenotfound', null, 'exclamation-circle', null, false, 40),

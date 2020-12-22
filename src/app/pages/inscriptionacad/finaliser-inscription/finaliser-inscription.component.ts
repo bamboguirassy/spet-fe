@@ -5,7 +5,7 @@ import { Etudiant } from '../../etudiant/etudiant';
 import { EtudiantService } from '../../etudiant/etudiant.service';
 import { Inscriptionacad } from '../inscriptionacad';
 import { InscriptionacadService } from '../inscriptionacad.service';
-
+declare var sendPaymentInfos: Function;
 @Component({
   selector: 'app-finaliser-inscription',
   templateUrl: './finaliser-inscription.component.html',
@@ -27,7 +27,7 @@ export class FinaliserInscriptionComponent implements OnInit {
       { name: 'Information Personnelle', icon: 'fa-user', active: true, valid: false, hasError: false },
       { name: 'Information Inscription', icon: 'fa-pencil', active: false, valid: false, hasError: false },
       { name: 'Mise à jour photo', icon: 'fa-image', active: false, valid: false, hasError: false },
-      { name: 'Information Paiement', icon: 'fa-credit-card', active: false, valid: false, hasError: false },
+      { name: 'Paiement des frais', icon: 'fa-credit-card', active: false, valid: false, hasError: false },
     ];
     this.inscriptionacad = new Inscriptionacad();
   }
@@ -43,6 +43,10 @@ export class FinaliserInscriptionComponent implements OnInit {
       .subscribe((data: any) => {
         this.inscriptionacad = data;
       }, error => this.inscriptionacadSrv.httpSrv.handleError(error));
+  }
+
+  startPaymentProcess() {
+    sendPaymentInfos('1258', 'agence_code', 'secure_code' ,'domain_name', 'url_notif_success' ,'url_notif_failed' ,this.preinscription.montant , 'ville' , this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant,this.preinscription.tel);
   }
 
   findByCni() {
@@ -81,7 +85,7 @@ export class FinaliserInscriptionComponent implements OnInit {
             steps[index + 1].active = true;
             return true;
           }
-          if (step.name == 'Information Paiement') {
+          if (step.name == 'Paiement des frais') {
             step.active = false;
             step.valid = true;
             steps[index + 1].active = true;

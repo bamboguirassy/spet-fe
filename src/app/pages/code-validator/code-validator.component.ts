@@ -13,6 +13,7 @@ import { TokenManagerService } from 'src/app/shared/services/token-manager.servi
 export class CodeValidatorComponent implements OnInit {
   public form: FormGroup;
   public code: AbstractControl;
+  codeSent = false;
 
   secureCode: number;
 
@@ -23,6 +24,7 @@ export class CodeValidatorComponent implements OnInit {
   ngOnInit() {
     this.secureCode = this.activatedRoute.snapshot.data.code;
     if (this.secureCode) {
+      this.codeSent = true;
       this.authSrv.httpSrv.notificationSrv.showInfo('Un code confirmation a été envoyé par email, merci de le saisir.');
     }
     this.form = this.fb.group({

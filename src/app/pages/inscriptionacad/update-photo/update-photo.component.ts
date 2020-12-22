@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Etudiant } from '../../etudiant/etudiant';
 
@@ -11,6 +11,8 @@ export class UpdatePhotoComponent implements OnInit {
 
   title = 'angular-image-uploader';
 
+  @Output() onPrevious: EventEmitter<any> = new EventEmitter();
+  @Output() onUpload: EventEmitter<any> = new EventEmitter();
   @Input() etudiant: Etudiant;
 
   imageChangedEvent: any = '';
@@ -21,6 +23,13 @@ export class UpdatePhotoComponent implements OnInit {
   ngOnInit() {
   }
 
+  goToPrevious() {
+    this.onPrevious.emit();
+  }
+
+  uploadPhoto() {
+    this.onUpload.emit();
+  }
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;

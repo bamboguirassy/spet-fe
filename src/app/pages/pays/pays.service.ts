@@ -13,7 +13,7 @@ export class PaysService {
   constructor(public httpSrv: HttpService) { }
 
   findAll() {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash());
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'public/');
   }
 
   findOneById(id: number) {

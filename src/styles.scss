@@ -10,6 +10,10 @@ $fa-font-path : "../node_modules/font-awesome/fonts";
          url('./assets/fonts/moonhouse.ttf') format('truetype');
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 @-webkit-keyframes trans1{ 
   from { 
     transform : translate3d(53px,0,0);

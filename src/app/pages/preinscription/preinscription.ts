@@ -1,3 +1,5 @@
+import { Pays } from "../pays/pays";
+
 export class Preinscription {
     id: any;
     idfiliere: any;
@@ -20,4 +22,6 @@ export class Preinscription {
     datePaiement: string;
     numeroTransaction: string;
     montant: string;
+    paiementConfirme: boolean;
+    nationalite: Pays;
 }
