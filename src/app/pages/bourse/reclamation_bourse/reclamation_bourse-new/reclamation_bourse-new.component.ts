@@ -14,6 +14,7 @@ export class ReclamationBourseNewComponent implements OnInit {
   reclamationBourse: ReclamationBourse;
   bourseEtudiant: BourseEtudiant;
 
+
   constructor(public reclamationBourseSrv: ReclamationBourseService,
               public ref: DynamicDialogRef, public config: DynamicDialogConfig
   ) {
