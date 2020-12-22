@@ -25,19 +25,24 @@
                         </td>
                         <td>
                             <span class="ui-column-title">Prénoms</span>
-                            {{line?.bourseEtudiant?.prenoms}}</td>
+                            {{line?.bourseEtudiant?.prenoms}}
+                        </td>
                         <td>
                             <span class="ui-column-title">Nom</span>
-                            {{line?.bourseEtudiant?.nom}}</td>
+                            {{line?.bourseEtudiant?.nom}}
+                        </td>
                         <td>
                             <span class="ui-column-title">CNI</span>
-                            {{line?.bourseEtudiant?.cni}}</td>
+                            {{line?.bourseEtudiant?.cni}}
+                        </td>
                         <td>
                             <span class="ui-column-title">Date Naissance</span>
-                            {{line?.bourseEtudiant?.dateNaissance}}</td>
+                            {{line?.bourseEtudiant?.dateNaissance}}
+                        </td>
                         <td>
                             <span class="ui-column-title">Lieu Naissance</span>
-                            {{line?.bourseEtudiant?.lieuNaissance}}</td>
+                            <span class="nowrap">{{line?.bourseEtudiant?.lieuNaissance}}</span>
+                        </td>
                         <td>
                             <span class="ui-column-title">Taux Bourse</span>
                             <span class="badge badge-pill badge-info">
@@ -51,8 +56,9 @@
                             </span>
                         </td>
                         <td>
-                            <button icon="pi pi-exclamation-triangle" type="button" (click)="toggleNewReclamationModal(line?.bourseEtudiant)"
-                                pButton label="Faire une réclamation" class="ui-button ui-button-warning"></button>
+                            <button icon="pi pi-exclamation-triangle" type="button"
+                                (click)="toggleNewReclamationModal(line?.bourseEtudiant)" pButton
+                                title="Faire une réclamation" class="ui-button ui-button-warning"></button>
                         </td>
                     </tr>
                     <tr *ngIf="!line.bourseEtudiant">
@@ -66,10 +72,10 @@
                         </td>
                         <td>
                             <div class="actions">
-                                <button icon="pi pi-exclamation-triangle" label="Faire un réclamation" pButton
+                                <button icon="pi pi-exclamation-triangle" title="Faire un réclamation" pButton
                                     class="ui-button ui-button-warning" type="button"
-                                    routerLinkActive="router-link-active" (click)="toggleNewReclamationModal(null)" pButton
-                                    label="Faire une réclamation"></button>
+                                    routerLinkActive="router-link-active" (click)="toggleNewReclamationModal(null)"
+                                    pButton></button>
                             </div>
                         </td>
                     </tr>

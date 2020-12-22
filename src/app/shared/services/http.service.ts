@@ -20,8 +20,8 @@ export class HttpService {
               public tokenManager: TokenManagerService,
               public notificationSrv: NotificationService,
               public router: Router) {
-    // this.customUrl = 'http://127.0.0.1:8000/api/';
-    this.customUrl = 'https://gpe-ws.univ-thies.sn/api/';
+    this.customUrl = 'http://127.0.0.1:8000/api/';
+    // this.customUrl = 'https://gpe-ws.univ-thies.sn/api/';
   }
 
   createAuthorizationHeaderWithProgress(): any {

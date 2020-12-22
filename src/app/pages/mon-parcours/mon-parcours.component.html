@@ -192,7 +192,7 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12 form-group">
                             <label>Type de Document
-                                <select name="type" class="form-control" [(ngModel)]="dd.typedocument"
+                                <select style="width: 100%;" name="type" class="form-control" [(ngModel)]="dd.typedocument"
                                         required>
                                     <option *ngFor="let td of typedocuments | typedocument: source"
                                             [value]="td.id">{{td.libelletypedocument}}</option>
@@ -201,7 +201,8 @@
                         </div>
                         <div class="col-md-6 col-sm-12 form-group">
                             <label>Nature de la demande
-                                <select name="nature" [(ngModel)]="dd.nature" class="form-control" required>
+                                <select style="width: 100%;" 
+                                 name="nature" [(ngModel)]="dd.nature" class="form-control" required>
                                     <option value="nouvelle">Nouvelle demande</option>
                                     <option value="duplicata">Demande de duplicata</option>
                                 </select>
