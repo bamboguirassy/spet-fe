@@ -21,7 +21,7 @@ import {
     EditorModule,
     InputMaskModule,
     AccordionModule,
-    OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule
+    OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule
 } from 'primeng/primeng';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -130,7 +130,8 @@ import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdia
         DialogModule,
         SplitButtonModule,
         InputTextModule,
-        DynamicDialogModule
+        DynamicDialogModule,
+        MessagesModule
     ],
     entryComponents: [
       ReclamationBourseNewComponent

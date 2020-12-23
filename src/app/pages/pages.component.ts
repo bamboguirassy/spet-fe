@@ -8,7 +8,7 @@ import { Settings } from '../app.settings.model';
     selector: 'app-pages',
     templateUrl: './pages.component.html',
     styleUrls: ['./pages.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
 export class PagesComponent implements OnInit {
     public showMenu: boolean = false;

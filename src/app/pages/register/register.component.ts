@@ -23,9 +23,9 @@ export class RegisterComponent implements AfterViewInit {
     public etudiant: Etudiant;
 
     constructor(router: Router, fb: FormBuilder,
-                public fosUserSrv: FosUserService,
-                private confirmationService: ConfirmationService,
-                public dialogService: DialogService
+        public fosUserSrv: FosUserService,
+        private confirmationService: ConfirmationService,
+        public dialogService: DialogService
     ) {
         this.router = router;
         this.form = fb.group({
@@ -47,7 +47,12 @@ export class RegisterComponent implements AfterViewInit {
                 .subscribe((data: any) => {
                     this.etudiant = data;
                     this.confirmationService.confirm({
-                        message: 'Un mail de confirmation est envoyé à ' + this.etudiant.email + '. Merci de le consulter',
+                        message: `Un mail de confirmation est envoyé
+                         à l'adresse email ` + this.etudiant.email +
+                            `. Merci de le consulter pour trouver le mail d'activation.
+                           Si le mail n'est pas conforme, se présenter à la DSOS 
+                            ou à la scolarité de l'établissement pour apporter 
+                             les modifications nécessaires. `,
                         accept: () => {
                             const ref = this.dialogService.open(EmailUpdateComponent, {
                                 header: 'Mise à jour de l\'adresse email',

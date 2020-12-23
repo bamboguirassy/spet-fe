@@ -1,3 +1,4 @@
+<p-messages></p-messages>
 <h2>Bonjour {{preinscription?.prenometudiant+' '+preinscription?.nometudiant}} </h2>
 <p>
     Vous êtes sur le point de finaliser votre inscription en <b>{{preinscription?.idniveau?.libelleniveau}}</b> pour
@@ -50,7 +51,9 @@
                                         <div class="card-body">
                                             <blockquote class="blockquote">
                                                 <p>Vous avez déja procédé au paiement de vos frais d'inscription.</p>
-                                                <footer class="card-blockquote">Pour terminer votre inscription, cliquer sur le bouton <cite title="terminer l'inscription">Terminer l'inscription</cite> juste en bas.</footer>
+                                                <footer class="card-blockquote">Pour terminer votre inscription, cliquer
+                                                    sur le bouton <cite title="terminer l'inscription">Terminer
+                                                        l'inscription</cite> juste en bas.</footer>
                                             </blockquote>
                                         </div>
                                     </div>
@@ -59,31 +62,34 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <blockquote class="blockquote">
-                                                <p>Vous devez regler vos frais d'inscription sur la plateforme directement.
-                                                    Assurez-vous d'avoir réchargé votre moyen de paiement électronique avant de procéder à l'opération de paiement.
+                                                <p>Vous devez regler vos frais d'inscription sur la plateforme
+                                                    directement.
+                                                    Assurez-vous d'avoir réchargé votre moyen de paiement électronique
+                                                    avant de procéder à l'opération de paiement.
                                                 </p>
-                                                <footer class="card-blockquote">
-                                                    <button (click)="startPaymentProcess()" type="button" class="btn btn-success pull-right">
-                                                        <i class="fa fa-money" aria-hidden="true"></i> Procéder au paiement
-                                                    </button>
-                                                </footer>
                                             </blockquote>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <button *ngIf="steps[steps.length-1].active" class="btn btn-primary pull-left"
-                                (click)="prev()"><i class="fa fa-chevron-left arrow"></i>&nbsp; Etape précedente</button>
+                                (click)="prev()"><i class="fa fa-chevron-left arrow"></i>&nbsp; Etape
+                                précedente</button>
                             <!-- <button *ngIf="!steps[steps.length-1].active" class="btn btn-primary pull-right"
                                 (click)="next()">Etape suivante &nbsp;<i class="fa fa-chevron-right arrow"></i></button> -->
-                            <button *ngIf="steps[steps.length-1].active && preinscription?.paiementConfirme" class="btn btn-primary pull-right"
-                                (click)="confirm()">Terminer l'inscription &nbsp;<i class="fa fa-check arrow"></i></button>
+                            <button *ngIf="steps[steps.length-1].active && preinscription?.paiementConfirme"
+                                class="btn btn-primary pull-right" (click)="confirm()">Terminer l'inscription &nbsp;<i
+                                    class="fa fa-check arrow"></i></button>
+                            <button *ngIf="steps[steps.length-1].active && !preinscription?.paiementConfirme"
+                                (click)="startPaymentProcess()" type="button" class="btn btn-success pull-right">
+                                <i class="fa fa-money" aria-hidden="true"></i> Procéder au paiement
+                            </button>
                         </div>
                     </div>
 
                 </div>
 
-                
+
 
             </div>
 

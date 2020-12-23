@@ -56,8 +56,12 @@
 
 <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
     <p-footer>
-        <button class="pull-left" type="button" pButton icon="pi pi-times" label="Ok" (click)="cd.reject()"></button>
-        <button class="ui-button-danger" type="button" pButton icon="pi pi-check" label="Ce mail ne m'appartient pas" (click)="cd.accept()"></button>
-        <button class="ui-button-warning mt-1" type="button" pButton icon="pi pi-check" label="Je n'utilise plus ce mail" (click)="cd.accept()"></button>
+        <div class="row">
+            <div class="col-12">
+                <button class="pull-right" type="button" pButton icon="pi pi-times" label="Fermer" (click)="cd.reject()"></button>
+            </div>
+        </div>
+        <!-- <button class="ui-button-danger" type="button" pButton icon="pi pi-check" label="Ce mail ne m'appartient pas" (click)="cd.accept()"></button>
+        <button class="ui-button-warning mt-1" type="button" pButton icon="pi pi-check" label="Je n'utilise plus ce mail" (click)="cd.accept()"></button> -->
     </p-footer>
 </p-confirmDialog>

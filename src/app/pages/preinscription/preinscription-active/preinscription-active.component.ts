@@ -17,8 +17,9 @@ export class PreinscriptionActiveComponent implements OnInit {
   }
 
   startProcess(idPreinscription: number) {
-    this.httpSrv.setRetUrl('finaliser-inscription/' + idPreinscription);
-    this.router.navigate(['validator']);
+    // this.httpSrv.setRetUrl('finaliser-inscription/' + idPreinscription);
+    // this.router.navigate(['validator']);
+    this.router.navigate(['finaliser-inscription/' + idPreinscription]);
   }
 
 }

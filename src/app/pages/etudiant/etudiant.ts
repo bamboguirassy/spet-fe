@@ -40,4 +40,8 @@ export class Etudiant {
     idpays: Pays;
     nationalite: Pays;
     typeOrphelin: string;
+    typeHabitation: string;
+    campusSocial: string;
+    numeroChambre: number;
+    quartierEtudiant: string;
 }

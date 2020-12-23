@@ -5,12 +5,14 @@ import { Etudiant } from '../../etudiant/etudiant';
 import { EtudiantService } from '../../etudiant/etudiant.service';
 import { Inscriptionacad } from '../inscriptionacad';
 import { InscriptionacadService } from '../inscriptionacad.service';
+import { MessageService } from 'primeng/api';
 declare var sendPaymentInfos: Function;
 @Component({
   selector: 'app-finaliser-inscription',
   templateUrl: './finaliser-inscription.component.html',
   styleUrls: ['./finaliser-inscription.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [MessageService]
 })
 export class FinaliserInscriptionComponent implements OnInit {
   public steps: any[];
@@ -46,7 +48,11 @@ export class FinaliserInscriptionComponent implements OnInit {
   }
 
   startPaymentProcess() {
-    sendPaymentInfos('1258', 'agence_code', 'secure_code' ,'domain_name', 'url_notif_success' ,'url_notif_failed' ,this.preinscription.montant , 'ville' , this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant,this.preinscription.tel);
+    if (!this.inscriptionacad.id) {
+      this.inscriptionacadSrv.httpSrv.notificationSrv.showError("Il faut d'abord valider l'inscription !!!");
+    } else {
+      sendPaymentInfos(this.inscriptionacad.id, 'agence_code', 'secure_code', 'etudiant.univ-thies.sn', 'url_notif_success', 'url_notif_failed', this.preinscription.montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
+    }
   }
 
   findByCni() {
@@ -112,8 +118,15 @@ export class FinaliserInscriptionComponent implements OnInit {
   }
 
   public confirm() {
-    this.steps.forEach(step => step.valid = true);
-    this.confirmed = true;
+    if(this.preinscription.paiementConfirme) {
+      this.inscriptionacadSrv.confirmPrepaidInscription(this.inscriptionacad)
+      .subscribe(()=>{
+        this.steps.forEach(step => step.valid = true);
+        this.confirmed = true;
+      },err=>this.inscriptionacadSrv.httpSrv.handleError(err));
+    } else {
+      this.inscriptionacadSrv.httpSrv.notificationSrv.showError("Le paiement doit être confirmé d'abord !");
+    }
   }
 
 }

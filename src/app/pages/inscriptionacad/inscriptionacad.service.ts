@@ -36,6 +36,10 @@ export class InscriptionacadService {
     return this.httpSrv.put(this.getRoutePrefixWithSlash()+inscriptionacad.id+'/edit', inscriptionacad);
   }
 
+  confirmPrepaidInscription(inscriptionacad: Inscriptionacad) {
+    return this.httpSrv.put(this.getRoutePrefixWithSlash()+inscriptionacad.id+'/confirm-prepaid-inscription', inscriptionacad);
+  }
+
   clone(original: Inscriptionacad, clone: Inscriptionacad) {
     return this.httpSrv.put(this.getRoutePrefixWithSlash()+original.id+'/clone', clone);
   }

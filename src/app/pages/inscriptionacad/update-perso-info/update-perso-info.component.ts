@@ -16,6 +16,24 @@ export class UpdatePersoInfoComponent implements OnInit {
   typeHandicaps: any[] = [];
   pays: any[] = [];
   @Output() onUpdate: EventEmitter<any> = new EventEmitter();
+  typeHabitations = [
+    'Campus Social',
+    'En location à Thiès',
+    'Hébergé à Thiès par un tuteur',
+    'Résident permanent à Thiès'
+  ];
+  campusSociaux = [
+    'Site VCN',
+    'Hotel du Rail',
+    'Campus ENSA'
+  ];
+  typeOrphelins = [
+    { type: 'Orphelin de père', libelle: 'Orphelin de père' },
+    { type: 'Orphelin de mère', libelle: 'Orphelin de mère' },
+    { type: 'Orphelin des deux', libelle: 'Orphelin des deux' },
+  ];
+
+
   constructor(public etudiantSrv: EtudiantService,
     public paysSrv: PaysService) { }
 
