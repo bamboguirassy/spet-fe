@@ -16,6 +16,10 @@ export class PreinscriptionService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash());
   }
 
+  requestNewEtudiantCreation(cni: string) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'public/request-etudiant-creation/'+cni);
+  }
+
   findActivePreinscriptionByEtudiant() {
     return this.httpSrv.get(this.getRoutePrefixWithSlash()+'active/');
   }

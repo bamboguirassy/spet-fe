@@ -64,7 +64,6 @@ export class InfosInscriptionComponent implements OnInit {
   createInscription() {
     this.inscriptionacad.passage = this.preinscription.passage;
     this.inscriptionacad.preinscirptionId = this.preinscription.id;
-    this.inscriptionacad.idmodepaiement = this.inscriptionacad.idmodepaiement.id;
     this.inscriptionacad.source = 'spet';
     this.inscriptionacadSrv.create(this.inscriptionacad)
       .subscribe((data: any) => {

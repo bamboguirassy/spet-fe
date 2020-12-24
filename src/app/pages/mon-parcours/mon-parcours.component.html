@@ -4,7 +4,7 @@
     </div>
 </div> -->
 <!-- {{inscriptions|json}} -->
-<div class="card border-warning">
+<div class="card border-warning" *ngIf="preinscriptions.length">
     <div class="card-body">
         <preinscription-active [preinscriptions]="preinscriptions"></preinscription-active>
     </div>

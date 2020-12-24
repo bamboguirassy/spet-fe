@@ -3,7 +3,7 @@
 <p>
     Vous êtes sur le point de finaliser votre inscription en <b>{{preinscription?.idniveau?.libelleniveau}}</b> pour
     l'année académique
-    <b>{{preinscription?.idanneeacad?.libelleanneeacad}}</b>.<br>
+    <b>{{preinscription?.idanneeacad?.libelleanneeacad}}</b> pour la filiere <b>{{preinscription?.idfiliere?.codefiliere}}</b>.<br>
     Vous êtes admis par <b>{{preinscription?.idtypeadmission?.libelletypeadmission}}</b> comme
     <b>
         <span class="badge badge-success" *ngIf="preinscription?.passage=='P'">Passant</span>

@@ -1,4 +1,4 @@
-<form *ngIf="!inscriptionacad.id" (submit)="createInscription()" #inscriptionForm="ngForm">
+<form *ngIf="!inscriptionacad.id" #inscriptionForm="ngForm">
     <div class="card">
         <div class="card-body">
             <fieldset class="border p-2">
@@ -28,6 +28,27 @@
                         <input required [(ngModel)]="inscriptionacad.coutformation" class="form-control" type="number"
                             name="cout" />
                     </div>
+                    <div class="form-group col-sm-12 col-md-12 col-lg-6" *ngIf="preinscription?.paiementConfirme">
+                        <label style="font-weight: bold;">Mode de paiement</label>
+                        <select required [(ngModel)]="inscriptionacad.idmodepaiement" class="custom-select"
+                            name="regime">
+                            <option disabled selected>Selectionnez le mode de paiement </option>
+                            <option [value]="modepaiement.id" *ngFor="let modepaiement of modepaiements">
+                                {{modepaiement.libellemodepaiement}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="preinscription?.paiementConfirme"
+                        class="form-group col-sm-12 col-md-12 col-lg-6">
+                        <label style="font-weight: bold;">Montant Inscription:</label>
+                        <input [disabled]="true" required [value]="preinscription.montant" class="form-control" type="number"
+                            name="montantinscriptionacad" />
+                    </div>
+                    <div *ngIf="preinscription?.paiementConfirme"
+                        class="form-group col-sm-12 col-md-12 col-lg-6">
+                        <label style="font-weight: bold;">Numéro de transaction ou reference de paiement:</label>
+                        <input required [(ngModel)]="inscriptionacad.numquittance" class="form-control" type="text"
+                            name="numquittance" />
+                    </div>
                 </div>
             </fieldset>
         </div>
@@ -36,12 +57,12 @@
                 <i class="fa fa-chevron-left arrow"></i>
                 &nbsp; Etape précedente
             </button>
-            <button [disabled]="inscriptionForm.invalid" type="submit"
+            <button (click)="createInscription()" [disabled]="inscriptionForm.invalid" type="button"
                 class="btn btn-outline-primary pull-right">Valider inscription & Continuer</button>
         </div>
     </div>
 </form>
-<form *ngIf="inscriptionacad.id" (submit)="updateInscription()" #inscriptionEditForm="ngForm">
+<form *ngIf="inscriptionacad.id" #inscriptionEditForm="ngForm">
     <div class="card">
         <div class="card-body">
             <fieldset class="border p-2">
@@ -100,7 +121,7 @@
                 <i class="fa fa-chevron-left arrow"></i>
                 &nbsp; Etape précedente
             </button>
-            <button [disabled]="inscriptionEditForm.invalid" type="submit"
+            <button (click)="updateInscription()" [disabled]="inscriptionEditForm.invalid" type="button"
                 class="btn btn-outline-primary pull-right">Valider inscription & Continuer</button>
         </div>
     </div>

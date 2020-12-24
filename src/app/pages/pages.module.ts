@@ -97,8 +97,10 @@ import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdia
     NoteEvaluationComponent,
     DossierPedagogiqueComponent,
     UserProfileComponent,
-    ReclamationBourseListComponent, ReclamationBourseNewComponent, ReclamationBourseShowComponent,
-    DemandeDocumentListComponent, DemandeDocumentNewComponent, DemandeDocumentShowComponent, ContactComponent
+    ReclamationBourseListComponent, ReclamationBourseNewComponent,
+     ReclamationBourseShowComponent,
+    DemandeDocumentListComponent, DemandeDocumentNewComponent,
+     DemandeDocumentShowComponent, ContactComponent
   ],
     imports: [
         CommonModule,

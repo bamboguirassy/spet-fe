@@ -8,10 +8,14 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { ConfirmDialogModule, ConfirmationService, DropdownModule, DialogService, PasswordModule, ProgressSpinnerModule, InputMaskModule } from 'primeng/primeng';
 import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdialog';
 import { SharedComponentModule } from '../shared/shared-component/shared-component.module';
+import { PreconfirmEtudiantCreationComponent } from '../etudiant/preconfirm-etudiant-creation/preconfirm-etudiant-creation.component';
+import { RequestEtudiantCreationComponent } from '../etudiant/request-etudiant-creation/request-etudiant-creation.component';
 
 export const routes = [
   { path: '', component: RegisterComponent },
   { path: 'confirmation/:id', component: ConfirmationComponent },
+  { path: 'preconfirm-etudiant', component: PreconfirmEtudiantCreationComponent },
+  { path: 'request-creation/:id' /*id = idpreinscription*/, component: RequestEtudiantCreationComponent }
 ];
 
 @NgModule({
@@ -31,7 +35,9 @@ export const routes = [
   ],
   declarations: [
     RegisterComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    PreconfirmEtudiantCreationComponent,
+    RequestEtudiantCreationComponent
   ],
   providers: [ConfirmationService, DialogService]
 })
