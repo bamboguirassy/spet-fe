@@ -16,7 +16,7 @@ export class Etudiant {
     adruevilla: string;
     email: string;
     emailUniv: string;
-    notifmail: string;
+    notifmail: boolean;
     photo: string;
     lyceedeprovenance: string;
     teletudiant: string;

@@ -1,0 +1,18 @@
+<div  class="card-body widget-body">
+
+    <div class="col bg-light p-5">
+        <div
+            class="d-flex justify-content-center align-items-center flex-column bg-light confirmed-content">
+            <i class="fa fa-check text-success" aria-hidden="true"></i>
+            <h2 class="p-3">Opération terminée</h2>
+            <h4 class="p-3">Vous utiliserez ce numéro de dossier pour vous inscrire à la plateforme</h4>
+            <h5 class="p-3">Numéro de dossier: <u style="border: 1px inset green;">{{etudiant?.numinterne}}</u></h5>
+            <h5 class="p-3">Nouvelle adresse email universitaire: <u style="border: 1px inset green;">{{etudiant?.emailUniv}}</u></h5>
+            <p class="p-2">
+                Merci de bien vouloir garder soigneuseument ces informations car vous en aurez besoin. <br>
+                Vous allez recevoir un mail avec les paramètres générés sur <b style="color: red;">{{etudiant?.email}}</b></p>
+                <a routerLink="/register" class="transition">Révenir à la plateforme pour s'inscrire</a>
+        </div>
+    </div>
+
+</div>

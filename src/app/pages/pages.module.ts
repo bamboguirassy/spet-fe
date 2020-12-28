@@ -6,22 +6,22 @@ import { PagesComponent } from './pages.component';
 import { BlankComponent } from './blank/blank.component';
 import { SearchComponent } from './search/search.component';
 
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import {
-    ContextMenuModule,
-    MenuModule,
-    ButtonModule,
-    CardModule,
-    FieldsetModule,
-    ToolbarModule,
-    TabViewModule,
-    DropdownModule,
-    SelectButtonModule,
-    SpinnerModule,
-    EditorModule,
-    InputMaskModule,
-    AccordionModule,
-    OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule
+  ContextMenuModule,
+  MenuModule,
+  ButtonModule,
+  CardModule,
+  FieldsetModule,
+  ToolbarModule,
+  TabViewModule,
+  DropdownModule,
+  SelectButtonModule,
+  SpinnerModule,
+  EditorModule,
+  InputMaskModule,
+  AccordionModule,
+  OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule
 } from 'primeng/primeng';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -42,7 +42,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SystemeLmdComponent } from './systeme-lmd/systeme-lmd.component';
 import { ModalitePaiementComponent } from './modalite-paiement/modalite-paiement.component';
-import {DataViewModule} from 'primeng/dataview';
+import { DataViewModule } from 'primeng/dataview';
 import { PreinscriptionActiveComponent } from './preinscription/preinscription-active/preinscription-active.component';
 import { CodeValidatorComponent } from './code-validator/code-validator.component';
 import { FinaliserInscriptionComponent } from './inscriptionacad/finaliser-inscription/finaliser-inscription.component';
@@ -98,45 +98,46 @@ import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdia
     DossierPedagogiqueComponent,
     UserProfileComponent,
     ReclamationBourseListComponent, ReclamationBourseNewComponent,
-     ReclamationBourseShowComponent,
+    ReclamationBourseShowComponent,
     DemandeDocumentListComponent, DemandeDocumentNewComponent,
-     DemandeDocumentShowComponent, ContactComponent
+    DemandeDocumentShowComponent,
+    ContactComponent
   ],
-    imports: [
-        CommonModule,
-        PagesRoutingModule,
-        TableModule,
-        ContextMenuModule,
-        MenuModule,
-        ToastModule,
-        FormsModule,
-        ReactiveFormsModule,
-        ButtonModule,
-        CardModule,
-        FieldsetModule,
-        ToolbarModule,
-        TabViewModule,
-        SharedModule,
-        FilterPipeModule,
-        NgxChartsModule,
-        DataViewModule,
-        ImageCropperModule,
-        DropdownModule,
-        SelectButtonModule,
-        SpinnerModule,
-        EditorModule,
-        InputMaskModule,
-        NgbModule,
-        AccordionModule,
-        OverlayPanelModule,
-        DialogModule,
-        SplitButtonModule,
-        InputTextModule,
-        DynamicDialogModule,
-        MessagesModule
-    ],
-    entryComponents: [
-      ReclamationBourseNewComponent
-    ]
+  imports: [
+    CommonModule,
+    PagesRoutingModule,
+    TableModule,
+    ContextMenuModule,
+    MenuModule,
+    ToastModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    CardModule,
+    FieldsetModule,
+    ToolbarModule,
+    TabViewModule,
+    SharedModule,
+    FilterPipeModule,
+    NgxChartsModule,
+    DataViewModule,
+    ImageCropperModule,
+    DropdownModule,
+    SelectButtonModule,
+    SpinnerModule,
+    EditorModule,
+    InputMaskModule,
+    NgbModule,
+    AccordionModule,
+    OverlayPanelModule,
+    DialogModule,
+    SplitButtonModule,
+    InputTextModule,
+    DynamicDialogModule,
+    MessagesModule
+  ],
+  entryComponents: [
+    ReclamationBourseNewComponent
+  ]
 })
 export class PagesModule { }

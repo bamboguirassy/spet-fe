@@ -20,23 +20,27 @@ export class EtudiantService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }
 
+  getGeneratedFields(id: number) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'public/' + id + '/show-generated-fields');
+  }
+
   findByCni(cni: any) {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'cni/' + cni);
   }
 
-  getSituationMatrimonialeValues(){
+  getSituationMatrimonialeValues() {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'situation-matrimoniale/');
   }
 
-  getHandicapValues(){
+  getHandicapValues() {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'handicap/');
   }
 
-  getOrphelinValues(){
+  getOrphelinValues() {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'orphelin/');
   }
 
-  getTypeHandicapValues(){
+  getTypeHandicapValues() {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'type-handicap/');
   }
 
@@ -46,6 +50,10 @@ export class EtudiantService {
 
   create(etudiant: Etudiant) {
     return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', etudiant);
+  }
+
+  createPrimoEntrant(etudiant: Etudiant) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'public/create-primoentrant/', etudiant);
   }
 
   update(etudiant: Etudiant) {

@@ -17,15 +17,15 @@ export class PreinscriptionService {
   }
 
   requestNewEtudiantCreation(cni: string) {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'public/request-etudiant-creation/'+cni);
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'public/request-etudiant-creation/' + cni);
   }
 
   findActivePreinscriptionByEtudiant() {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'active/');
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'active/');
   }
 
   findOneById(id: number) {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'public/' + id);
   }
 
   create(preinscription: Preinscription) {
@@ -33,19 +33,19 @@ export class PreinscriptionService {
   }
 
   update(preinscription: Preinscription) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+preinscription.id+'/edit', preinscription);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + preinscription.id + '/edit', preinscription);
   }
 
   clone(original: Preinscription, clone: Preinscription) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+original.id+'/clone', clone);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + original.id + '/clone', clone);
   }
 
   remove(preinscription: Preinscription) {
-    return this.httpSrv.delete(this.getRoutePrefixWithSlash()+preinscription.id);
+    return this.httpSrv.delete(this.getRoutePrefixWithSlash() + preinscription.id);
   }
 
   removeSelection(preinscriptions: Preinscription[]) {
-    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',preinscriptions);
+    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', preinscriptions);
   }
 
   public getRoutePrefix(): string {
@@ -53,7 +53,7 @@ export class PreinscriptionService {
   }
 
   private getRoutePrefixWithSlash(): string {
-    return this.routePrefix+'/';
+    return this.routePrefix + '/';
   }
 
 }
