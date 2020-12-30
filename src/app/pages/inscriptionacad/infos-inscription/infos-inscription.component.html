@@ -15,14 +15,13 @@
                     </div>
                     <div class="form-group col-sm-12 col-md-12 col-lg-6">
                         <label style="font-weight: bold;">Regime d'inscription</label>
-                        <select required [(ngModel)]="inscriptionacad.idregimeinscription" class="custom-select"
+                        <select class="custom-select" [disabled]="true"
                             name="regime">
-                            <option disabled selected>Selectionnez une Regime d'inscription </option>
-                            <option [value]="regimeinscription.id" *ngFor="let regimeinscription of regimeinscriptions">
+                            <option [selected]="preinscription?.idregimeinscription.id==regimeinscription.id" [value]="regimeinscription.id" *ngFor="let regimeinscription of regimeinscriptions">
                                 {{regimeinscription.libelleregimeinscription}}</option>
                         </select>
                     </div>
-                    <div *ngIf="inscriptionacad.idregimeinscription==2 || inscriptionacad.idregimeinscription==4"
+                    <div *ngIf="preinscription?.idregimeinscription?.coderegimeinscription=='RNP' || preinscription?.idregimeinscription?.coderegimeinscription=='RPP'"
                         class="form-group col-sm-12 col-md-12 col-lg-6">
                         <label style="font-weight: bold;">Cout de la formation:</label>
                         <input required [(ngModel)]="inscriptionacad.coutformation" class="form-control" type="number"
@@ -100,14 +99,13 @@
                     </div>
                     <div class="form-group col-sm-12 col-md-12 col-lg-6">
                         <label style="font-weight: bold;">Regime d'inscription</label>
-                        <select required [(ngModel)]="inscriptionacad.idregimeinscription.id" class="custom-select"
+                        <select required class="custom-select"
                             name="regime">
-                            <option disabled selected>Selectionnez un Regime d'inscription </option>
-                            <option [value]="regimeinscription.id" *ngFor="let regimeinscription of regimeinscriptions">
+                            <option [selected]="preinscription?.idregimeinscription?.id==regimeinscription.id" [value]="regimeinscription.id" *ngFor="let regimeinscription of regimeinscriptions">
                                 {{regimeinscription.libelleregimeinscription}}</option>
                         </select>
                     </div>
-                    <div *ngIf="inscriptionacad.idregimeinscription.id==2 || inscriptionacad.idregimeinscription.id==4"
+                    <div *ngIf="preinscription?.idregimeinscription?.coderegimeinscription=='RNP' || preinscription?.idregimeinscription?.coderegimeinscription=='RPP'"
                         class="form-group col-sm-12 col-md-12 col-lg-6">
                         <label style="font-weight: bold;">Cout de la formation:</label>
                         <input required [(ngModel)]="inscriptionacad.coutformation" class="form-control" type="number"

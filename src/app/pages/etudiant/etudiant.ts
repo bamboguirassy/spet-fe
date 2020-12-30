@@ -44,4 +44,5 @@ export class Etudiant {
     campusSocial: string;
     numeroChambre: number;
     quartierEtudiant: string;
+    photoLink: string;
 }

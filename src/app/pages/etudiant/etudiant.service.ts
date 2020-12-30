@@ -16,6 +16,10 @@ export class EtudiantService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash());
   }
 
+  uploadPhoto(etudiant: Etudiant, photoData) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'upload-photo/'+etudiant.id, photoData);
+  }
+
   findOneById(id: number) {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }

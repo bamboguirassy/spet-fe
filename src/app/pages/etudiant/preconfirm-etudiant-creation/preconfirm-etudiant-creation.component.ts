@@ -37,7 +37,13 @@ export class PreconfirmEtudiantCreationComponent implements AfterViewInit {
     if (this.form.valid) {
       this.preinscriptionSrv.requestNewEtudiantCreation(this.form.value.cni)
         .subscribe((data: any) => {
-          this.router.navigate(['register/request-creation/' + data.id]);
+          if(data.code=='preinscription') {
+            this.router.navigate(['register/request-creation/' + data.preinscription.id]);
+          } else if(data.code=='etudiant') {
+            this.router.navigate(['register','primo-success-etudiant',data.etudiant.id]);
+          } else {
+            this.preinscriptionSrv.httpSrv.notificationSrv.showError('Réponse non catégorisée !!!');
+          }
         }, err => {
           this.error = err;
           this.preinscriptionSrv.httpSrv.handleError(err)
