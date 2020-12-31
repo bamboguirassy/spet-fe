@@ -67,6 +67,9 @@ export class EtudiantService {
   autoUpdate(etudiant: Etudiant) {
     return this.httpSrv.put(this.getRoutePrefixWithSlash() + 'update-infos/', etudiant);
   }
+  findUserByEmail(etudiant: Etudiant) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'find-by-email/'+ etudiant.emailUniv);
+  }
 
   clone(original: Etudiant, clone: Etudiant) {
     return this.httpSrv.put(this.getRoutePrefixWithSlash() + original.id + '/clone', clone);
