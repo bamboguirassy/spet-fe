@@ -21,8 +21,8 @@ export class AuthService {
     req.subscribe((data: any) => {
       this.currentUserManager.next(data);
       this.currentUser = data;
-      if (this.currentUser.idgroup.codegroupe !== 'ETU') {
-        confirm('Cette application est destinée aux étudiants');
+      if (!['ADMIN', 'ETU', 'DSOS'].includes(this.currentUser.profession.codeprofil)) {
+       this.httpSrv.notificationSrv.showError("Vous n'êtes pas autorisé à vous connecter à cette application");
         this.logout();
       }
     },

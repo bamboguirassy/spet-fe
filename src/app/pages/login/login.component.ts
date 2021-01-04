@@ -6,6 +6,7 @@ import { TokenManagerService } from 'src/app/shared/services/token-manager.servi
 import { DialogService } from 'primeng/api';
 import { FosUser } from '../fos_user/fos_user';
 import { EmailUpdateComponent } from '../shared/shared-component/email-update/email-update.component';
+import { FosUserService } from '../fos_user/fos_user.service';
 
 @Component({
     selector: 'app-login',
@@ -18,12 +19,16 @@ export class LoginComponent implements AfterViewInit {
     public router: Router;
     public form: FormGroup;
     public username: AbstractControl;
+    public usernameTmp: string;
     public password: AbstractControl;
+    public nextStep: boolean = false;
+
 
     constructor(router: Router, fb: FormBuilder,
         public authSrv: AuthService,
         private tokenManager: TokenManagerService,
         public dialogService: DialogService,
+        public fosUserSrv: FosUserService,
     ) {
         this.router = router;
         this.form = fb.group({
@@ -35,9 +40,9 @@ export class LoginComponent implements AfterViewInit {
         this.password = this.form.controls.password;
     }
 
-    public onSubmit(values: Object): void {
+    public onSubmit(values: any): void {
         if (this.form.valid) {
-            this.authSrv.login(values)
+            this.authSrv.login({ username: this.usernameTmp, password: this.password.value })
                 .subscribe((data: any) => {
                     this.tokenManager.setToken(data.token);
                     this.authSrv.getCurrentUser();
@@ -62,6 +67,19 @@ export class LoginComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         document.getElementById('preloader').classList.add('hide');
+    }
+
+    validateAccountByEmail() {
+        this
+            .fosUserSrv
+            .validateAccountByEmail(this.username.value)
+            .subscribe((user: any) => {
+                this.usernameTmp = this.username.value;
+                this.username.disable()
+                this.nextStep = true;
+            }, error => {
+                this.fosUserSrv.httpSrv.handleError(error);
+            });
     }
 
 }
