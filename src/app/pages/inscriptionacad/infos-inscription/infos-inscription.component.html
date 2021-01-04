@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group col-sm-12 col-md-12 col-lg-6" *ngIf="preinscription?.paiementConfirme">
                         <label style="font-weight: bold;">Mode de paiement</label>
-                        <select required [(ngModel)]="inscriptionacad.idmodepaiement" class="custom-select"
+                        <select [disabled]="true" required [value]="inscriptionacad.idmodepaiement" class="custom-select"
                             name="regime">
                             <option disabled selected>Selectionnez le mode de paiement </option>
                             <option [value]="modepaiement.id" *ngFor="let modepaiement of modepaiements">
@@ -45,7 +45,7 @@
                     <div *ngIf="preinscription?.paiementConfirme"
                         class="form-group col-sm-12 col-md-12 col-lg-6">
                         <label style="font-weight: bold;">Numéro de transaction ou reference de paiement:</label>
-                        <input required [(ngModel)]="inscriptionacad.numquittance" class="form-control" type="text"
+                        <input [disabled]="true" required [value]="inscriptionacad.numquittance" class="form-control" type="text"
                             name="numquittance" />
                     </div>
                 </div>
@@ -76,9 +76,17 @@
                                 {{specialite.libellespecialite}}</option>
                         </select>
                     </div>
+                    <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                        <label style="font-weight: bold;">Regime d'inscription</label>
+                        <select [disabled]="true" required class="custom-select"
+                            name="regime">
+                            <option [selected]="preinscription?.idregimeinscription?.id==regimeinscription.id" [value]="regimeinscription.id" *ngFor="let regimeinscription of regimeinscriptions">
+                                {{regimeinscription.libelleregimeinscription}}</option>
+                        </select>
+                    </div>
                     <div class="form-group col-sm-12 col-md-12 col-lg-6" *ngIf="preinscription?.paiementConfirme">
                         <label style="font-weight: bold;">Mode de paiement</label>
-                        <select required [(ngModel)]="inscriptionacad.idmodepaiement.id" class="custom-select"
+                        <select [disabled]="true" required [value]="inscriptionacad.idmodepaiement.id" class="custom-select"
                             name="regime">
                             <option disabled selected>Selectionnez le mode de paiement </option>
                             <option [value]="modepaiement.id" *ngFor="let modepaiement of modepaiements">
@@ -94,16 +102,8 @@
                     <div *ngIf="preinscription?.paiementConfirme"
                         class="form-group col-sm-12 col-md-12 col-lg-6">
                         <label style="font-weight: bold;">Numéro de transaction ou reference de paiement:</label>
-                        <input required [(ngModel)]="inscriptionacad.numquittance" class="form-control" type="text"
+                        <input [disabled]="true" required [value]="inscriptionacad.numquittance" class="form-control" type="text"
                             name="numquittance" />
-                    </div>
-                    <div class="form-group col-sm-12 col-md-12 col-lg-6">
-                        <label style="font-weight: bold;">Regime d'inscription</label>
-                        <select required class="custom-select"
-                            name="regime">
-                            <option [selected]="preinscription?.idregimeinscription?.id==regimeinscription.id" [value]="regimeinscription.id" *ngFor="let regimeinscription of regimeinscriptions">
-                                {{regimeinscription.libelleregimeinscription}}</option>
-                        </select>
                     </div>
                     <div *ngIf="preinscription?.idregimeinscription?.coderegimeinscription=='RNP' || preinscription?.idregimeinscription?.coderegimeinscription=='RPP'"
                         class="form-group col-sm-12 col-md-12 col-lg-6">
