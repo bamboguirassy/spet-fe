@@ -19,28 +19,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let preinscription of preinscriptions">
+                            <tr *ngFor="let preinscriptionLine of preinscriptionData">
                                 <td class="align-middle">
                                     <span class="badge badge-danger">
-                                        {{preinscription?.datedelai|date:'dd/MM/yyyy'}}
+                                        {{preinscriptionLine?.preinscription?.datedelai|date:'dd/MM/yyyy'}}
                                     </span>
                                 </td>
-                                <td class="align-middle text-truncate">{{preinscription?.idfiliere?.codefiliere}}</td>
-                                <td class="align-middle text-truncate">{{preinscription?.idniveau?.libelleniveau}}</td>
-                                <td class="align-middle text-truncate">{{preinscription?.idanneeacad?.libelleanneeacad}}</td>
-                                <td class="align-middle text-truncate">{{preinscription?.idtypeadmission?.libelletypeadmission}}</td>
+                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.idfiliere?.codefiliere}}</td>
+                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.idniveau?.libelleniveau}}</td>
+                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.idanneeacad?.libelleanneeacad}}</td>
+                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.idtypeadmission?.libelletypeadmission}}</td>
                                 <td class="align-middle text-truncate">
-                                    <span class="badge badge-success" *ngIf="preinscription?.passage=='P'">Passant</span>
-                                    <span class="badge badge-danger" *ngIf="preinscription?.passage=='R'">Redoublant</span>
-                                    <span class="badge badge-warning" *ngIf="preinscription?.passage=='C'">Conditionnel</span>
+                                    <span class="badge badge-success" *ngIf="preinscriptionLine?.preinscription?.passage=='P'">Passant</span>
+                                    <span class="badge badge-danger" *ngIf="preinscriptionLine?.preinscription?.passage=='R'">Redoublant</span>
+                                    <span class="badge badge-warning" *ngIf="preinscriptionLine?.preinscription?.passage=='C'">Conditionnel</span>
                                 </td>
-                                <td class="align-middle text-truncate">{{preinscription?.montant }}</td>
-                                <td class="align-middle">
+                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.montant }}</td>
+                                <td class="align-middle" *ngIf="preinscriptionLine?.active">
                                     <div class="btn-group" role="group">
-                                        <button (click)="startProcess(preinscription.id)"  class="btn btn-outline-primary">
+                                        <button (click)="startProcess(preinscriptionLine?.preinscription.id)"  class="btn btn-outline-primary">
                                             <i class="fa fa-pencil-square" aria-hidden="true"></i> S'inscrire
                                         </button>
                                     </div>
+                                </td>
+                                <td class="align-middle" *ngIf="!preinscriptionLine?.active">
+                                    <span class="badge badge-danger">Inscription non autorisée</span>
                                 </td>
                             </tr>
                         </tbody>

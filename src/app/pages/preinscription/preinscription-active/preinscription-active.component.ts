@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
-import { Preinscription } from '../preinscription';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./preinscription-active.component.scss']
 })
 export class PreinscriptionActiveComponent implements OnInit {
-  @Input() preinscriptions: Preinscription[];
+  @Input() preinscriptionData: any[];
 
   constructor(public httpSrv: HttpService, public router: Router) { }
 

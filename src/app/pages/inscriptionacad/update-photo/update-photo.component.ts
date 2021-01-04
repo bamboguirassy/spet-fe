@@ -30,11 +30,17 @@ export class UpdatePhotoComponent implements OnInit {
   }
 
   uploadPhoto() {
-    this.etudiantSrv.uploadPhoto(this.etudiant, { photo: this.croppedImage.split(',')[1], filename: this.filename})
-      .subscribe((data: any) => {
-        this.etudiant = data;
-        this.onUpload.emit();
-      }, err => this.etudiantSrv.httpSrv.handleError(err));
+    if (this.croppedImage) {
+      this.etudiantSrv.uploadPhoto(this.etudiant, { photo: this.croppedImage.split(',')[1], filename: this.filename })
+        .subscribe((data: any) => {
+          this.etudiant = data;
+          this.onUpload.emit();
+        }, err => this.etudiantSrv.httpSrv.handleError(err));
+    } else if (!this.etudiant.photoLink) {
+      this.etudiantSrv.httpSrv.notificationSrv.showError('Vous devez obligatoirement ajouter une photo d\'identification !');
+    } else {
+      this.onUpload.emit();
+    }
   }
 
   fileChangeEvent(event: any): void {
