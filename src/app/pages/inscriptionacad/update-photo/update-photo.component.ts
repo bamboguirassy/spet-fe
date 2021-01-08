@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Etudiant } from '../../etudiant/etudiant';
+import { EtudiantService } from '../../etudiant/etudiant.service';
 
 @Component({
   selector: 'update-photo',
@@ -17,8 +18,9 @@ export class UpdatePhotoComponent implements OnInit {
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
+  filename: string;
 
-  constructor() { }
+  constructor(public etudiantSrv: EtudiantService) { }
 
   ngOnInit() {
   }
@@ -28,14 +30,28 @@ export class UpdatePhotoComponent implements OnInit {
   }
 
   uploadPhoto() {
-    this.onUpload.emit();
+    if (this.croppedImage) {
+      this.etudiantSrv.uploadPhoto(this.etudiant, { photo: this.croppedImage.split(',')[1], filename: this.filename })
+        .subscribe((data: any) => {
+          this.etudiant = data;
+          this.onUpload.emit();
+        }, err => this.etudiantSrv.httpSrv.handleError(err));
+    } else if (!this.etudiant.photoLink) {
+      this.etudiantSrv.httpSrv.notificationSrv.showError('Vous devez obligatoirement ajouter une photo d\'identification !');
+    } else {
+      this.onUpload.emit();
+    }
   }
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
+    let file: File = this.imageChangedEvent.target.files[0];
+    this.filename = file.name;
+    console.log(this.filename);
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
+    console.log(event);
   }
   imageLoaded() {
     // show cropper

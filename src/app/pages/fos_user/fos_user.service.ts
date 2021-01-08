@@ -60,6 +60,10 @@ export class FosUserService {
     return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', fos_users);
   }
 
+  validateAccountByEmail(email: string) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'public/validate/' + email + '/');
+  }
+
   public getRoutePrefix(): string {
     return this.routePrefix;
   }

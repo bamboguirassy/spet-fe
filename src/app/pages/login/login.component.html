@@ -1,88 +1,97 @@
 <p-toast></p-toast>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-sd-12">
-            <div class="card">
-                <div class="card-header">
-                    <marquee><p class="card-text"><span style="color : blue;"><H4>PREINSCRIPTION EN LIGNE</H4> </span></p></marquee> 
+<div class="d-flex justify-content-center align-items-center w-100 h-100 login-container">
+    <div class="col-xl-4 col-md-6 col-10">
+        <div class="card border-0 box-shadow rounded-0">
+            <div [routerLink]="['']" routerLinkActive="router-link-active"
+                class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
+                <!-- <i class="fa fa-sign-in" aria-hidden="true"></i> -->
+                <img style="border-radius: 50%;margin-left: 5px;" width="150" height="150" src="/assets/img/logo_ut.jpg"
+                    alt="logo_ut">
+            </div>
+            <div class="card-body text-center pb-0">
+                <h2 class="mt-0">Spet - Connexion</h2>
+                <div class="row">
+                    <div class="col-md-12 mt-2">
+                        <a id="spet-std-button" class="btn btn-primary btn-block transition mb-1"
+                            routerLink="/register">Inscription</a>
+                        <a id="spet-std-button" class="btn btn-primary btn-block transition"
+                            routerLink="/register/preconfirm-etudiant">Je suis nouveau à l'UT, obtenir mon numéro de
+                            dossier</a>
+                    </div>
+                    <!-- <div class="col-md-6 mt-2">
+                        <a id="spet-std-button" class="btn btn-secondary btn-block" (click)="openEmailChangeComponent()" href="javascript:void(0)">Problème d'émail ?</a>
+                    </div> -->
                 </div>
-                 <!-- <img class="card-img-top" src="/assets/img/web_onlinereg.png" alt="inscription_ut" style="height: 200px;">-->
-                <div class="card-body">
-                   <div class="row">
-                       <div class="col-xs-12 col-sm-12 col-md-6">
-                                <div class="card">
-                                    <img style="border-radius: 50%;margin-left: 5px;" width="150" height="150" src="/assets/img/logo_ut.jpg"
-                                    alt="logo_ut">
-                                    <div class="card-body">
-                                       <H4 class="card-title"><p>Université de Thiès<br></H4>
-                                        <div class="alert alert-primary" role="alert">
-                                            <span style="color: black;">Merci de prendre le temps de bien lire cette partie.</span>
-                                        </div>
-                                       <p class="card-text">Bienvenue sur la plateforme de préinscription en ligne ! <br>
-                                        Pour l'année en cours, la "Préinscription en ligne" est obligatoire pour tous les étudiants de l'UT.
-                                        Il faut d’abord vous préinscrire sur cette plateforme  pour obtenir votre carte d’étudiant</p>
-                                    </div>
-                                </div>
-                       </div>
-                       <div class="col-xs-12 col-sm-12 col-md-6">
-                            <div class="card">
-                                <div class="card-header" style=" text-align: center;"><strong> Spet - Connexion</strong></div>
-                                <div class="card-body">
-                                    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-2" style="overflow-y: auto;">
-                                        <div class="form-group">
-                                            <label for="username">Adresse email institutionnelle</label>
-                                            <input [formControl]="username" class="form-control validation-field" placeholder="Email"
-                                                type="text" id="username" name="username">
-                                            <small class="text-danger"
-                                                *ngIf="form.get('username').touched && form.get('username').hasError('required')">Email
-                                                obligatoire</small>
-                                            <small class="text-danger"
-                                                *ngIf="form.get('username').touched && form.get('username').hasError('username')">Adresse
-                                                email invalide</small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Mot de passe</label>
-                                            <input [formControl]="password" class="form-control validation-field" placeholder="Mot de passe"
-                                                type="password" id="password" name="password">
-                                            <small class="text-danger"
-                                                *ngIf="form.get('password').touched && form.get('password').hasError('required')">Mot de
-                                                passe obligatoire</small>
-                                            <small class="text-danger"
-                                                *ngIf="form.get('password').touched && form.get('password').hasError('minlength')">Mot de
-                                                passe court, 6 caracteres au minimum</small>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="login-checkbox"
-                                                    name="login-checkbox">
-                                                <label class="custom-control-label" for="login-checkbox">Se souvenir de moi.</label>
-                                            </div>
-                                            <button id="connectionButton" [disabled]="!form.valid" class="btn btn-block" type="submit">Se
-                                                connecter</button>
-                                        </div>
-                                        <div class="form-group d-flex justify-content-between">
-                                            <a class="transition pull-right" [routerLink]="['/forgotpassword']"
-                                                routerLinkActive="router-link-active">Mot de passe oublié ?</a>
-                                        </div>
-                                        
-                                    </form>
-                                </div> 
-                                <div class="card-footer">
-                                    <span>
-                                        <div class="">
-                                            <a id="" class="btn btn-success btn-block transition mb-1" routerLink="/register">Inscription</a>
-                                            <a id="" class="btn btn-primary btn-block transition" routerLink="/register/preconfirm-etudiant">Je suis nouveau à l'UT, obtenir mon numéro de dossier</a>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
+                <!-- <a target="_blank" class="transition" href="http://wifi.univ-thies.sn/recherchermail.php">Trouver mon
+                    adresse email universitaire ?</a> -->
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-2"
+                    style="overflow-y: auto; overflow-x: auto">
+                    <div class="form-group ">
+                        <label for="username">Adresse email institutionnelle</label>
+                        <input [formControl]="username" class="form-control validation-field" placeholder="Email"
+                            type="text" id="username" name="username">
+                        <small class="text-danger"
+                            *ngIf="form.get('username').touched && form.get('username').hasError('required')">Email
+                            obligatoire</small>
+                        <small class="text-danger"
+                            *ngIf="form.get('username').touched && form.get('username').hasError('username')">Adresse
+                            email invalide</small>
+                    </div>
+
+                    <div class="d-flex justify-content-end" style="width: 100%;" *ngIf="!nextStep">
+                        <div class="form-group ">
+                            <button id="continuerButton" (click)="validateAccountByEmail()" type="button"
+                                class="btn btn-block">Continuer</button>
                         </div>
-                   </div>
-                </div>
-                <div class="card-footer" style=" text-align: center;">
-                    <span style="font-size:25px;" class="z-span">
-                    <span style="font-size:15px;" class="z-label"> © Université Thiès/DSI</span></span>
-                </div>
+                    </div>
+
+
+                    <div *ngIf="nextStep">
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input [formControl]="password" class="form-control validation-field"
+                                placeholder="Mot de passe" type="password" id="password" name="password">
+                            <small class="text-danger"
+                                *ngIf="form.get('password').touched && form.get('password').hasError('required')">Mot de
+                                passe obligatoire</small>
+                            <small class="text-danger"
+                                *ngIf="form.get('password').touched && form.get('password').hasError('minlength')">Mot
+                                de
+                                passe court, 6 caracteres au minimum</small>
+                        </div>
+                        <div class="form-group d-flex justify-content-between">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="login-checkbox"
+                                    name="login-checkbox">
+                                <label class="custom-control-label" for="login-checkbox">Se souvenir de moi.</label>
+                            </div>
+                            <a class="transition pull-right" [routerLink]="['/forgotpassword']"
+                                routerLinkActive="router-link-active">Mot de passe oublié ?</a>
+                        </div>
+                        <div class="form-group">
+                            <button id="connectionButton" [disabled]="!form.valid" class="btn btn-block"
+                                type="submit">Se
+                                connecter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center bg-transparent">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <a target="_blank" href="https://facebook.com/univthies" class="fa-stack fa-lg">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a target="_blank" href="https://twitter.com/univthies" class="fa-stack fa-lg">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

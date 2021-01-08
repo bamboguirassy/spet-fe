@@ -44,6 +44,7 @@ export class InfosInscriptionComponent implements OnInit {
       }, err => this.modepaiementSrv.httpSrv.handleError(err));
       // si paiement déja effectué, mettre le montant payé
       this.inscriptionacad.montantinscriptionacad = this.preinscription.montant;
+      this.inscriptionacad.idregimeinscription = this.preinscription.idregimeinscription.id;
     }
   }
 
@@ -65,6 +66,7 @@ export class InfosInscriptionComponent implements OnInit {
     this.inscriptionacad.passage = this.preinscription.passage;
     this.inscriptionacad.preinscirptionId = this.preinscription.id;
     this.inscriptionacad.source = 'spet';
+    this.inscriptionacad.idregimeinscription = this.preinscription.idregimeinscription.id;
     this.inscriptionacadSrv.create(this.inscriptionacad)
       .subscribe((data: any) => {
         this.inscriptionacad = data;

@@ -18,8 +18,7 @@ export class MonParcoursComponent implements OnInit {
     public type = 'grid';
     public searchText: string;
     inscriptions: Inscriptionacad[] = [];
-    preinscriptions: Preinscription[] = [];
-    public email = 'ndiayeelhadjicode94@gmail.com'
+    preinscriptionData: any[] = [];
 
     /** @var dd Object d'une demande de document */
     dd = new DemandeDocument();
@@ -38,10 +37,9 @@ export class MonParcoursComponent implements OnInit {
 
     ngOnInit() {
         this.inscriptions = this.activatedRoute.snapshot.data.inscriptions;
-        this.preinscriptions = this.activatedRoute.snapshot.data.preinscriptions;
+        this.preinscriptionData = this.activatedRoute.snapshot.data.preinscriptions;
         this.typedocuments = this.activatedRoute.snapshot.data.typedocuments;
         this.etats = this.activatedRoute.snapshot.data.etats;
-        this.verifierEmailEtudiant();
     }
 
     showDocAdminRequestDialog(inscriptionacad: Inscriptionacad) {
@@ -71,13 +69,4 @@ export class MonParcoursComponent implements OnInit {
         );
     }
 
-    verifierEmailEtudiant(){
-        this.httpServ.verifierEmailEtudiant(this.email)
-        .subscribe((response) => {
-              console.log('Teste email '+ JSON.stringify(response));
-          },err=>{
-            console.log(err);
-          }
-          );
-    }
 }

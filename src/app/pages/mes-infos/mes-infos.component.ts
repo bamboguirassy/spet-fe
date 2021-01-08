@@ -18,6 +18,7 @@ export class MesInfosComponent implements OnInit {
   public modalRef: NgbModalRef;
   public form: FormGroup;
   etudiant: Etudiant;
+  user:FosUser;
   selectedRegion: any;
   selectedSituationMatromoniale: any;
   selectedHandicap: any;
@@ -27,6 +28,7 @@ export class MesInfosComponent implements OnInit {
   updateForm: Etudiant;
 
   currentUser: FosUser;
+
 
   regions = [
     { value: 'Dakar', label: 'Dakar' },
@@ -139,16 +141,20 @@ export class MesInfosComponent implements OnInit {
               public router: Router) { }
 
   ngOnInit() {
+    
     if (this.activatedRoute.snapshot.data.etudiant.error) {
       confirm(this.activatedRoute.snapshot.data.etudiant.error.error.message);
       this.router.navigate(['login']);
     } else {
       this.etudiant = this.activatedRoute.snapshot.data.etudiant;
+      
       this.updateForm = Object.assign({}, this.etudiant);
       this.setDefaultValues();
     }
 
     this.authSrv.currentUserProvider.subscribe(data => this.currentUser = data);
+    this.findUserByEmail();
+    
   }
 
   public openModal(modalContent, data) {
@@ -192,5 +198,11 @@ export class MesInfosComponent implements OnInit {
         this.etudiantSrv.httpSrv.notificationSrv.showSuccess('Informations mises à jour avec succès');
       }, error => this.etudiantSrv.httpSrv.handleError(error));
   }
+  findUserByEmail(){
+      this.etudiantSrv.findUserByEmail(this.etudiant).subscribe((data:any) => {
+        this.user = data;
+      }, error => this.etudiantSrv.httpSrv.handleError(error))
+      
+}
 
 }

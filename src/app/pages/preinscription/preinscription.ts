@@ -1,4 +1,5 @@
 import { Pays } from "../pays/pays";
+import { Regimeinscription } from "../regimeinscription/regimeinscription";
 
 export class Preinscription {
     id: any;
@@ -24,4 +25,5 @@ export class Preinscription {
     montant: string;
     paiementConfirme: boolean;
     nationalite: Pays;
+    idregimeinscription: Regimeinscription;
 }

@@ -64,6 +64,7 @@ import { DemandeDocumentShowComponent } from './demande_document/demande_documen
 import { DemandeDocumentNewComponent } from './demande_document/demande_document-new/demande_document-new.component';
 import { ContactComponent } from './dashboard/contact/contact.component';
 import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdialog';
+import { FormFieldValidationMessageComponent } from './errors/form-field-validation-message/form-field-validation-message.component';
 
 
 
@@ -101,7 +102,8 @@ import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdia
     ReclamationBourseShowComponent,
     DemandeDocumentListComponent, DemandeDocumentNewComponent,
     DemandeDocumentShowComponent,
-    ContactComponent
+    ContactComponent,
+    FormFieldValidationMessageComponent
   ],
   imports: [
     CommonModule,
