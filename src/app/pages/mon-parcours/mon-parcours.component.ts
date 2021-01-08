@@ -1,3 +1,4 @@
+import { HttpService } from 'src/app/shared/services/http.service';
 import {Component, OnInit} from '@angular/core';
 import {Inscriptionacad} from '../inscriptionacad/inscriptionacad';
 import {InscriptionacadService} from '../inscriptionacad/inscriptionacad.service';
@@ -18,6 +19,7 @@ export class MonParcoursComponent implements OnInit {
     public searchText: string;
     inscriptions: Inscriptionacad[] = [];
     preinscriptions: Preinscription[] = [];
+    public email = 'ndiayeelhadjicode94@gmail.com'
 
     /** @var dd Object d'une demande de document */
     dd = new DemandeDocument();
@@ -30,7 +32,8 @@ export class MonParcoursComponent implements OnInit {
 
     constructor(
         public inscriptionAcadSrv: InscriptionacadService,
-        public activatedRoute: ActivatedRoute, public demandeDocumentSrv: DemandeDocumentService) {
+        public activatedRoute: ActivatedRoute, public demandeDocumentSrv: DemandeDocumentService,
+        public httpServ: HttpService) {
     }
 
     ngOnInit() {
@@ -38,6 +41,7 @@ export class MonParcoursComponent implements OnInit {
         this.preinscriptions = this.activatedRoute.snapshot.data.preinscriptions;
         this.typedocuments = this.activatedRoute.snapshot.data.typedocuments;
         this.etats = this.activatedRoute.snapshot.data.etats;
+        this.verifierEmailEtudiant();
     }
 
     showDocAdminRequestDialog(inscriptionacad: Inscriptionacad) {
@@ -65,5 +69,15 @@ export class MonParcoursComponent implements OnInit {
             },
             error => this.demandeDocumentSrv.httpSrv.handleError(error)
         );
+    }
+
+    verifierEmailEtudiant(){
+        this.httpServ.verifierEmailEtudiant(this.email)
+        .subscribe((response) => {
+              console.log('Teste email '+ JSON.stringify(response));
+          },err=>{
+            console.log(err);
+          }
+          );
     }
 }
