@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EtudiantService } from '../etudiant/etudiant.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -19,6 +19,7 @@ export class MesInfosComponent implements OnInit {
   public form: FormGroup;
   etudiant: Etudiant;
   user:FosUser;
+  content1: any;
   selectedRegion: any;
   selectedSituationMatromoniale: any;
   selectedHandicap: any;
@@ -26,6 +27,7 @@ export class MesInfosComponent implements OnInit {
   selectedOrphelin: any;
   selectedTypeOrphelin: any;
   updateForm: Etudiant;
+
 
   currentUser: FosUser;
 
@@ -138,7 +140,10 @@ export class MesInfosComponent implements OnInit {
               public notificationSrv: NotificationService,
               public activatedRoute: ActivatedRoute,
               public authSrv: AuthService,
-              public router: Router) { }
+              public router: Router) { 
+                           
+             
+              }
 
   ngOnInit() {
     
@@ -165,9 +170,28 @@ export class MesInfosComponent implements OnInit {
     }, (reason) => {
     });
   }
+  toggle1Modal(content1) {
+    this.modalService.open(content1, {
+        size: 'lg',
+        keyboard: false,
+        backdrop: 'static',
+        backdropClass: 'light-blue-backdrop',
+        centered: true
+    });
+}
+
+  dissmissModal(param: string) {
+    this.modalService.dismissAll(param);
+  }
+
 
   public closeModal() {
     this.modalRef.close();
+  }
+  public closeModal1(){
+   
+      this.modalService.dismissAll('Cross click');
+  
   }
 
   updateEtudiant() {
@@ -203,6 +227,15 @@ export class MesInfosComponent implements OnInit {
         this.user = data;
       }, error => this.etudiantSrv.httpSrv.handleError(error))
       
+
+}
+sendEmail(){
+  this.etudiantSrv.sendEmail(this.etudiant).subscribe((data:any)=>{
+    this.etudiant = data;
+    this.closeModal1();
+
+  })
+  
 }
 
 }
