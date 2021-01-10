@@ -1,12 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Inscriptionacad} from '../inscriptionacad/inscriptionacad';
-import {InscriptionacadService} from '../inscriptionacad/inscriptionacad.service';
-import {ActivatedRoute} from '@angular/router';
-import {Preinscription} from '../preinscription/preinscription';
-import {DemandeDocument} from '../demande_document/demande_document';
-import {Typedocument} from '../typedocument/typedocument';
-import {EtatDemandeDocument} from '../demande_document/etat_demande_document/etat_demande_document';
-import {DemandeDocumentService} from '../demande_document/demande_document.service';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Inscriptionacad } from '../inscriptionacad/inscriptionacad';
+import { InscriptionacadService } from '../inscriptionacad/inscriptionacad.service';
+import { ActivatedRoute } from '@angular/router';
+import { Preinscription } from '../preinscription/preinscription';
+import { DemandeDocument } from '../demande_document/demande_document';
+import { Typedocument } from '../typedocument/typedocument';
+import { EtatDemandeDocument } from '../demande_document/etat_demande_document/etat_demande_document';
+import { DemandeDocumentService } from '../demande_document/demande_document.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-mon-parcours',
@@ -27,9 +28,10 @@ export class MonParcoursComponent implements OnInit {
     source = '';
     display = false;
     inscriptionacad: Inscriptionacad;
+    @ViewChild('fileUploadModal', { static: false }) fileUploadModalRef: TemplateRef<any>;
 
     constructor(
-        public inscriptionAcadSrv: InscriptionacadService,
+        public inscriptionAcadSrv: InscriptionacadService, public modal: NgbModal,
         public activatedRoute: ActivatedRoute, public demandeDocumentSrv: DemandeDocumentService) {
     }
 
@@ -65,5 +67,18 @@ export class MonParcoursComponent implements OnInit {
             },
             error => this.demandeDocumentSrv.httpSrv.handleError(error)
         );
+    }
+
+    displayDocumentModal() {
+        this.modal.open(this.fileUploadModalRef, {
+            size: 'lg',
+            centered: true,
+            keyboard: false,
+            backdrop: 'static'
+        });
+    }
+
+    dismissModal() {
+        this.modal.dismissAll('Cross click');
     }
 }

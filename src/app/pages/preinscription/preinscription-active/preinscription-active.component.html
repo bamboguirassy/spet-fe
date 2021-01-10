@@ -1,3 +1,4 @@
+
 <div class="card card-outline-danger bg-gray">
     <div class="card-body">
         <span class="title bg-white h6">Vous avez des préinscriptions actives.</span>
@@ -25,19 +26,28 @@
                                         {{preinscriptionLine?.preinscription?.datedelai|date:'dd/MM/yyyy'}}
                                     </span>
                                 </td>
-                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.idfiliere?.codefiliere}}</td>
-                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.idniveau?.libelleniveau}}</td>
-                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.idanneeacad?.libelleanneeacad}}</td>
-                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.idtypeadmission?.libelletypeadmission}}</td>
                                 <td class="align-middle text-truncate">
-                                    <span class="badge badge-success" *ngIf="preinscriptionLine?.preinscription?.passage=='P'">Passant</span>
-                                    <span class="badge badge-danger" *ngIf="preinscriptionLine?.preinscription?.passage=='R'">Redoublant</span>
-                                    <span class="badge badge-warning" *ngIf="preinscriptionLine?.preinscription?.passage=='C'">Conditionnel</span>
+                                    {{preinscriptionLine?.preinscription?.idfiliere?.codefiliere}}</td>
+                                <td class="align-middle text-truncate">
+                                    {{preinscriptionLine?.preinscription?.idniveau?.libelleniveau}}</td>
+                                <td class="align-middle text-truncate">
+                                    {{preinscriptionLine?.preinscription?.idanneeacad?.libelleanneeacad}}</td>
+                                <td class="align-middle text-truncate">
+                                    {{preinscriptionLine?.preinscription?.idtypeadmission?.libelletypeadmission}}</td>
+                                <td class="align-middle text-truncate">
+                                    <span class="badge badge-success"
+                                        *ngIf="preinscriptionLine?.preinscription?.passage=='P'">Passant</span>
+                                    <span class="badge badge-danger"
+                                        *ngIf="preinscriptionLine?.preinscription?.passage=='R'">Redoublant</span>
+                                    <span class="badge badge-warning"
+                                        *ngIf="preinscriptionLine?.preinscription?.passage=='C'">Conditionnel</span>
                                 </td>
-                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.montant }}</td>
+                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.montant }}
+                                </td>
                                 <td class="align-middle" *ngIf="preinscriptionLine?.active">
                                     <div class="btn-group" role="group">
-                                        <button (click)="startProcess(preinscriptionLine?.preinscription.id)"  class="btn btn-outline-primary">
+                                        <button (click)="startProcess(preinscriptionLine?.preinscription.id)"
+                                            class="btn btn-outline-primary">
                                             <i class="fa fa-pencil-square" aria-hidden="true"></i> S'inscrire
                                         </button>
                                     </div>
@@ -54,3 +64,4 @@
         <!-- fin preinscription active -->
     </div>
 </div>
+

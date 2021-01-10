@@ -7,6 +7,7 @@ import { ListablePipe } from './pipes/listable.pipe';
 import { ShowablePipe } from './pipes/showable.pipe';
 import { DeletablePipe } from './pipes/deletable.pipe';
 import { TypedocumentPipe } from './pipes/typedocument.pipe';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { TypedocumentPipe } from './pipes/typedocument.pipe';
     ListablePipe,
     ShowablePipe,
     DeletablePipe,
+    SafeUrlPipe,
     TypedocumentPipe,
   ],
   imports: [
@@ -30,6 +32,7 @@ import { TypedocumentPipe } from './pipes/typedocument.pipe';
     ShowablePipe,
     DeletablePipe,
     TypedocumentPipe,
+    SafeUrlPipe,
   ]
 })
 export class SharedModule { }

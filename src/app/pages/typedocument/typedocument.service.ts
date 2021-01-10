@@ -40,6 +40,11 @@ export class TypedocumentService {
     return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',typedocuments);
   }
 
+  findInputDocuments() {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'input-documents');
+  }
+
+
   public getRoutePrefix(): string {
     return this.routePrefix;
   }

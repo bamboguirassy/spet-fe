@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'preinscription-active',
@@ -9,8 +10,9 @@ import { Router } from '@angular/router';
 })
 export class PreinscriptionActiveComponent implements OnInit {
   @Input() preinscriptionData: any[];
+  @ViewChild('fileUploadModal', { static: false }) fileUploadModalRef: TemplateRef<any>;
 
-  constructor(public httpSrv: HttpService, public router: Router) { }
+  constructor(public httpSrv: HttpService, public router: Router, public modal: NgbModal) { }
 
   ngOnInit() {
   }
@@ -20,5 +22,7 @@ export class PreinscriptionActiveComponent implements OnInit {
     // this.router.navigate(['validator']);
     this.router.navigate(['finaliser-inscription/' + idPreinscription]);
   }
+
+
 
 }

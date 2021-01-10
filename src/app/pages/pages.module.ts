@@ -65,6 +65,8 @@ import { DemandeDocumentNewComponent } from './demande_document/demande_document
 import { ContactComponent } from './dashboard/contact/contact.component';
 import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdialog';
 import { FormFieldValidationMessageComponent } from './errors/form-field-validation-message/form-field-validation-message.component';
+import { DocumentUploadComponent } from './typedocument/document-upload/document-upload.component';
+import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
 
 
 
@@ -103,7 +105,8 @@ import { FormFieldValidationMessageComponent } from './errors/form-field-validat
     DemandeDocumentListComponent, DemandeDocumentNewComponent,
     DemandeDocumentShowComponent,
     ContactComponent,
-    FormFieldValidationMessageComponent
+    FormFieldValidationMessageComponent,
+    DocumentUploadComponent,
   ],
   imports: [
     CommonModule,
@@ -136,7 +139,7 @@ import { FormFieldValidationMessageComponent } from './errors/form-field-validat
     SplitButtonModule,
     InputTextModule,
     DynamicDialogModule,
-    MessagesModule
+    MessagesModule,
   ],
   entryComponents: [
     ReclamationBourseNewComponent
