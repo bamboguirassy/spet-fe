@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-4">
         <div class="card border-0 box-shadow mb-4">
-            <img class="card-img-top w-100" src="assets/img/users/default-user.jpg" alt="user">
+            <img class="card-img-top w-100" [src]="etudiant?.photoLink" alt="user">
             <div class="card-body">
                 <h4 class="card-title text-center">{{etudiant?.prenometudiant}} {{etudiant?.nometudiant}}</h4>
                 <h5 class="card-title text-center text-info">Etudiant</h5>
