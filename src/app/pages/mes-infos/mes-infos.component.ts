@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EtudiantService } from '../etudiant/etudiant.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -7,6 +7,8 @@ import { Etudiant } from '../etudiant/etudiant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FosUser } from '../fos_user/fos_user';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { DocumentEtudiantService } from '../typedocument/document-etudiant.service';
+import { DocumentEtudiant } from '../typedocument/documentetudiant';
 
 @Component({
   selector: 'app-mes-infos',
@@ -18,7 +20,8 @@ export class MesInfosComponent implements OnInit {
   public modalRef: NgbModalRef;
   public form: FormGroup;
   etudiant: Etudiant;
-  user:FosUser;
+  user: FosUser;
+  content1: any;
   selectedRegion: any;
   selectedSituationMatromoniale: any;
   selectedHandicap: any;
@@ -26,6 +29,7 @@ export class MesInfosComponent implements OnInit {
   selectedOrphelin: any;
   selectedTypeOrphelin: any;
   updateForm: Etudiant;
+
 
   currentUser: FosUser;
 
@@ -133,28 +137,30 @@ export class MesInfosComponent implements OnInit {
   }
 
   constructor(public fb: FormBuilder,
-              public modalService: NgbModal,
-              public etudiantSrv: EtudiantService,
-              public notificationSrv: NotificationService,
-              public activatedRoute: ActivatedRoute,
-              public authSrv: AuthService,
-              public router: Router) { }
+    public modalService: NgbModal,
+    public etudiantSrv: EtudiantService,
+    public notificationSrv: NotificationService,
+    public activatedRoute: ActivatedRoute,
+    public authSrv: AuthService,
+    public router: Router) {
+
+  }
 
   ngOnInit() {
-    
+
     if (this.activatedRoute.snapshot.data.etudiant.error) {
       confirm(this.activatedRoute.snapshot.data.etudiant.error.error.message);
       this.router.navigate(['login']);
     } else {
       this.etudiant = this.activatedRoute.snapshot.data.etudiant;
-      
+
       this.updateForm = Object.assign({}, this.etudiant);
       this.setDefaultValues();
     }
 
     this.authSrv.currentUserProvider.subscribe(data => this.currentUser = data);
     this.findUserByEmail();
-    
+
   }
 
   public openModal(modalContent, data) {
@@ -165,9 +171,28 @@ export class MesInfosComponent implements OnInit {
     }, (reason) => {
     });
   }
+  toggle1Modal(content1) {
+    this.modalService.open(content1, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static',
+      backdropClass: 'light-blue-backdrop',
+      centered: true
+    });
+  }
+
+  dissmissModal(param: string) {
+    this.modalService.dismissAll(param);
+  }
+
 
   public closeModal() {
     this.modalRef.close();
+  }
+  public closeModal1() {
+
+    this.modalService.dismissAll('Cross click');
+
   }
 
   updateEtudiant() {
@@ -198,11 +223,24 @@ export class MesInfosComponent implements OnInit {
         this.etudiantSrv.httpSrv.notificationSrv.showSuccess('Informations mises à jour avec succès');
       }, error => this.etudiantSrv.httpSrv.handleError(error));
   }
-  findUserByEmail(){
-      this.etudiantSrv.findUserByEmail(this.etudiant).subscribe((data:any) => {
-        this.user = data;
-      }, error => this.etudiantSrv.httpSrv.handleError(error))
-      
-}
+
+  onUploadEnd(documentEtudiant: DocumentEtudiant) {
+    this.etudiantSrv.httpSrv.notificationSrv.showSuccess('Document chargé avec succés.')
+  }
+  findUserByEmail() {
+    this.etudiantSrv.findUserByEmail(this.etudiant).subscribe((data: any) => {
+      this.user = data;
+    }, error => this.etudiantSrv.httpSrv.handleError(error))
+
+
+  }
+  sendEmail() {
+    this.etudiantSrv.sendEmail(this.etudiant).subscribe((data: any) => {
+      this.etudiant = data;
+      this.closeModal1();
+
+    })
+
+  }
 
 }

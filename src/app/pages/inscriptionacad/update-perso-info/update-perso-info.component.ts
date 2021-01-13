@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { HttpService } from 'src/app/shared/services/http.service';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Etudiant } from '../../etudiant/etudiant';
 import { EtudiantService } from '../../etudiant/etudiant.service';
 import { PaysService } from '../../pays/pays.service';
@@ -8,13 +9,14 @@ import { PaysService } from '../../pays/pays.service';
   templateUrl: './update-perso-info.component.html',
   styleUrls: ['./update-perso-info.component.scss']
 })
-export class UpdatePersoInfoComponent implements OnInit {
+export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
   @Input() etudiant: Etudiant;
   situationMatrimoniales: any[] = [];
   handicaps: any[] = [];
   orphelins: any[] = [];
   typeHandicaps: any[] = [];
   pays: any[] = [];
+  validerEmail: any;
   @Output() onUpdate: EventEmitter<any> = new EventEmitter();
   typeHabitations = [
     'Campus Social',
@@ -35,7 +37,10 @@ export class UpdatePersoInfoComponent implements OnInit {
 
 
   constructor(public etudiantSrv: EtudiantService,
-    public paysSrv: PaysService) { }
+    public paysSrv: PaysService, public httpServ: HttpService) { }
+  ngOnDestroy(): void {
+    this.verifierEmailEtudiant();
+  }
 
   ngOnInit() {
     this.getSituationMatrimonialeValues();
@@ -43,6 +48,7 @@ export class UpdatePersoInfoComponent implements OnInit {
     this.getOrphelinValues();
     this.getTypeHandicapValues();
     this.getPays();
+    this.verifierEmailEtudiant();
   }
 
   getSituationMatrimonialeValues() {
@@ -97,5 +103,17 @@ export class UpdatePersoInfoComponent implements OnInit {
           this.etudiantSrv.httpSrv.handleError(error);
         });
   }
+
+  verifierEmailEtudiant(){
+    this.httpServ.verifierEmailEtudiant(this.etudiant.email)
+    .subscribe((data: any) => {
+          this.validerEmail = data.deliverable;
+          console.log('Teste  '+ this.validerEmail);
+      },err=>{
+        console.log(err);
+      }
+      );
+}
+
 
 }

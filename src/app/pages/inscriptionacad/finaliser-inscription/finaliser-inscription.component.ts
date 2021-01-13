@@ -1,3 +1,4 @@
+import { HttpService } from 'src/app/shared/services/http.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Preinscription } from '../../preinscription/preinscription';
 import { ActivatedRoute } from '@angular/router';
@@ -24,7 +25,7 @@ export class FinaliserInscriptionComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     public etudiantSrv: EtudiantService,
-    public inscriptionacadSrv: InscriptionacadService) {
+    public inscriptionacadSrv: InscriptionacadService, public httpServ: HttpService) {
     this.steps = [
       { name: 'Information Personnelle', icon: 'fa-user', active: true, valid: false, hasError: false },
       { name: 'Information Inscription', icon: 'fa-pencil', active: false, valid: false, hasError: false },
