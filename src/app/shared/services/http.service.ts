@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TokenManagerService } from './token-manager.service';
 import { NotificationService } from './notification.service';
 import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -86,7 +87,8 @@ export class HttpService {
   }
 
   verifierEmailEtudiant(email: string){
-    return this.httpSrv.get(this.urlValidEmail+email);
+    return this.httpSrv.get(this.urlValidEmail+email)
+    .pipe(first());
   }
   
 }
