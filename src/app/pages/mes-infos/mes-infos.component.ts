@@ -33,6 +33,8 @@ export class MesInfosComponent implements OnInit {
 
   currentUser: FosUser;
 
+  tabs = [1, 2, 3];
+
 
   regions = [
     { value: 'Dakar', label: 'Dakar' },

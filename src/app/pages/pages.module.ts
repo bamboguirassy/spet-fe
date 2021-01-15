@@ -68,8 +68,6 @@ import { FormFieldValidationMessageComponent } from './errors/form-field-validat
 import { DocumentUploadComponent } from './typedocument/document-upload/document-upload.component';
 import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
 
-
-
 @NgModule({
   declarations: [
     PagesComponent,

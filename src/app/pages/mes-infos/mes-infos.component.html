@@ -71,231 +71,245 @@
                     
                 </p-toolbar>
             </div>
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <fieldset>
-                            <legend>Informations Personnelles</legend>
-                            <table class="table table-responsive">
-                                <tbody>
-                                    <tr>
-                                        <th>Date Naissance</th>
-                                        <td>{{etudiant?.datenaiss|date:'dd/MM/yyyy'}}
-                                            <span *ngIf="!etudiant?.datenaiss" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Lieu Naissance</th>
-                                        <td>{{etudiant?.lieunaiss}}
-                                            <span *ngIf="!etudiant?.lieunaiss" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Region Naissance</th>
-                                        <td>{{etudiant?.regionnaiss}}
-                                            <span *ngIf="!etudiant?.regionnaiss" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Pays Naissance</th>
-                                        <td>{{etudiant?.idpays?.nomFrFr}}
-                                            <span *ngIf="!etudiant?.idpays?.nomFrFr" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Genre</th>
-                                        <td>
-                                            <span *ngIf="etudiant?.genre=='M'">Masculin</span>
-                                            <span *ngIf="etudiant?.genre=='F'">Feminin</span>
-                                            <span *ngIf="!etudiant?.genre" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Nationalité</th>
-                                        <td>{{etudiant?.nationalite?.nationalite}}
-                                            <span *ngIf="!etudiant?.nationalite?.nationalite"
-                                                class="badge badge-danger">Non renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Année Bac</th>
-                                        <td>{{etudiant?.anneeBac}}
-                                            <span *ngIf="!etudiant?.anneeBac" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Resultat du BAC</th>
-                                        <td>{{etudiant?.moyennebac}}
-                                            <span *ngIf="!etudiant?.moyennebac" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Serie BAC</th>
-                                        <td>{{etudiant?.seriebac}}
-                                            <span *ngIf="!etudiant?.seriebac" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Mention BAC</th>
-                                        <td>{{etudiant?.mentionbac}}
-                                            <span *ngIf="!etudiant?.mentionbac" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Groupe Passage</th>
-                                        <td>{{etudiant?.groupepassage}}
-                                            <span *ngIf="!etudiant?.groupepassage" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Lycée de provenance</th>
-                                        <td>{{etudiant?.lyceedeprovenance}}
-                                            <span *ngIf="!etudiant?.lyceedeprovenance" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Diplome d'entrée</th>
-                                        <td>{{etudiant?.diplomeentree}}
-                                            <span *ngIf="!etudiant?.diplomeentree" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Handicap</th>
-                                        <td>{{etudiant?.handicap}}
-                                            <span *ngIf="!etudiant?.handicap" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr *ngIf="etudiant?.handicap=='Oui'">
-                                        <th>Type Handicap</th>
-                                        <td>{{etudiant?.typeHandicap}}
-                                            <span *ngIf="!etudiant?.typeHandicap" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Description Handicap</th>
-                                        <td>
-                                            <div [innerHtml]="etudiant?.descriptionHandicap"></div>
-                                            <span *ngIf="!etudiant?.descriptionHandicap" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Situration Matrimoniale</th>
-                                        <td>
-                                            <span *ngIf="etudiant?.situationMatrimoniale=='M'">Marié(e)</span>
-                                            <span *ngIf="etudiant?.situationMatrimoniale=='C'">Célibataire</span>
-                                            <span *ngIf="etudiant?.situationMatrimoniale=='D'">Divorcé(e)</span>
-                                            <span *ngIf="etudiant?.situationMatrimoniale=='V'">Veuf(Ve)</span>
-                                            <span *ngIf="!etudiant?.situationMatrimoniale"
-                                                class="badge badge-danger">Non renseigné</span>
-                                        </td>
-                                        <th>Nombre d'enfants</th>
-                                        <td>{{etudiant?.nbreenfant}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nom conjoint</th>
-                                        <td>{{etudiant?.nomconjoint}}
-                                            <span *ngIf="!etudiant?.nomconjoint" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Orphelin</th>
-                                        <td>{{etudiant?.orphelin}}
-                                            <span *ngIf="!etudiant?.orphelin" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr *ngIf="etudiant?.orphelin=='Oui'">
-                                        <th>Type Orphelin</th>
-                                        <td>{{etudiant?.typeOrphelin}}
-                                            <span *ngIf="!etudiant?.typeOrphelin" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th></th>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </fieldset>
-                    </div>
+            <div class="row">
+                <div class="col-12">
+                    <p-tabView>
+                        <p-tabPanel header="Information">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <fieldset>
+                                                <legend>Informations Personnelles</legend>
+                                                <table class="table table-responsive">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Date Naissance</th>
+                                                            <td>{{etudiant?.datenaiss|date:'dd/MM/yyyy'}}
+                                                                <span *ngIf="!etudiant?.datenaiss" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Lieu Naissance</th>
+                                                            <td>{{etudiant?.lieunaiss}}
+                                                                <span *ngIf="!etudiant?.lieunaiss" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Region Naissance</th>
+                                                            <td>{{etudiant?.regionnaiss}}
+                                                                <span *ngIf="!etudiant?.regionnaiss" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Pays Naissance</th>
+                                                            <td>{{etudiant?.idpays?.nomFrFr}}
+                                                                <span *ngIf="!etudiant?.idpays?.nomFrFr" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Genre</th>
+                                                            <td>
+                                                                <span *ngIf="etudiant?.genre=='M'">Masculin</span>
+                                                                <span *ngIf="etudiant?.genre=='F'">Feminin</span>
+                                                                <span *ngIf="!etudiant?.genre" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Nationalité</th>
+                                                            <td>{{etudiant?.nationalite?.nationalite}}
+                                                                <span *ngIf="!etudiant?.nationalite?.nationalite"
+                                                                    class="badge badge-danger">Non renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Année Bac</th>
+                                                            <td>{{etudiant?.anneeBac}}
+                                                                <span *ngIf="!etudiant?.anneeBac" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Resultat du BAC</th>
+                                                            <td>{{etudiant?.moyennebac}}
+                                                                <span *ngIf="!etudiant?.moyennebac" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Serie BAC</th>
+                                                            <td>{{etudiant?.seriebac}}
+                                                                <span *ngIf="!etudiant?.seriebac" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Mention BAC</th>
+                                                            <td>{{etudiant?.mentionbac}}
+                                                                <span *ngIf="!etudiant?.mentionbac" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Groupe Passage</th>
+                                                            <td>{{etudiant?.groupepassage}}
+                                                                <span *ngIf="!etudiant?.groupepassage" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Lycée de provenance</th>
+                                                            <td>{{etudiant?.lyceedeprovenance}}
+                                                                <span *ngIf="!etudiant?.lyceedeprovenance" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Diplome d'entrée</th>
+                                                            <td>{{etudiant?.diplomeentree}}
+                                                                <span *ngIf="!etudiant?.diplomeentree" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Handicap</th>
+                                                            <td>{{etudiant?.handicap}}
+                                                                <span *ngIf="!etudiant?.handicap" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngIf="etudiant?.handicap=='Oui'">
+                                                            <th>Type Handicap</th>
+                                                            <td>{{etudiant?.typeHandicap}}
+                                                                <span *ngIf="!etudiant?.typeHandicap" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Description Handicap</th>
+                                                            <td>
+                                                                <div [innerHtml]="etudiant?.descriptionHandicap"></div>
+                                                                <span *ngIf="!etudiant?.descriptionHandicap" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Situration Matrimoniale</th>
+                                                            <td>
+                                                                <span *ngIf="etudiant?.situationMatrimoniale=='M'">Marié(e)</span>
+                                                                <span *ngIf="etudiant?.situationMatrimoniale=='C'">Célibataire</span>
+                                                                <span *ngIf="etudiant?.situationMatrimoniale=='D'">Divorcé(e)</span>
+                                                                <span *ngIf="etudiant?.situationMatrimoniale=='V'">Veuf(Ve)</span>
+                                                                <span *ngIf="!etudiant?.situationMatrimoniale"
+                                                                    class="badge badge-danger">Non renseigné</span>
+                                                            </td>
+                                                            <th>Nombre d'enfants</th>
+                                                            <td>{{etudiant?.nbreenfant}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Nom conjoint</th>
+                                                            <td>{{etudiant?.nomconjoint}}
+                                                                <span *ngIf="!etudiant?.nomconjoint" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Orphelin</th>
+                                                            <td>{{etudiant?.orphelin}}
+                                                                <span *ngIf="!etudiant?.orphelin" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngIf="etudiant?.orphelin=='Oui'">
+                                                            <th>Type Orphelin</th>
+                                                            <td>{{etudiant?.typeOrphelin}}
+                                                                <span *ngIf="!etudiant?.typeOrphelin" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th></th>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <fieldset>
+                                                <legend>Contacts</legend>
+                                                <table class="table table-responsive">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Téléphone 1</th>
+                                                            <td>{{etudiant?.teletudiant}}
+                                                                <span *ngIf="!etudiant?.teletudiant" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Téléphone 2</th>
+                                                            <td>{{etudiant?.teletudiant2}}
+                                                                <span *ngIf="!etudiant?.teletudiant2" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Email Perso.</th>
+                                                            <td>{{etudiant?.email}}
+                                                                <span *ngIf="!etudiant?.email" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Email Univ.</th>
+                                                            <td>
+                                                                <span class="badge badge-danger">{{etudiant?.emailUniv}}
+                                                                    <span *ngIf="!etudiant?.emailUniv" class="badge badge-danger">Non
+                                                                        renseigné</span>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Personne à contacter en cas de bosoin</th>
+                                                            <td>{{etudiant?.nomcontact}}
+                                                                <span *ngIf="!etudiant?.nomcontact" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Tél. Contact</th>
+                                                            <td>{{etudiant?.telcontact}}
+                                                                <span *ngIf="!etudiant?.telcontact" class="badge badge-danger">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Adresse</th>
+                                                            <td colspan="3">{{etudiant?.adruevilla}}, {{etudiant?.adquartier}},
+                                                                {{etudiant?.adville}}, {{etudiant?.adpays?.nomFrFr}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </fieldset>
+                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="Documents">
+                            <div class="row">
+                                <div class="col-md-12 mt-2">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <fieldset>
+                                                <legend>Document</legend>
+                                                <app-document-upload [etudiant]="etudiant" (uploadEnd)="onUploadEnd($event)" ></app-document-upload>
+                                            </fieldset>
+                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="Parcours">
+                            Content 3
+                        </p-tabPanel>
+                     </p-tabView>     
                 </div>
             </div>
-            <div class="col-md-12 mt-2">
-                <div class="card">
-                    <div class="card-body">
-                        <fieldset>
-                            <legend>Contacts</legend>
-                            <table class="table table-responsive">
-                                <tbody>
-                                    <tr>
-                                        <th>Téléphone 1</th>
-                                        <td>{{etudiant?.teletudiant}}
-                                            <span *ngIf="!etudiant?.teletudiant" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Téléphone 2</th>
-                                        <td>{{etudiant?.teletudiant2}}
-                                            <span *ngIf="!etudiant?.teletudiant2" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Email Perso.</th>
-                                        <td>{{etudiant?.email}}
-                                            <span *ngIf="!etudiant?.email" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Email Univ.</th>
-                                        <td>
-                                            <span class="badge badge-danger">{{etudiant?.emailUniv}}
-                                                <span *ngIf="!etudiant?.emailUniv" class="badge badge-danger">Non
-                                                    renseigné</span>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Personne à contacter</th>
-                                        <td>{{etudiant?.nomcontact}}
-                                            <span *ngIf="!etudiant?.nomcontact" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                        <th>Tél. Contact</th>
-                                        <td>{{etudiant?.telcontact}}
-                                            <span *ngIf="!etudiant?.telcontact" class="badge badge-danger">Non
-                                                renseigné</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Adresse</th>
-                                        <td colspan="3">{{etudiant?.adruevilla}}, {{etudiant?.adquartier}},
-                                            {{etudiant?.adville}}, {{etudiant?.adpays?.nomFrFr}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </fieldset>
+           
+            
 
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 mt-2">
-                <div class="card">
-                    <div class="card-body">
-                        <fieldset>
-                            <legend>Document</legend>
-                            <app-document-upload [etudiant]="etudiant" (uploadEnd)="onUploadEnd($event)" ></app-document-upload>
-                        </fieldset>
-
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </div>
 </div>  
- 
-
-
-
-
-
-<ng-template #modalContent>
+ <ng-template #modalContent>
     <div class="modal-body bg-gray" style="height: 400px; overflow: auto;">
         <form (ngSubmit)="updateEtudiant()" class="row px-3">
             <div class="row">
@@ -340,7 +354,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label form-control-label" for="nomcontact">Nom
                                                 Personne à
-                                                contacter</label>
+                                                contacter en cas de besoin</label>
                                             <input [(ngModel)]="updateForm.nomcontact" class="form-control" type="text"
                                                 name="nomcontact" id="nomcontact">
                                         </div>
