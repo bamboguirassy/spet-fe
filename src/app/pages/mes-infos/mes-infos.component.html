@@ -725,7 +725,7 @@
 </ng-template>
 <p-toast></p-toast>
 <ng-template #content1>
-<form  style="width: 100%;"  class="form" role="form" #emailForm="ngForm" autocomplete="off">
+<form  style="width: 100%;" (ngSubmit)="sendEmail()" class="form" role="form" #emailForm="ngForm" autocomplete="off">
     <div class="modal-header ">
         <h4 class="modal-title">Envoyer un email</h4>
     </div>
@@ -752,7 +752,7 @@
         
     </div>
     <div class="modal-footer">
-        <button [disabled]="emailForm.invalid" type="submit" (click)="sendEmail()" class="btn btn-outline-primary" >
+        <button [disabled]="emailForm.invalid" type="submit"  class="btn btn-outline-primary" >
             Envoyer
         </button>
         <button type="button" class="btn btn-danger" (click)="closeModal1()">Annuler</button>

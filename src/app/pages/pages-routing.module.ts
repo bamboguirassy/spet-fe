@@ -28,6 +28,8 @@ import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assi
 import { ContactComponent } from './dashboard/contact/contact.component';
 import { MultipleTypedocumentResolver } from './typedocument/multiple-typedocument.resolver';
 import { MultipleEtatDemandeDocumentResolver } from './demande_document/etat_demande_document/multiple-etat_demande_document.resolver';
+import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
+import { MultipleEtudiantResolver } from './etudiant/multiple-etudiant.resolver';
 
 
 
@@ -101,6 +103,11 @@ const routes: Routes = [
         resolve: {
           assistants: MultipleAssistanceEmailResolver,
         }
+      },
+      {
+        path:'liste-etudiant', component: EtudiantListComponent,
+        data:{ breadcrumb: 'Les etudiants'}, resolve:{ etudiants: MultipleEtudiantResolver}
+
       },
       demandeDocumentRoutes,
       reclamationBourseRoutes
