@@ -2,7 +2,9 @@ import { ThrowStmt } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Etudiant } from '../../etudiant/etudiant';
+import { FosUser } from '../../fos_user/fos_user';
 import { DocumentEtudiantService } from '../document-etudiant.service';
 import { DocumentEtudiant } from '../documentetudiant';
 import { Typedocument } from '../typedocument';
@@ -14,6 +16,7 @@ import { TypedocumentService } from '../typedocument.service';
   styleUrls: ['./document-upload.component.scss']
 })
 export class DocumentUploadComponent implements OnInit {
+  currentUser: FosUser;
   typeDocuments: Typedocument[];
   selectedTypeDocument: Typedocument;
   selectedDocumentEtudiant: DocumentEtudiant;
@@ -34,12 +37,27 @@ export class DocumentUploadComponent implements OnInit {
 
   constructor(
     public typeDocumentSrv: TypedocumentService, public documentEtudiantSrv: DocumentEtudiantService,
-    public modal: NgbModal
+    public modal: NgbModal, public authSrv: AuthService,
   ) { }
 
   ngOnInit() {
     this.findInputDocuments();
     this.findAssociatedDocument();
+    this.fetchCurrentUser();
+  }
+
+  fetchCurrentUser() {
+    this
+      .authSrv
+      .currentUserProvider
+      .subscribe((user: any) => {
+        this.currentUser = user;
+      }, error => {
+        this
+          .authSrv
+          .httpSrv
+          .handleError(error);
+      });
   }
 
   findInputDocuments() {
@@ -108,6 +126,29 @@ export class DocumentUploadComponent implements OnInit {
     this.canReplaceOther = other === 'other';
     this.canShowAutreForm = !this.canShowAutreForm;
     this.documentEtudiant = documentEtudiant ? { ...documentEtudiant } : new DocumentEtudiant();
+  }
+
+  sendMail(typeDocument: Typedocument) {
+    
+    this
+      .typeDocumentSrv
+      .sendMailForQuery(typeDocument, this.etudiant)
+      .subscribe((etudiant: any) => {
+
+        this
+          .typeDocumentSrv
+          .httpSrv
+          .notificationSrv
+          .showSuccess('Mail envoyé avec succès.');
+
+      }, error => {
+
+        this
+          .typeDocumentSrv
+          .httpSrv
+          .handleError(error);
+
+      });
   }
 
   editOther() {

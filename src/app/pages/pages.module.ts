@@ -70,8 +70,6 @@ import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
 import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
 
 
-
-
 @NgModule({
   declarations: [
     PagesComponent,
