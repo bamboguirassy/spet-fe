@@ -4,7 +4,7 @@
     </div>
 </div> -->
 <!-- {{inscriptions|json}} -->
-<div class="row mb-2 d-flex justify-content-between">
+<!-- <div class="row mb-2 d-flex justify-content-between">
     <div class="col-sm-12 col-md-12 col-lg-12 justify-content-between">
         <div class="card border-warning">
             <div class="card-body d-flex justify-content-between align-items-center">
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <hr>
 <div class="card border-warning" *ngIf="preinscriptionData.length">
     <div class="card-body">
@@ -34,26 +34,26 @@
         <h4 class="card-title">Mon Parcours - Université de Thiès</h4>
         <div class="col-md-12 col-lg-12 col-sm-12">
             <p-accordion>
-                <p-accordionTab [header]="inscriptionacad.idclasse.idanneeacad.libelleanneeacad + '-' + inscriptionacad.idclasse.idniveau.libelleniveau+ '-'+
-                inscriptionacad.idclasse.idfiliere.libellefiliere"
+                <p-accordionTab [header]="inscriptionacad?.idclasse?.idanneeacad?.libelleanneeacad + '-' + inscriptionacad?.idclasse?.idniveau?.libelleniveau+ '-'+
+                inscriptionacad?.idclasse?.idfiliere?.libellefiliere"
                     *ngFor="let inscriptionacad of inscriptions; let i=index" [selected]="i==0">
                     <p-toolbar>
 
-                        <div class="ui-toolbar-group-left">
+                        <!-- <div class="ui-toolbar-group-left">
                             <button type="button" ngbTooltip="Faire une demande" placement="bottom"
                                 class="mr-2 mb-1 btn btn-outline-primary"
                                 (click)="showDocAdminRequestDialog(inscriptionacad)">Doc. Administratif</button>
                             <button type="button" ngbTooltip="Faire une demande" placement="bottom"
                                 class="mr-2 mb-1 btn btn-outline-warning"
                                 (click)="showDocPedagRequestDialog(inscriptionacad)">Doc. Pédagogique</button>
-                        </div>
+                        </div> -->
 
                         <div class="ui-toolbar-group-right">
-                            <button [routerLink]="['/inscription-pedagogique',inscriptionacad.id]"
+                            <button [routerLink]="['/inscription-pedagogique',inscriptionacad?.id]"
                                 class="btn btn-sm-block btn-outline-secondary mb-1 mr-2" style="margin-bottom: 5px">
                                 <i class="fa fa-edit"></i> Inscription pédagogique
                             </button>
-                            <button [disabled]="true" [routerLink]="['/note-evaluation',inscriptionacad.id]" href="#"
+                            <button [disabled]="true" [routerLink]="['/note-evaluation',inscriptionacad?.id]" href="#"
                                 class="btn btn-sm-block btn-outline-primary mb-1 mr-2" style="margin-bottom: 5px"><i
                                     class="fa fa-eye"></i> Voir mes notes <span class="badge badge-danger">bientôt
                                     disponible</span>
@@ -62,7 +62,7 @@
                     </p-toolbar>
                     <hr>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
                                     <i class="fa fa-university"></i> <b> Etablissement </b>
@@ -73,25 +73,25 @@
                                             <tr>
                                                 <th> Etablissement</th>
                                                 <td><a
-                                                        class="float-right">{{inscriptionacad.idspecialite.idfiliere.identite.identiteparent.libelleentite}}</a>
+                                                        class="float-right">{{inscriptionacad?.idspecialite?.idfiliere?.identite?.identiteparent?.libelleentite}}</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th> Département</th>
                                                 <td><a
-                                                        class="float-right">{{inscriptionacad.idspecialite.idfiliere.identite.libelleentite}}</a>
+                                                        class="float-right">{{inscriptionacad?.idspecialite?.idfiliere?.identite?.libelleentite}}</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th> Classe</th>
                                                 <td><a
-                                                        class="float-right">{{inscriptionacad.idclasse.libelleclasse}}</a>
+                                                        class="float-right">{{inscriptionacad?.idclasse?.libelleclasse}}</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th> Spécialité</th>
                                                 <td><a
-                                                        class="float-right">{{inscriptionacad.idspecialite.libellespecialite}}</a>
+                                                        class="float-right">{{inscriptionacad?.idspecialite?.libellespecialite}}</a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
                                     <i class="fa fa-mortar-board"></i> <b> Formation </b>
@@ -123,13 +123,13 @@
                                             <tr>
                                                 <th> Date d'inscription</th>
                                                 <td><a
-                                                        class="float-right">{{inscriptionacad.dateinscacad|date:"dd/MM/yyyy HH:mm:ss" }}</a>
+                                                        class="float-right">{{inscriptionacad?.dateinscacad|date:"dd/MM/yyyy HH:mm:ss" }}</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th> Mode d'enseignement</th>
                                                 <td><a
-                                                        class="float-right">{{inscriptionacad.idmodaliteenseignement.description}}</a>
+                                                        class="float-right">{{inscriptionacad?.idmodaliteenseignement?.description}}</a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
                                     <i class="fa fa-bar-chart"></i> <b> Résultat scolaire </b>
@@ -200,7 +200,7 @@
                 </p-accordionTab>
             </p-accordion>
         </div>
-        <p-dialog [(visible)]="display" [baseZIndex]="10000" [resizable]="true">
+        <!-- <p-dialog [(visible)]="display" [baseZIndex]="10000" [resizable]="true">
             <p-header>
                 <p-toolbar>
                     <div class="ui-toolbar-group-left">
@@ -239,6 +239,6 @@
                     <button [disabled]="data.invalid" type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
             </div>
-        </p-dialog>
+        </p-dialog> -->
     </div>
 </div>

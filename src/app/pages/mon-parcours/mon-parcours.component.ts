@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Inscriptionacad } from '../inscriptionacad/inscriptionacad';
 import { InscriptionacadService } from '../inscriptionacad/inscriptionacad.service';
 import { ActivatedRoute } from '@angular/router';
@@ -8,6 +8,9 @@ import { Typedocument } from '../typedocument/typedocument';
 import { EtatDemandeDocument } from '../demande_document/etat_demande_document/etat_demande_document';
 import { DemandeDocumentService } from '../demande_document/demande_document.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TypedocumentService } from '../typedocument/typedocument.service';
+import { EtatDemandeDocumentService } from '../demande_document/etat_demande_document/etat_demande_document.service';
+import { Etudiant } from '../etudiant/etudiant';
 
 @Component({
     selector: 'app-mon-parcours',
@@ -15,6 +18,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./mon-parcours.component.scss']
 })
 export class MonParcoursComponent implements OnInit {
+
+    @Input() etudiant: Etudiant;
+
     public type = 'grid';
     public searchText: string;
     inscriptions: Inscriptionacad[] = [];
@@ -23,40 +29,65 @@ export class MonParcoursComponent implements OnInit {
     /** @var dd Object d'une demande de document */
     dd = new DemandeDocument();
     requestDocAdmin = false;
-    typedocuments: Typedocument[];
-    etats: EtatDemandeDocument[];
+    typedocuments: Typedocument[] = [];
+    etats: EtatDemandeDocument[] = [];
     source = '';
     display = false;
     inscriptionacad: Inscriptionacad;
     @ViewChild('fileUploadModal', { static: false }) fileUploadModalRef: TemplateRef<any>;
 
     constructor(
-        public inscriptionAcadSrv: InscriptionacadService, public modal: NgbModal,
-        public activatedRoute: ActivatedRoute, public demandeDocumentSrv: DemandeDocumentService) {
+        public inscriptionAcadSrv: InscriptionacadService,
+         public modal: NgbModal,
+        public activatedRoute: ActivatedRoute,
+         public demandeDocumentSrv: DemandeDocumentService,
+         public typedocumentSrv: TypedocumentService,
+         public etat_demande_documentSrv: EtatDemandeDocumentService) {
     }
 
     ngOnInit() {
-        this.inscriptions = this.activatedRoute.snapshot.data.inscriptions;
-        this.preinscriptionData = this.activatedRoute.snapshot.data.preinscriptions;
-        this.typedocuments = this.activatedRoute.snapshot.data.typedocuments;
-        this.etats = this.activatedRoute.snapshot.data.etats;
+        this.loadInscriptionAcads();
+        //this.preinscriptionData = this.activatedRoute.snapshot.data.preinscriptions;
+        /*this.loadTypeDocuments();
+        this.loadEtatDocuments();*/
     }
 
-    showDocAdminRequestDialog(inscriptionacad: Inscriptionacad) {
+    loadInscriptionAcads() {
+        this.inscriptionAcadSrv.getInscriptionsEtudiant(this.etudiant)
+        .subscribe((data: any)=>{
+            this.inscriptions = data;
+        },err=>{this.inscriptionAcadSrv.httpSrv.handleError(err)});
+    }
+
+    /*loadEtatDocuments() {
+        this.etat_demande_documentSrv.findAll()
+        .subscribe((data: any)=>{
+            this.inscriptions = data;
+        },err=>{this.inscriptionAcadSrv.httpSrv.handleError(err)});
+    }*/
+
+   /* loadTypeDocuments() {
+        this.typedocumentSrv.findAll()
+        .subscribe((data: any)=>{
+            this.inscriptions = data;
+        },err=>{this.inscriptionAcadSrv.httpSrv.handleError(err)});
+    }*/
+
+    /*showDocAdminRequestDialog(inscriptionacad: Inscriptionacad) {
         this.inscriptionacad = inscriptionacad;
         this.requestDocAdmin = true;
         this.display = true;
         this.source = 'administrative';
-    }
+    }*/
 
-    showDocPedagRequestDialog(inscriptionacad: Inscriptionacad) {
+    /*showDocPedagRequestDialog(inscriptionacad: Inscriptionacad) {
         this.inscriptionacad = inscriptionacad;
         this.requestDocAdmin = false;
         this.display = true;
         this.source = 'pedagogique';
-    }
+    }*/
 
-    requestDocument() {
+    /*requestDocument() {
         this.dd.etatActuel = this.etats[0].id; // En Attente d'Approbation -> default
         this.dd.inscriptionacad = this.inscriptionacad.id;
         this.demandeDocumentSrv.create(this.dd).subscribe(
@@ -67,16 +98,16 @@ export class MonParcoursComponent implements OnInit {
             },
             error => this.demandeDocumentSrv.httpSrv.handleError(error)
         );
-    }
+    }*/
 
-    displayDocumentModal() {
+    /*displayDocumentModal() {
         this.modal.open(this.fileUploadModalRef, {
             size: 'lg',
             centered: true,
             keyboard: false,
             backdrop: 'static'
         });
-    }
+    }*/
 
     dismissModal() {
         this.modal.dismissAll('Cross click');

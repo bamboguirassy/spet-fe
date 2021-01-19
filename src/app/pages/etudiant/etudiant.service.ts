@@ -87,6 +87,10 @@ export class EtudiantService {
 
   }
 
+  findByNuminterne(numinterne: any) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'public/numinterne/' + numinterne);
+  }
+
   public getRoutePrefix(): string {
     return this.routePrefix;
   }

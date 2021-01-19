@@ -15,9 +15,7 @@ export const verticalMenuItems = [
 
 export const horizontalMenuItems = [
     new Menu (1, 'Accueil', '/', null, 'tachometer', null, false, 0),
-    new Menu (20, 'Mon dossier', null, null, 'user', null, true, 0),
-    new Menu (21, 'Mes Informations', '/mes-infos', null, 'info', null, false, 20),
-    new Menu (22, 'Mon parcours', '/mon-parcours', null, 'graduation-cap', null, false, 20),
+    new Menu (20, 'Mon dossier', '/mes-infos', null, 'info', null, false, 0),
     // new Menu (40, 'Modalités de paiement', '/modalite-paiement', null, 'credit-card-alt', null, false, 0),
     new Menu (30, 'Ma bourse', null, null, 'money', null, true, 0),
     new Menu (31, 'Les états', '/bourse', null, 'credit-card', null, false, 30),
