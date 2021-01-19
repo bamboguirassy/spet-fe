@@ -28,6 +28,7 @@ export class DossierEtudiantComponent implements OnInit {
   selectedOrphelin: any;
   selectedTypeOrphelin: any;
   updateForm: Etudiant;
+  isInscriptionActive: any;
 
 
   currentUser: FosUser;
@@ -153,6 +154,7 @@ export class DossierEtudiantComponent implements OnInit {
 
     this.authSrv.currentUserProvider.subscribe(data => this.currentUser = data);
     this.findUserByEmail();
+    this.verifierInscriptionEtudiantActif();
 
   }
 
@@ -236,5 +238,17 @@ export class DossierEtudiantComponent implements OnInit {
 
     })
   }
+
+  verifierInscriptionEtudiantActif(){
+    this.etudiantSrv.verifierInscriptionEtudiantActif(this.etudiant.cni)
+        .subscribe((data: any)=>{
+            this.isInscriptionActive = data;
+            console.log(this.isInscriptionActive);
+        },(err)=>{
+          console.log("error isInscriptionActive");
+        });
+  }
+
+
 
 }
