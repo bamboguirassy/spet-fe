@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
+import { Etudiant } from '../etudiant/etudiant';
 import { Typedocument } from './typedocument';
 
 @Injectable({
@@ -43,6 +44,10 @@ export class TypedocumentService {
   findInputDocuments() {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'input-documents');
   }
+
+  sendMailForQuery(typeDocument: Typedocument, etudiant: Etudiant) {
+    return this.httpSrv.get(`${this.getRoutePrefixWithSlash()}send-query-mail/${typeDocument.id}/etudiant/${etudiant.id}`)
+  } 
 
 
   public getRoutePrefix(): string {
