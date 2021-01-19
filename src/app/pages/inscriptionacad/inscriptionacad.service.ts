@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
+import { Etudiant } from '../etudiant/etudiant';
 import { Inscriptionacad } from './inscriptionacad';
 
 @Injectable({
@@ -20,8 +21,8 @@ export class InscriptionacadService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash()+'preinscription/'+id);
   }
 
-  getInscriptionsEtudiant() {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'mes-inscriptions/');
+  getInscriptionsEtudiant(etudiant: Etudiant) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'inscriptions/'+etudiant.id+'/etudiant');
   }
 
   findOneById(id: number) {
