@@ -11,7 +11,17 @@
             </thead>
             <tbody>
                 <tr *ngFor="let typeDocument of typeDocuments; let i = index ">
-                    <td scope="row"> {{ typeDocument.libelletypedocument }} </td>
+                    <td scope="row">
+                        <ng-container [ngSwitch]="isAlreadyAdded(typeDocument)">
+                            <a *ngSwitchCase="true" href="javascript:void(0)"
+                                (click)="displayDocumentViewer(typeDocument)">
+                                {{ typeDocument.libelletypedocument }}
+                            </a>
+                            <span *ngSwitchCase="false"> {{ typeDocument.libelletypedocument }} </span>
+                        </ng-container>
+
+
+                    </td>
 
                     <td>
                         <ng-container [ngSwitch]="isAlreadyAdded(typeDocument)">
@@ -36,9 +46,12 @@
                     </td>
 
                     <td>
-                        <button type="button" class="btn btn-info" (click)="displayDocumentViewer(typeDocument)"
-                            *ngIf="isAlreadyAdded(typeDocument)">
-                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        <button 
+                        type="button" 
+                        class="btn btn-info" 
+                        (click)="sendMail(typeDocument)"
+                        *ngIf="typeDocument?.codetypedocument !== 'OTHER' && ['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil)">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
                         </button>
 
                         <button type="button"
@@ -88,8 +101,7 @@
                     <div class="col-12">
                         <div class="card h3 mb-3">
                             <div class="card-body row justify-content-end">
-                                <button type="button" (click)="showAutreForm()"
-                                    class="btn btn-primary mr-3 ">
+                                <button type="button" (click)="showAutreForm()" class="btn btn-primary mr-3 ">
                                     {{ canShowAutreForm ? 'Annuler' : 'Ajouter' }}
                                     <i *ngIf="!canShowAutreForm" class="fa fa-plus-circle" aria-hidden="true"></i>
                                 </button>
@@ -127,7 +139,8 @@
                                             <i *ngIf="canView" class="fa fa-eye-slash" aria-hidden="true"></i>
                                         </button>
 
-                                        <button type="button" (click)="showAutreForm(documentEtudiant, 'other')"  class="btn btn-primary ml-1">
+                                        <button type="button" (click)="showAutreForm(documentEtudiant, 'other')"
+                                            class="btn btn-primary ml-1">
                                             <i class="fa fa-upload" aria-hidden="true"></i>
                                         </button>
                                         <button type="button" (click)="delete(selectedTypeDocument, documentEtudiant)"
