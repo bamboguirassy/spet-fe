@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs';
+import { EtudiantService } from './../etudiant/etudiant.service';
 import { Component, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, AbstractControl, FormBuilder, Validators } from '@angular/forms';
@@ -21,11 +23,14 @@ export class RegisterComponent implements AfterViewInit {
     public password: AbstractControl;
     public confirmPassword: AbstractControl;
     public etudiant: Etudiant;
+    public etudiantVerifier: any;
+    public etudiantTrouver= true;
 
     constructor(router: Router, fb: FormBuilder,
         public fosUserSrv: FosUserService,
         private confirmationService: ConfirmationService,
-        public dialogService: DialogService
+        public dialogService: DialogService,
+        public etudiantServ: EtudiantService
     ) {
         this.router = router;
         this.form = fb.group({
@@ -73,6 +78,19 @@ export class RegisterComponent implements AfterViewInit {
                 },
                     error => this.fosUserSrv.httpSrv.handleError(error));
         }
+    }
+
+    findByNuminterne(numinterne: any){
+        this.etudiantServ.findByNuminterne(numinterne)
+            .subscribe((data: any)=>{
+                this.etudiantVerifier = data;
+                this.etudiantTrouver = true;
+                console.log(this.etudiantVerifier);
+            },(err)=>{
+                this.etudiantTrouver = false;
+                console.log(err);
+            });
+            
     }
 
     ngAfterViewInit() {
