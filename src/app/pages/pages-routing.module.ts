@@ -54,7 +54,13 @@ const routes: Routes = [
       },
       {
         path: 'mes-infos', component: MesInfosComponent,
+        
         data: { breadcrumb: 'Mon compte' }, resolve: { etudiant: OneEtudiantResolver }
+      },
+      {
+        path:'liste-etudiant', component: EtudiantListComponent,
+        data:{ breadcrumb: 'Les etudiants'}, resolve: { etudiants: MultipleEtudiantResolver}
+
       },
       {
         path: 'bourse', component: BourseComponent,
@@ -104,11 +110,7 @@ const routes: Routes = [
           assistants: MultipleAssistanceEmailResolver,
         }
       },
-      {
-        path:'liste-etudiant', component: EtudiantListComponent,
-        data:{ breadcrumb: 'Les etudiants'}, resolve:{ etudiants: MultipleEtudiantResolver}
-
-      },
+      
       demandeDocumentRoutes,
       reclamationBourseRoutes
     ]

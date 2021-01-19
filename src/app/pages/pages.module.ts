@@ -68,6 +68,8 @@ import { FormFieldValidationMessageComponent } from './errors/form-field-validat
 import { DocumentUploadComponent } from './typedocument/document-upload/document-upload.component';
 import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
 import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
+import { ClasseListComponent } from './classe/classe-list/classe-list.component';
+import { InscriptionacadListComponent } from './inscriptionacad/inscriptionacad-list/inscriptionacad-list.component';
 
 
 @NgModule({
@@ -108,6 +110,8 @@ import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.co
     FormFieldValidationMessageComponent,
     DocumentUploadComponent,
     EtudiantListComponent,
+    ClasseListComponent,
+    InscriptionacadListComponent
    
   ],
   imports: [

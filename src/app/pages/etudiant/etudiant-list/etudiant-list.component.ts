@@ -9,15 +9,21 @@ import { EtudiantService } from '../etudiant.service';
   styleUrls: ['./etudiant-list.component.scss']
 })
 export class EtudiantListComponent implements OnInit {
-  etudiants: Etudiant [];
+  etudiants: Etudiant;
 
   constructor(public etudiantSrv: EtudiantService,public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.etudiants = this.activatedRoute.snapshot.data.etudiants;
+    this.getEtudiant();
+  
+ 
   }
-  refreshList() {
+  getEtudiant() {
     this.etudiantSrv.findAll()
-      .subscribe((data: any) => this.etudiants = data, error => this.etudiants);
+      .subscribe((data: any) => {
+        this.etudiants = data;
+      }, err => this.etudiantSrv.httpSrv.handleError(err));
+      console.log(this.etudiants);
   }
+  
 }
