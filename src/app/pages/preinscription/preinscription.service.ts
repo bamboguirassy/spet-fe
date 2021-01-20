@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
+import { Etudiant } from '../etudiant/etudiant';
 import { Preinscription } from './preinscription';
 
 @Injectable({
@@ -20,8 +21,8 @@ export class PreinscriptionService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'public/request-etudiant-creation/' + cni);
   }
 
-  findActivePreinscriptionByEtudiant() {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'active/');
+  findActivePreinscriptionByEtudiant(etudiant: Etudiant) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'active/'+etudiant.id+'/etudiant');
   }
 
   findOneById(id: number) {
