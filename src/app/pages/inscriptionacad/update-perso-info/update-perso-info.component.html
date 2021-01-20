@@ -14,7 +14,6 @@
                                 name="AdresseMail" id="AdresseMail" #email="ngModel">
                             <app-form-field-validation-message [formField]="email">
                             </app-form-field-validation-message>
-                            <span class="badge badge-danger"  *ngIf="!validerEmail">Attention vous n'avez pas donné un bon eamil</span>
                         </div>
                         <div class="card border-white col-sm-12 border-top-0">
                             <label>Telephone 1</label>
@@ -232,7 +231,7 @@
             <!-- end form content -->
         </div>
         <div class="card-footer">
-            <button (click) = "verifierEmailEtudiant()" [disabled]="etudiantForm.invalid" type="submit" class="btn btn-outline-primary pull-right">Mettre
+            <button [disabled]="etudiantForm.invalid" type="submit" class="btn btn-outline-primary pull-right">Mettre
                 à jour & Continuer</button>
         </div>
     </div>
