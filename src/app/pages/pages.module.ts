@@ -68,6 +68,8 @@ import { FormFieldValidationMessageComponent } from './errors/form-field-validat
 import { DocumentUploadComponent } from './typedocument/document-upload/document-upload.component';
 import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
 import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-etudiant.component';
+import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +109,8 @@ import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-et
     FormFieldValidationMessageComponent,
     DocumentUploadComponent,
     DossierEtudiantComponent,
+    PaymentSuccessComponent,
+    PaymentFailedComponent,
   ],
   imports: [
     CommonModule,

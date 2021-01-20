@@ -23,6 +23,8 @@ import { demandeDocumentRoutes } from './demande_document/demande_document.route
 import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
 import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assistanceemail.resolver';
 import { ContactComponent } from './dashboard/contact/contact.component';
+import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 
 
 
@@ -96,6 +98,14 @@ const routes: Routes = [
         resolve: {
           assistants: MultipleAssistanceEmailResolver,
         }
+      },
+      {
+        path: 'payment-succeeded', component: PaymentSuccessComponent,
+        data: { breadcrumb: 'Payment Succeeded' }
+      },
+      {
+        path: 'payment-failed', component: PaymentFailedComponent,
+        data: { breadcrumb: 'Payement Failed' }
       },
       demandeDocumentRoutes,
       reclamationBourseRoutes
