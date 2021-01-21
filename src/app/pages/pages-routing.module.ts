@@ -28,6 +28,8 @@ import { MultipleEtatDemandeDocumentResolver } from './demande_document/etat_dem
 import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
 import { MultipleEtudiantResolver } from './etudiant/multiple-etudiant.resolver';
 import { classeRoutes } from './classe/classe.routes';
+import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 
 
 
@@ -109,6 +111,16 @@ const routes: Routes = [
         }
       },
       
+      {
+        path: 'payment-succeeded', component: PaymentSuccessComponent,
+        data: { breadcrumb: 'Paiement Réussi' },
+        resolve: { etudiant: OneEtudiantResolver}
+      },
+      {
+        path: 'payment-failed', component: PaymentFailedComponent,
+        data: { breadcrumb: 'Erreur Paiement' },
+        resolve: { etudiant: OneEtudiantResolver}
+      },
       demandeDocumentRoutes,
       reclamationBourseRoutes,
       classeRoutes

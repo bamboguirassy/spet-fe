@@ -9,6 +9,7 @@ import { Etudiant } from './etudiant';
 export class EtudiantService {
 
   private routePrefix: string = 'etudiant';
+  public routerPrefixPreinscription: string = 'preinscription';
 
   constructor(public httpSrv: HttpService) { }
 
@@ -97,6 +98,10 @@ export class EtudiantService {
 
   private getRoutePrefixWithSlash(): string {
     return this.routePrefix + '/';
+  }
+
+  public verifierInscriptionEtudiantActif(cni: any){
+    return this.httpSrv.get(this.routerPrefixPreinscription + '/public/verifier-inscription-etudiant-active/' + cni);
   }
 
 }

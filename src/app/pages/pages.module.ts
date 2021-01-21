@@ -73,6 +73,8 @@ import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-et
 import { InscriptionacadListComponent } from './inscriptionacad/inscriptionacad-list/inscriptionacad-list.component';
 
 
+import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 
 @NgModule({
   declarations: [
@@ -114,8 +116,10 @@ import { InscriptionacadListComponent } from './inscriptionacad/inscriptionacad-
     EtudiantListComponent,
     ClasseListComponent,
     DossierEtudiantComponent,
-    InscriptionacadListComponent
+    InscriptionacadListComponent,
     
+    PaymentSuccessComponent,
+    PaymentFailedComponent,
   ],
   imports: [
     CommonModule,

@@ -24,7 +24,8 @@ export class RegisterComponent implements AfterViewInit {
     public confirmPassword: AbstractControl;
     public etudiant: Etudiant;
     public etudiantVerifier: any;
-    public etudiantTrouver= true;
+    public etudiantTrouver:any;
+    public etudiantNonTrouver:any;
 
     constructor(router: Router, fb: FormBuilder,
         public fosUserSrv: FosUserService,
@@ -85,9 +86,11 @@ export class RegisterComponent implements AfterViewInit {
             .subscribe((data: any)=>{
                 this.etudiantVerifier = data;
                 this.etudiantTrouver = true;
+                this.etudiantNonTrouver = false;
                 console.log(this.etudiantVerifier);
             },(err)=>{
                 this.etudiantTrouver = false;
+                this.etudiantNonTrouver = true;
                 console.log(err);
             });
             
