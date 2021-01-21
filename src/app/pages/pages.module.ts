@@ -21,6 +21,8 @@ import {
   EditorModule,
   InputMaskModule,
   AccordionModule,
+  PanelModule,
+  AutoCompleteModule,
   OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule
 } from 'primeng/primeng';
 import { ToastModule } from 'primeng/toast';
@@ -68,6 +70,7 @@ import { FormFieldValidationMessageComponent } from './errors/form-field-validat
 import { DocumentUploadComponent } from './typedocument/document-upload/document-upload.component';
 import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
 import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-etudiant.component';
+import { VisiteMedicaleListComponent } from './visite_medical/visite_medicale-list/visite_medicale-list.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +110,7 @@ import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-et
     FormFieldValidationMessageComponent,
     DocumentUploadComponent,
     DossierEtudiantComponent,
+    VisiteMedicaleListComponent,
   ],
   imports: [
     CommonModule,
@@ -138,8 +142,10 @@ import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-et
     DialogModule,
     SplitButtonModule,
     InputTextModule,
+    AutoCompleteModule,
     DynamicDialogModule,
     MessagesModule,
+    PanelModule,
   ],
   entryComponents: [
     ReclamationBourseNewComponent

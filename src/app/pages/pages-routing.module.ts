@@ -23,6 +23,8 @@ import { demandeDocumentRoutes } from './demande_document/demande_document.route
 import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
 import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assistanceemail.resolver';
 import { ContactComponent } from './dashboard/contact/contact.component';
+import { VisiteMedicaleListComponent } from './visite_medical/visite_medicale-list/visite_medicale-list.component';
+import { visiteMedicaleRoutes } from './visite_medical/visite_medicale.routes';
 
 
 
@@ -98,7 +100,8 @@ const routes: Routes = [
         }
       },
       demandeDocumentRoutes,
-      reclamationBourseRoutes
+      reclamationBourseRoutes,
+      visiteMedicaleRoutes,
     ]
   }
 ];
