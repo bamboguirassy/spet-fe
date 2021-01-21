@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { Etudiant } from './../../etudiant/etudiant';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class PaymentFailedComponent implements OnInit {
+  etudiant: Etudiant;
 
-  constructor() { }
+  constructor(private acivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.etudiant = this.acivatedRoute.snapshot.data.etudiant;
   }
 
 }

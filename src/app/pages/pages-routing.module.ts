@@ -101,11 +101,13 @@ const routes: Routes = [
       },
       {
         path: 'payment-succeeded', component: PaymentSuccessComponent,
-        data: { breadcrumb: 'Payment Succeeded' }
+        data: { breadcrumb: 'Paiement Réussi' },
+        resolve: { etudiant: OneEtudiantResolver}
       },
       {
         path: 'payment-failed', component: PaymentFailedComponent,
-        data: { breadcrumb: 'Payement Failed' }
+        data: { breadcrumb: 'Erreur Paiement' },
+        resolve: { etudiant: OneEtudiantResolver}
       },
       demandeDocumentRoutes,
       reclamationBourseRoutes
