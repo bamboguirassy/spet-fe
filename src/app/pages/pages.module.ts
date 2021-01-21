@@ -69,7 +69,9 @@ import { DocumentUploadComponent } from './typedocument/document-upload/document
 import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
 import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
 import { ClasseListComponent } from './classe/classe-list/classe-list.component';
+import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-etudiant.component';
 import { InscriptionacadListComponent } from './inscriptionacad/inscriptionacad-list/inscriptionacad-list.component';
+
 
 
 @NgModule({
@@ -111,8 +113,9 @@ import { InscriptionacadListComponent } from './inscriptionacad/inscriptionacad-
     DocumentUploadComponent,
     EtudiantListComponent,
     ClasseListComponent,
+    DossierEtudiantComponent,
     InscriptionacadListComponent
-   
+    
   ],
   imports: [
     CommonModule,

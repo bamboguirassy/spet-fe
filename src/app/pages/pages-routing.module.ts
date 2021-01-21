@@ -23,13 +23,11 @@ import { demandeDocumentRoutes } from './demande_document/demande_document.route
 import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
 import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assistanceemail.resolver';
 import { ContactComponent } from './dashboard/contact/contact.component';
-<<<<<<< HEAD
 import { MultipleTypedocumentResolver } from './typedocument/multiple-typedocument.resolver';
 import { MultipleEtatDemandeDocumentResolver } from './demande_document/etat_demande_document/multiple-etat_demande_document.resolver';
 import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
 import { MultipleEtudiantResolver } from './etudiant/multiple-etudiant.resolver';
-=======
->>>>>>> 59a11c0dad16336f14e7bcd8312e50a5739f77ae
+import { classeRoutes } from './classe/classe.routes';
 
 
 
@@ -112,7 +110,8 @@ const routes: Routes = [
       },
       
       demandeDocumentRoutes,
-      reclamationBourseRoutes
+      reclamationBourseRoutes,
+      classeRoutes
     ]
   }
 ];

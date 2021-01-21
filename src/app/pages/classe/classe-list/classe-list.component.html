@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+<!-- <p-toast></p-toast>
 <div class="row" *ngIf="'Classe'|listable">
   <div class="col-sm-12 col-md-12 col-lg-12">
     <p-fieldset legend="Liste des classes" [toggleable]="true">
@@ -97,5 +97,112 @@
         </div>
       </div>
     </p-fieldset>
+  </div>
+</div> -->
+
+<div class="card border-info">
+  <div class="card-body">
+      <!-- <h4 class="card-title">UFR SET</h4> -->
+      <div class="col-md-12 col-lg-12 col-sm-12">
+          <p-accordion>
+              <p-accordionTab >
+                  <p-toolbar>
+
+                      <div class="ui-toolbar-group-right">
+                          <button    class="btn btn-sm-block btn-outline-secondary mb-1 mr-2" style="margin-bottom: 5px">
+                              <i class="fa fa-edit"></i> Inscription pédagogique
+                          </button>
+                          <button [disabled]="true" href="#"
+                              class="btn btn-sm-block btn-outline-primary mb-1 mr-2" style="margin-bottom: 5px"><i
+                                  class="fa fa-eye"></i> Voir mes notes <span class="badge badge-danger">bientôt
+                                  disponible</span>
+                          </button>
+                      </div>
+                  </p-toolbar>
+                  <hr>
+                  <div class="row">
+                      <div class="col-12">
+                          <div class="card">
+                              <div class="card-header">
+                                  <i class="fa fa-university"></i> <b> Etablissement </b>
+                              </div>
+                              <div class="card-body">
+                                  <div class="card card-responsive">
+                                      <table class="table table-responsive-sm">
+                                          <tr>
+                                              <th> Etablissement</th>
+                                              <td><a
+                                                      class="float-right"></a>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <th> Département</th>
+                                              <td><a
+                                                      class="float-right"></a>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <th> Classe</th>
+                                              <td><a
+                                                      class="float-right"></a>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <th> Spécialité</th>
+                                              <td><a
+                                                      class="float-right"></a>
+                                              </td>
+                                          </tr>
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+                  
+              </p-accordionTab>
+          </p-accordion>
+      </div>
+      <!-- <p-dialog [(visible)]="display" [baseZIndex]="10000" [resizable]="true">
+          <p-header>
+              <p-toolbar>
+                  <div class="ui-toolbar-group-left">
+                      <button routerLink="/demandedocument" pButton type="button" label="Mes demandes"
+                          icon="pi pi-file" class="ui-button-warning">
+                      </button>
+                  </div>
+              </p-toolbar>
+          </p-header>
+          <div class="ui-dialog-content mt-2">
+              <h4 class="text-center text-uppercase py-3 {{requestDocAdmin ? 'text-primary': 'text-warning'}}">
+                  <i class="fa fa-files-o mr-1"></i>
+                  Demande de document {{requestDocAdmin ? 'administratif' : 'pédagogique'}}
+              </h4>
+              <form #data="ngForm" (ngSubmit)="requestDocument()">
+                  <div class="row">
+                      <div class="col-md-6 col-sm-12 form-group">
+                          <label>Type de Document
+                              <select style="width: 100%;" name="type" class="form-control"
+                                  [(ngModel)]="dd.typedocument" required>
+                                  <option *ngFor="let td of typedocuments | typedocument: source" [value]="td.id">
+                                      {{td.libelletypedocument}}</option>
+                              </select>
+                          </label>
+                      </div>
+                      <div class="col-md-6 col-sm-12 form-group">
+                          <label>Nature de la demande
+                              <select style="width: 100%;" name="nature" [(ngModel)]="dd.nature" class="form-control"
+                                  required>
+                                  <option value="nouvelle">Nouvelle demande</option>
+                                  <option value="duplicata">Demande de duplicata</option>
+                              </select>
+                          </label>
+                      </div>
+                  </div>
+                  <button [disabled]="data.invalid" type="submit" class="btn btn-primary">Envoyer</button>
+              </form>
+          </div>
+      </p-dialog> -->
   </div>
 </div>

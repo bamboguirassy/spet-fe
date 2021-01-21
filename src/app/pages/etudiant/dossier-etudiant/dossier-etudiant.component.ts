@@ -20,7 +20,7 @@ export class DossierEtudiantComponent implements OnInit {
   public form: FormGroup;
   @Input() etudiant: Etudiant;
   user: FosUser;
-  content1: any;
+  content: any;
   selectedRegion: any;
   selectedSituationMatromoniale: any;
   selectedHandicap: any;
@@ -165,8 +165,8 @@ export class DossierEtudiantComponent implements OnInit {
     });
   }
 
-  toggle1Modal(content1) {
-    this.modalService.open(content1, {
+  ModalSendEmail(content) {
+    this.modalService.open(content, {
       size: 'lg',
       keyboard: false,
       backdrop: 'static',
@@ -234,7 +234,7 @@ export class DossierEtudiantComponent implements OnInit {
       this.etudiant = data;
       this.closeModal1();
 
-    })
+    }, error => this.etudiantSrv.httpSrv.handleError(error))
   }
 
 }

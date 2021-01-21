@@ -27,6 +27,7 @@ export const horizontalMenuItems = [
     new Menu (61, 'Inscriptions', '/inscriptionacad', null, 'pencil', null, false, 60),
     new Menu (62, 'Dossiers Etudiant', '/dossieretudiant', null, 'folder', null, false, 60),
     new Menu (62, 'etudiant', '/liste-etudiant', null, 'folder', null, false, 60),
+    new Menu (62, 'classe', '/classe', null, 'folder', null, false, 60),
 
     // new Menu (45, 'Blank', '/blank', null, 'file-o', null, false, 40),
     // new Menu (46, 'Error', '/pagenotfound', null, 'exclamation-circle', null, false, 40),
