@@ -39,7 +39,6 @@ export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
   constructor(public etudiantSrv: EtudiantService,
     public paysSrv: PaysService, public httpServ: HttpService) { }
   ngOnDestroy(): void {
-    this.verifierEmailEtudiant();
   }
 
   ngOnInit() {
@@ -48,7 +47,6 @@ export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
     this.getOrphelinValues();
     this.getTypeHandicapValues();
     this.getPays();
-    this.verifierEmailEtudiant();
   }
 
   getSituationMatrimonialeValues() {
@@ -104,16 +102,16 @@ export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
         });
   }
 
-  verifierEmailEtudiant(){
+ /* verifierEmailEtudiant(){
     this.httpServ.verifierEmailEtudiant(this.etudiant.email)
     .subscribe((data: any) => {
           this.validerEmail = data.deliverable;
-          console.log('Teste  '+ this.validerEmail);
+          console.log('Teste validerEmail  '+ this.validerEmail);
       },err=>{
         console.log(err);
       }
       );
-}
+}*/
 
 
 }

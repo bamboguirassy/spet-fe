@@ -52,7 +52,7 @@ export class FinaliserInscriptionComponent implements OnInit {
     if (!this.inscriptionacad.id) {
       this.inscriptionacadSrv.httpSrv.notificationSrv.showError("Il faut d'abord valider l'inscription !!!");
     } else {
-      sendPaymentInfos(this.inscriptionacad.id, 'agence_code', 'secure_code', 'etudiant.univ-thies.sn', 'url_notif_success', 'url_notif_failed', this.preinscription.montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
+      sendPaymentInfos(this.inscriptionacad.id, 'UNITH11586', '9Cev0^7!4Ikp@_6Wtk%zelWbY_zK9rGQDI2UnE?zfc5jOJfVmc', 'univ-thies.sn', 'url_notif_success', 'url_notif_failed', this.preinscription.montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
     }
   }
 

@@ -5,6 +5,7 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { FosUser } from '../../fos_user/fos_user';
+import { PreinscriptionService } from '../../preinscription/preinscription.service';
 import { DocumentEtudiant } from '../../typedocument/documentetudiant';
 import { Etudiant } from '../etudiant';
 import { EtudiantService } from '../etudiant.service';
@@ -28,6 +29,8 @@ export class DossierEtudiantComponent implements OnInit {
   selectedOrphelin: any;
   selectedTypeOrphelin: any;
   updateForm: Etudiant;
+  isInscriptionActive: any;
+  preinscriptionData: any[];
 
 
   currentUser: FosUser;
@@ -142,7 +145,8 @@ export class DossierEtudiantComponent implements OnInit {
     public etudiantSrv: EtudiantService,
     public notificationSrv: NotificationService,
     public authSrv: AuthService,
-    public router: Router) {
+    public router: Router,
+    public preinscriptionSrv: PreinscriptionService) {
 
   }
 
@@ -153,6 +157,8 @@ export class DossierEtudiantComponent implements OnInit {
 
     this.authSrv.currentUserProvider.subscribe(data => this.currentUser = data);
     this.findUserByEmail();
+    this.verifierInscriptionEtudiantActif();
+    this.loadPreinscriptionActives();
 
   }
 
@@ -236,5 +242,22 @@ export class DossierEtudiantComponent implements OnInit {
 
     })
   }
+
+  verifierInscriptionEtudiantActif(){
+    this.etudiantSrv.verifierInscriptionEtudiantActif(this.etudiant.cni)
+        .subscribe((data: any)=>{
+            this.isInscriptionActive = data;
+            console.log(this.isInscriptionActive);
+        },(err)=>{
+          console.log("error isInscriptionActive");
+        });
+  }
+
+  loadPreinscriptionActives() {
+    this.preinscriptionSrv.findActivePreinscriptionByEtudiant(this.etudiant)
+    .subscribe((data: any)=>{
+        this.preinscriptionData = data;
+    },err=>{this.preinscriptionSrv.httpSrv.handleError(err)});
+}
 
 }

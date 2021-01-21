@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TypedocumentService } from '../typedocument/typedocument.service';
 import { EtatDemandeDocumentService } from '../demande_document/etat_demande_document/etat_demande_document.service';
 import { Etudiant } from '../etudiant/etudiant';
+import { PreinscriptionService } from '../preinscription/preinscription.service';
 
 @Component({
     selector: 'app-mon-parcours',
@@ -24,7 +25,6 @@ export class MonParcoursComponent implements OnInit {
     public type = 'grid';
     public searchText: string;
     inscriptions: Inscriptionacad[] = [];
-    preinscriptionData: any[] = [];
 
     /** @var dd Object d'une demande de document */
     dd = new DemandeDocument();
@@ -47,7 +47,6 @@ export class MonParcoursComponent implements OnInit {
 
     ngOnInit() {
         this.loadInscriptionAcads();
-        //this.preinscriptionData = this.activatedRoute.snapshot.data.preinscriptions;
         /*this.loadTypeDocuments();
         this.loadEtatDocuments();*/
     }

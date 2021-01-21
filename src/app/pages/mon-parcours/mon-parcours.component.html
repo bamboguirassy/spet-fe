@@ -23,12 +23,6 @@
     </div>
 </div> -->
 <hr>
-<div class="card border-warning" *ngIf="preinscriptionData.length">
-    <div class="card-body">
-        <preinscription-active [preinscriptionData]="preinscriptionData"></preinscription-active>
-    </div>
-</div>
-<hr>
 <div class="card border-info" *ngIf="inscriptions.length">
     <div class="card-body">
         <h4 class="card-title">Mon Parcours - Université de Thiès</h4>
@@ -122,8 +116,8 @@
                                             </tr>
                                             <tr>
                                                 <th> Date d'inscription</th>
-                                                <td><a
-                                                        class="float-right">{{inscriptionacad?.dateinscacad|date:"dd/MM/yyyy HH:mm:ss" }}</a>
+                                                <td><a class="float-right">{{inscriptionacad?.dateinscacad|date:"dd/MM/yyyy
+                                                        HH:mm:ss" }}</a>
                                                 </td>
                                             </tr>
                                             <tr>

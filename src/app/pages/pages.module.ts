@@ -71,6 +71,8 @@ import { DocumentUploadComponent } from './typedocument/document-upload/document
 import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
 import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-etudiant.component';
 import { VisiteMedicaleListComponent } from './visite_medical/visite_medicale-list/visite_medicale-list.component';
+import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +113,8 @@ import { VisiteMedicaleListComponent } from './visite_medical/visite_medicale-li
     DocumentUploadComponent,
     DossierEtudiantComponent,
     VisiteMedicaleListComponent,
+    PaymentSuccessComponent,
+    PaymentFailedComponent,
   ],
   imports: [
     CommonModule,

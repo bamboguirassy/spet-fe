@@ -25,6 +25,8 @@ import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assi
 import { ContactComponent } from './dashboard/contact/contact.component';
 import { VisiteMedicaleListComponent } from './visite_medical/visite_medicale-list/visite_medicale-list.component';
 import { visiteMedicaleRoutes } from './visite_medical/visite_medicale.routes';
+import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 
 
 
@@ -98,6 +100,16 @@ const routes: Routes = [
         resolve: {
           assistants: MultipleAssistanceEmailResolver,
         }
+      },
+      {
+        path: 'payment-succeeded', component: PaymentSuccessComponent,
+        data: { breadcrumb: 'Paiement Réussi' },
+        resolve: { etudiant: OneEtudiantResolver}
+      },
+      {
+        path: 'payment-failed', component: PaymentFailedComponent,
+        data: { breadcrumb: 'Erreur Paiement' },
+        resolve: { etudiant: OneEtudiantResolver}
       },
       demandeDocumentRoutes,
       reclamationBourseRoutes,
