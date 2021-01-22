@@ -21,6 +21,8 @@ import {
   EditorModule,
   InputMaskModule,
   AccordionModule,
+  PanelModule,
+  AutoCompleteModule,
   OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule
 } from 'primeng/primeng';
 import { ToastModule } from 'primeng/toast';
@@ -73,6 +75,7 @@ import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-et
 import { InscriptionacadListComponent } from './inscriptionacad/inscriptionacad-list/inscriptionacad-list.component';
 
 
+import { VisiteMedicaleListComponent } from './visite_medical/visite_medicale-list/visite_medicale-list.component';
 import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 
@@ -117,7 +120,7 @@ import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment
     ClasseListComponent,
     DossierEtudiantComponent,
     InscriptionacadListComponent,
-    
+    VisiteMedicaleListComponent,
     PaymentSuccessComponent,
     PaymentFailedComponent,
   ],
@@ -151,8 +154,10 @@ import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment
     DialogModule,
     SplitButtonModule,
     InputTextModule,
+    AutoCompleteModule,
     DynamicDialogModule,
     MessagesModule,
+    PanelModule,
   ],
   entryComponents: [
     ReclamationBourseNewComponent

@@ -92,6 +92,10 @@ export class EtudiantService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'public/numinterne/' + numinterne);
   }
 
+  searchByNumInterne(numeroInterne: any) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'search/' + numeroInterne);
+  }
+
   public getRoutePrefix(): string {
     return this.routePrefix;
   }

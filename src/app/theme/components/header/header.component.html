@@ -34,9 +34,9 @@
         </div>
 
         <div class="horizontal-menu-outer" *ngIf="settings.theme.menu == 'horizontal'">
-                   
-            <app-horizontal-menu *ngIf="showHorizontalMenu"  [menuItems]="menuItems"></app-horizontal-menu>        
-            <app-vertical-menu *ngIf="!showHorizontalMenu"  [menuItems]="menuItems"></app-vertical-menu>
+                
+            <app-horizontal-menu *ngIf="showHorizontalMenu && currentUser?.idgroup?.codegroupe !== 'MEDECIN' "  [menuItems]="menuItems"></app-horizontal-menu>        
+            <app-vertical-menu *ngIf="!showHorizontalMenu && currentUser?.idgroup?.codegroupe !== 'MEDECIN' "  [menuItems]="menuItems"></app-vertical-menu>
 
         </div>
 

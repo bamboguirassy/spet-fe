@@ -4,6 +4,7 @@ import { AppSettings } from '../../../app.settings';
 import { Settings } from '../../../app.settings.model';
 import { MenuService } from '../menu/menu.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { FosUser } from 'src/app/pages/fos_user/fos_user';
 
 @Component({
   selector: 'app-header',
@@ -25,10 +26,26 @@ export class HeaderComponent implements OnInit {
   public showInfoContent: boolean = false;
   public settings: Settings;
   public menuItems: Array<any>;
+  public currentUser: FosUser;
   constructor(public appSettings: AppSettings, public menuService: MenuService,
     public authSrv: AuthService) {
     this.settings = this.appSettings.settings;
     this.menuItems = this.menuService.getHorizontalMenuItems();
+    this.fetchCurrentUser();
+  }
+
+  fetchCurrentUser() {
+    this
+      .authSrv
+      .currentUserProvider
+      .subscribe((user: any) => {
+        this.currentUser = user;
+      }, error => {
+        this
+          .authSrv
+          .httpSrv
+          .handleError(error);
+      })
   }
 
   ngOnInit() {

@@ -53,6 +53,10 @@ export class InscriptionacadService {
     return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',inscriptionacads);
   }
 
+  findEncoursByEtudiant(etudiant: Etudiant) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'en-cours/etudiant/' + etudiant.id);
+  }
+
   public getRoutePrefix(): string {
     return this.routePrefix;
   }
