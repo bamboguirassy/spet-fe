@@ -55,6 +55,7 @@ export class MonParcoursComponent implements OnInit {
         this.inscriptionAcadSrv.getInscriptionsEtudiant(this.etudiant)
         .subscribe((data: any)=>{
             this.inscriptions = data;
+            console.log('Inscrip=> ', this.inscriptions[0]);
         },err=>{this.inscriptionAcadSrv.httpSrv.handleError(err)});
     }
 

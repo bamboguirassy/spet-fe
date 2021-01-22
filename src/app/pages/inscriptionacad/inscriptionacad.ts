@@ -17,6 +17,7 @@ export class Inscriptionacad {
     quitusMedical: boolean;
     quitusComptabilite: boolean;
     quitusVieUniversitaire: boolean;
+    croust: boolean;
     universitepartenaire: string;
     sourcefinancement: string;
     coencadreur: string;
