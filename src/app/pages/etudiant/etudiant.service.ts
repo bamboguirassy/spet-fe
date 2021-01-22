@@ -83,8 +83,8 @@ export class EtudiantService {
   removeSelection(etudiants: Etudiant[]) {
     return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', etudiants);
   }
-  sendEmail(etudiant: Etudiant){
-    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'send-by-email/'+ etudiant.id);
+  sendEmail(etudiant: Etudiant, mail: {objet: string, contenu: string}){
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'send-by-email/'+ etudiant.id, mail);
 
   }
 

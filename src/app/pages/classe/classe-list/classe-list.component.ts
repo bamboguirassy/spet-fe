@@ -15,13 +15,13 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
   styleUrls: ['./classe-list.component.scss']
 })
 export class ClasseListComponent implements OnInit {
-
+  public tabs: TabItem[];
   classes: Classe[] = [];
   selectedClasses: Classe[];
   selectedClasse: Classe;
   clonedClasses: Classe[];
 
-  cMenuItems: MenuItem[]=[];
+  cMenuItems: MenuItem[] = [];
 
   tableColumns = classeColumns;
   //allowed fields for filter
@@ -34,16 +34,39 @@ export class ClasseListComponent implements OnInit {
     public notificationSrv: NotificationService) { }
 
   ngOnInit() {
-    if(this.authSrv.checkShowAccess('Classe')){
+    this.tabs = [{
+      heading: 'UFR SET',
+      content: 'content1'
+
+    }, 
+    {
+      heading: 'UFR SES',
+      content: 'content2'
+    },
+    {
+      heading: 'IUT',
+      content: 'content2'
+    },
+    {
+      heading: 'ENSA',
+      content: 'content2'
+    },
+    {
+      heading: 'UFR SI',
+      content: 'content3'
+    }]
+
+
+    if (this.authSrv.checkShowAccess('Classe')) {
       this.cMenuItems.push({ label: 'Afficher détails', icon: 'pi pi-eye', command: (event) => this.viewClasse(this.selectedClasse) });
     }
-    if(this.authSrv.checkEditAccess('Classe')){
+    if (this.authSrv.checkEditAccess('Classe')) {
       this.cMenuItems.push({ label: 'Modifier', icon: 'pi pi-pencil', command: (event) => this.editClasse(this.selectedClasse) })
     }
-    if(this.authSrv.checkCloneAccess('Classe')){
+    if (this.authSrv.checkCloneAccess('Classe')) {
       this.cMenuItems.push({ label: 'Cloner', icon: 'pi pi-clone', command: (event) => this.cloneClasse(this.selectedClasse) })
     }
-    if(this.authSrv.checkDeleteAccess('Classe')){
+    if (this.authSrv.checkDeleteAccess('Classe')) {
       this.cMenuItems.push({ label: 'Supprimer', icon: 'pi pi-times', command: (event) => this.deleteClasse(this.selectedClasse) })
     }
 
@@ -51,21 +74,21 @@ export class ClasseListComponent implements OnInit {
   }
 
   viewClasse(classe: Classe) {
-      this.router.navigate([this.classeSrv.getRoutePrefix(), classe.id]);
+    this.router.navigate([this.classeSrv.getRoutePrefix(), classe.id]);
 
   }
 
   editClasse(classe: Classe) {
-      this.router.navigate([this.classeSrv.getRoutePrefix(), classe.id, 'edit']);
+    this.router.navigate([this.classeSrv.getRoutePrefix(), classe.id, 'edit']);
   }
 
   cloneClasse(classe: Classe) {
-      this.router.navigate([this.classeSrv.getRoutePrefix(), classe.id, 'clone']);
+    this.router.navigate([this.classeSrv.getRoutePrefix(), classe.id, 'clone']);
   }
 
   deleteClasse(classe: Classe) {
-      this.classeSrv.remove(classe)
-        .subscribe(data => this.refreshList(), error => this.classeSrv.httpSrv.handleError(error));
+    this.classeSrv.remove(classe)
+      .subscribe(data => this.refreshList(), error => this.classeSrv.httpSrv.handleError(error));
   }
 
   deleteSelectedClasses(classe: Classe) {
@@ -90,4 +113,9 @@ export class ClasseListComponent implements OnInit {
     this.exportSrv.saveAsExcelFile(buffer, fileName);
   }
 
+}
+
+export class TabItem {
+  heading: string;
+  content: string;
 }

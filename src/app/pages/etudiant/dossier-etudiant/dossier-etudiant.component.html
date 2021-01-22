@@ -782,14 +782,14 @@
                     <div class="form-group">
 
                         <label class="col-form-label form-control-label" for="objet">Objet</label>
-                        <input type="text" class="form-control" id="objet" name="objet" required>
+                        <input type="text" class="form-control" [(ngModel)]="email.objet" id="objet" name="objet" required>
                     </div>
                 </div>
 
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <label lass="col-form-label form-control-label" for="message">Message</label>
-                        <p-editor name="message" required [style]="{'height':'200px'}">
+                        <label lass="col-form-label form-control-label" for="contenu">Message</label>
+                        <p-editor name="contenu" [(ngModel)]="email.contenu" required [style]="{'height':'200px'}">
                         </p-editor>
 
                     </div>

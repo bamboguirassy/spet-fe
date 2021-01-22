@@ -31,6 +31,7 @@ export class DossierEtudiantComponent implements OnInit {
   updateForm: Etudiant;
   isInscriptionActive: any;
   preinscriptionData: any[];
+ email = {objet: '', contenu: ''};
 
 
   currentUser: FosUser;
@@ -236,9 +237,10 @@ export class DossierEtudiantComponent implements OnInit {
 
   }
   sendEmail() {
-    this.etudiantSrv.sendEmail(this.etudiant).subscribe((data: any) => {
+    this.etudiantSrv.sendEmail(this.etudiant,this.email).subscribe((data: any) => {
       this.etudiant = data;
       this.closeModal1();
+      this.email = {objet: '', contenu: ''};
 
     }, error => this.etudiantSrv.httpSrv.handleError(error))
   }

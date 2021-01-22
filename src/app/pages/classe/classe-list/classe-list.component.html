@@ -1,208 +1,86 @@
-<!-- <p-toast></p-toast>
-<div class="row" *ngIf="'Classe'|listable">
-  <div class="col-sm-12 col-md-12 col-lg-12">
-    <p-fieldset legend="Liste des classes" [toggleable]="true">
-      <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-          <p-toolbar>
-            <button *ngIf="'Classe'|listable" type="button" class="btn btn-outline-secondary" (click)="refreshList()">
-              <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
-            </button>
-            <button *ngIf="'Classe'|deletable" (click)="deleteSelectedClasses()" type="button"
-              class="btn btn-outline-danger pull-right ml-1">
-              <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer selection
-            </button>
-            <button *ngIf="'Classe'|creable" [routerLink]="['/'+classeSrv.getRoutePrefix(),'new']"
-              routerLinkActive="router-link-active" type="button" class="btn btn-outline-primary pull-right ml-1">
-              <i class="fa fa-plus-square-o" aria-hidden="true"></i> Nouveau
-            </button>
-          </p-toolbar>
-          <p-table #tt [value]="classes" [paginator]="true" [rows]="50" sortMode="multiple" selectionMode="multiple"
-            [(selection)]="selectedClasses" [resizableColumns]="true" [responsive]="true"
-            [contextMenu]="contextMenu" [(contextMenuSelection)]="selectedClasse" [scrollable]="true"
-            scrollHeight="400px" [globalFilterFields]="globalFilterFields" dataKey="id">
-            <ng-template pTemplate="caption">
-              Liste des classes<br>
-              <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-              <input type="text" pInputText size="50" placeholder="Rechercher dans le tableau"
-                (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-              <div class="ui-helper-clearfix" style="text-align: left">
-                <button *ngIf="'Classe'|listable" type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF"
-                  (click)="exportPdf()" class="ui-button-warning pull-right ml-1"></button>
-                <button *ngIf="'Classe'|listable" type="button" pButton icon="pi pi-file-excel" iconPos="left"
-                  label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success pull-right"></button>
-              </div>
-            </ng-template>
-            <ng-template pTemplate="colgroup">
-              <colgroup>
-                                  <col>
-                            <col>
-                            <col>
-                    </colgroup>
-            </ng-template>
-            <ng-template pTemplate="header">
-              <tr>
-                <th style="width: 3em">
-                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                </th>
-                                <th [pSortableColumn]="'codeclasse'" pResizableColumn>
-                  Codeclasse <p-sortIcon [field]="'codeclasse'"></p-sortIcon>
-              </th>
-                          <th [pSortableColumn]="'libelleclasse'" pResizableColumn>
-                  Libelleclasse <p-sortIcon [field]="'libelleclasse'"></p-sortIcon>
-              </th>
-                          <th [pSortableColumn]="'etat'" pResizableColumn>
-                  Etat <p-sortIcon [field]="'etat'"></p-sortIcon>
-              </th>
-                    </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-classe let-editing="editing">
-              <tr [pEditableRow]="classe" [pSelectableRow]="classe" [pContextMenuRow]="classe">
-                <td style="width: 3em">
-                  <p-tableCheckbox [value]="classe"></p-tableCheckbox>
-                </td>
-                                                  <td class="ui-resizable-column">
-                  {{ classe.codeclasse }}
-                </td>
-                                        <td class="ui-resizable-column">
-                  {{ classe.libelleclasse }}
-                </td>
-                                        <td class="ui-resizable-column">
-                  {{ classe.etat ? 'Yes' : 'No' }}
-                </td>
-                          </tr>
-            </ng-template>
-            <ng-template pTemplate="footer" let-columns>
-              <tr>
-                <td style="width: 3em">
-                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                </td>
-                                   <td>Codeclasse</td>
-                             <td>Libelleclasse</td>
-                             <td>Etat</td>
-                    </tr>
-            </ng-template>
-          </p-table>
-          <p-contextMenu #contextMenu [model]="cMenuItems"></p-contextMenu>
-          <p-toolbar>
-            <button *ngIf="'Classe'|deletable" (click)="deleteSelectedClasses()" type="button"
-              class="btn btn-outline-danger mr-1">
-              <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer selection
-            </button>
-            <button *ngIf="'Classe'|creable" [routerLink]="['/'+classeSrv.getRoutePrefix(),'new']"
-              routerLinkActive="router-link-active" type="button" class="btn btn-outline-primary mr-1">
-              <i class="fa fa-plus-square-o" aria-hidden="true"></i> Nouveau
-            </button>
-          </p-toolbar>
-        </div>
-      </div>
-    </p-fieldset>
-  </div>
-</div> -->
+
 
 <div class="card border-info">
   <div class="card-body">
       <!-- <h4 class="card-title">UFR SET</h4> -->
       <div class="col-md-12 col-lg-12 col-sm-12">
-          <p-accordion>
-              <p-accordionTab >
-                  <p-toolbar>
-
-                      <div class="ui-toolbar-group-right">
-                          <button    class="btn btn-sm-block btn-outline-secondary mb-1 mr-2" style="margin-bottom: 5px">
-                              <i class="fa fa-edit"></i> Inscription pédagogique
-                          </button>
-                          <button [disabled]="true" href="#"
-                              class="btn btn-sm-block btn-outline-primary mb-1 mr-2" style="margin-bottom: 5px"><i
-                                  class="fa fa-eye"></i> Voir mes notes <span class="badge badge-danger">bientôt
-                                  disponible</span>
-                          </button>
-                      </div>
-                  </p-toolbar>
-                  <hr>
-                  <div class="row">
-                      <div class="col-12">
-                          <div class="card">
-                              <div class="card-header">
-                                  <i class="fa fa-university"></i> <b> Etablissement </b>
-                              </div>
-                              <div class="card-body">
-                                  <div class="card card-responsive">
-                                      <table class="table table-responsive-sm">
-                                          <tr>
-                                              <th> Etablissement</th>
-                                              <td><a
-                                                      class="float-right"></a>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <th> Département</th>
-                                              <td><a
-                                                      class="float-right"></a>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <th> Classe</th>
-                                              <td><a
-                                                      class="float-right"></a>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <th> Spécialité</th>
-                                              <td><a
-                                                      class="float-right"></a>
-                                              </td>
-                                          </tr>
-                                      </table>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      
-                  </div>
+          <p-accordion> 
+              <p-accordionTab *ngFor="let tab of tabs" header="{{tab.heading}}" > 
+                
+                  <div class="table-responsive">
+                        <p-table #tt [value]="" [paginator]="true" [rows]="50" sortMode="multiple"
+                            selectionMode="multiple" 
+                            [responsive]="true"  scrollHeight="400px"
+                            [globalFilterFields]="globalFilterFields" dataKey="id">
+                            <ng-template pTemplate="caption">
+                                Liste des classes<br>
+                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                <input type="text" pInputText placeholder="Rechercher dans le tableau"
+                                    style="width: 50%" (input)="tt.filterGlobal($event.target.value, 'contains')">
+                                <div class="ui-helper-clearfix" style="text-align: left">
+                                    
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="colgroup">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 3em">
+                                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                    </th>
+                                    <th [pSortableColumn]="'libelleclasse'" pResizableColumn>
+                                      Libelle Classe
+                                        <p-sortIcon [field]="'libelleclasse'"></p-sortIcon>
+                                    </th>
+                                    <th [pSortableColumn]="'idfiliere'" pResizableColumn>
+                                        Filière
+                                        <p-sortIcon [field]="'date'"></p-sortIcon>
+                                    </th>
+                                    <th [pSortableColumn]="'departement'" pResizableColumn>
+                                        Departement
+                                        <p-sortIcon [field]="'departement'"></p-sortIcon>
+                                    </th>
+                                   
+                                    <th>Actions</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body"  let-editing="editing">
+                                <tr 
+>
+                                    <td style="width: 3em">
+                                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap"></span>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap"></span>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap"></span>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="badge nowrap"></span>
+                                    </td>
+                                    <td class="ui-resizable-column text-center">
+                                        <button label="Détails" [routerLink]="[]" pButton
+                                            icon="pi pi-eye"></button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
                   
               </p-accordionTab>
           </p-accordion>
       </div>
-      <!-- <p-dialog [(visible)]="display" [baseZIndex]="10000" [resizable]="true">
-          <p-header>
-              <p-toolbar>
-                  <div class="ui-toolbar-group-left">
-                      <button routerLink="/demandedocument" pButton type="button" label="Mes demandes"
-                          icon="pi pi-file" class="ui-button-warning">
-                      </button>
-                  </div>
-              </p-toolbar>
-          </p-header>
-          <div class="ui-dialog-content mt-2">
-              <h4 class="text-center text-uppercase py-3 {{requestDocAdmin ? 'text-primary': 'text-warning'}}">
-                  <i class="fa fa-files-o mr-1"></i>
-                  Demande de document {{requestDocAdmin ? 'administratif' : 'pédagogique'}}
-              </h4>
-              <form #data="ngForm" (ngSubmit)="requestDocument()">
-                  <div class="row">
-                      <div class="col-md-6 col-sm-12 form-group">
-                          <label>Type de Document
-                              <select style="width: 100%;" name="type" class="form-control"
-                                  [(ngModel)]="dd.typedocument" required>
-                                  <option *ngFor="let td of typedocuments | typedocument: source" [value]="td.id">
-                                      {{td.libelletypedocument}}</option>
-                              </select>
-                          </label>
-                      </div>
-                      <div class="col-md-6 col-sm-12 form-group">
-                          <label>Nature de la demande
-                              <select style="width: 100%;" name="nature" [(ngModel)]="dd.nature" class="form-control"
-                                  required>
-                                  <option value="nouvelle">Nouvelle demande</option>
-                                  <option value="duplicata">Demande de duplicata</option>
-                              </select>
-                          </label>
-                      </div>
-                  </div>
-                  <button [disabled]="data.invalid" type="submit" class="btn btn-primary">Envoyer</button>
-              </form>
-          </div>
-      </p-dialog> -->
+     
   </div>
 </div>
