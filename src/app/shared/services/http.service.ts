@@ -17,6 +17,7 @@ export class HttpService {
   pdfUrl: string;
   private retUrl = '';
   urlValidEmail: string;
+  private clientUrl = 'http://localhost:4200/';
 
   constructor(private httpSrv: HttpClient,
               public tokenManager: TokenManagerService,
@@ -84,6 +85,10 @@ export class HttpService {
 
   getRetUrl() {
     return this.retUrl;
+  }
+
+  getClientUrl() {
+    return this.clientUrl;
   }
 
  /* verifierEmailEtudiant(email: string){
