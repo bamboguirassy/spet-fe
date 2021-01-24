@@ -1,0 +1,86 @@
+
+
+<div class="card border-info">
+  <div class="card-body">
+      <!-- <h4 class="card-title">UFR SET</h4> -->
+      <div class="col-md-12 col-lg-12 col-sm-12">
+          <p-accordion> 
+              <p-accordionTab *ngFor="let tab of tabs" header="{{tab.heading}}" > 
+                
+                  <div class="table-responsive">
+                        <p-table #tt [value]="" [paginator]="true" [rows]="50" sortMode="multiple"
+                            selectionMode="multiple" 
+                            [responsive]="true"  scrollHeight="400px"
+                            [globalFilterFields]="globalFilterFields" dataKey="id">
+                            <ng-template pTemplate="caption">
+                                Liste des classes<br>
+                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                <input type="text" pInputText placeholder="Rechercher dans le tableau"
+                                    style="width: 50%" (input)="tt.filterGlobal($event.target.value, 'contains')">
+                                <div class="ui-helper-clearfix" style="text-align: left">
+                                    
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="colgroup">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 3em">
+                                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                    </th>
+                                    <th [pSortableColumn]="'libelleclasse'" pResizableColumn>
+                                      Libelle Classe
+                                        <p-sortIcon [field]="'libelleclasse'"></p-sortIcon>
+                                    </th>
+                                    <th [pSortableColumn]="'idfiliere'" pResizableColumn>
+                                        Filière
+                                        <p-sortIcon [field]="'date'"></p-sortIcon>
+                                    </th>
+                                    <th [pSortableColumn]="'departement'" pResizableColumn>
+                                        Departement
+                                        <p-sortIcon [field]="'departement'"></p-sortIcon>
+                                    </th>
+                                   
+                                    <th>Actions</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body"  let-editing="editing">
+                                <tr 
+>
+                                    <td style="width: 3em">
+                                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap"></span>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap"></span>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap"></span>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="badge nowrap"></span>
+                                    </td>
+                                    <td class="ui-resizable-column text-center">
+                                        <button label="Détails" [routerLink]="[]" pButton
+                                            icon="pi pi-eye"></button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                  
+              </p-accordionTab>
+          </p-accordion>
+      </div>
+     
+  </div>
+</div>

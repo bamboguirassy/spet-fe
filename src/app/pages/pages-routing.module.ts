@@ -23,6 +23,13 @@ import { demandeDocumentRoutes } from './demande_document/demande_document.route
 import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
 import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assistanceemail.resolver';
 import { ContactComponent } from './dashboard/contact/contact.component';
+import { MultipleTypedocumentResolver } from './typedocument/multiple-typedocument.resolver';
+import { MultipleEtatDemandeDocumentResolver } from './demande_document/etat_demande_document/multiple-etat_demande_document.resolver';
+import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
+import { MultipleEtudiantResolver } from './etudiant/multiple-etudiant.resolver';
+import { classeRoutes } from './classe/classe.routes';
+import { VisiteMedicaleListComponent } from './visite_medical/visite_medicale-list/visite_medicale-list.component';
+import { visiteMedicaleRoutes } from './visite_medical/visite_medicale.routes';
 import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 
@@ -49,7 +56,13 @@ const routes: Routes = [
       },
       {
         path: 'mes-infos', component: MesInfosComponent,
+        
         data: { breadcrumb: 'Mon compte' }, resolve: { etudiant: OneEtudiantResolver }
+      },
+      {
+        path:'liste-etudiant', component: EtudiantListComponent,
+        data:{ breadcrumb: 'Les etudiants'}, resolve: { etudiants: MultipleEtudiantResolver}
+
       },
       {
         path: 'bourse', component: BourseComponent,
@@ -99,6 +112,7 @@ const routes: Routes = [
           assistants: MultipleAssistanceEmailResolver,
         }
       },
+      
       {
         path: 'payment-succeeded', component: PaymentSuccessComponent,
         data: { breadcrumb: 'Paiement Réussi' },
@@ -110,7 +124,9 @@ const routes: Routes = [
         resolve: { etudiant: OneEtudiantResolver}
       },
       demandeDocumentRoutes,
-      reclamationBourseRoutes
+      reclamationBourseRoutes,
+      classeRoutes,
+      visiteMedicaleRoutes,
     ]
   }
 ];

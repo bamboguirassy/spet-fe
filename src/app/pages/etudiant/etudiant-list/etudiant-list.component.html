@@ -1,0 +1,121 @@
+
+
+
+
+<!-- <p-toast></p-toast>
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <p-fieldset legend="Liste des etudiants" [toggleable]="true">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <p-toolbar>
+                        <button *ngIf="'Etudiant'|listable" type="button" class="btn btn-outline-secondary"
+                            (click)="refreshList()">
+                            <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
+                        </button>
+                    </p-toolbar>
+                    <div class="table-responsive">
+                        <p-table #tt [value]="etudiants" [paginator]="true" [rows]="50" sortMode="multiple"
+                            selectionMode="multiple" [resizableColumns]="true"
+                            [responsive]="true" [contextMenu]="contextMenu"
+                             [scrollable]="true" scrollHeight="400px"
+                            [globalFilterFields]="globalFilterFields" dataKey="id">
+                            <ng-template pTemplate="caption">
+                                Liste des etudiants<br>
+                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                <input type="text" pInputText placeholder="Rechercher dans le tableau"
+                                    style="width: 50%" (input)="tt.filterGlobal($event.target.value, 'contains')">
+                                <div class="ui-helper-clearfix" style="text-align: left">
+                                    <button *ngIf="'Etudiant'|listable" type="button" pButton
+                                        icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()"
+                                        class="ui-button-warning pull-right ml-1"></button>
+                                    <button *ngIf="'Etudiant'|listable" type="button" pButton
+                                        icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()"
+                                        style="margin-right: 0.5em;" class="ui-button-success pull-right"></button>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="colgroup">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 3em">
+                                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                    </th>
+                                    <th [pSortableColumn]="'prenometudiant'" pResizableColumn>
+                                        Prénom
+                                        <p-sortIcon [field]="'prenometudiant'"></p-sortIcon>
+                                    </th>
+                                    <th [pSortableColumn]="'nometudiant'" pResizableColumn>
+                                        Nom
+                                        <p-sortIcon [field]="'nometudiant'"></p-sortIcon>
+                                    </th>
+                                    <th [pSortableColumn]="'cni'" pResizableColumn>
+                                        CNI
+                                        <p-sortIcon [field]="'cni'"></p-sortIcon>
+                                    </th>
+                                    <th [pSortableColumn]="'datenaiss'" pResizableColumn>
+                                        Date Naissance
+                                        <p-sortIcon [field]="'datenaiss'"></p-sortIcon>
+                                    </th>
+                                    <th [pSortableColumn]="'lieunaiss'" pResizableColumn>
+                                        Lieu de Naissance
+                                        <p-sortIcon [field]="'lieunaiss'"></p-sortIcon>
+                                    </th>
+                                    <th [pSortableColumn]="'email'" pResizableColumn>
+                                        Email
+                                        <p-sortIcon [field]="'email'"></p-sortIcon>
+                                    </th>
+                                    
+                                    <th>Actions</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-etudiant let-editing="editing">
+                                <tr [pEditableRow]="etudiant" [pSelectableRow]="etudiant"
+                                    [pContextMenuRow]="etudiant">
+                                    <td style="width: 3em">
+                                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap">{{ etudiant?.prenometudiant
+                                            }}</span>
+                                    </td>
+                                    <td class="ui-resizable-column"> 
+                                        <span class="nowrap">{{ etudiant?.nometudiant}}</span>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap">{{ etudiant?.cni }}</span>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap">{{ etudiant?.datenaiss | date: 'dd MMM, yyyy' }}</span>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap">{{ etudiant?.lieunaiss }}</span>
+                                    </td>
+                                    <td class="ui-resizable-column">
+                                        <span class="nowrap">{{ etudiant?.email }}</span>
+                                    </td>
+                                   
+                                    <td class="ui-resizable-column text-center">
+                                        <button label="Détails" [routerLink]="['/mes-infos']" pButton
+                                            icon="pi pi-eye"></button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                    <p-contextMenu #contextMenu [model]="cMenuItems"></p-contextMenu>
+                    <p-toolbar>
+                       
+                    </p-toolbar>
+                </div>
+            </div>
+        </p-fieldset>
+    </div>
+</div> -->

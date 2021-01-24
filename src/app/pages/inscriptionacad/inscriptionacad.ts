@@ -1,3 +1,6 @@
+import { Etudiant } from '../etudiant/etudiant';
+import { VisiteMedicale } from '../visite_medical/visite_medicale';
+
 export class Inscriptionacad {
     id: any;
     dateinscacad: string;
@@ -14,6 +17,7 @@ export class Inscriptionacad {
     quitusMedical: boolean;
     quitusComptabilite: boolean;
     quitusVieUniversitaire: boolean;
+    croust: boolean;
     universitepartenaire: string;
     sourcefinancement: string;
     coencadreur: string;
@@ -24,6 +28,7 @@ export class Inscriptionacad {
     creditCapitalise: string;
     decisionConseil: string;
     idregimeinscription: any;
+    idetudiant: Etudiant;
     idspecialite: any;
     idclasse: any;
     idmodaliteenseignement: any;
@@ -32,4 +37,5 @@ export class Inscriptionacad {
     source: string;
     // temporal fields
     preinscirptionId: any;
+    visiteMedicale: VisiteMedicale;
 }

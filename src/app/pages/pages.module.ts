@@ -21,6 +21,8 @@ import {
   EditorModule,
   InputMaskModule,
   AccordionModule,
+  PanelModule,
+  AutoCompleteModule,
   OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule
 } from 'primeng/primeng';
 import { ToastModule } from 'primeng/toast';
@@ -67,7 +69,13 @@ import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdia
 import { FormFieldValidationMessageComponent } from './errors/form-field-validation-message/form-field-validation-message.component';
 import { DocumentUploadComponent } from './typedocument/document-upload/document-upload.component';
 import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
+import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
+import { ClasseListComponent } from './classe/classe-list/classe-list.component';
 import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-etudiant.component';
+import { InscriptionacadListComponent } from './inscriptionacad/inscriptionacad-list/inscriptionacad-list.component';
+
+
+import { VisiteMedicaleListComponent } from './visite_medical/visite_medicale-list/visite_medicale-list.component';
 import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 
@@ -108,7 +116,11 @@ import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment
     ContactComponent,
     FormFieldValidationMessageComponent,
     DocumentUploadComponent,
+    EtudiantListComponent,
+    ClasseListComponent,
     DossierEtudiantComponent,
+    InscriptionacadListComponent,
+    VisiteMedicaleListComponent,
     PaymentSuccessComponent,
     PaymentFailedComponent,
   ],
@@ -142,8 +154,10 @@ import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment
     DialogModule,
     SplitButtonModule,
     InputTextModule,
+    AutoCompleteModule,
     DynamicDialogModule,
     MessagesModule,
+    PanelModule,
   ],
   entryComponents: [
     ReclamationBourseNewComponent

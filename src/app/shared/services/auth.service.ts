@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpService } from './http.service';
 import { FosUser } from 'src/app/pages/fos_user/fos_user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +15,22 @@ export class AuthService {
 
   public localStorage = window.localStorage;
 
-  constructor(public httpSrv: HttpService) { }
+  constructor(public httpSrv: HttpService, public router: Router) { }
 
   getCurrentUser() {
     let req = this.httpSrv.get('auth/current_user/');
     req.subscribe((data: any) => {
       this.currentUserManager.next(data);
       this.currentUser = data;
+      if (this.currentUser.idgroup && this.currentUser.idgroup.codegroupe === 'MEDECIN') {
+        this.router.navigate(['visite-medicale']);
+      }
       if (!['ADMIN', 'ETU', 'DSOS'].includes(this.currentUser.profession.codeprofil)) {
-       this.httpSrv.notificationSrv.showError("Vous n'êtes pas autorisé à vous connecter à cette application");
+        this.httpSrv.notificationSrv.showError("Vous n'êtes pas autorisé à vous connecter à cette application");
         this.logout();
       }
     },
-      error => {});
+      error => { });
     return req;
   }
 
