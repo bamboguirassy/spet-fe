@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   public menuItems:Array<any>;
   constructor(public appSettings:AppSettings, public menuService:MenuService) {
       this.settings = this.appSettings.settings;
-      this.menuItems = this.menuService.getVerticalMenuItems();
+     // this.menuItems = this.menuService.getVerticalMenuItems();
   }
 
   ngOnInit() {     

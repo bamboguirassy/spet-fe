@@ -40,7 +40,7 @@ const routes: Routes = [
     children: [
       {
         path: '', component: DashboardComponent, pathMatch: 'full',
-        resolve: { etudiant: OneEtudiantResolver, assistants: MultipleAssistanceEmailResolver}
+        resolve: { etudiant: OneEtudiantResolver /*, assistants: MultipleAssistanceEmailResolver*/}
       },
       { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
       {
