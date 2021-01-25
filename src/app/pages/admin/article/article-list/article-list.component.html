@@ -101,7 +101,7 @@
                   {{ article.contenu }}
                 </td>
                 <td class="ui-resizable-column">
-                  {{ article.dateCreation|date:'Y-m-d H:i:s' }}
+                  {{ article.dateCreation }}
                 </td>
                 <td class="ui-resizable-column">
                   {{ article.userCreation }}
@@ -110,13 +110,13 @@
                   {{ article.publie ? 'Yes' : 'No' }}
                 </td>
                 <td class="ui-resizable-column">
-                  {{article.datePublication|date:'Y-m-d H:i:s'}}
+                  {{article.datePublication}}
                 </td>
                 <td class="ui-resizable-column">
                   {{ article.userPublication }}
                 </td>
                 <td class="ui-resizable-column">
-                  {{ article.dateDesactivation|date:'Y-m-d H:i:s' }}
+                  {{ article.dateDesactivation }}
                 </td>
                 <td class="ui-resizable-column">
                   {{ article.userDesactivation }}
