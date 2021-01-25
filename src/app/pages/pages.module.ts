@@ -78,6 +78,11 @@ import { InscriptionacadListComponent } from './inscriptionacad/inscriptionacad-
 import { VisiteMedicaleListComponent } from './visite_medical/visite_medicale-list/visite_medicale-list.component';
 import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
+import { ArticleCloneComponent } from './admin/article/article-clone/article-clone.component';
+import { ArticleEditComponent } from './admin/article/article-edit/article-edit.component';
+import { ArticleNewComponent } from './admin/article/article-new/article-new.component';
+import { ArticleShowComponent } from './admin/article/article-show/article-show.component';
+import { ArticleListComponent } from './admin/article/article-list/article-list.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +128,11 @@ import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment
     VisiteMedicaleListComponent,
     PaymentSuccessComponent,
     PaymentFailedComponent,
+    ArticleListComponent,
+    ArticleCloneComponent,
+    ArticleEditComponent,
+    ArticleNewComponent,
+    ArticleShowComponent
   ],
   imports: [
     CommonModule,
