@@ -5,10 +5,12 @@
                 <h5 class="mb-0"><b class="badge badge-info">Notes d'information</b></h5>
             </div>
             <div class="card-body pt-0 widget-body border-1">
-                <p class="fs-13"><b>Votre adresse email institutionnelle est:
-                        <code style="font-weight: bolder;">{{etudiant?.emailUniv}}</code>.</b>
-                </p>
-                <h2>Bienvenue dans votre <b>Espace Etudiant</b></h2>
+                <div *ngIf="etudiant">
+                    <p class="fs-13"><b>Votre adresse email institutionnelle est:
+                            <code style="font-weight: bolder;">{{etudiant?.emailUniv}}</code>.</b>
+                    </p>
+                    <h2>Bienvenue dans votre <b>Espace Etudiant</b></h2>
+                </div>
                 <div class="row mb-4">
                     <div class="col">
                         <div class="card-group">
@@ -59,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="card" routerLinkActive="router-link-active">
-                               <!-- <img [routerLink]="['/mes-infos']" class="card-img-top w-100"
+                                <!-- <img [routerLink]="['/mes-infos']" class="card-img-top w-100"
                                     src="assets/img/dossier.jpg" alt="Dossier"> -->
                                 <div class="card-body">
                                     <h4 class="card-title">Mon dossier</h4>
