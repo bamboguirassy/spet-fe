@@ -23,7 +23,8 @@ export class ClasseListComponent implements OnInit {
   clonedClasses: Classe[];
   entites: any;
   anneAcads: any;
-  selectAnneAcad: any;
+  selectedAnneeAcad: any;
+  classeData: any[] = [];
 
   cMenuItems: MenuItem[] = [];
 
@@ -38,11 +39,8 @@ export class ClasseListComponent implements OnInit {
     public notificationSrv: NotificationService, public anneAcadSrv: AnneeacadService) { }
 
   ngOnInit() {
-    
-    this.getEntites();
-    this.getAnneAcads();
-    
 
+    this.getAnneAcads();
 
     if (this.authSrv.checkShowAccess('Classe')) {
       this.cMenuItems.push({ label: 'Afficher détails', icon: 'pi pi-eye', command: (event) => this.viewClasse(this.selectedClasse) });
@@ -57,7 +55,7 @@ export class ClasseListComponent implements OnInit {
       this.cMenuItems.push({ label: 'Supprimer', icon: 'pi pi-times', command: (event) => this.deleteClasse(this.selectedClasse) })
     }
 
-    this.classes = this.activatedRoute.snapshot.data['classes'];
+  //  this.classes = this.activatedRoute.snapshot.data['classes'];
   }
 
   viewClasse(classe: Classe) {
@@ -100,22 +98,22 @@ export class ClasseListComponent implements OnInit {
     this.exportSrv.saveAsExcelFile(buffer, fileName);
   }
 
-  getEntites(){
-    this.classeSrv.findEntite().subscribe((data:any)=>{
-      this.entites = data;
-      console.log(this.entites);
-      
+  findClasseByEntiteGroupByAnnee() {
+    this.classeSrv.findClasseByEntiteGroupByAnnee(this.selectedAnneeAcad).subscribe((data: any) => {
+      this.classeData = data;
+
     }, error => this.classeSrv.httpSrv.handleError(error))
-    
-    
+
+
   }
 
-  getAnneAcads(){
+  getAnneAcads() {
     this.anneAcadSrv.findAnneeOuvertes()
-    .subscribe((data:any)=>{
-      this.anneAcads= data;
-      this.selectAnneAcad=data[0];
-        }, error => this.anneAcadSrv.httpSrv.handleError(error))
+      .subscribe((data: any) => {
+        this.anneAcads = data;
+        this.selectedAnneeAcad = data[0];
+        this.findClasseByEntiteGroupByAnnee();
+      }, error => this.anneAcadSrv.httpSrv.handleError(error))
   }
 
 

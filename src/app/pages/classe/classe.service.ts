@@ -47,7 +47,7 @@ export class ClasseService {
   }
   
   findClasseByEntiteGroupByAnnee(anneeacad: Anneeacad){
-    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'entite/')
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'entite/'+anneeacad.id+'/anneeacad/');
   }
 
 

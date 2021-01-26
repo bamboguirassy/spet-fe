@@ -23,13 +23,15 @@ import { demandeDocumentRoutes } from './demande_document/demande_document.route
 import { reclamationBourseRoutes } from './bourse/reclamation_bourse/reclamation_bourse.routes';
 import { MultipleAssistanceEmailResolver } from './assistanceemail/multiple-assistanceemail.resolver';
 import { ContactComponent } from './dashboard/contact/contact.component';
-import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
 import { MultipleEtudiantResolver } from './etudiant/multiple-etudiant.resolver';
 import { classeRoutes } from './classe/classe.routes';
 import { visiteMedicaleRoutes } from './visite_medical/visite_medicale.routes';
 import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 import { articleRoutes } from './admin/article/article.routes';
+import { etudiantRoutes } from './etudiant/etudiant.routes';
+import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.component';
+import { OneEtudiantByIdResolver } from './etudiant/one-etudiant-by-id.resolver copy';
 
 
 
@@ -56,11 +58,6 @@ const routes: Routes = [
         path: 'mes-infos', component: MesInfosComponent,
         
         data: { breadcrumb: 'Mon compte' }, resolve: { etudiant: OneEtudiantResolver }
-      },
-      {
-        path:'liste-etudiant', component: EtudiantListComponent,
-        data:{ breadcrumb: 'Les etudiants'}, resolve: { etudiants: MultipleEtudiantResolver}
-
       },
       {
         path: 'bourse', component: BourseComponent,
@@ -111,7 +108,9 @@ const routes: Routes = [
           assistants: MultipleAssistanceEmailResolver,
         }
       },
-      
+      {
+        path: 'etudiant/:id', component: EtudiantShowComponent, resolve: { etudiant: OneEtudiantByIdResolver }
+      },
       {
         path: 'payment-succeeded', component: PaymentSuccessComponent,
         data: { breadcrumb: 'Paiement Réussi' },
@@ -126,6 +125,7 @@ const routes: Routes = [
       reclamationBourseRoutes,
       classeRoutes,
       visiteMedicaleRoutes,
+
     ]
   }
 ];

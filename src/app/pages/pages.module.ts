@@ -70,8 +70,6 @@ import { ContactComponent } from './dashboard/contact/contact.component';
 import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdialog';
 import { FormFieldValidationMessageComponent } from './errors/form-field-validation-message/form-field-validation-message.component';
 import { DocumentUploadComponent } from './typedocument/document-upload/document-upload.component';
-import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
-import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
 import { ClasseListComponent } from './classe/classe-list/classe-list.component';
 import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-etudiant.component';
 import { InscriptionacadListComponent } from './inscriptionacad/inscriptionacad-list/inscriptionacad-list.component';
@@ -85,6 +83,8 @@ import { ArticleEditComponent } from './admin/article/article-edit/article-edit.
 import { ArticleNewComponent } from './admin/article/article-new/article-new.component';
 import { ArticleShowComponent } from './admin/article/article-show/article-show.component';
 import { ArticleListComponent } from './admin/article/article-list/article-list.component';
+import { ClasseShowComponent } from './classe/classe-show/classe-show.component';
+import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.component';
 
 @NgModule({
   declarations: [
@@ -123,8 +123,8 @@ import { ArticleListComponent } from './admin/article/article-list/article-list.
     ContactComponent,
     FormFieldValidationMessageComponent,
     DocumentUploadComponent,
-    EtudiantListComponent,
     ClasseListComponent,
+    ClasseShowComponent,
     DossierEtudiantComponent,
     InscriptionacadListComponent,
     VisiteMedicaleListComponent,
@@ -134,7 +134,8 @@ import { ArticleListComponent } from './admin/article/article-list/article-list.
     ArticleCloneComponent,
     ArticleEditComponent,
     ArticleNewComponent,
-    ArticleShowComponent
+    ArticleShowComponent,
+    EtudiantShowComponent
   ],
   imports: [
     CommonModule,
