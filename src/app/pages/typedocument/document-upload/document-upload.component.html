@@ -41,7 +41,7 @@
             </div>
             <div class="card-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-info" (click)="sendMail(typeDocument)"
-                    *ngIf="typeDocument?.codetypedocument !== 'OTHER' && ['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil)">
+                    *ngIf="typeDocument?.codetypedocument !== 'OTHER' && ['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil) && !isAlreadyAdded(typeDocument)">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                 </button>
 
@@ -116,8 +116,8 @@
         *ngFor="let typeDocument of [autreTypeDocument]; let i = index ">
         <div class="card" style="width: 100%;">
             <div class="img d-flex justify-content-center mt-1">
-                <img src="assets/img/other.png" style="width: 50%; height: 50%;"
-                    class="card-img-top" [class.pdf-width]="otherDocument?.filename?.split('.')[1] === 'pdf'">
+                <img src="assets/img/other.png" style="width: 50%; height: 50%;" class="card-img-top"
+                    [class.pdf-width]="otherDocument?.filename?.split('.')[1] === 'pdf'">
             </div>
             <div class="card-body">
                 <h5 class="card-title">
@@ -134,16 +134,15 @@
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-center">
-                <button type="button"
-                (click)=" typeDocument.codetypedocument === 'OTHER' ? displayAutreModal(typeDocument, 'create') : fileInput.click()"
-                class="btn btn-primary ml-1">
 
-                <i *ngIf="typeDocument.codetypedocument!== 'OTHER' else faPlus " class="fa fa-upload"
-                    aria-hidden="true"></i>
-                <ng-template #faPlus>
+                <button type="button" class="btn btn-info" (click)="displaySendCustomMail()"
+                    *ngIf="['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil)">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </button>
+
+                <button type="button" (click)="displayAutreModal(typeDocument, 'create')" class="btn btn-primary ml-1">
                     <i #faPlus class="fa fa-plus-square" aria-hidden="true"></i>
-                </ng-template>
-            </button>
+                </button>
             </div>
         </div>
     </div>
@@ -382,7 +381,8 @@
 <ng-template #otherDocument let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Document</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click'); fileToUpload = null;">
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click'); fileToUpload = null;">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -412,6 +412,36 @@
     <div class="modal-footer">
         <button type="button" [disabled]="!fileToUpload" class="btn btn-success"
             (click)=" currentOperation === 'update' ? changeListenerForUpdate(fileToUpload, selectedTypeDocument) : changeListener(fileToUpload, selectedTypeDocument)">Valider</button>
+    </div>
+
+</ng-template>
+
+<ng-template #queryDocument let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Mail</h4>
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12 col-md-12 d-flex justify-content-center">
+                <form ngForm="ngForm" role="form" autocomplete="off">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Titre du document</label>
+                        <input type="text" class="form-control" name="titreDocument"
+                            [(ngModel)]="queriedDocumentTitle" id="titreDocument">
+                        <small id="emailHelp" class="form-text text-muted">Donner le titre du document</small>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" [disabled]="!queriedDocumentTitle" class="btn btn-success"
+            (click)="sendCustomMail()">Valider</button>
     </div>
 
 </ng-template>

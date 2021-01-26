@@ -26,10 +26,12 @@ export class DocumentUploadComponent implements OnInit {
   autreTypeDocument: Typedocument = new Typedocument();
   currentOperation: string;
   canUpload: boolean = false;
+  queriedDocumentTitle: string;
   @Input() etudiant: Etudiant;
   @Output() uploadEnd: EventEmitter<DocumentEtudiant> = new EventEmitter();
   @ViewChild('documentViewer', { static: true }) documentViewerRef: TemplateRef<any>;
   @ViewChild('otherDocument', { static: true }) otherDocumentRef: TemplateRef<any>;
+  @ViewChild('queryDocument', { static: true }) queryCustomDocumentRef: TemplateRef<any>;
 
 
   constructor(
@@ -146,6 +148,35 @@ export class DocumentUploadComponent implements OnInit {
       });
   }
 
+  sendCustomMail() {
+
+    this
+      .typeDocumentSrv
+      .sendCustomMail(this.queriedDocumentTitle, this.etudiant)
+      .subscribe((etudiant: any) => {
+
+        this
+          .modal
+          .dismissAll();
+
+        this
+          .typeDocumentSrv
+          .httpSrv
+          .notificationSrv
+          .showSuccess('Mail envoyé avec succès.');
+
+
+
+      }, error => {
+
+        this
+          .typeDocumentSrv
+          .httpSrv
+          .handleError(error);
+
+      });
+  }
+
   editOther() {
     this.documentEtudiant.url = (this.base64EncodedFile as string).split(',')[1];
     this.documentEtudiant.etudiant = this.documentEtudiant.etudiant.id;
@@ -226,6 +257,15 @@ export class DocumentUploadComponent implements OnInit {
   displayOtherDocumentViewer(documentEtudiant: DocumentEtudiant) {
     this.selectedDocumentEtudiant = documentEtudiant;
     this.modal.open(this.documentViewerRef, {
+      size: 'lg',
+      centered: true,
+      keyboard: false,
+      backdrop: 'static'
+    });
+  }
+
+  displaySendCustomMail() {
+    this.modal.open(this.queryCustomDocumentRef, {
       size: 'lg',
       centered: true,
       keyboard: false,
