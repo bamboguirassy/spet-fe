@@ -29,6 +29,7 @@
                 <col>
                 <col>
                 <col>
+                <col>
             </colgroup>
         </ng-template>
         <ng-template pTemplate="header">
@@ -42,25 +43,25 @@
                 <th [pSortableColumn]="'nometudiant'" pResizableColumn>
                     Nom <p-sortIcon [field]="'nometudiant'"></p-sortIcon>
                 </th>
+                <th [pSortableColumn]="'ine'" pResizableColumn>
+                    Ine <p-sortIcon [field]="'ine'"></p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'cni'" pResizableColumn>
+                    Cni <p-sortIcon [field]="'cni'"></p-sortIcon>
+                </th>
                 <th [pSortableColumn]="'numinterne'" pResizableColumn>
-                    Num. Dossier <p-sortIcon [field]="'numinterne'"></p-sortIcon>
+                    Numéro Dossier <p-sortIcon [field]="'numinterne'"></p-sortIcon>
                 </th>
                 <th [pSortableColumn]="'dateinscacad'" pResizableColumn>
-                    Dateinscacad <p-sortIcon [field]="'dateinscacad'"></p-sortIcon>
+                    Date Inscription <p-sortIcon [field]="'dateinscacad'"></p-sortIcon>
                 </th>
                 <th [pSortableColumn]="'passage'" pResizableColumn>
                     Passage <p-sortIcon [field]="'passage'"></p-sortIcon>
                 </th>
                 <th [pSortableColumn]="'montantinscriptionacad'" pResizableColumn>
-                    Montantinscriptionacad <p-sortIcon [field]="'montantinscriptionacad'"></p-sortIcon>
-                </th>
-                <th [pSortableColumn]="'coutformation'" pResizableColumn>
-                    Coutformation <p-sortIcon [field]="'coutformation'"></p-sortIcon>
-                </th>
-                <th [pSortableColumn]="'numquittance'" pResizableColumn>
-                    Numquittance <p-sortIcon [field]="'numquittance'"></p-sortIcon>
-                </th>
-                <td>Actions</td>
+                    Montant Incription <p-sortIcon [field]="'montantinscriptionacad'"></p-sortIcon>
+                </th >          
+                <th pResizableColumn>Actions</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-inscriptionacad let-editing="editing">
@@ -75,23 +76,28 @@
                     {{ inscriptionacad?.idetudiant?.nometudiant }}
                 </td>
                 <td class="ui-resizable-column">
+                    {{ inscriptionacad?.idetudiant?.ine }}
+                </td>
+                <td class="ui-resizable-column">
+                    {{ inscriptionacad?.idetudiant?.cni }}
+                </td>
+                <td class="ui-resizable-column">
                     {{ inscriptionacad?.idetudiant?.numinterne }}
                 </td>
                 <td class="ui-resizable-column">
-                    {{ inscriptionacad.dateinscacad|date:'Y-m-d H:i:s' }}
+                    {{ inscriptionacad?.dateinscacad|date:'dd/MM/yyyy  hh:mm:ss' }}
                 </td>
                 <td class="ui-resizable-column">
-                    {{ inscriptionacad.passage }}
+                   <span  class="badge badge-pill"
+                    [ngClass]="{'badge-success': inscriptionacad?.passage=='P','badge-danger':inscriptionacad?.passage=='R','badge-warning':inscriptionacad?.passage=='C' }">
+                    {{inscriptionacad?.passage}}
+                   </span>
+                 
                 </td>
                 <td class="ui-resizable-column">
-                    {{ inscriptionacad.montantinscriptionacad }}
+                    {{ inscriptionacad?.montantinscriptionacad }}
                 </td>
-                <td class="ui-resizable-column">
-                    {{ inscriptionacad.coutformation }}
-                </td>
-                <td class="ui-resizable-column">
-                    {{ inscriptionacad.numquittance }}
-                </td>
+               
                 <td class="ui-resizable-column">
                     <button label="Détails" (click)="viewEtudiant(inscriptionacad)" pButton
                         icon="pi pi-eye"></button>
@@ -105,14 +111,13 @@
                 </td>
                 <td>Prénom</td>
                 <td>Nom</td>
+                <td>Ine</td>
+                <td>Cni</td>
                 <td>Num. Dossier</td>
-                <td>Dateinscacad</td>
+                <td>Date Incription</td>
                 <td>Passage</td>
-                <td>Etat</td>
-                <td>Montantinscriptionacad</td>
-                <td>Coutformation</td>
-                <td>Numquittance</td>
-                <td>Actions</td>
+                <td>Montant Inscrption</td>
+                 <td>Actions</td>
             </tr>
         </ng-template>
     </p-table>

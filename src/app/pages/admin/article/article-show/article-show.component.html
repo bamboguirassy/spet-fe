@@ -15,7 +15,7 @@
   </p-toolbar>
   <p-tabView>
     <p-tabPanel header="Détails">
-      <p-fieldset [legend]="article.id">
+      <p-fieldset legend='Show-Article'>
         <table class="table">
           <tr>
             <th>Titre</th>
@@ -23,11 +23,11 @@
           </tr>
           <tr>
             <th>Contenu</th>
-            <td>{{ article.contenu }}</td>
+            <td [innerHTML]="article.contenu">{{ article.contenu }}</td>
           </tr>
           <tr>
             <th>DateCreation</th>
-            <td>{{ article.dateCreation|date:'Y-m-d H:i:s' }}</td>
+            <td>{{ article.dateCreation|date:'dd/MM/yyyy à H:m:s' }}</td>
           </tr>
           <tr>
             <th>UserCreation</th>
@@ -35,29 +35,30 @@
           </tr>
           <tr>
             <th>Publie</th>
-            <td>{{ article.publie ? 'Yes' : 'No' }}</td>
+            <td *ngIf="article.publie"><span class="badge badge-pill badge-success">{{ article.publie ? 'Yes' : 'No' }}</span></td>
+            <td *ngIf="!article.publie"><span class="badge badge-pill badge-danger">{{ article.publie ? 'Yes' : 'No' }}</span></td>
           </tr>
-          <tr>
+          <tr *ngIf="article.datePublication">
             <th>DatePublication</th>
-            <td>{{ article.datePublication|date:'Y-m-d H:i:s' }}</td>
+            <td>{{ article.datePublication|date:'dd/MM/yyyy à H:m:s' }}</td>
           </tr>
-          <tr>
+          <tr *ngIf="article.userPublication">
             <th>UserPublication</th>
             <td>{{ article.userPublication }}</td>
           </tr>
-          <tr>
+          <tr *ngIf="article.dateDesactivation">
             <th>DateDesactivation</th>
-            <td>{{ article.dateDesactivation|date:'Y-m-d H:i:s' }}</td>
+            <td>{{ article.dateDesactivation|date:'dd/MM/yyyy à H:m:s' }}</td>
           </tr>
-          <tr>
+          <tr *ngIf="article.userDesactivation">
             <th>UserDesactivation</th>
             <td>{{ article.userDesactivation }}</td>
           </tr>
-          <tr>
+          <tr  *ngIf="article.photoName">
             <th>PhotoName</th>
             <td>{{ article.photoName }}</td>
           </tr>
-          <tr>
+          <tr *ngIf="article.photoPath">
             <th>PhotoPath</th>
             <td>{{ article.photoPath }}</td>
           </tr>

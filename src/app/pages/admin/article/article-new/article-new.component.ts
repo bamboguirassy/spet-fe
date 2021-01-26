@@ -4,7 +4,7 @@ import { ArticleService } from '../article.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-
+import {InputSwitchModule} from 'primeng/inputswitch';
 @Component({
   selector: 'app-article-new',
   templateUrl: './article-new.component.html',

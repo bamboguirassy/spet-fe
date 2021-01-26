@@ -40,13 +40,6 @@
                 <col>
                 <col>
                 <col>
-                <col>
-                <col>
-                <col>
-                <col>
-                <col>
-                <col>
-                <col>
               </colgroup>
             </ng-template>
             <ng-template pTemplate="header">
@@ -60,32 +53,11 @@
                 <th [pSortableColumn]="'contenu'" pResizableColumn>
                   Contenu <p-sortIcon [field]="'contenu'"></p-sortIcon>
                 </th>
-                <th [pSortableColumn]="'dateCreation'" pResizableColumn>
-                  DateCreation <p-sortIcon [field]="'dateCreation'"></p-sortIcon>
-                </th>
-                <th [pSortableColumn]="'userCreation'" pResizableColumn>
-                  UserCreation <p-sortIcon [field]="'userCreation'"></p-sortIcon>
-                </th>
                 <th [pSortableColumn]="'publie'" pResizableColumn>
                   Publie <p-sortIcon [field]="'publie'"></p-sortIcon>
                 </th>
-                <th [pSortableColumn]="'datePublication'" pResizableColumn>
-                  DatePublication <p-sortIcon [field]="'datePublication'"></p-sortIcon>
-                </th>
-                <th [pSortableColumn]="'userPublication'" pResizableColumn>
-                  UserPublication <p-sortIcon [field]="'userPublication'"></p-sortIcon>
-                </th>
-                <th [pSortableColumn]="'dateDesactivation'" pResizableColumn>
-                  DateDesactivation <p-sortIcon [field]="'dateDesactivation'"></p-sortIcon>
-                </th>
-                <th [pSortableColumn]="'userDesactivation'" pResizableColumn>
-                  UserDesactivation <p-sortIcon [field]="'userDesactivation'"></p-sortIcon>
-                </th>
-                <th [pSortableColumn]="'photoName'" pResizableColumn>
-                  PhotoName <p-sortIcon [field]="'photoName'"></p-sortIcon>
-                </th>
-                <th [pSortableColumn]="'photoPath'" pResizableColumn>
-                  PhotoPath <p-sortIcon [field]="'photoPath'"></p-sortIcon>
+                <th>
+                  Action 
                 </th>
               </tr>
             </ng-template>
@@ -97,35 +69,20 @@
                 <td class="ui-resizable-column">
                   {{ article.titre }}
                 </td>
-                <td class="ui-resizable-column">
+                <td class="ui-resizable-column" [innerHTML]="article.contenu">
                   {{ article.contenu }}
                 </td>
                 <td class="ui-resizable-column">
-                  {{ article.dateCreation }}
+                  <span *ngIf="article.publie" class="badge badge-success">{{ article.publie ? 'Yes' : 'No' }}</span>
+                  <span *ngIf="!article.publie" class="badge badge-dark">{{ article.publie ? 'Yes' : 'No' }}</span>
                 </td>
-                <td class="ui-resizable-column">
-                  {{ article.userCreation }}
-                </td>
-                <td class="ui-resizable-column">
-                  {{ article.publie ? 'Yes' : 'No' }}
-                </td>
-                <td class="ui-resizable-column">
-                  {{article.datePublication}}
-                </td>
-                <td class="ui-resizable-column">
-                  {{ article.userPublication }}
-                </td>
-                <td class="ui-resizable-column">
-                  {{ article.dateDesactivation }}
-                </td>
-                <td class="ui-resizable-column">
-                  {{ article.userDesactivation }}
-                </td>
-                <td class="ui-resizable-column">
-                  {{ article.photoName }}
-                </td>
-                <td class="ui-resizable-column">
-                  {{ article.photoPath }}
+                <td style="text-align: center;">
+                  <button style="text-align: center;" title="Publier" *ngIf="!article.publie" type="button" class="btn btn-outline-secondary btn-lg" (click)="updateArticle(article)">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                </button>
+                <button style="text-align: center;" title="Retirer" *ngIf="article.publie" type="button" class="btn btn-outline-secondary btn-lg" (click)="updateArticle(article)">
+                  <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                </button>
                 </td>
               </tr>
             </ng-template>
@@ -136,15 +93,8 @@
                 </td>
                 <td>Titre</td>
                 <td>Contenu</td>
-                <td>DateCreation</td>
-                <td>UserCreation</td>
                 <td>Publie</td>
-                <td>DatePublication</td>
-                <td>UserPublication</td>
-                <td>DateDesactivation</td>
-                <td>UserDesactivation</td>
-                <td>PhotoName</td>
-                <td>PhotoPath</td>
+                <td>Action</td>
               </tr>
             </ng-template>
           </p-table>

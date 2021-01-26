@@ -1,64 +1,35 @@
 <p-toast></p-toast>
 <!-- form article info -->
-<form *ngIf="'Article'|creable" class="form" role="form" #articleForm="ngForm" autocomplete="off">
+<!--*ngIf="'Article'|creable"-->
+<form class="form" role="form" #articleForm="ngForm" autocomplete="off">
   <p-fieldset legend="Creation utilisateur" [toggleable]="true">
     <!-- debut body -->
     <div class="row">
-                            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="form-group">
                     <label class="col-form-label form-control-label" for="titre">Titre</label>
                     <input [(ngModel)]="article.titre" class="form-control" type="text" name="titre" id="titre">
                 </div>
             </div>
-                            <div class="col-lg-6">
+           <div class="col-lg-12">
                 <div class="form-group">
-                    <label class="col-form-label form-control-label" for="contenu">Contenu</label>
-                    <input [(ngModel)]="article.contenu" class="form-control" type="text" name="contenu" id="contenu">
+                    <label lass="col-form-label form-control-label" for="contenu">Contenu</label>
+                    <p-editor name="contenu" id="contenu" [(ngModel)]="article.contenu" required [style]="{'height':'100px'}">
+                    </p-editor>
+
                 </div>
             </div>
-                            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="col-form-label form-control-label" for="dateCreation">DateCreation</label>
-                    <input [(ngModel)]="article.dateCreation" class="form-control" type="text" name="dateCreation" id="dateCreation">
+            <div class="col-lg-6">
+                <h5>Publié</h5>
+                <p-inputSwitch name="publie" id="publie" [(ngModel)]="article.publie"></p-inputSwitch>
+               <!--<div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="publie" />
+                    <label class="form-check-label" for="publie"> Publié </label>
                 </div>
+                --> 
             </div>
-                            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="col-form-label form-control-label" for="userCreation">UserCreation</label>
-                    <input [(ngModel)]="article.userCreation" class="form-control" type="text" name="userCreation" id="userCreation">
-                </div>
-            </div>
-                            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="col-form-label form-control-label" for="publie">Publie</label>
-                    <input [(ngModel)]="article.publie" class="form-control" type="text" name="publie" id="publie">
-                </div>
-            </div>
-                            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="col-form-label form-control-label" for="datePublication">DatePublication</label>
-                    <input [(ngModel)]="article.datePublication" class="form-control" type="text" name="datePublication" id="datePublication">
-                </div>
-            </div>
-                            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="col-form-label form-control-label" for="userPublication">UserPublication</label>
-                    <input [(ngModel)]="article.userPublication" class="form-control" type="text" name="userPublication" id="userPublication">
-                </div>
-            </div>
-                            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="col-form-label form-control-label" for="dateDesactivation">DateDesactivation</label>
-                    <input [(ngModel)]="article.dateDesactivation" class="form-control" type="text" name="dateDesactivation" id="dateDesactivation">
-                </div>
-            </div>
-                            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="col-form-label form-control-label" for="userDesactivation">UserDesactivation</label>
-                    <input [(ngModel)]="article.userDesactivation" class="form-control" type="text" name="userDesactivation" id="userDesactivation">
-                </div>
-            </div>
-                            <div class="col-lg-6">
+           
+                     <!--       <div class="col-lg-6">
                 <div class="form-group">
                     <label class="col-form-label form-control-label" for="photoName">PhotoName</label>
                     <input [(ngModel)]="article.photoName" class="form-control" type="text" name="photoName" id="photoName">
@@ -69,7 +40,7 @@
                     <label class="col-form-label form-control-label" for="photoPath">PhotoPath</label>
                     <input [(ngModel)]="article.photoPath" class="form-control" type="text" name="photoPath" id="photoPath">
                 </div>
-            </div>
+            </div>-->
           
     </div>
     <!-- fin body -->
