@@ -44,6 +44,9 @@ export class AnneeacadService {
     return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', anneeacads);
   }
 
+  findAnneeOuvertes(){
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+ 'public/ouvertes/')
+  }
   public getRoutePrefix(): string {
     return this.routePrefix;
   }

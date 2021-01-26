@@ -7,6 +7,7 @@ import { ExportService } from 'src/app/shared/services/export.service';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { AnneeacadService } from '../../anneeacad/anneeacad.service';
 
 
 @Component({
@@ -15,11 +16,14 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
   styleUrls: ['./classe-list.component.scss']
 })
 export class ClasseListComponent implements OnInit {
-  public tabs: TabItem[];
   classes: Classe[] = [];
+  classe: Classe;
   selectedClasses: Classe[];
   selectedClasse: Classe;
   clonedClasses: Classe[];
+  entites: any;
+  anneAcads: any;
+  selectAnneAcad: any;
 
   cMenuItems: MenuItem[] = [];
 
@@ -31,30 +35,13 @@ export class ClasseListComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     public classeSrv: ClasseService, public exportSrv: ExportService,
     private router: Router, public authSrv: AuthService,
-    public notificationSrv: NotificationService) { }
+    public notificationSrv: NotificationService, public anneAcadSrv: AnneeacadService) { }
 
   ngOnInit() {
-    this.tabs = [{
-      heading: 'UFR SET',
-      content: 'content1'
-
-    }, 
-    {
-      heading: 'UFR SES',
-      content: 'content2'
-    },
-    {
-      heading: 'IUT',
-      content: 'content2'
-    },
-    {
-      heading: 'ENSA',
-      content: 'content2'
-    },
-    {
-      heading: 'UFR SI',
-      content: 'content3'
-    }]
+    
+    this.getEntites();
+    this.getAnneAcads();
+    
 
 
     if (this.authSrv.checkShowAccess('Classe')) {
@@ -113,9 +100,24 @@ export class ClasseListComponent implements OnInit {
     this.exportSrv.saveAsExcelFile(buffer, fileName);
   }
 
+  getEntites(){
+    this.classeSrv.findEntite().subscribe((data:any)=>{
+      this.entites = data;
+      console.log(this.entites);
+      
+    }, error => this.classeSrv.httpSrv.handleError(error))
+    
+    
+  }
+
+  getAnneAcads(){
+    this.anneAcadSrv.findAnneeOuvertes()
+    .subscribe((data:any)=>{
+      this.anneAcads= data;
+      this.selectAnneAcad=data[0];
+        }, error => this.anneAcadSrv.httpSrv.handleError(error))
+  }
+
+
 }
 
-export class TabItem {
-  heading: string;
-  content: string;
-}

@@ -2,10 +2,14 @@
 
 <div class="card border-info">
   <div class="card-body">
-      <!-- <h4 class="card-title">UFR SET</h4> -->
+    <div class="col-md-12 col-lg-12 col-sm-12">
+    <p-dropdown [options]="anneAcads" [(ngModel)]="selectAnneAcad" optionLabel="libelleanneeacad" [style]="{'width':'100%'}"></p-dropdown>
+
+  
+    </div> <br>
       <div class="col-md-12 col-lg-12 col-sm-12">
           <p-accordion> 
-              <p-accordionTab *ngFor="let tab of tabs" header="{{tab.heading}}" > 
+              <p-accordionTab *ngFor="let entite of entites" header="{{entite.codeentite}}" > 
                 
                   <div class="table-responsive">
                         <p-table #tt [value]="" [paginator]="true" [rows]="50" sortMode="multiple"

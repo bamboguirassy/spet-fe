@@ -41,6 +41,8 @@ import { MonParcoursComponent } from './mon-parcours/mon-parcours.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { StatistiqueInscriptionComponent } from './statistique-inscription/statistique-inscription.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {MultiSelectModule} from 'primeng/multiselect';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SystemeLmdComponent } from './systeme-lmd/systeme-lmd.component';
 import { ModalitePaiementComponent } from './modalite-paiement/modalite-paiement.component';
