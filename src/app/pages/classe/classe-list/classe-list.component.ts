@@ -8,6 +8,10 @@ import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { AnneeacadService } from '../../anneeacad/anneeacad.service';
+import { Inscriptionacad } from '../../inscriptionacad/inscriptionacad';
+import { EtudiantService } from '../../etudiant/etudiant.service';
+import { finalize, first } from 'rxjs/operators';
+import { Etudiant } from '../../etudiant/etudiant';
 
 
 @Component({
@@ -25,6 +29,11 @@ export class ClasseListComponent implements OnInit {
   anneAcads: any;
   selectedAnneeAcad: any;
   classeData: any[] = [];
+  numeroInterne: number;
+  filteredEtudiants: Etudiant[] = [];
+  searchInputTouched = false;
+  searching = false;
+
 
   cMenuItems: MenuItem[] = [];
 
@@ -35,7 +44,7 @@ export class ClasseListComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     public classeSrv: ClasseService, public exportSrv: ExportService,
-    private router: Router, public authSrv: AuthService,
+    private router: Router, public authSrv: AuthService, public etudiantSrv: EtudiantService,
     public notificationSrv: NotificationService, public anneAcadSrv: AnneeacadService) { }
 
   ngOnInit() {
@@ -55,7 +64,30 @@ export class ClasseListComponent implements OnInit {
       this.cMenuItems.push({ label: 'Supprimer', icon: 'pi pi-times', command: (event) => this.deleteClasse(this.selectedClasse) })
     }
 
-  //  this.classes = this.activatedRoute.snapshot.data['classes'];
+    //  this.classes = this.activatedRoute.snapshot.data['classes'];
+  }
+
+  searchEtudiant(term: any) {
+    this.searchInputTouched = true;
+    this.searching = true;
+    this
+      .etudiantSrv
+      .searchByTerm(term.query)
+      .pipe(
+        first(),
+        finalize(() => this.searching = false)
+      ).subscribe((etudiants: any) => {
+        this.filteredEtudiants = etudiants;
+      }, error => {
+        this
+          .etudiantSrv
+          .httpSrv
+          .handleError(error);
+      });
+  }
+
+  viewEtudiant(etudiant: Etudiant) {
+    this.router.navigate([this.etudiantSrv.getRoutePrefix(), etudiant.id]);
   }
 
   viewClasse(classe: Classe) {
