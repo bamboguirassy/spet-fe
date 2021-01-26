@@ -83,6 +83,8 @@ import { ArticleEditComponent } from './admin/article/article-edit/article-edit.
 import { ArticleNewComponent } from './admin/article/article-new/article-new.component';
 import { ArticleShowComponent } from './admin/article/article-show/article-show.component';
 import { ArticleListComponent } from './admin/article/article-list/article-list.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
+
 import { ClasseShowComponent } from './classe/classe-show/classe-show.component';
 import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.component';
 
@@ -170,7 +172,8 @@ import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.co
     AutoCompleteModule,
     DynamicDialogModule,
     MessagesModule,
-    PanelModule
+    PanelModule,
+    InputSwitchModule
   ],
   entryComponents: [
     ReclamationBourseNewComponent
