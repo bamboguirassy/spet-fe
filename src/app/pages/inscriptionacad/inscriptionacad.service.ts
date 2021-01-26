@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
+import { Classe } from '../classe/classe';
 import { Etudiant } from '../etudiant/etudiant';
 import { Inscriptionacad } from './inscriptionacad';
 
@@ -19,6 +20,10 @@ export class InscriptionacadService {
 
   getInscriptionacadByPreinscription(id) {
     return this.httpSrv.get(this.getRoutePrefixWithSlash()+'preinscription/'+id);
+  }
+
+  findByClasse(classe: Classe) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'classe/'+classe.id);
   }
 
   getInscriptionsEtudiant(etudiant: Etudiant) {

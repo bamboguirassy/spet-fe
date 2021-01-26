@@ -41,6 +41,8 @@ import { MonParcoursComponent } from './mon-parcours/mon-parcours.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { StatistiqueInscriptionComponent } from './statistique-inscription/statistique-inscription.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {MultiSelectModule} from 'primeng/multiselect';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SystemeLmdComponent } from './systeme-lmd/systeme-lmd.component';
 import { ModalitePaiementComponent } from './modalite-paiement/modalite-paiement.component';
@@ -68,8 +70,6 @@ import { ContactComponent } from './dashboard/contact/contact.component';
 import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdialog';
 import { FormFieldValidationMessageComponent } from './errors/form-field-validation-message/form-field-validation-message.component';
 import { DocumentUploadComponent } from './typedocument/document-upload/document-upload.component';
-import { SafeUrlPipe } from '../shared/pipes/safe-url.pipe';
-import { EtudiantListComponent } from './etudiant/etudiant-list/etudiant-list.component';
 import { ClasseListComponent } from './classe/classe-list/classe-list.component';
 import { DossierEtudiantComponent } from './etudiant/dossier-etudiant/dossier-etudiant.component';
 import { InscriptionacadListComponent } from './inscriptionacad/inscriptionacad-list/inscriptionacad-list.component';
@@ -83,8 +83,8 @@ import { ArticleEditComponent } from './admin/article/article-edit/article-edit.
 import { ArticleNewComponent } from './admin/article/article-new/article-new.component';
 import { ArticleShowComponent } from './admin/article/article-show/article-show.component';
 import { ArticleListComponent } from './admin/article/article-list/article-list.component';
-import { InputSwitchModule } from 'primeng/inputswitch';
-
+import { ClasseShowComponent } from './classe/classe-show/classe-show.component';
+import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.component';
 
 @NgModule({
   declarations: [
@@ -123,8 +123,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     ContactComponent,
     FormFieldValidationMessageComponent,
     DocumentUploadComponent,
-    EtudiantListComponent,
     ClasseListComponent,
+    ClasseShowComponent,
     DossierEtudiantComponent,
     InscriptionacadListComponent,
     VisiteMedicaleListComponent,
@@ -134,7 +134,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     ArticleCloneComponent,
     ArticleEditComponent,
     ArticleNewComponent,
-    ArticleShowComponent
+    ArticleShowComponent,
+    EtudiantShowComponent
   ],
   imports: [
     CommonModule,
@@ -169,8 +170,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     AutoCompleteModule,
     DynamicDialogModule,
     MessagesModule,
-    PanelModule,
-    InputSwitchModule
+    PanelModule
   ],
   entryComponents: [
     ReclamationBourseNewComponent

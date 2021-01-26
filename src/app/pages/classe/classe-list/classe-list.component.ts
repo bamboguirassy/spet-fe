@@ -7,6 +7,11 @@ import { ExportService } from 'src/app/shared/services/export.service';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { AnneeacadService } from '../../anneeacad/anneeacad.service';
+import { Inscriptionacad } from '../../inscriptionacad/inscriptionacad';
+import { EtudiantService } from '../../etudiant/etudiant.service';
+import { finalize, first } from 'rxjs/operators';
+import { Etudiant } from '../../etudiant/etudiant';
 
 
 @Component({
@@ -15,11 +20,20 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
   styleUrls: ['./classe-list.component.scss']
 })
 export class ClasseListComponent implements OnInit {
-  public tabs: TabItem[];
   classes: Classe[] = [];
+  classe: Classe;
   selectedClasses: Classe[];
   selectedClasse: Classe;
   clonedClasses: Classe[];
+  entites: any;
+  anneAcads: any;
+  selectedAnneeAcad: any;
+  classeData: any[] = [];
+  numeroInterne: number;
+  filteredEtudiants: Etudiant[] = [];
+  searchInputTouched = false;
+  searching = false;
+
 
   cMenuItems: MenuItem[] = [];
 
@@ -30,32 +44,12 @@ export class ClasseListComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     public classeSrv: ClasseService, public exportSrv: ExportService,
-    private router: Router, public authSrv: AuthService,
-    public notificationSrv: NotificationService) { }
+    private router: Router, public authSrv: AuthService, public etudiantSrv: EtudiantService,
+    public notificationSrv: NotificationService, public anneAcadSrv: AnneeacadService) { }
 
   ngOnInit() {
-    this.tabs = [{
-      heading: 'UFR SET',
-      content: 'content1'
 
-    }, 
-    {
-      heading: 'UFR SES',
-      content: 'content2'
-    },
-    {
-      heading: 'IUT',
-      content: 'content2'
-    },
-    {
-      heading: 'ENSA',
-      content: 'content2'
-    },
-    {
-      heading: 'UFR SI',
-      content: 'content3'
-    }]
-
+    this.getAnneAcads();
 
     if (this.authSrv.checkShowAccess('Classe')) {
       this.cMenuItems.push({ label: 'Afficher détails', icon: 'pi pi-eye', command: (event) => this.viewClasse(this.selectedClasse) });
@@ -70,7 +64,30 @@ export class ClasseListComponent implements OnInit {
       this.cMenuItems.push({ label: 'Supprimer', icon: 'pi pi-times', command: (event) => this.deleteClasse(this.selectedClasse) })
     }
 
-    this.classes = this.activatedRoute.snapshot.data['classes'];
+    //  this.classes = this.activatedRoute.snapshot.data['classes'];
+  }
+
+  searchEtudiant(term: any) {
+    this.searchInputTouched = true;
+    this.searching = true;
+    this
+      .etudiantSrv
+      .searchByTerm(term.query)
+      .pipe(
+        first(),
+        finalize(() => this.searching = false)
+      ).subscribe((etudiants: any) => {
+        this.filteredEtudiants = etudiants;
+      }, error => {
+        this
+          .etudiantSrv
+          .httpSrv
+          .handleError(error);
+      });
+  }
+
+  viewEtudiant(etudiant: Etudiant) {
+    this.router.navigate([this.etudiantSrv.getRoutePrefix(), etudiant.id]);
   }
 
   viewClasse(classe: Classe) {
@@ -113,9 +130,24 @@ export class ClasseListComponent implements OnInit {
     this.exportSrv.saveAsExcelFile(buffer, fileName);
   }
 
+  findClasseByEntiteGroupByAnnee() {
+    this.classeSrv.findClasseByEntiteGroupByAnnee(this.selectedAnneeAcad).subscribe((data: any) => {
+      this.classeData = data;
+
+    }, error => this.classeSrv.httpSrv.handleError(error))
+
+
+  }
+
+  getAnneAcads() {
+    this.anneAcadSrv.findAnneeOuvertes()
+      .subscribe((data: any) => {
+        this.anneAcads = data;
+        this.selectedAnneeAcad = data[0];
+        this.findClasseByEntiteGroupByAnnee();
+      }, error => this.anneAcadSrv.httpSrv.handleError(error))
+  }
+
+
 }
 
-export class TabItem {
-  heading: string;
-  content: string;
-}

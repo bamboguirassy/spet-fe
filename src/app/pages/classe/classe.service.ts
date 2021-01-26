@@ -1,6 +1,8 @@
 
 import { Injectable } from '@angular/core';
+import { id } from '@swimlane/ngx-charts/release/utils';
 import { HttpService } from 'src/app/shared/services/http.service';
+import { Anneeacad } from '../anneeacad/anneeacad';
 import { Classe } from './classe';
 
 @Injectable({
@@ -39,6 +41,15 @@ export class ClasseService {
   removeSelection(classes: Classe[]) {
     return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',classes);
   }
+
+  findEntite(){
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+ 'etablissement/');
+  }
+  
+  findClasseByEntiteGroupByAnnee(anneeacad: Anneeacad){
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'entite/'+anneeacad.id+'/anneeacad/');
+  }
+
 
   public getRoutePrefix(): string {
     return this.routePrefix;

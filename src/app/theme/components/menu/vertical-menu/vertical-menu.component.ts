@@ -35,7 +35,7 @@ export class VerticalMenuComponent implements OnInit {
  
   ngOnInit() {     
     let menu_wrapper = this.elementRef.nativeElement.children[0];
-    this.menuService.createMenu(this.menuItems, menu_wrapper, 'vertical');
+   // this.menuService.createMenu(this.menuItems, menu_wrapper, 'vertical');
     
     if(this.settings.theme.menuType == 'mini')
       jQuery('.menu-item-link').tooltip();

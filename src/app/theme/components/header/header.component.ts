@@ -25,12 +25,11 @@ export class HeaderComponent implements OnInit {
   public showHorizontalMenu: boolean = true;
   public showInfoContent: boolean = false;
   public settings: Settings;
-  public menuItems: Array<any>;
+  public menuItems: Array<any> = [];
   public currentUser: FosUser;
   constructor(public appSettings: AppSettings, public menuService: MenuService,
     public authSrv: AuthService) {
     this.settings = this.appSettings.settings;
-    this.menuItems = this.menuService.getHorizontalMenuItems();
     this.fetchCurrentUser();
   }
 
@@ -40,6 +39,7 @@ export class HeaderComponent implements OnInit {
       .currentUserProvider
       .subscribe((user: any) => {
         this.currentUser = user;
+        this.menuItems = this.menuService.getHorizontalMenuItems(this.currentUser);
       }, error => {
         this
           .authSrv

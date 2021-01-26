@@ -18,7 +18,7 @@ export class EtudiantService {
   }
 
   uploadPhoto(etudiant: Etudiant, photoData) {
-    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'upload-photo/'+etudiant.id, photoData);
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'upload-photo/' + etudiant.id, photoData);
   }
 
   findOneById(id: number) {
@@ -69,7 +69,7 @@ export class EtudiantService {
     return this.httpSrv.put(this.getRoutePrefixWithSlash() + 'update-infos/', etudiant);
   }
   findUserByEmail(etudiant: Etudiant) {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'find-by-email/'+ etudiant.emailUniv);
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'find-by-email/' + etudiant.emailUniv);
   }
 
   clone(original: Etudiant, clone: Etudiant) {
@@ -83,8 +83,8 @@ export class EtudiantService {
   removeSelection(etudiants: Etudiant[]) {
     return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', etudiants);
   }
-  sendEmail(etudiant: Etudiant, mail: {objet: string, contenu: string}){
-    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'send-by-email/'+ etudiant.id, mail);
+  sendEmail(etudiant: Etudiant, mail: { objet: string, contenu: string }) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'send-by-email/' + etudiant.id, mail);
 
   }
 
@@ -96,6 +96,10 @@ export class EtudiantService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'search/' + numeroInterne);
   }
 
+  searchByTerm(term: any) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'search/term/' + term);
+  }
+
   public getRoutePrefix(): string {
     return this.routePrefix;
   }
@@ -104,7 +108,7 @@ export class EtudiantService {
     return this.routePrefix + '/';
   }
 
-  public verifierInscriptionEtudiantActif(cni: any){
+  public verifierInscriptionEtudiantActif(cni: any) {
     return this.httpSrv.get(this.routerPrefixPreinscription + '/public/verifier-inscription-etudiant-active/' + cni);
   }
 

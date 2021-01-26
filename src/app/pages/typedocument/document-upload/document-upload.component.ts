@@ -1,5 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -23,12 +21,11 @@ export class DocumentUploadComponent implements OnInit {
   documentEtudiant: DocumentEtudiant = new DocumentEtudiant();
   base64EncodedFile: string | ArrayBuffer;
   fileToUpload: any;
-  canUpload = false;
-  canView = false;
   associatedDocuments: DocumentEtudiant[] = [];
   otherDocuments: DocumentEtudiant[] = [];
-  canShowAutreForm = false;
-  canReplaceOther = false;
+  autreTypeDocument: Typedocument = new Typedocument();
+  currentOperation: string;
+  canUpload: boolean = false;
   @Input() etudiant: Etudiant;
   @Output() uploadEnd: EventEmitter<DocumentEtudiant> = new EventEmitter();
   @ViewChild('documentViewer', { static: true }) documentViewerRef: TemplateRef<any>;
@@ -66,7 +63,8 @@ export class DocumentUploadComponent implements OnInit {
       .findInputDocuments()
       .subscribe((typeDocuments: any) => {
 
-        this.typeDocuments = typeDocuments;
+        this.typeDocuments = typeDocuments.filter(d => d.codetypedocument !== 'OTHER');
+        this.autreTypeDocument = typeDocuments.find(d => d.codetypedocument === 'OTHER');
         const otherTypeDocument = this.typeDocuments.find((td: Typedocument) => td.codetypedocument === 'OTHER');
         this.typeDocuments.push(this.typeDocuments.splice(this.typeDocuments.indexOf(otherTypeDocument), 1)[0]);
 
@@ -79,6 +77,11 @@ export class DocumentUploadComponent implements OnInit {
     this.selectedTypeDocument = typeDocument;
     this.documentEtudiant.filename = $event.target.files[0].name.split('.')[0];
     this.encodeToBase64($event.target, other);
+  }
+
+  changeListenerForUpdate($event: any): void {
+    this.documentEtudiant.filename = $event.target.files[0].name.split('.')[0];
+    this.encodeToBase64($event.target, 'other');
   }
 
   encodeToBase64(inputValue: any, other?: string): void {
@@ -111,10 +114,8 @@ export class DocumentUploadComponent implements OnInit {
         this.fileToUpload = null;
         this.canUpload = false;
         if (typeDocument.codetypedocument === 'OTHER') {
-          this.canView = false;
-          this.canShowAutreForm = false;
           this.selectedDocumentEtudiant = documentEtudiant;
-          this.displayDocumentViewer(typeDocument);
+          this.displayOtherDocumentViewer(documentEtudiant);
         }
       }, error => {
         this.documentEtudiantSrv.httpSrv.handleError(error);
@@ -122,14 +123,8 @@ export class DocumentUploadComponent implements OnInit {
 
   }
 
-  showAutreForm(documentEtudiant?: DocumentEtudiant, other?: string) {
-    this.canReplaceOther = other === 'other';
-    this.canShowAutreForm = !this.canShowAutreForm;
-    this.documentEtudiant = documentEtudiant ? { ...documentEtudiant } : new DocumentEtudiant();
-  }
-
   sendMail(typeDocument: Typedocument) {
-    
+
     this
       .typeDocumentSrv
       .sendMailForQuery(typeDocument, this.etudiant)
@@ -163,8 +158,7 @@ export class DocumentUploadComponent implements OnInit {
         this.findAssociatedDocument();
         this.fileToUpload = null;
         this.canUpload = false;
-        this.canView = false;
-        this.canShowAutreForm = false;
+        this.modal.dismissAll();
       }, error => {
         this.documentEtudiantSrv.httpSrv.handleError(error);
       });
@@ -183,10 +177,8 @@ export class DocumentUploadComponent implements OnInit {
       });
   }
 
-  delete(typeDocument: Typedocument, documentEtudiant?: DocumentEtudiant) {
-    if (!documentEtudiant) {
-      documentEtudiant = this.associatedDocuments.find((doc) => doc.typeDocument.codetypedocument === typeDocument.codetypedocument);
-    }
+  deleteInputDocument(typeDocument: Typedocument) {
+    const documentEtudiant = this.findCorrespondingDocument(typeDocument);
     this
       .documentEtudiantSrv
       .remove(documentEtudiant)
@@ -194,10 +186,19 @@ export class DocumentUploadComponent implements OnInit {
         this.documentEtudiantSrv.httpSrv.notificationSrv.showSuccess('Suppression réussi');
         this.associatedDocuments = this.associatedDocuments
           .filter((doc) => doc.id !== documentEtudiant.id);
-        this.otherDocuments = this.associatedDocuments.filter(doc => doc.typeDocument.codetypedocument === 'OTHER');
-        if (this.otherDocuments.length === 0) {
-          this.modal.dismissAll();
-        }
+      }, error => {
+        this.documentEtudiantSrv.httpSrv.handleError(error);
+      })
+  }
+
+  delete(documentEtudiant: DocumentEtudiant) {
+    this
+      .documentEtudiantSrv
+      .remove(documentEtudiant)
+      .subscribe((data: any) => {
+        this.documentEtudiantSrv.httpSrv.notificationSrv.showSuccess('Suppression réussi');
+        this.otherDocuments = this.otherDocuments
+          .filter((doc) => doc.id !== documentEtudiant.id);
       }, error => {
         this.documentEtudiantSrv.httpSrv.handleError(error);
       })
@@ -208,7 +209,7 @@ export class DocumentUploadComponent implements OnInit {
   }
 
   findCorrespondingDocument(typeDocument: Typedocument) {
-    return this.associatedDocuments.find((doc) => doc.typeDocument.codetypedocument === typeDocument.codetypedocument);
+    return this.associatedDocuments.find((doc) => doc.typeDocument.codetypedocument === typeDocument.codetypedocument && doc.typeDocument.codetypedocument !== 'OTHER');
   }
 
   displayDocumentViewer(typeDocument: Typedocument) {
@@ -222,8 +223,20 @@ export class DocumentUploadComponent implements OnInit {
     });
   }
 
-  displayAutreModal(typeDocument: Typedocument) {
+  displayOtherDocumentViewer(documentEtudiant: DocumentEtudiant) {
+    this.selectedDocumentEtudiant = documentEtudiant;
+    this.modal.open(this.documentViewerRef, {
+      size: 'lg',
+      centered: true,
+      keyboard: false,
+      backdrop: 'static'
+    });
+  }
+
+  displayAutreModal(typeDocument: Typedocument, operation?: 'update' | 'create', documentEtudiant?: DocumentEtudiant) {
     this.selectedTypeDocument = typeDocument;
+    this.documentEtudiant = { ...documentEtudiant };
+    this.currentOperation = operation;
     this.modal.open(this.otherDocumentRef, {
       size: 'lg',
       centered: true,
@@ -235,7 +248,5 @@ export class DocumentUploadComponent implements OnInit {
   beforeUpload(event: any) {
     this.fileToUpload = event;
   }
-
-
 
 }
