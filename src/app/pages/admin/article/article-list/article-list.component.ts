@@ -7,6 +7,8 @@ import { ExportService } from 'src/app/shared/services/export.service';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -26,11 +28,12 @@ export class ArticleListComponent implements OnInit {
   tableColumns = articleColumns;
   //allowed fields for filter
   globalFilterFields = allowedArticleFieldsForFilter;
+  article: Article;
 
 
   constructor(private activatedRoute: ActivatedRoute,
     public articleSrv: ArticleService, public exportSrv: ExportService,
-    private router: Router, public authSrv: AuthService,
+    private router: Router, public authSrv: AuthService,public location: Location,
     public notificationSrv: NotificationService) { }
 
   ngOnInit() {
@@ -88,6 +91,13 @@ export class ArticleListComponent implements OnInit {
 
   saveAsExcelFile(buffer: any, fileName: string): void {
     this.exportSrv.saveAsExcelFile(buffer, fileName);
+  }
+
+  updateArticle(article: any) {
+    article.publie = !article.publie;
+    this.articleSrv.update(article)
+      .subscribe((data) => console.log("Modifiaction reussiii..."),
+        (error) => this.articleSrv.httpSrv.handleError(error));
   }
 
 }

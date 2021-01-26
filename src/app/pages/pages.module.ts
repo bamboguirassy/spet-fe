@@ -83,6 +83,8 @@ import { ArticleEditComponent } from './admin/article/article-edit/article-edit.
 import { ArticleNewComponent } from './admin/article/article-new/article-new.component';
 import { ArticleShowComponent } from './admin/article/article-show/article-show.component';
 import { ArticleListComponent } from './admin/article/article-list/article-list.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
+
 
 @NgModule({
   declarations: [
@@ -168,6 +170,7 @@ import { ArticleListComponent } from './admin/article/article-list/article-list.
     DynamicDialogModule,
     MessagesModule,
     PanelModule,
+    InputSwitchModule
   ],
   entryComponents: [
     ReclamationBourseNewComponent
