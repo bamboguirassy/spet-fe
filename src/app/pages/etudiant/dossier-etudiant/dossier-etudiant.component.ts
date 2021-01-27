@@ -30,7 +30,7 @@ export class DossierEtudiantComponent implements OnInit {
   selectedTypeOrphelin: any;
   updateForm: Etudiant;
   isInscriptionActive: any;
-  preinscriptionData: any[];
+  preinscriptionData: any[] = [];
  email = {objet: '', contenu: ''};
 
 
@@ -157,7 +157,6 @@ export class DossierEtudiantComponent implements OnInit {
     this.setDefaultValues();
 
     this.authSrv.currentUserProvider.subscribe(data => this.currentUser = data);
-    this.findUserByEmail();
     this.verifierInscriptionEtudiantActif();
     this.loadPreinscriptionActives();
 
@@ -172,7 +171,7 @@ export class DossierEtudiantComponent implements OnInit {
     });
   }
 
-  ModalSendEmail(content) {
+  modalSendEmail(content) {
     this.modalService.open(content, {
       size: 'lg',
       keyboard: false,
@@ -229,14 +228,6 @@ export class DossierEtudiantComponent implements OnInit {
     this.etudiantSrv.httpSrv.notificationSrv.showSuccess('Document chargé avec succés.')
   }
 
-  findUserByEmail() {
-    this.etudiantSrv.findUserByEmail(this.etudiant).subscribe((data: any) => {
-      this.user = data;
-      
-    }, error => this.etudiantSrv.httpSrv.handleError(error))
-
-
-  }
   sendEmail() {
     this.etudiantSrv.sendEmail(this.etudiant,this.email).subscribe((data: any) => {
       this.etudiant = data;
@@ -250,16 +241,15 @@ export class DossierEtudiantComponent implements OnInit {
     this.etudiantSrv.verifierInscriptionEtudiantActif(this.etudiant.cni)
         .subscribe((data: any)=>{
             this.isInscriptionActive = data;
-            console.log(this.isInscriptionActive);
         },(err)=>{
-          console.log("error isInscriptionActive");
+          this.etudiantSrv.httpSrv.handleError(err);
         });
   }
 
   loadPreinscriptionActives() {
     this.preinscriptionSrv.findActivePreinscriptionByEtudiant(this.etudiant)
     .subscribe((data: any)=>{
-        this.preinscriptionData = data;
+        this.preinscriptionData = data;        
     },err=>{this.preinscriptionSrv.httpSrv.handleError(err)});
 }
 
