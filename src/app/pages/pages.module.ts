@@ -87,6 +87,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 
 import { ClasseShowComponent } from './classe/classe-show/classe-show.component';
 import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.component';
+import { ArticleItemComponent } from './admin/article/article-item/article-item.component';
+import { ArticleItemListComponent } from './admin/article/article-item-list/article-item-list.component';
 
 @NgModule({
   declarations: [
@@ -137,7 +139,9 @@ import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.co
     ArticleEditComponent,
     ArticleNewComponent,
     ArticleShowComponent,
-    EtudiantShowComponent
+    EtudiantShowComponent,
+    ArticleItemComponent,
+    ArticleItemListComponent
   ],
   imports: [
     CommonModule,
