@@ -7,6 +7,7 @@ import { DialogService } from 'primeng/api';
 import { FosUser } from '../fos_user/fos_user';
 import { EmailUpdateComponent } from '../shared/shared-component/email-update/email-update.component';
 import { FosUserService } from '../fos_user/fos_user.service';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-login',
@@ -43,7 +44,8 @@ export class LoginComponent implements AfterViewInit {
     public onSubmit(values: any): void {
         if (this.form.valid) {
             this.authSrv.login({ username: this.usernameTmp, password: this.password.value })
-                .subscribe((data: any) => {
+            .pipe(first())    
+            .subscribe((data: any) => {
                     this.tokenManager.setToken(data.token);
                     this.authSrv.getCurrentUser();
                     this.router.navigate(['/']);

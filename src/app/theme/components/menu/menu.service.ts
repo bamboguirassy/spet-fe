@@ -10,7 +10,7 @@ import { FosUser } from 'src/app/pages/fos_user/fos_user';
 @Injectable()
 export class MenuService {
 
-  adminRoles = ['ADMIN', 'DSOS'];
+  adminRoles = ['SA', 'ADSOS', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS'];
   etudiantRole = 'ETU';
 
   constructor(private location: Location,
@@ -25,7 +25,7 @@ export class MenuService {
   public getHorizontalMenuItems(currentUser: FosUser): Array<Menu> {
     return [
       new Menu(1, 'Accueil', '/', null, 'tachometer', null, false, 0, true),
-      new Menu(20, 'Mon dossier', '/mes-infos', null, 'info', null, false, 0,currentUser.profession.codeprofil=='ETU'),
+      new Menu(20, 'Mon dossier', '/mes-infos', null, 'info', null, false, 0,currentUser.idgroup.codegroupe=='ETU'),
       // new Menu (40, 'Modalités de paiement', '/modalite-paiement', null, 'credit-card-alt', null, false, 0),
       // new Menu (30, 'Ma bourse', null, null, 'money', null, true, 0),
       // new Menu (31, 'Les états', '/bourse', null, 'credit-card', null, false, 30),
@@ -33,7 +33,7 @@ export class MenuService {
       // new Menu (40, 'Demandes de documents', '/demandedocument', null, 'file-text-o', null, false, 0),
       new Menu(50, 'Liens utiles', null, null, 'link', null, true, 0, true),
       new Menu(51, 'Le système LMD', '/systeme-lmd', null, 'bookmark-o', null, false, 50, true),
-      new Menu(60, 'Admin', null, null, 'cog', null, true, 0, this.adminRoles.includes(currentUser.profession.codeprofil)),
+      new Menu(60, 'Admin', null, null, 'cog', null, true, 0, this.adminRoles.includes(currentUser.idgroup.codegroupe)),
       // new Menu (61, 'Inscriptions', '/inscriptionacad', null, 'pencil', null, false, 60),
       // new Menu (62, 'Dossiers Etudiant', '/dossieretudiant', null, 'folder', null, false, 60),
       new Menu(62, 'Classes', '/classe', null, 'folder', null, false, 60, true),

@@ -15,7 +15,7 @@ import { TypedocumentService } from '../typedocument.service';
 })
 export class DocumentUploadComponent implements OnInit {
   currentUser: FosUser;
-  typeDocuments: Typedocument[];
+  typeDocuments: Typedocument[] = [];
   selectedTypeDocument: Typedocument;
   selectedDocumentEtudiant: DocumentEtudiant;
   documentEtudiant: DocumentEtudiant = new DocumentEtudiant();
@@ -236,7 +236,8 @@ export class DocumentUploadComponent implements OnInit {
   }
 
   isAlreadyAdded(typeDocument: Typedocument) {
-    return this.associatedDocuments.map((doc) => doc.typeDocument.id).includes(typeDocument.id);
+    return this.associatedDocuments.map((doc) => doc.typeDocument.id)
+    .includes(typeDocument.id);
   }
 
   findCorrespondingDocument(typeDocument: Typedocument) {

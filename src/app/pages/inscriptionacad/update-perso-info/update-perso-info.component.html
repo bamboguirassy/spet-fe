@@ -55,9 +55,9 @@
                             </app-form-field-validation-message>
                         </div>
                         <div class="card border-white bg-white col-sm-12">
-                            <label for="Enfant"> Nombre Enfant(s)</label>
+                            <label for="nombreEnfant"> Nombre Enfant(s)</label>
                             <input [required]="true" [(ngModel)]="etudiant.nbreenfant" type="number"
-                                class="form-control" name="Enfant" min="0" #nombreEnfant="ngModel">
+                                class="form-control" name="nombreEnfant" id="nombreEnfant" min="0" #nombreEnfant="ngModel">
                             <app-form-field-validation-message [formField]="nombreEnfant">
                             </app-form-field-validation-message>
                         </div>

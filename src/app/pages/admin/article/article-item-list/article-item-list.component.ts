@@ -18,8 +18,6 @@ export class ArticleItemListComponent implements OnInit {
   findArticlePublie(){
     this.articleServ.findArticlePublie()
       .subscribe((data: any)=>{
-        console.log(data);
-        
           this.articlePublies = data;
           //console.log('articles publies: '+ JSON.stringify(this.articlePublies));
       },(err)=>{
