@@ -26,19 +26,19 @@ export class TypedocumentService {
   }
 
   update(typedocument: Typedocument) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+typedocument.id+'/edit', typedocument);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + typedocument.id + '/edit', typedocument);
   }
 
   clone(original: Typedocument, clone: Typedocument) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+original.id+'/clone', clone);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + original.id + '/clone', clone);
   }
 
   remove(typedocument: Typedocument) {
-    return this.httpSrv.delete(this.getRoutePrefixWithSlash()+typedocument.id);
+    return this.httpSrv.delete(this.getRoutePrefixWithSlash() + typedocument.id);
   }
 
   removeSelection(typedocuments: Typedocument[]) {
-    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',typedocuments);
+    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', typedocuments);
   }
 
   findInputDocuments() {
@@ -47,7 +47,11 @@ export class TypedocumentService {
 
   sendMailForQuery(typeDocument: Typedocument, etudiant: Etudiant) {
     return this.httpSrv.get(`${this.getRoutePrefixWithSlash()}send-query-mail/${typeDocument.id}/etudiant/${etudiant.id}`)
-  } 
+  }
+
+  sendCustomMail(title: string, etudiant: Etudiant) {
+    return this.httpSrv.post(`${this.getRoutePrefixWithSlash()}send-custom/etudiant/${etudiant.id}`, { title })
+  }
 
 
   public getRoutePrefix(): string {
@@ -55,7 +59,7 @@ export class TypedocumentService {
   }
 
   private getRoutePrefixWithSlash(): string {
-    return this.routePrefix+'/';
+    return this.routePrefix + '/';
   }
 
 }
