@@ -25,5 +25,4 @@ export class DashboardComponent implements AfterViewInit, OnInit {
         document.getElementById('preloader').classList.add('hide');
     }
 
-
 }

@@ -45,6 +45,8 @@ export class InfosInscriptionComponent implements OnInit {
       // si paiement déja effectué, mettre le montant payé
       this.inscriptionacad.montantinscriptionacad = this.preinscription.montant;
       this.inscriptionacad.idregimeinscription = this.preinscription.idregimeinscription.id;
+      this.inscriptionacad.numquittance = this.preinscription.numeroTransaction;
+
     }
   }
 
