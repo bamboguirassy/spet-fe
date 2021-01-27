@@ -56,8 +56,7 @@ const routes: Routes = [
       },
       {
         path: 'mes-infos', component: MesInfosComponent,
-        
-        data: { breadcrumb: 'Mon compte' }, resolve: { etudiant: OneEtudiantResolver }
+        data: { breadcrumb: 'Mon compte' }
       },
       {
         path: 'bourse', component: BourseComponent,

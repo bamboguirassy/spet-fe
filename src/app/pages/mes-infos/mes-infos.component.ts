@@ -5,6 +5,7 @@ import { Etudiant } from '../etudiant/etudiant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FosUser } from '../fos_user/fos_user';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { first, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mes-infos',
@@ -26,14 +27,23 @@ export class MesInfosComponent implements OnInit {
 
   }
 
+  getMonCompte() {
+    return this.etudiantSrv.findMonCompteEtudiant()
+      .pipe(first())
+      .subscribe((data: any) => {
+        this.etudiant = data;
+      }, error => {
+        this.etudiantSrv.httpSrv.handleError(error);
+      });
+  }
+
   ngOnInit() {
-    if (this.activatedRoute.snapshot.data.etudiant.error) {
-      confirm(this.activatedRoute.snapshot.data.etudiant.error.error.message);
-      this.router.navigate(['login']);
-    } else {
-      this.etudiant = this.activatedRoute.snapshot.data.etudiant;
-    }
-    this.authSrv.currentUserProvider.subscribe(data => this.currentUser = data);
+    this.authSrv.currentUserProvider.subscribe(data => {
+      this.currentUser = data;
+      if (this.currentUser.idgroup.codegroupe == 'ETU') {
+        this.getMonCompte();
+      }
+    });
   }
 
 }
