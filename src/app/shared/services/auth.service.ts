@@ -36,11 +36,11 @@ export class AuthService {
             this.logout();
           }
           resolve(this.currentUser);
-          if (this.currentUser.idgroup.codegroupe != 'MEDECIN') {
-            this.httpSrv.router.navigate(['/']);
-          }
         },
           error => {
+            if(error.error.code==401) {
+              this.httpSrv.router.navigate(['login']);
+            }
             resolve(false);
           });
     });
