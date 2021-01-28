@@ -25,7 +25,7 @@ export class HttpService {
               public router: Router) {
     this.customUrl = 'http://127.0.0.1:8000/api/';
     //this.urlValidEmail = 'https://api.emailverifyapi.com/v3/lookups/json?key=5BA3C4B98EAE2C68&email=';
-     //this.customUrl = 'https://gpe-ws.univ-thies.sn/api/';
+   // this.customUrl = 'https://gpe-ws.univ-thies.sn/api/';
   }
 
   createAuthorizationHeaderWithProgress(): any {

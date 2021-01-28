@@ -22,24 +22,27 @@ export class AuthService {
   }
 
   getCurrentUser() {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
       this.httpSrv.get('auth/current_user/')
-      .pipe(first())
-      .subscribe((data: any) => {
-        this.currentUser = data;
-        this.currentUserManager.next(data);
-        if (this.currentUser.idgroup && this.currentUser.idgroup.codegroupe === 'MEDECIN') {
-         /* this.router.navigate(['visite-medicale']);*/
-        }
-        if (!['ADMIN', 'ETU', 'DSOS','SA','DIR_DSOS','ADSOS'].includes(this.currentUser.idgroup.codegroupe)) {
-          this.httpSrv.notificationSrv.showError("Vous n'êtes pas autorisé à vous connecter à cette application");
-          this.logout();
-        }
-        resolve(this.currentUser);
-      },
-        error => {
-          reject(error);
-        });
+        .pipe(first())
+        .subscribe((data: any) => {
+          this.currentUser = data;
+          this.currentUserManager.next(data);
+          if (this.currentUser.idgroup && this.currentUser.idgroup.codegroupe === 'MEDECIN') {
+            this.httpSrv.router.navigate(['visite-medicale']);
+          }
+          if (!['ADMIN', 'ETU', 'DSOS', 'SA', 'DIR_DSOS', 'ADSOS', 'MEDECIN'].includes(this.currentUser.idgroup.codegroupe)) {
+            this.httpSrv.notificationSrv.showError("Vous n'êtes pas autorisé à vous connecter à cette application");
+            this.logout();
+          }
+          resolve(this.currentUser);
+          if (this.currentUser.idgroup.codegroupe != 'MEDECIN') {
+            this.httpSrv.router.navigate(['/']);
+          }
+        },
+          error => {
+            resolve(false);
+          });
     });
   }
 
