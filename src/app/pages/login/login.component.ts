@@ -48,6 +48,7 @@ export class LoginComponent implements AfterViewInit {
             .subscribe((data: any) => {
                     this.tokenManager.setToken(data.token);
                     this.authSrv.getCurrentUser();
+                    this.router.navigate(['/']);
                 }, error => this.authSrv.httpSrv.handleError(error));
 
         }
