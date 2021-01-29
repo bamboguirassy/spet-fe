@@ -38,9 +38,9 @@ export class AuthService {
           resolve(this.currentUser);
         },
           error => {
-            if(error.error.code==401) {
+            /*if(error.error.code==401) {
               this.httpSrv.router.navigate(['login']);
-            }
+            }*/
             resolve(false);
           });
     });

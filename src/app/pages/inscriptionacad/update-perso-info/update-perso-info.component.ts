@@ -12,9 +12,9 @@ import { PaysService } from '../../pays/pays.service';
 export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
   @Input() etudiant: Etudiant;
   situationMatrimoniales: any[] = [];
-  handicaps: any[] = [];
+ // handicaps: any[] = [];
   orphelins: any[] = [];
-  typeHandicaps: any[] = [];
+  // typeHandicaps: any[] = [];
   pays: any[] = [];
   validerEmail: any;
   @Output() onUpdate: EventEmitter<any> = new EventEmitter();
@@ -43,9 +43,9 @@ export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.getSituationMatrimonialeValues();
-    this.getHandicapValues();
+   // this.getHandicapValues();
     this.getOrphelinValues();
-    this.getTypeHandicapValues();
+   // this.getTypeHandicapValues();
     this.getPays();
   }
 
@@ -56,13 +56,13 @@ export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
       }, error => this.etudiantSrv.httpSrv.handleError(error));
   }
 
-  getHandicapValues() {
+ /* getHandicapValues() {
     this.etudiantSrv.getHandicapValues()
       .subscribe((data: any) => {
         this.handicaps = data
       }, error => this.etudiantSrv.httpSrv.handleError(error));
 
-  }
+  }*/
 
   getOrphelinValues() {
     this.etudiantSrv.getOrphelinValues()
@@ -72,12 +72,12 @@ export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
 
   }
 
-  getTypeHandicapValues() {
+ /* getTypeHandicapValues() {
     this.etudiantSrv.getTypeHandicapValues()
       .subscribe((data: any) => {
         this.typeHandicaps = data
       }, error => this.etudiantSrv.httpSrv.handleError(error));
-  }
+  }*/
 
   getPays() {
     this.paysSrv.findAll()
