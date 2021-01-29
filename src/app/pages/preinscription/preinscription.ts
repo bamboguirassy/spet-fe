@@ -22,7 +22,7 @@ export class Preinscription {
     codeOperateur: string;
     datePaiement: string;
     numeroTransaction: string;
-    montant: string;
+    montant: any;
     paiementConfirme: boolean;
     nationalite: Pays;
     idregimeinscription: Regimeinscription;

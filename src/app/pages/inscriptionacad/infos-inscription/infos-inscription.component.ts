@@ -43,7 +43,8 @@ export class InfosInscriptionComponent implements OnInit {
         this.modepaiements = data;
       }, err => this.modepaiementSrv.httpSrv.handleError(err));
       // si paiement déja effectué, mettre le montant payé
-      this.inscriptionacad.montantinscriptionacad = this.preinscription.montant;
+      let montantPlusFrais = ((this.preinscription.montant*100)/(100-1.25))+5;
+      this.inscriptionacad.montantinscriptionacad = Math.round(montantPlusFrais);
       this.inscriptionacad.idregimeinscription = this.preinscription.idregimeinscription.id;
       this.inscriptionacad.numquittance = this.preinscription.numeroTransaction;
 
