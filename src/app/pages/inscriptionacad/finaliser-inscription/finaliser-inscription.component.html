@@ -3,7 +3,8 @@
 <p>
     Vous êtes sur le point de finaliser votre inscription en <b>{{preinscription?.idniveau?.libelleniveau}}</b> pour
     l'année académique
-    <b>{{preinscription?.idanneeacad?.libelleanneeacad}}</b> pour la filiere <b>{{preinscription?.idfiliere?.codefiliere}}</b>.<br>
+    <b>{{preinscription?.idanneeacad?.libelleanneeacad}}</b> pour la filiere
+    <b>{{preinscription?.idfiliere?.codefiliere}}</b>.<br>
     Vous êtes admis par <b>{{preinscription?.idtypeadmission?.libelletypeadmission}}</b> comme
     <b>
         <span class="badge badge-success" *ngIf="preinscription?.passage=='P'">Passant</span>
@@ -36,7 +37,8 @@
                     <update-perso-info (onUpdate)="next()" [etudiant]="etudiant"
                         *ngIf="(step.name=='Information Personnelle') && etudiant"></update-perso-info>
 
-                    <infos-inscription (onPrevious)="prev()" [inscriptionacad]="inscriptionacad" (onSave)="handleInscriptionChange($event)"
+                    <infos-inscription (onPrevious)="prev()" [inscriptionacad]="inscriptionacad"
+                        (onSave)="handleInscriptionChange($event)"
                         *ngIf="(step.name=='Information Inscription') && preinscription"
                         [preinscription]="preinscription" [etudiant]="etudiant"></infos-inscription>
 
@@ -101,12 +103,18 @@
                         <i class="fa fa-check text-success" aria-hidden="true"></i>
                         <h2 class="p-3"><b>Inscription Reussie !</b></h2>
                         <p>Vous pouvez suivre votre dossier sur votre espace étudiant. <br>
-                            Il faudra nécessairement téléverser tous les documents nécessaires à votre dossier à partir de votre espace étudiant. <br>
-                            Une fois l'inscription définitivement validée, la carte et le certificat d'inscription seront tirés et remis au Service de la scolarité de votre établissement ou à votre responsable de classe.<br>
-                            Pour les retirer il va falloir effectuer votre visite médicale pour l'année universitaire auprès du médecin du Crous, sauf si vous en êtes exempté. <br>
-                            Pour de plus amples informations, vous pouvez contacter <b> <a href="mailto:dsos@univ-thies.sn">dsos@univ-thies.sn</a> </b>  en précisant toujours votre numéro de dossier avec un objet clair et explicite.
+                            Il faudra nécessairement téléverser tous les documents nécessaires à votre dossier à partir
+                            de votre espace étudiant. <br>
+                            Une fois l'inscription définitivement validée, la carte et le certificat d'inscription
+                            seront tirés et remis au Service de la scolarité de votre établissement ou à votre
+                            responsable de classe.<br>
+                            Pour les retirer il va falloir effectuer votre visite médicale pour l'année universitaire
+                            auprès du médecin du Crous, sauf si vous en êtes exempté. <br>
+                            Pour de plus amples informations, vous pouvez contacter <b> <a
+                                    href="mailto:dsos@univ-thies.sn">dsos@univ-thies.sn</a> </b> en précisant toujours
+                            votre numéro de dossier avec un objet clair et explicite.
                         </p>
-                        
+
                         <i class="fa fa-print text-muted" aria-hidden="true"></i>
                     </div>
                 </div>
