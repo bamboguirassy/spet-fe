@@ -119,7 +119,6 @@ export class FinaliserInscriptionComponent implements OnInit {
   }
 
   public confirm() {
-    console.log('testee => '+this.preinscription.paiementConfirme);
     if(this.preinscription.paiementConfirme) {
       this.inscriptionacadSrv.confirmPrepaidInscription(this.inscriptionacad)
       .subscribe(()=>{
