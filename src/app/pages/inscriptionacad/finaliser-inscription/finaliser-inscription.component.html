@@ -38,7 +38,6 @@
 
                     <infos-inscription (onPrevious)="prev()" [inscriptionacad]="inscriptionacad" (onSave)="handleInscriptionChange($event)"
                         *ngIf="(step.name=='Information Inscription') && preinscription"
-                        .
                         [preinscription]="preinscription" [etudiant]="etudiant"></infos-inscription>
 
                     <update-photo (onPrevious)="prev()" (onUpload)="next()" [etudiant]="etudiant"

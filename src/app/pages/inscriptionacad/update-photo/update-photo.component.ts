@@ -19,6 +19,7 @@ export class UpdatePhotoComponent implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
   filename: string;
+  isLaoder: any;
 
   constructor(public etudiantSrv: EtudiantService) { }
 
@@ -44,10 +45,14 @@ export class UpdatePhotoComponent implements OnInit {
   }
 
   fileChangeEvent(event: any): void {
+    this.isLaoder = true; 
     this.imageChangedEvent = event;
     let file: File = this.imageChangedEvent.target.files[0];
     this.filename = file.name;
     console.log(this.filename);
+    this.isLaoder = false; 
+    console.log(this.isLaoder+" test");
+    
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
@@ -55,9 +60,12 @@ export class UpdatePhotoComponent implements OnInit {
   }
   imageLoaded() {
     // show cropper
+    //alert("chargement img....."); 
   }
   cropperReady() {
-    // cropper ready
+    // cropper readyng serv  
+   // this.isLaoder = false; 
+    //alert("chargement photo....."); 
   }
   loadImageFailed() {
     // show message
