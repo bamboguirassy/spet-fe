@@ -25,19 +25,19 @@
                     <div class="col-md-6 text-right"><strong class="d-inline-block">{{etudiant?.cni}}</strong></div>
                 </div>
                 <div class="dropdown-divider w-100"></div>
-                <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
+                <div *ngIf="isInscriptionActive" class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
                     <!-- <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
                         class="btn btn-outline-primary  btn-block mb-1 mr-2">
                         <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
                     </button> -->
-                    <button *ngIf="isInscriptionActive" (click)="openModal(modalContent, null)" type="button"
+                    <button (click)="openModal(modalContent, null)" type="button"
                         class="btn btn-outline-warning btn-block">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Mettre à jour mes informations
                     </button>
 
                 </div>
                 <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
-                    <span class="badge badge-primary  mb-1 mr-2"> Vu dernierèment le {{currentUser?.lastLogin|date:'dd/MM/yyyy à hh:mm:ss'}}
+                    <span class="badge badge-primary  mb-1 mr-2"> Vu dernierèment le {{currentUser?.lastLogin|date:'dd/MM/yyyy à HH:mm:ss'}}
                         
                         <span *ngIf="!currentUser?.email" class="badge badge-danger">Pas de compte</span>
                     </span>
@@ -55,7 +55,7 @@
     </div>
     <div class="col-lg-8">
         <div class="row">
-            <div class="col-sm-12 mb-1 d-none d-sm-none d-md-none d-lg-block">
+            <div *ngIf="isInscriptionActive || currentUser?.profession?.codeprofil!='ETU'" class="col-sm-12 mb-1 d-none d-sm-none d-md-none d-lg-block">
                 <p-toolbar>
                     <div class="ui-toolbar-group-right">
                         <!-- <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"

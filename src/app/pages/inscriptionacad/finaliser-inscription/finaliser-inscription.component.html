@@ -36,8 +36,9 @@
                     <update-perso-info (onUpdate)="next()" [etudiant]="etudiant"
                         *ngIf="(step.name=='Information Personnelle') && etudiant"></update-perso-info>
 
-                    <infos-inscription (onPrevious)="prev()" [inscriptionacad]="inscriptionacad" (onSave)="next()"
+                    <infos-inscription (onPrevious)="prev()" [inscriptionacad]="inscriptionacad" (onSave)="handleInscriptionChange($event)"
                         *ngIf="(step.name=='Information Inscription') && preinscription"
+                        .
                         [preinscription]="preinscription" [etudiant]="etudiant"></infos-inscription>
 
                     <update-photo (onPrevious)="prev()" (onUpload)="next()" [etudiant]="etudiant"
