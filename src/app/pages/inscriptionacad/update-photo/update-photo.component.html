@@ -1,11 +1,11 @@
-<div class="container" *ngIf="isLaoder">
+<div class="container" [hidden] ="!isLaoding">
     <div class="row">
         <div class="col-12">
             <img src="/assets/img/loader-photo.gif" alt="">
         </div>
     </div>
 </div>
-<div class="container" *ngIf="!isLaoder">
+<div class="container" [hidden] ="isLaoding">
     <div class="row" style="margin-top: 5%;">
         <div class="col-12 col-md-6" *ngIf="etudiant?.photoLink">
             <img [src]="etudiant?.photoLink" alt="Photo de l'étudiant">
