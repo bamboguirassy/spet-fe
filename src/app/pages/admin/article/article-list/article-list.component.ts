@@ -96,7 +96,7 @@ export class ArticleListComponent implements OnInit {
   updateArticle(article: any) {
     article.publie = !article.publie;
     this.articleSrv.update(article)
-      .subscribe((data) =>
+      .subscribe(() => {},
         (error) => this.articleSrv.httpSrv.handleError(error));
   }
 

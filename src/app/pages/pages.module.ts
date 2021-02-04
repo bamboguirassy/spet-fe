@@ -89,6 +89,8 @@ import { ClasseShowComponent } from './classe/classe-show/classe-show.component'
 import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.component';
 import { ArticleItemComponent } from './admin/article/article-item/article-item.component';
 import { ArticleItemListComponent } from './admin/article/article-item-list/article-item-list.component';
+import { RappelInfoSensibleComponent } from './dashboard/rappel-info-sensible/rappel-info-sensible.component';
+import { ServiceElectronicListComponent } from './dashboard/service-electronic-list/service-electronic-list.component';
 
 @NgModule({
   declarations: [
@@ -141,7 +143,9 @@ import { ArticleItemListComponent } from './admin/article/article-item-list/arti
     ArticleShowComponent,
     EtudiantShowComponent,
     ArticleItemComponent,
-    ArticleItemListComponent
+    ArticleItemListComponent,
+    RappelInfoSensibleComponent,
+    ServiceElectronicListComponent
   ],
   imports: [
     CommonModule,

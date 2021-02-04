@@ -23,7 +23,6 @@ export class ArticleCloneComponent implements OnInit {
   }
 
   cloneArticle() {
-    console.log(this.article);
     this.articleSrv.clone(this.original, this.article)
       .subscribe((data: any) => {
         this.router.navigate([this.articleSrv.getRoutePrefix(), data.id]);

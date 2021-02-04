@@ -49,23 +49,18 @@ export class UpdatePhotoComponent implements OnInit {
     this.imageChangedEvent = event;
     let file: File = this.imageChangedEvent.target.files[0];
     this.filename = file.name;
-    console.log(this.filename);
    // this.isLaoding = false; 
-    //console.log(this.isLaoder+" test");
     
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
-    console.log(event);
   }
   imageLoaded() {
     // show cropper
-    //alert("chargement img....."); 
     this.isLaoding = false; 
   }
   cropperReady() {
     // cropper readyng serv  
-    //alert("chargement photo....."); 
   }
   loadImageFailed() {
     // show message
