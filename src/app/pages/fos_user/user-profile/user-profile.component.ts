@@ -1,3 +1,4 @@
+import { FosUserService } from './../fos_user.service';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Etudiant } from '../../etudiant/etudiant';
@@ -28,7 +29,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute, public authSrv: AuthService, public modalSrv: NgbModal,
-    public notificationSrv: NotificationService
+    public notificationSrv: NotificationService, private fosUserServ: FosUserService
   ) { }
 
   ngOnInit() {
@@ -56,7 +57,14 @@ export class UserProfileComponent implements OnInit {
     } else if(newPassword !== newPasswordConfirm) {
       this.notificationSrv.showWarning('Les deux mots de passe ne concordent pas.');
     } else {
-      // commit data
+      this.fosUserServ.changerPassword(this.newCredentials).subscribe(()=>{
+        this.notificationSrv.showWarning('Le mot de passe est changé succès.');
+        this.newCredentials =  { currentPassword: '', newPassword: '', newPasswordConfirm: '' };
+        this.dissmissEditModal('cancel');
+      },
+          (err)=>{
+            this.fosUserServ.httpSrv.handleError
+          });
     }
   }
 

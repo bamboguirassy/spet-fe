@@ -52,7 +52,8 @@ export class FinaliserInscriptionComponent implements OnInit {
     if (!this.inscriptionacad.id) {
       this.inscriptionacadSrv.httpSrv.notificationSrv.showError("Il faut d'abord valider l'inscription !!!");
     } else {
-      sendPaymentInfos(this.inscriptionacad.id, 'UNITH11586', '9Cev0^7!4Ikp@_6Wtk%zelWbY_zK9rGQDI2UnE?zfc5jOJfVmc', 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl()+'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl()+'payment-failed', this.preinscription.montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
+      let montant = Math.round(((this.preinscription.montant * 100) / (100 - 1.25)) + 5);
+      sendPaymentInfos(this.inscriptionacad.id, 'UNITH11586', '9Cev0^7!4Ikp@_6Wtk%zelWbY_zK9rGQDI2UnE?zfc5jOJfVmc', 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-failed', montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
     }
   }
 
@@ -119,16 +120,20 @@ export class FinaliserInscriptionComponent implements OnInit {
   }
 
   public confirm() {
-    console.log('testee => '+this.preinscription.paiementConfirme);
-    if(this.preinscription.paiementConfirme) {
+    if (this.preinscription.paiementConfirme) {
       this.inscriptionacadSrv.confirmPrepaidInscription(this.inscriptionacad)
-      .subscribe(()=>{
-        this.steps.forEach(step => step.valid = true);
-        this.confirmed = true;
-      },err=>this.inscriptionacadSrv.httpSrv.handleError(err));
+        .subscribe(() => {
+          this.steps.forEach(step => step.valid = true);
+          this.confirmed = true;
+        }, err => this.inscriptionacadSrv.httpSrv.handleError(err));
     } else {
       this.inscriptionacadSrv.httpSrv.notificationSrv.showError("Le paiement doit être confirmé d'abord !");
     }
+  }
+
+  handleInscriptionChange(inscriptionAcad: Inscriptionacad) {
+    this.inscriptionacad = inscriptionAcad;
+    this.next();
   }
 
 }

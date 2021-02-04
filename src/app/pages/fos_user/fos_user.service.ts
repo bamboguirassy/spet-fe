@@ -27,6 +27,9 @@ export class FosUserService {
   updatePassword(updateData: any) {
     return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'public/update-password/', updateData);
   }
+  changerPassword(updateData: any) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'change-password/', updateData);
+  }
 
   checkToken(token: string) {
     return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'public/check-token/', token);

@@ -11,90 +11,7 @@
                     </p>
                     <h2>Bienvenue dans votre <b>Espace Etudiant</b></h2>
                 </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div class="card-group">
-                            <div class="card" routerLinkActive="router-link-active">
-                                <!-- <img [routerLink]="['/mes-infos']" class="card-img-top w-100"
-                                    src="assets/img/dossier.jpg" alt="Dossier"> -->
-                                <div class="card-body">
-                                    <h4 class="card-title">Mon dossier</h4>
-                                    <p class="card-text">
-                                        L'Université de Thiès demande aux bacheliers de ne communiquer, en aucun cas,
-                                        ces informations de
-                                        connexion à l'espace étudiant à des tiers :
-                                    </p>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            - INE
-                                        </li>
-                                        <li>
-                                            - Numéro de carte d'étudiant
-                                        </li>
-                                        <li>
-                                            - Adresse Email
-                                        </li>
-                                        <li>
-                                            - Mot de passe
-                                        </li>
-                                    </ul>
-                                    <p class="card-text">
-                                        Elles sont strictement personnelles et doivent être soigneusement conservées par
-                                        l'étudiant. Il est absolument interdit de recourir à des tiers ou des
-                                        associations, à quelque titre que ce soit, dans le cadre des opérations
-                                        réalisées en vue de l'inscription.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <i class="fa fa-link" aria-hidden="true"> </i>
-                                            Services électroniques aux étudiants
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="card card-responsive-sm">
-                                                <div class="list-group">
-                                                    <a href="http://mail.univ-thies.sn/" target='_blank'
-                                                        class="list-group-item list-group-item-action">
-                                                        <i class="pi pi-external-link" style="font-size: 18px;"></i>
-                                                        Accéder à votre boîte mail institutionnelle
-                                                    </a>
-                                                    <a href="http://www.scholarvox.com/" target='_blank'
-                                                        class="list-group-item list-group-item-action">
-                                                        <i class="pi pi-external-link" style="font-size: 18px;"></i>
-                                                        Accéder à la bibliothèque numérique LMD
-                                                    </a>
-                                                    <a href="http://fad.univ-thies.sn/" target='_blank'
-                                                        class="list-group-item list-group-item-action">
-                                                        <i class="pi pi-external-link" style="font-size: 18px;"></i>
-                                                        Accéder à la
-                                                        plateforme de formation à distance</a>
-                                                    <a href="https://www.univ-thies.sn/" target='_blank'
-                                                        class="list-group-item list-group-item-action">
-                                                        <i class="pi pi-external-link" style="font-size: 18px;"></i>
-                                                        Accéder au site
-                                                        officiel de l'Université</a>
-                                                    <a href="https://bibliotheque.univ-thies.sn/" target='_blank'
-                                                        class="list-group-item list-group-item-action">
-                                                        <i class="pi pi-external-link" style="font-size: 18px;"></i>
-                                                        Accéder à la
-                                                        bibliothèque numérique Universitaire</a>
-                                                    <a href="http://support.univ-thies.sn/" target='_blank'
-                                                        class="list-group-item list-group-item-action">
-                                                        <i class="pi pi-external-link" style="font-size: 18px;"></i>
-                                                        Support IT de la
-                                                        DSI de l'Université</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- <h1>GPE</h1>
                 <div class="row">
                     <div class="col">
@@ -136,14 +53,24 @@
                         </div>
                     </div>
                 </div> -->
-                
+
             </div>
-           
+
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-12">
-        <app-article-item-list></app-article-item-list>
+<div class="row mb-4">
+    <div class="col-12 col-md-6" [hidden]="!articles?.length">
+        <app-article-item-list (onDataLoaded)="assignArticles($event)"></app-article-item-list>
+    </div>
+    <div [ngClass]="{'col-12': true, 'col-md-6':articles?.length}" class="col-12 col-md-6">
+        <div class="row">
+            <div [ngClass]="{'col-md-6': !articles?.length, 'col-12': articles?.length}">
+                <app-service-electronic-list></app-service-electronic-list>
+            </div>
+            <div [ngClass]="{'col-md-6': !articles?.length, 'col-12 mt-1': articles?.length}">
+                <app-rappel-info-sensible></app-rappel-info-sensible>
+            </div>
+        </div>
     </div>
 </div>
