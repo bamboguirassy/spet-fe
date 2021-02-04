@@ -87,11 +87,10 @@ export class RegisterComponent implements AfterViewInit {
                 this.etudiantVerifier = data;
                 this.etudiantTrouver = true;
                 this.etudiantNonTrouver = false;
-                console.log(this.etudiantVerifier);
             },(err)=>{
                 this.etudiantTrouver = false;
                 this.etudiantNonTrouver = true;
-                console.log(err);
+                this.etudiantServ.httpSrv.handleError(err);
             });
             
     }

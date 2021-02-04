@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Article } from '../article';
 import { ArticleService } from '../article.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { ArticleService } from '../article.service';
 })
 export class ArticleItemListComponent implements OnInit {
   articlePublies: any[] = [];
+  @Output() onDataLoaded: EventEmitter<Article[]> = new EventEmitter();
 
   constructor(private articleServ: ArticleService) { }
 
@@ -19,9 +21,9 @@ export class ArticleItemListComponent implements OnInit {
     this.articleServ.findArticlePublie()
       .subscribe((data: any)=>{
           this.articlePublies = data;
-          //console.log('articles publies: '+ JSON.stringify(this.articlePublies));
+          this.onDataLoaded.emit(this.articlePublies);
       },(err)=>{
-          console.log(err);
+          this.articleServ.httpSrv.handleError(err);
       })
   }
 

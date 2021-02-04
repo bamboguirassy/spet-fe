@@ -8,7 +8,7 @@ $card-height: 180px;
     -moz-perspective: 800px;
     -o-perspective: 800px;
     perspective: 800px;
-    .content{
+    .content {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -20,7 +20,8 @@ $card-height: 180px;
         -moz-transform-style: preserve-3d;
         -o-transform-style: preserve-3d;
         transform-style: preserve-3d;
-        div.front, div.back{
+        div.front,
+        div.back {
             height: 100%;
             width: 100%;
             position: absolute;
@@ -29,45 +30,49 @@ $card-height: 180px;
             -moz-backface-visibility: hidden;
             -o-backface-visibility: hidden;
             backface-visibility: hidden;
-            .card{
+            .card {
                 height: $card-height;
             }
         }
-        div.back{
+        div.back {
             z-index: 1;
-            -webkit-transform: rotateY( 180deg );
-            -moz-transform: rotateY( 180deg );
-            -o-transform: rotateY( 180deg );
-            transform: rotateY( 180deg );
-            .dropdown{
+            -webkit-transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+            -o-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+            .dropdown {
                 width: 100%;
-                .dropdown-menu{
+                .dropdown-menu {
                     width: 100%;
                     margin-top: -1px;
-                    a{
+                    a {
                         color: #666;
-                        .fa-check{
-                            color: #378D3B;
+                        .fa-check {
+                            color: #378d3b;
                         }
-                        .fa-times{
-                            color: #D22E2E;
+                        .fa-times {
+                            color: #d22e2e;
                         }
                     }
                 }
             }
         }
-        &.flipped{
-            -webkit-transform: rotateY( 180deg );
-            -moz-transform: rotateY( 180deg );
-            -o-transform: rotateY( 180deg );
-            transform: rotateY( 180deg );
+        &.flipped {
+            -webkit-transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+            -o-transform: rotateY(180deg);
+            transform: rotateY(180deg);
         }
     }
 }
 
-.z-index-1{
+.z-index-1 {
     z-index: 1;
 }
-.form{
+.form {
     width: 100%;
+}
+
+.p-tabview-panels {
+    overflow: auto;
 }

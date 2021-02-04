@@ -63,8 +63,7 @@ export class UserProfileComponent implements OnInit {
         this.dissmissEditModal('cancel');
       },
           (err)=>{
-            console.log(err);
-            
+            this.fosUserServ.httpSrv.handleError
           });
     }
   }
