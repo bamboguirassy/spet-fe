@@ -20,6 +20,10 @@ export class VisiteMedicaleService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }
 
+  findWithAtLeastOneInsacad() {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'with-inscriptionacad');
+  }
+
   create(visite_medicale: VisiteMedicale) {
     return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', visite_medicale);
   }
