@@ -12,13 +12,14 @@ import { PaysService } from '../../pays/pays.service';
 export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
   @Input() etudiant: Etudiant;
   situationMatrimoniales: any[] = [];
-  handicaps: any[] = [];
+ handicaps: any[] = [];
   orphelins: any[] = [];
   typeHandicaps: any[] = [];
   pays: any[] = [];
   validerEmail: any;
   @Output() onUpdate: EventEmitter<any> = new EventEmitter();
   typeHabitations = [
+    "Je n'ai pas de logement à Thiès",
     'Campus Social',
     'En location à Thiès',
     'Hébergé à Thiès par un tuteur',

@@ -48,4 +48,8 @@ export class ArticleService {
     return this.routePrefix+'/';
   }
 
+  findArticlePublie(){
+    return  this.httpSrv.get(this.getRoutePrefixWithSlash()+'public/publie');
+  }
+
 }

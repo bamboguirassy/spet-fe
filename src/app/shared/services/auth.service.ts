@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpService } from './http.service';
 import { FosUser } from 'src/app/pages/fos_user/fos_user';
-import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,23 +15,35 @@ export class AuthService {
 
   public localStorage = window.localStorage;
 
-  constructor(public httpSrv: HttpService, public router: Router) { }
+  constructor(private injector: Injector) { }
+
+  public get httpSrv(): HttpService {
+    return this.injector.get(HttpService);
+  }
 
   getCurrentUser() {
-    let req = this.httpSrv.get('auth/current_user/');
-    req.subscribe((data: any) => {
-      this.currentUserManager.next(data);
-      this.currentUser = data;
-      if (this.currentUser.idgroup && this.currentUser.idgroup.codegroupe === 'MEDECIN') {
-        this.router.navigate(['visite-medicale']);
-      }
-      if (!['ADMIN', 'ETU', 'DSOS'].includes(this.currentUser.profession.codeprofil)) {
-        this.httpSrv.notificationSrv.showError("Vous n'êtes pas autorisé à vous connecter à cette application");
-        this.logout();
-      }
-    },
-      error => { });
-    return req;
+    return new Promise((resolve, reject) => {
+      this.httpSrv.get('auth/current_user/')
+        .pipe(first())
+        .subscribe((data: any) => {
+          this.currentUser = data;
+          this.currentUserManager.next(data);
+          if (this.currentUser.idgroup && this.currentUser.idgroup.codegroupe === 'MEDECIN') {
+            this.httpSrv.router.navigate(['visite-medicale']);
+          }
+          if (!['ADMIN', 'ETU', 'DSOS', 'SA', 'DIR_DSOS', 'ADSOS', 'MEDECIN'].includes(this.currentUser.idgroup.codegroupe)) {
+            this.httpSrv.notificationSrv.showError("Vous n'êtes pas autorisé à vous connecter à cette application");
+            this.logout();
+          }
+          resolve(this.currentUser);
+        },
+          error => {
+            /*if(error.error.code==401) {
+              this.httpSrv.router.navigate(['login']);
+            }*/
+            resolve(false);
+          });
+    });
   }
 
   login(loginInformation: any) {

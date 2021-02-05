@@ -6,7 +6,7 @@ export class Inscriptionacad {
     dateinscacad: string;
     passage: string;
     etat: string;
-    montantinscriptionacad: string;
+    montantinscriptionacad: any;
     coutformation: string;
     numquittance: string;
     cartetiree: boolean;

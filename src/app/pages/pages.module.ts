@@ -89,6 +89,10 @@ import { ClasseShowComponent } from './classe/classe-show/classe-show.component'
 import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.component';
 import { VisiteMedicalDashboardComponent } from './visite_medical/visite-medical-dashboard/visite-medical-dashboard.component';
 import { VisiteMedicaleNewComponent } from './visite_medical/visite_medicale-new/visite_medicale-new.component';
+import { ArticleItemComponent } from './admin/article/article-item/article-item.component';
+import { ArticleItemListComponent } from './admin/article/article-item-list/article-item-list.component';
+import { RappelInfoSensibleComponent } from './dashboard/rappel-info-sensible/rappel-info-sensible.component';
+import { ServiceElectronicListComponent } from './dashboard/service-electronic-list/service-electronic-list.component';
 
 @NgModule({
   declarations: [
@@ -141,7 +145,11 @@ import { VisiteMedicaleNewComponent } from './visite_medical/visite_medicale-new
     ArticleShowComponent,
     EtudiantShowComponent,
     VisiteMedicalDashboardComponent,
-    VisiteMedicaleNewComponent
+    VisiteMedicaleNewComponent,
+    ArticleItemComponent,
+    ArticleItemListComponent,
+    RappelInfoSensibleComponent,
+    ServiceElectronicListComponent
   ],
   imports: [
     CommonModule,

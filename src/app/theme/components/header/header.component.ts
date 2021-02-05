@@ -39,7 +39,9 @@ export class HeaderComponent implements OnInit {
       .currentUserProvider
       .subscribe((user: any) => {
         this.currentUser = user;
-        this.menuItems = this.menuService.getHorizontalMenuItems(this.currentUser);
+        if(this.currentUser) {
+          this.menuItems = this.menuService.getHorizontalMenuItems(this.currentUser);
+        }
       }, error => {
         this
           .authSrv

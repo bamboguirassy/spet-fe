@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { MessageService } from 'primeng/api';
 
 @Injectable({
@@ -6,7 +6,11 @@ import { MessageService } from 'primeng/api';
 })
 export class NotificationService {
 
-  constructor(public messageService:MessageService) { }
+  constructor(private injector: Injector) { }
+
+  public get messageService(): MessageService {
+    return this.injector.get(MessageService);
+  }
 
   showError(message: any){
     this.messageService.add({ severity: 'error', summary: 'Attention', detail: message });

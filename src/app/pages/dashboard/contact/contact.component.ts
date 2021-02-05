@@ -35,7 +35,7 @@ export class ContactComponent implements OnInit {
     this.assistanceEmailSrv.sendMail(this.newMail)
       .subscribe(() => {
         this.contactForm.reset();
-      }, error => console.log(error));
+      }, error =>  this.assistanceEmailSrv.httpSrv.handleError(error));
   }
 
 

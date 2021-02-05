@@ -72,7 +72,6 @@ export class StatistiqueInscriptionComponent implements OnInit {
   }
 
   public onSelect(event) {
-    console.log(event);
   }
 
 

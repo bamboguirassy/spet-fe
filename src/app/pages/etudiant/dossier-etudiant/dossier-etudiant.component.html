@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-12">
-        <preinscription-active *ngIf="preinscriptionData" [preinscriptionData]="preinscriptionData">
+        <preinscription-active *ngIf="preinscriptionData?.length" [preinscriptionData]="preinscriptionData">
         </preinscription-active>
         <hr>
     </div>
@@ -25,21 +25,21 @@
                     <div class="col-md-6 text-right"><strong class="d-inline-block">{{etudiant?.cni}}</strong></div>
                 </div>
                 <div class="dropdown-divider w-100"></div>
-                <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
+                <div *ngIf="isInscriptionActive" class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
                     <!-- <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
                         class="btn btn-outline-primary  btn-block mb-1 mr-2">
                         <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
                     </button> -->
-                    <button *ngIf="isInscriptionActive" (click)="openModal(modalContent, null)" type="button"
+                    <button (click)="openModal(modalContent, null)" type="button"
                         class="btn btn-outline-warning btn-block">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Mettre à jour mes informations
                     </button>
 
                 </div>
                 <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
-                    <span class="badge badge-primary  mb-1 mr-2"> Vu dernierèment le {{user?.lastLogin|date:'dd/MM/yyyy à HH:ss'}}
+                    <span class="badge badge-primary  mb-1 mr-2"> Vu dernierèment le {{currentUser?.lastLogin|date:'dd/MM/yyyy à HH:mm:ss'}}
                         
-                        <span *ngIf="!user?.email" class="badge badge-danger">Pas de compte</span>
+                        <span *ngIf="!currentUser?.email" class="badge badge-danger">Pas de compte</span>
                     </span>
                 </div>
 
@@ -55,14 +55,14 @@
     </div>
     <div class="col-lg-8">
         <div class="row">
-            <div class="col-sm-12 mb-1 d-none d-sm-none d-md-none d-lg-block">
+            <div *ngIf="isInscriptionActive || currentUser?.profession?.codeprofil!='ETU'" class="col-sm-12 mb-1 d-none d-sm-none d-md-none d-lg-block">
                 <p-toolbar>
                     <div class="ui-toolbar-group-right">
                         <!-- <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
                             class="btn btn-outline-primary mb-1 mr-2">
                             <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
                         </button> -->
-                        <button type="button" (click)="ModalSendEmail(content)" class="btn btn-outline-primary mb-1">
+                        <button type="button" *ngIf="currentUser?.profession?.codeprofil!='ETU'" (click)="modalSendEmail(content)" class="btn btn-outline-primary mb-1">
                             <i class="fa fa-envelope" aria-hidden="true"></i> Envoyer un email
                         </button>
                         <button *ngIf="isInscriptionActive" (click)="openModal(modalContent, null)" type="button"
@@ -505,7 +505,7 @@
                             <h3 class="card-title">Autres informations</h3>
                             <div class="card-text">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-6">
+                                    <!-- <div class="col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="col-form-label form-control-label" for="handicap">Avez vous un
                                                 handicap ?</label>
@@ -533,7 +533,7 @@
                                             <textarea class="form-control" name="descriptionHandicap"
                                                 id="descriptionHandicap" cols="30" rows="10"></textarea>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="col-form-label form-control-label" for="orphelin">Êtes-vous
@@ -794,9 +794,6 @@
 
                     </div>
                 </div>
-
-
-
             </div>
             <div class="modal-footer">
                 <button [disabled]="emailForm.invalid" type="submit" (click)="sendEmail()"

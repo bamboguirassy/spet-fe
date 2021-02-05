@@ -24,13 +24,13 @@ export class DossierEtudiantComponent implements OnInit {
   content: any;
   selectedRegion: any;
   selectedSituationMatromoniale: any;
-  selectedHandicap: any;
-  selectedTypeHandicap: any;
+ /* selectedHandicap: any;
+  selectedTypeHandicap: any;*/
   selectedOrphelin: any;
   selectedTypeOrphelin: any;
   updateForm: Etudiant;
   isInscriptionActive: any;
-  preinscriptionData: any[];
+  preinscriptionData: any[] = [];
  email = {objet: '', contenu: ''};
 
 
@@ -65,17 +65,17 @@ export class DossierEtudiantComponent implements OnInit {
     { value: 'V', label: 'Veuf (ve)' }
   ];
 
-  handicaps = [
+ /* handicaps = [
     { value: 'Non', label: 'Non' },
     { value: 'Oui', label: 'Oui' },
-  ];
+  ];*/
 
   orphelins = [
     { value: 'Non', label: 'Non' },
     { value: 'Oui', label: 'Oui' },
   ];
 
-  handicapTypes = [
+  /*handicapTypes = [
     { type: 'Handicap mental (ou déficience intellectuelle)', libelle: 'Handicap mental (ou déficience intellectuelle' },
     { type: 'Handicap auditif', libelle: 'Handicap auditif' },
     { type: 'Handicap visuel', libelle: 'Handicap visuel' },
@@ -88,7 +88,7 @@ export class DossierEtudiantComponent implements OnInit {
     { type: 'Maladies dégénératives', libelle: 'Maladies dégénératives' },
     { type: 'Troubles dys', libelle: 'Troubles dys' }
 
-  ];
+  ];*/
 
   typeOrphelins = [
     { type: 'Orphelin de père', libelle: 'Orphelin de père' },
@@ -119,19 +119,19 @@ export class DossierEtudiantComponent implements OnInit {
       }
     });
     // set type handicap
-    this.handicapTypes.forEach(typeHandicap => {
+   /* this.handicapTypes.forEach(typeHandicap => {
       if (typeHandicap.type === this.etudiant.typeHandicap) {
         this.selectedTypeHandicap = typeHandicap;
         return;
       }
-    });
+    });*/
     // set handicap
-    this.handicaps.forEach(handicap => {
+    /*this.handicaps.forEach(handicap => {
       if (handicap.value === this.etudiant.handicap) {
         this.selectedHandicap = handicap;
         return;
       }
-    });
+    });*/
     // set situation matrimoniale
     this.situationMatrimoniales.forEach(situationMatrimoniale => {
       if (situationMatrimoniale.value === this.etudiant.situationMatrimoniale) {
@@ -157,7 +157,6 @@ export class DossierEtudiantComponent implements OnInit {
     this.setDefaultValues();
 
     this.authSrv.currentUserProvider.subscribe(data => this.currentUser = data);
-    this.findUserByEmail();
     this.verifierInscriptionEtudiantActif();
     this.loadPreinscriptionActives();
 
@@ -172,7 +171,7 @@ export class DossierEtudiantComponent implements OnInit {
     });
   }
 
-  ModalSendEmail(content) {
+  modalSendEmail(content) {
     this.modalService.open(content, {
       size: 'lg',
       keyboard: false,
@@ -199,13 +198,13 @@ export class DossierEtudiantComponent implements OnInit {
   updateEtudiant() {
     this.updateForm.situationMatrimoniale = this.selectedSituationMatromoniale.value;
     this.updateForm.orphelin = this.selectedOrphelin.value;
-    this.updateForm.handicap = this.selectedHandicap.value;
+   /* this.updateForm.handicap = this.selectedHandicap.value;
     if (this.selectedHandicap.value === 'Oui') {
       this.updateForm.typeHandicap = this.selectedTypeHandicap.type;
     } else {
       this.updateForm.typeHandicap = '';
       this.updateForm.descriptionHandicap = '';
-    }
+    }*/
     if (this.selectedOrphelin.value === 'Oui') {
       this.updateForm.typeOrphelin = this.selectedTypeOrphelin.type;
     } else {
@@ -229,13 +228,6 @@ export class DossierEtudiantComponent implements OnInit {
     this.etudiantSrv.httpSrv.notificationSrv.showSuccess('Document chargé avec succés.')
   }
 
-  findUserByEmail() {
-    this.etudiantSrv.findUserByEmail(this.etudiant).subscribe((data: any) => {
-      this.user = data;
-    }, error => this.etudiantSrv.httpSrv.handleError(error))
-
-
-  }
   sendEmail() {
     this.etudiantSrv.sendEmail(this.etudiant,this.email).subscribe((data: any) => {
       this.etudiant = data;
@@ -249,16 +241,15 @@ export class DossierEtudiantComponent implements OnInit {
     this.etudiantSrv.verifierInscriptionEtudiantActif(this.etudiant.cni)
         .subscribe((data: any)=>{
             this.isInscriptionActive = data;
-            console.log(this.isInscriptionActive);
         },(err)=>{
-          console.log("error isInscriptionActive");
+          this.etudiantSrv.httpSrv.handleError(err);
         });
   }
 
   loadPreinscriptionActives() {
     this.preinscriptionSrv.findActivePreinscriptionByEtudiant(this.etudiant)
     .subscribe((data: any)=>{
-        this.preinscriptionData = data;
+        this.preinscriptionData = data;        
     },err=>{this.preinscriptionSrv.httpSrv.handleError(err)});
 }
 

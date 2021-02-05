@@ -45,7 +45,7 @@
                     <div *ngIf="preinscription?.paiementConfirme"
                         class="form-group col-sm-12 col-md-12 col-lg-6">
                         <label style="font-weight: bold;">Numéro de transaction ou reference de paiement:</label>
-                        <input [disabled]="true" required [value]="inscriptionacad.numquittance" class="form-control" type="text"
+                        <input [disabled]="true" required [value]="preinscription.numeroTransaction" class="form-control" type="text"
                             name="numquittance" />
                     </div>
                 </div>
