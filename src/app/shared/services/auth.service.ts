@@ -84,7 +84,7 @@ export class AuthService {
   }
 
   checkDeleteAccess(entityName: string) {
-    let role = 'ROLE_' + entityName.toUpperCase() + '_DELETE';
+    let role = 'ROLE_' + entityName.toUpperCase() + '_SUPPRESSION';
     return this.getRoles().includes(role);
   }
 
