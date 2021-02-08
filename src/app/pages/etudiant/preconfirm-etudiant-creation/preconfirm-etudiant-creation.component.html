@@ -4,7 +4,7 @@
         <div class="card border-0 box-shadow rounded-0">
             <div class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
                 <!-- <i class="fa fa-registered" aria-hidden="true"></i> -->
-                <img style="border-radius: 50%;margin-left: 5px;" width="150" height="150" src="/assets/img/logo_ut.jpg"
+                <img routerLink="/login" style="border-radius: 50%;margin-left: 5px;" width="150" height="150" src="/assets/img/logo_ut.jpg"
                     alt="logo_ut">
             </div>
             <div class="card-body text-center pb-1">
@@ -13,7 +13,9 @@
 
                 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-4">
                     <div class="form-group">
-                        <label for="identifiant">Numéro d'identification nationale ou Passport</label>
+                        <label for="identifiant">Numéro d'identification nationale ou Passport <br>
+                        Pour la carte CEDEAO, c'est le numéro NIN au dos de la carte.
+                        </label>
                         <input class="form-control validation-field" type="number" formControlName="cni"
                             placeholder="CNI ou Passeport">
                         <b class="text-danger" *ngIf="error">
