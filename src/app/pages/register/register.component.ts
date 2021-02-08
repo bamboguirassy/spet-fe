@@ -55,9 +55,9 @@ export class RegisterComponent implements AfterViewInit {
                     this.confirmationService.confirm({
                         message: `Un mail de confirmation est envoyé
                          à l'adresse email ` + this.etudiant.email +
-                            `. Merci de le consulter pour trouver le mail d'activation.
-                           Si le mail n'est pas conforme, se présenter à la DSOS 
-                            ou à la scolarité de l'établissement pour apporter 
+                            `. Merci de le consulter (dans la boite de réception et/ou dans les spams) pour trouver le mail d'activation.
+                           Si le mail qui vient d'être indiqué n'est pas conforme, merci de contacter la Scolarité centrale (DSOS) 
+                            ou la scolarité de votre établissement pour apporter 
                              les modifications nécessaires. `,
                         accept: () => {
                             const ref = this.dialogService.open(EmailUpdateComponent, {

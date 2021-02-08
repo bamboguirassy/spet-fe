@@ -10,7 +10,7 @@
             <div class="card-body text-center pb-1">
                 <h2>Demande de génération de numéro de dossier et d'email universitaire pour l'étudiant
                     {{etudiant?.prenometudiant+' '+etudiant?.nometudiant}}</h2>
-                <a routerLink="/login" class="transition">Je posséde déja un compte !</a>
+                <a routerLink="/login" class="transition">Si vous avez déjà un compte, cliquez ici !</a>
                 <form (submit)="createPrimoEntrant()" #form="ngForm" class="text-left mt-4">
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-4">
