@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { Inscriptionacad } from '../inscriptionacad/inscriptionacad';
 import { InscriptionacadService } from '../inscriptionacad/inscriptionacad.service';
 import { ActivatedRoute } from '@angular/router';
@@ -35,6 +35,8 @@ export class MonParcoursComponent implements OnInit {
     display = false;
     inscriptionacad: Inscriptionacad;
     @ViewChild('fileUploadModal', { static: false }) fileUploadModalRef: TemplateRef<any>;
+    @Output() parcoursLoaded: EventEmitter<any> = new EventEmitter();
+
 
     constructor(
         public inscriptionAcadSrv: InscriptionacadService,
@@ -55,6 +57,7 @@ export class MonParcoursComponent implements OnInit {
         this.inscriptionAcadSrv.getInscriptionsEtudiant(this.etudiant)
         .subscribe((data: any)=>{
             this.inscriptions = data;
+            this.parcoursLoaded.emit(this.inscriptions);
         },err=>{this.inscriptionAcadSrv.httpSrv.handleError(err)});
     }
 

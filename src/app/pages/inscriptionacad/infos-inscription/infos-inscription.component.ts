@@ -71,6 +71,7 @@ export class InfosInscriptionComponent implements OnInit {
     this.inscriptionacad.source = 'spet';
     this.inscriptionacad.idregimeinscription = this.preinscription.idregimeinscription.id;
     this.inscriptionacad.montantinscriptionacad = this.preinscription.montant;
+    this.inscriptionacad.numquittance = this.preinscription.numeroTransaction;
     this.inscriptionacadSrv.create(this.inscriptionacad)
       .subscribe((data: any) => {
         this.inscriptionacad = data;
