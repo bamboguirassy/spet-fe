@@ -151,6 +151,7 @@ export class DossierEtudiantComponent implements OnInit {
   ngOnInit() {
     this.updateForm = Object.assign({}, this.etudiant);
     this.setDefaultValues();
+    this.findUserByEmail();
 
     this.authSrv.currentUserProvider.subscribe(
       (data) => (this.currentUser = data)
@@ -263,5 +264,14 @@ export class DossierEtudiantComponent implements OnInit {
           this.preinscriptionSrv.httpSrv.handleError(err);
         }
       );
+  }
+
+  findUserByEmail(){
+    this.etudiantSrv.findUserByEmail(this.etudiant).subscribe((data:any)=>{
+    this.user= data
+    console.log(this.user);
+    }
+    )
+   
   }
 }
