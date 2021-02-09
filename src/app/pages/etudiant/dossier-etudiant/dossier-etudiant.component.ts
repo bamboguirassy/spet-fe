@@ -269,9 +269,11 @@ export class DossierEtudiantComponent implements OnInit {
   findUserByEmail(){
     this.etudiantSrv.findUserByEmail(this.etudiant).subscribe((data:any)=>{
     this.user= data
-    console.log(this.user);
-    }
-    )
+    },
+        (err) => {
+          this.etudiantSrv.httpSrv.handleError(err);
+        }
+    );
    
   }
 }
