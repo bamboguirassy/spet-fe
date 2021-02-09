@@ -313,8 +313,8 @@
                                 </div>
                             </div>
                         </p-tabPanel>
-                        <p-tabPanel header="Parcours">
-                            <app-mon-parcours *ngIf="etudiant" [etudiant]="etudiant"></app-mon-parcours>
+                        <p-tabPanel header="Parcours" *ngIf="inscriptions.length">
+                            <app-mon-parcours  (parcoursLoaded)="inscriptions = $event" *ngIf="etudiant" [etudiant]="etudiant"></app-mon-parcours>
                         </p-tabPanel>
                         <p-tabPanel header="Documents">
                             <div class="row">
