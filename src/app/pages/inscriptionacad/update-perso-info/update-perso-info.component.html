@@ -56,7 +56,7 @@
                         </div>
                         <div class="card border-white bg-white col-sm-12">
                             <label for="nombreEnfant"> Nombre Enfant(s)</label>
-                            <input [(ngModel)]="etudiant.nbreenfant" type="number" class="form-control"
+                            <input [required]="true" [(ngModel)]="etudiant.nbreenfant" type="number" class="form-control"
                                 name="nombreEnfant" id="nombreEnfant" min="0" #nombreEnfant="ngModel">
                             <app-form-field-validation-message [formField]="nombreEnfant">
                             </app-form-field-validation-message>
@@ -72,13 +72,13 @@
                     <div class="form-inline border-white mt-2">
                         <div class="card border-white col-sm-12 border-top-0">
                             <label>Type Habitation</label>
-                            <select #nombreEnfant="ngModel" [required]="true" name="typeHabitation"
+                            <select #typeHabitation="ngModel" [required]="true" name="typeHabitation"
                                 [(ngModel)]="etudiant.typeHabitation" class="form-control">
                                 <option disabled selected> Selectionner une valeur</option>
                                 <option *ngFor="let typeHabitation of typeHabitations" [value]="typeHabitation">
                                     {{typeHabitation}}</option>
                             </select>
-                            <app-form-field-validation-message [formField]="nombreEnfant">
+                            <app-form-field-validation-message [formField]="typeHabitation">
                             </app-form-field-validation-message>
                         </div>
                         <div *ngIf="etudiant.typeHabitation=='Campus Social'"
