@@ -31,7 +31,7 @@
           <span>Consultation</span>
         </ng-template>
         <br>
-        <app-visitemedicale-new></app-visitemedicale-new>
+        <app-visitemedicale-new (created)="onCreate($event)" ></app-visitemedicale-new>
       </p-tabPanel>
       <p-tabPanel>
         <ng-template pTemplate="header">

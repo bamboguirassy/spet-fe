@@ -38,4 +38,8 @@ export class VisiteMedicalDashboardComponent implements OnInit {
         }
       );
   }
+
+  onCreate(visiteMedicale: VisiteMedicale) {
+    this.visiteMedicales.push(visiteMedicale);
+  }
 }
