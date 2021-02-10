@@ -5,7 +5,7 @@
             [(contextMenuSelection)]="selectedVisiteMedicale" [scrollable]="true" scrollHeight="400px"
             [globalFilterFields]="globalFilterFields" dataKey="id">
             <ng-template pTemplate="caption">
-                Liste des classes<br>
+                Liste des visites médicales<br>
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                 <input type="text" pInputText size="50" placeholder="Rechercher dans le tableau"
                     (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
@@ -34,13 +34,16 @@
                         <p-sortIcon [field]="'inscriptionacad.idetudiant.nometudiant'"></p-sortIcon>
                     </th>
                     <th pResizableColumn>
-                        Genre
+                        Commentaire
                     </th>
-                    <th pResizableColumn>
+                    <th pResizableColumn >
                         Date Consultation
                     </th>
-                    <th pResizableColumn>
+                    <th pResizableColumn  >
                         Classe
+                    </th>
+                    <th pResizableColumn>
+                        Statut
                     </th>
                 </tr>
             </ng-template>
@@ -55,17 +58,22 @@
                     <td class="ui-resizable-column">
                         {{ visiteMedicale?.inscriptionacad?.idetudiant?.nometudiant }}
                     </td>
-                    <td class="ui-resizable-column">
-                        <div class="d-inline" [ngSwitch]="visiteMedicale?.inscriptionacad?.idetudiant?.genre">
-                            <span class="badge badge-primary" style="font-size: 13px;" *ngSwitchCase="'F'">Femme</span>
-                            <span class="badge badge-primary" style="font-size: 13px;" *ngSwitchDefault>Homme</span>
-                        </div>
+                    <td class="ui-resizable-column" >
+                       <div [innerHTML]="visiteMedicale.commentaire">
+                          <span>{{visiteMedicale?.commentaire}}</span>
+                       </div>
+                        <span *ngIf="!visiteMedicale.commentaire" class="badge badge-danger"> Pas de commentaire</span>
+                        
                     </td>
                     <td class="ui-resizable-column">
                         {{ visiteMedicale?.date | date: 'dd/MM/yyyy' }}
                     </td>
-                    <td class="ui-resizable-column">
+                    <td class="ui-resizable-column" >
                         {{ visiteMedicale?.inscriptionacad?.idclasse?.idniveau?.libelleniveau + ' ' +  visiteMedicale?.inscriptionacad?.idclasse?.idfiliere?.libellefiliere }}
+                    </td>
+                    <td class="ui-resizable-column">
+                        <span *ngIf="visiteMedicale.apte" class="badge badge-success">{{ visiteMedicale?.apte ? 'Apte' : 'Inapte' }}</span>
+                  <span *ngIf="!visiteMedicale.apte" class="badge badge-warning">{{ visiteMedicale?.apte ? 'Apte' : 'Inape' }}</span>
                     </td>
                 </tr>
             </ng-template>
@@ -79,6 +87,7 @@
                     <td>Genre</td>
                     <td>Date consultation</td>
                     <td>Classe</td>
+                    <td>Statut</td>
                 </tr>
             </ng-template>
         </p-table>
