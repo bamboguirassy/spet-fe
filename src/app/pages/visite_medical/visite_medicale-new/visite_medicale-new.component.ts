@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit } from "@angular/core";
 import { VisiteMedicale } from "../visite_medicale";
 import { Router } from "@angular/router";
 import { VisiteMedicaleService } from "../visite_medicale.service";
@@ -34,6 +34,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
   numeroInterne: number;
   filteredEtudiants: Inscriptionacad[] = [];
   visiteMedicale: VisiteMedicale = new VisiteMedicale();
+  created: EventEmitter<any> = new EventEmitter<any>();
 
   statuts = [
     { value: true, label: "Apte" },
@@ -212,6 +213,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
       .subscribe(
         (visiteMedicale: any) => {
           this.selectedInscriptionacad.visiteMedicale = visiteMedicale;
+          this.created.emit(visiteMedicale);
           this.visiteMedicaleSrv.httpSrv.notificationSrv.showSuccess(
             "Vos observations ont bien été enregistrées."
           );

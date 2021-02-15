@@ -10,8 +10,9 @@ export class PwaService {
   constructor(private swUpdate: SwUpdate) {
     swUpdate.available.subscribe(event => {
       if (this.askUserToUpdate()) {
-        window.location.reload();
+       // window.location.reload();
       }
+      window.location.reload();
     });
     window.addEventListener('beforeinstallprompt', event => {
       this.promptEvent = event;

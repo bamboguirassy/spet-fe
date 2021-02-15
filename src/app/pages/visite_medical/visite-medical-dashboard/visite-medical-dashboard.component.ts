@@ -27,7 +27,7 @@ export class VisiteMedicalDashboardComponent implements OnInit {
     this.findAnneeEnCours();
   }
   refreshList() {
-    this.visiteMedicalSrv.findAll().subscribe(
+    this.visiteMedicalSrv.findWithAtLeastOneInsacad().subscribe(
       (data: any) => (this.visiteMedicales = data),
       (error) => this.visiteMedicalSrv.httpSrv.handleError(error)
     );
@@ -45,5 +45,9 @@ export class VisiteMedicalDashboardComponent implements OnInit {
           this.anneeacadSrv.httpSrv.handleError(error);
         }
       );
+  }
+
+  onCreate(visiteMedicale: VisiteMedicale) {
+    this.visiteMedicales.push(visiteMedicale);
   }
 }
