@@ -34,6 +34,7 @@ export class DossierEtudiantComponent implements OnInit {
   inscriptions: Array<any> = [0,1];
 
   currentUser: FosUser;
+  etudiantPhotoLink: string;
 
   tabs = [1, 2, 3];
 
@@ -158,6 +159,7 @@ export class DossierEtudiantComponent implements OnInit {
     );
     this.verifierInscriptionEtudiantActif();
     this.loadPreinscriptionActives();
+    this.setPhotoEtudiantPhotoLink();
   }
 
   public openModal(modalContent, data) {
@@ -275,5 +277,15 @@ export class DossierEtudiantComponent implements OnInit {
         }
     );
    
+  }
+
+  setEtudiant(etudiant: Etudiant) {
+    this.etudiant = etudiant;
+    this.setPhotoEtudiantPhotoLink();
+    this.modalService.dismissAll();
+  }
+
+  setPhotoEtudiantPhotoLink() {
+    this.etudiantPhotoLink = this.etudiant.photoLink + '?' + Math.random();
   }
 }
