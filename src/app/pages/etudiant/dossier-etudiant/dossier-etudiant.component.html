@@ -6,7 +6,7 @@
     </div>
     <div class="col-lg-4">
         <div class="card border-0 box-shadow mb-4">
-            <img class="card-img-top w-100" [src]="etudiant?.photoLink" alt="user">
+            <img class="card-img-top w-100" [src]="etudiantPhotoLink" alt="user">
             <div class="card-body">
                 <h4 class="card-title text-center">{{etudiant?.prenometudiant}} {{etudiant?.nometudiant}}</h4>
                 <h5 class="card-title text-center text-info">Etudiant</h5>
@@ -25,7 +25,8 @@
                     <div class="col-md-6 text-right"><strong class="d-inline-block">{{etudiant?.cni}}</strong></div>
                 </div>
                 <div class="dropdown-divider w-100"></div>
-                <div *ngIf="isInscriptionActive" class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
+                <div *ngIf="isInscriptionActive"
+                    class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
                     <!-- <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
                         class="btn btn-outline-primary  btn-block mb-1 mr-2">
                         <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
@@ -36,9 +37,23 @@
                     </button>
 
                 </div>
+                <div *ngIf="isInscriptionActive"
+                    class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
+                    <!-- <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
+                    class="btn btn-outline-primary  btn-block mb-1 mr-2">
+                    <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
+                </button> -->
+                    <button (click)="openModal(updatePhotoModalContent, null)" type="button"
+                        class="btn btn-outline-info btn-block">
+                        <i class="fa fa-camera" aria-hidden="true"></i>
+                        Mettre à jour ma photo
+                    </button>
+
+                </div>
                 <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
-                    <span class="badge badge-primary  mb-1 mr-2"> Vu dernierèment le {{user?.lastLogin|date:'dd/MM/yyyy à HH:mm:ss'}}
-                        
+                    <span class="badge badge-primary  mb-1 mr-2"> Vu dernierèment le
+                        {{user?.lastLogin|date:'dd/MM/yyyy à HH:mm:ss'}}
+
                         <span *ngIf="!user?.email" class="badge badge-danger">Pas de compte</span>
                     </span>
                 </div>
@@ -55,14 +70,16 @@
     </div>
     <div class="col-lg-8">
         <div class="row">
-            <div *ngIf="isInscriptionActive || currentUser?.profession?.codeprofil!='ETU'" class="col-sm-12 mb-1 d-none d-sm-none d-md-none d-lg-block">
+            <div *ngIf="isInscriptionActive || currentUser?.profession?.codeprofil!='ETU'"
+                class="col-sm-12 mb-1 d-none d-sm-none d-md-none d-lg-block">
                 <p-toolbar>
                     <div class="ui-toolbar-group-right">
                         <!-- <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
                             class="btn btn-outline-primary mb-1 mr-2">
                             <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
                         </button> -->
-                        <button type="button" *ngIf="currentUser?.profession?.codeprofil!='ETU'" (click)="modalSendEmail(content)" class="btn btn-outline-primary mb-1">
+                        <button type="button" *ngIf="currentUser?.profession?.codeprofil!='ETU'"
+                            (click)="modalSendEmail(content)" class="btn btn-outline-primary mb-1">
                             <i class="fa fa-envelope" aria-hidden="true"></i> Envoyer un email
                         </button>
                         <button *ngIf="isInscriptionActive" (click)="openModal(modalContent, null)" type="button"
@@ -314,7 +331,8 @@
                             </div>
                         </p-tabPanel>
                         <p-tabPanel header="Parcours" *ngIf="inscriptions.length">
-                            <app-mon-parcours  (parcoursLoaded)="inscriptions = $event" *ngIf="etudiant" [etudiant]="etudiant"></app-mon-parcours>
+                            <app-mon-parcours (parcoursLoaded)="inscriptions = $event" *ngIf="etudiant"
+                                [etudiant]="etudiant"></app-mon-parcours>
                         </p-tabPanel>
                         <p-tabPanel header="Documents">
                             <div class="row">
@@ -782,7 +800,8 @@
                     <div class="form-group">
 
                         <label class="col-form-label form-control-label" for="objet">Objet</label>
-                        <input type="text" class="form-control" [(ngModel)]="email.objet" id="objet" name="objet" required>
+                        <input type="text" class="form-control" [(ngModel)]="email.objet" id="objet" name="objet"
+                            required>
                     </div>
                 </div>
 
@@ -804,4 +823,21 @@
             </div>
         </div>
     </form>
+</ng-template>
+
+<ng-template #updatePhotoModalContent>
+    <div style="width: 100%;">
+        <div class="modal-header ">
+            <h4 class="modal-title">Modifier ma photo</h4>
+        </div>
+        <div class="modal-body" style="width: 100%;">
+            <div class="col-sm-12 mr-2">
+                <update-photo [etudiant]="etudiant" (onUpload)="setEtudiant($event)" [isInscription]="false"> </update-photo>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModal1()">Annuler</button>
+            </div>
+        </div>
+    </div>
+
 </ng-template>
