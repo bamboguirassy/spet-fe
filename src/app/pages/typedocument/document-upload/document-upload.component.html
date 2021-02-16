@@ -33,7 +33,7 @@
                         <span *ngSwitchDefault
                             [class.badge-danger]="!(findCorrespondingDocument(typeDocument))?.estValide"
                             [class.badge-success]="(findCorrespondingDocument(typeDocument))?.estValide" class="badge">
-                            {{ findCorrespondingDocument(typeDocument)?.estValide ? 'Valide' : 'Invalide' }}
+                            {{ findCorrespondingDocument(typeDocument)?.estValide ? 'Validé' : 'En attente de validation' }}
                         </span>
                     </ng-container>
 
@@ -85,7 +85,7 @@
                     <ng-container>
                         <span [class.badge-danger]="!otherDocument?.estValide"
                             [class.badge-success]="otherDocument?.estValide" class="badge">
-                            {{ otherDocument?.estValide ? 'Valide' : 'Invalide' }}
+                            {{ otherDocument?.estValide ? 'Validé' : 'En attente de validation' }}
                         </span>
                     </ng-container>
 
