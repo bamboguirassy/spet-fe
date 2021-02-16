@@ -18,7 +18,7 @@ export class HttpService {
   private retUrl = '';
   urlValidEmail: string;
   // private clientUrl = 'http://localhost:4200/';
-  private clientUrl = 'https://etudiant.univ-thies.sn/';
+  private clientUrl = 'https://etudiant.univ-thies.sn/#/';
 
   constructor(private httpSrv: HttpClient,
               public tokenManager: TokenManagerService,
