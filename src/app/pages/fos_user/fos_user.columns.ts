@@ -10,7 +10,7 @@ const fos_userColumns = [
             { header: 'ConfirmationToken', field: 'confirmationToken', dataKey: 'confirmationToken' },
             { header: 'PasswordRequestedAt', field: 'passwordRequestedAt', dataKey: 'passwordRequestedAt' },
             { header: 'Roles', field: 'roles', dataKey: 'roles' },
-                    { header: 'Prenom', field: 'prenom', dataKey: 'prenom' },
+            { header: 'Prenom', field: 'prenom', dataKey: 'prenom' },
             { header: 'Nom', field: 'nom', dataKey: 'nom' },
             { header: 'Sexe', field: 'sexe', dataKey: 'sexe' },
             { header: 'Titre', field: 'titre', dataKey: 'titre' },

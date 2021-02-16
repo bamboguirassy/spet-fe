@@ -26,7 +26,7 @@ export class PreconfirmEtudiantCreationComponent implements AfterViewInit {
   ) {
     this.router = router;
     this.form = fb.group({
-      cni: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11)])],
+      cni: ['', Validators.compose([Validators.required])],
     });
 
     this.email = this.form.controls.email;
