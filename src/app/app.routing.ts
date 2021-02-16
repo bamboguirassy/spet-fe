@@ -9,8 +9,8 @@ export const routes: Routes = [
   { path: '**', component: NotFoundComponent }
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(routes, 
-  /*{
-  //preloadingStrategy: PreloadAllModules,  // <- comment this line for enable lazy load
-  // useHash: true
-}*/);
+export const routing: ModuleWithProviders = RouterModule.forRoot(routes,
+  {
+    preloadingStrategy: PreloadAllModules,  // <- comment this line for enable lazy load
+    useHash: true
+  });

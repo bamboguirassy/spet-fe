@@ -13,8 +13,8 @@
 
                 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-4">
                     <div class="form-group">
-                        <label for="identifiant">Numéro d'identification nationale pour les nationaux ou passport pour les étrangers <br>
-                       Ps: Pour la carte CEDEAO, c'est le numéro NIN au dos de la carte.
+                        <label for="identifiant">N° d'identification nationale pour les nationaux ou N° Passport pour les étrangers <br>
+                        Pour la carte CEDEAO, c'est le numéro NIN au dos de la carte.
                         </label>
                         <input class="form-control validation-field" type="text" formControlName="cni"
                             placeholder="CNI ou Passeport">

@@ -19,7 +19,7 @@ export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
   validerEmail: any;
   @Output() onUpdate: EventEmitter<any> = new EventEmitter();
   typeHabitations = [
-    "Je n'ai pas de logement à Thiès",
+    "Je n'ai pas encore de logement à Thiès",
     'Campus Social',
     'En location à Thiès',
     'Hébergé à Thiès par un tuteur',
