@@ -101,7 +101,7 @@
                             <app-form-field-validation-message [formField]="numeroChambre">
                             </app-form-field-validation-message>
                         </div>
-                        <div *ngIf="etudiant.typeHabitation && (etudiant.typeHabitation!='Campus Social' && etudiant.typeHabitation!='Je n\'ai pas de logement à Thiès')"
+                        <div *ngIf="etudiant.typeHabitation && (etudiant.typeHabitation!='Campus Social' && etudiant.typeHabitation!='Je n\'ai pas encore de logement à Thiès')"
                             class="card border-white col-sm-12 border-top-0">
                             <label>Quartier</label>
                             <input #quartierEtudiant="ngModel" [required]="true" [(ngModel)]="etudiant.quartierEtudiant"
