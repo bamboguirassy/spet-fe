@@ -6,4 +6,5 @@ export class VisiteMedicale {
     apte: boolean;
     commentaire: string;
     inscriptionacad: Inscriptionacad;
+    resultat: string;
 }
