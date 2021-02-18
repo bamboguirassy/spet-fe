@@ -37,8 +37,9 @@ export class VisiteMedicaleNewComponent implements OnInit {
   created: EventEmitter<any> = new EventEmitter<any>();
 
   statuts = [
-    { value: true, label: "Apte" },
-    { value: false, label: "Inapte" },
+    { value: 'Apte', label: "Apte" },
+    { value: 'Inapte', label: "Inapte" },
+    { value: 'Inaptitude temporaire', label: "Inaptitude temporaire" },
   ];
 
   presenceHandicaps = [
@@ -101,7 +102,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
     this.dateConsultation = {
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
-      day: new Date().getDay(),
+      day: new Date().getDate(),
     };
     this.selectedApte = this.statuts.find((vm) => vm.label === "Apte") as any;
     this.selectedInscriptionacad = null;
@@ -120,15 +121,13 @@ export class VisiteMedicaleNewComponent implements OnInit {
             this.visiteMedicale = {
               ...this.selectedInscriptionacad.visiteMedicale,
             };
-            this.selectedApte = this.visiteMedicale.apte
-              ? this.statuts.find((apt) => apt.value === true)
-              : this.statuts.find((apt) => apt.value === false);
+            this.selectedApte = this.statuts.find((vm) => vm.label === this.visiteMedicale.resultat) as any;
             this.visiteMedicale.date = new Date(this.visiteMedicale.date);
 
             this.dateConsultation = {
               year: this.visiteMedicale.date.getFullYear(),
               month: this.visiteMedicale.date.getMonth(),
-              day: this.visiteMedicale.date.getDay(),
+              day: this.visiteMedicale.date.getDate(),
             };
           }
           this.selectedPresenceHandicap = this.presenceHandicaps.find(
@@ -159,20 +158,22 @@ export class VisiteMedicaleNewComponent implements OnInit {
   searchEtudiant(term: any) {
     this.searchInputTouched = true;
     this.searching = true;
-    this.etudiantSrv
-      .searchByNumInterne(term.query)
-      .pipe(
-        first(),
-        finalize(() => (this.searching = false))
-      )
-      .subscribe(
-        (etudiants: any) => {
-          this.filteredEtudiants = etudiants;
-        },
-        (error) => {
-          this.etudiantSrv.httpSrv.handleError(error);
-        }
-      );
+    if (term.query.length > 10) {
+      this.etudiantSrv
+        .searchByNumInterne(term.query)
+        .pipe(
+          first(),
+          finalize(() => (this.searching = false))
+        )
+        .subscribe(
+          (etudiants: any) => {
+            this.filteredEtudiants = etudiants;
+          },
+          (error) => {
+            this.etudiantSrv.httpSrv.handleError(error);
+          }
+        );
+    }
   }
 
   updateEtudiantInfos() {
@@ -180,7 +181,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
     if (this.selectedHandicap) {
       this.selectedEtudiant.typeHandicap = this.selectedHandicap.type;
     }
-    if(this.selectedEtudiant.handicap) {
+    if (this.selectedEtudiant.handicap) {
       this.selectedEtudiant.typeHandicap = null;
     }
 
@@ -202,7 +203,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
   save() {
     this.visiteMedicale.inscriptionacad = this.selectedInscriptionacad
       .id as any;
-    this.visiteMedicale.apte = this.selectedApte.value;
+    this.visiteMedicale.resultat = this.selectedApte.value;
     this.visiteMedicale.date = new Date(
       `${this.dateConsultation.year}-${this.dateConsultation.month}-${this.dateConsultation.day}`
     );
@@ -227,7 +228,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
   update() {
     this.visiteMedicale.inscriptionacad = this.selectedInscriptionacad
       .id as any;
-    this.visiteMedicale.apte = this.selectedApte.value;
+    this.visiteMedicale.resultat = this.selectedApte.value;
     this.visiteMedicale.date = new Date(
       `${this.dateConsultation.year}-${this.dateConsultation.month}-${this.dateConsultation.day}`
     );
