@@ -67,6 +67,16 @@ export class VisiteMedicaleNewComponent implements OnInit {
     { type: "Troubles dys", libelle: "Troubles dys" },
   ];
 
+  maladieChroniques = [
+    { name: 'Asthme', code: 'Asthme' },
+    { name: 'Diabète', code: 'Diabète' },
+    { name: 'Drépanocytose', code: 'Drépanocytose' },
+    { name: 'Hépatites', code: 'Hépatites' },
+    { name: 'Insuffisance Rénale', code: 'Insuffisance Rénale' }
+  ];
+
+  selectedMaladieChroniques = [];
+
   constructor(
     public visiteMedicaleSrv: VisiteMedicaleService,
     public exportSrv: ExportService,

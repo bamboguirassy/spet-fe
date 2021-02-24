@@ -22,18 +22,16 @@
                     </p>
 
                     <ng-container [ngSwitch]="isAlreadyAdded(typeDocument)">
-                        <span class="badge badge-success" *ngSwitchCase="true">Renseigné</span>
-                        <span class="badge badge-danger" *ngSwitchCase="false">Non renseigné</span>
+                        <!-- <span class="badge badge-success" *ngSwitchCase="true">Renseigné</span> -->
+                        <span class="badge badge-info" style="white-space: normal;" *ngSwitchCase="false">Merci de cliquer sur le bouton bleu pour charger le document</span>
                     </ng-container> &nbsp;
 
                     <ng-container [ngSwitch]="typeDocument?.codetypedocument">
                         <span *ngSwitchCase="'OTHER'" class="text-center">
-
                         </span>
                         <span *ngSwitchDefault
-                            [class.badge-danger]="!(findCorrespondingDocument(typeDocument))?.estValide"
-                            [class.badge-success]="(findCorrespondingDocument(typeDocument))?.estValide" class="badge">
-                            {{ findCorrespondingDocument(typeDocument)?.estValide ? 'Validé' : 'En attente de validation' }}
+                            [class.badge-danger]="!(findCorrespondingDocument(typeDocument))?.estValide" class="badge">
+                            <span *ngIf="findCorrespondingDocument(typeDocument)?.estValide">{{ 'Validé' }}</span>
                         </span>
                     </ng-container>
 
@@ -80,12 +78,12 @@
                 </h5>
                 <div class="sub-body">
 
-                    <span class="badge badge-success">Renseigné</span> &nbsp;
+                    <!-- <span class="badge badge-success">Renseigné</span> &nbsp; -->
 
                     <ng-container>
-                        <span [class.badge-danger]="!otherDocument?.estValide"
+                        <span *ngIf="otherDocument?.estValide" [class.badge-danger]="!otherDocument?.estValide"
                             [class.badge-success]="otherDocument?.estValide" class="badge">
-                            {{ otherDocument?.estValide ? 'Validé' : 'En attente de validation' }}
+                            Validé
                         </span>
                     </ng-container>
 

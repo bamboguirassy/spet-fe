@@ -1,4 +1,3 @@
-import { Subscription } from 'rxjs';
 import { EtudiantService } from './../etudiant/etudiant.service';
 import { Component, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -56,9 +55,8 @@ export class RegisterComponent implements AfterViewInit {
                         message: `Un mail de confirmation est envoyé
                          à l'adresse email ` + this.etudiant.email +
                             `. Merci de le consulter (dans la boite de réception et/ou dans les spams) pour trouver le mail d'activation.
-                           Si le mail qui vient d'être indiqué n'est pas conforme, merci de contacter la Scolarité centrale (DSOS) 
-                            ou la scolarité de votre établissement pour apporter 
-                             les modifications nécessaires. `,
+                           Si le mail qui vient d'être indiqué n'est pas conforme,
+                            écrire un message à dsos@univ-thies.sn pour demander que votre adresse email soit modifiée. `,
                         accept: () => {
                             const ref = this.dialogService.open(EmailUpdateComponent, {
                                 header: 'Mise à jour de l\'adresse email',

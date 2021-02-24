@@ -112,6 +112,12 @@
                         optionLabel="label" name="handicap" id="handicap"></p-selectButton>
                     </div>
                   </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label class="col-form-label form-control-label" for="maladieChroniques">Maladies Chroniques</label>
+                      <p-multiSelect name="maladieChroniques" [options]="maladieChroniques" [(ngModel)]="selectedMaladieChroniques" optionLabel="name" optionValue="code"></p-multiSelect>
+                    </div>
+                  </div>
 
                   <div class="col-md-12 col-lg-12">
                     <div class="form-group">
