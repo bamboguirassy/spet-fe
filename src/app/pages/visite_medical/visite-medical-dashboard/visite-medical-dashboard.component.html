@@ -28,7 +28,7 @@
       <p-tabPanel>
         <ng-template pTemplate="header">
           <i class="fa fa-user-md" style="font-size: 20px;" aria-hidden="true"></i> &nbsp;
-          <span>Consultation</span>
+          <span>Nouvelle Consultation</span>
         </ng-template>
         <br>
         <app-visitemedicale-new (created)="onCreate($event)" ></app-visitemedicale-new>
@@ -36,20 +36,16 @@
       <p-tabPanel>
         <ng-template pTemplate="header">
           <i class="fa fa-list" aria-hidden="true"></i>&nbsp;
-          <span>Liste</span>
+          <span>Liste des visites</span>
         </ng-template>
         <div>
           <div class="row ">
             <div class="col-12  d-flex justify-content-end mb-2">
-              
                 <button type="button" class="btn btn-outline-secondary" (click)="refreshList()">
                   <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
                 </button>
-              
-            
             </div>
           </div>
-
           <app-visitemedicale-list [visiteMedicales]="visiteMedicales" ></app-visitemedicale-list>
         </div>
       </p-tabPanel>

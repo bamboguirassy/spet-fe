@@ -7,4 +7,5 @@ export class VisiteMedicale {
     commentaire: string;
     inscriptionacad: Inscriptionacad;
     resultat: string;
+    maladieChroniques: string;
 }
