@@ -1,67 +1,87 @@
 <div class="row">
-    <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngFor="let typeDocument of typeDocuments; let i = index ">
+    <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngFor="let documentEtudiant of associatedDocuments; let i = index ">
         <div class="card" style="width: 100%;">
+
             <div class="img d-flex justify-content-center mt-1">
-                <img src="{{ findCorrespondingDocument(typeDocument)?.filename?.split('.')[1] === 'pdf' ? 'assets/img/pdf.png' : findCorrespondingDocument(typeDocument)?.url  }}"
-                    class="card-img-top"
-                    [class.pdf-width]="findCorrespondingDocument(typeDocument)?.filename?.split('.')[1] === 'pdf'">
+                <img [src]="documentEtudiant.filename?.split('.')[1] === 'pdf' ? 'assets/img/pdf.png' : documentEtudiant?.url"
+                    class="card-img-top" [class.pdf-width]="documentEtudiant?.filename?.split('.')[1] === 'pdf'">
             </div>
+
             <div class="card-body">
                 <h5 class="card-title">
-                    <ng-container [ngSwitch]="isAlreadyAdded(typeDocument)">
-                        <a *ngSwitchCase="true" href="javascript:void(0)" (click)="displayDocumentViewer(typeDocument)">
-                            {{ typeDocument?.libelletypedocument }}
-                        </a>
-                        <span *ngSwitchCase="false"> {{ typeDocument?.libelletypedocument }} </span>
-                    </ng-container>
+
+                    <a href="javascript:void(0)" (click)="displayDocumentViewer(documentEtudiant)">
+                        {{ documentEtudiant?.typeDocument.libelletypedocument }}
+                    </a>
+
                 </h5>
                 <div class="sub-body">
+                    <!--  <p *ngIf="typeDocument?.codetypedocument === 'OTHER'">
+                            Ici, vous pouvez ajouter d'autres types de documents.
+                        </p> -->
+                    <span class="badge badge-success">Renseigné</span>
 
-                    <p *ngIf="typeDocument?.codetypedocument === 'OTHER'">
-                        Ici, vous pouvez ajouter d'autres types de documents.
-                    </p>
-
-                    <ng-container [ngSwitch]="isAlreadyAdded(typeDocument)">
-                        <!-- <span class="badge badge-success" *ngSwitchCase="true">Renseigné</span> -->
-                        <span class="badge badge-info" style="white-space: normal;" *ngSwitchCase="false">Merci de cliquer sur le bouton bleu pour charger le document</span>
-                    </ng-container> &nbsp;
-
-                    <ng-container [ngSwitch]="typeDocument?.codetypedocument">
-                        <span *ngSwitchCase="'OTHER'" class="text-center">
-                        </span>
-                        <span *ngSwitchDefault
-                            [class.badge-danger]="!(findCorrespondingDocument(typeDocument))?.estValide" class="badge">
-                            <span *ngIf="findCorrespondingDocument(typeDocument)?.estValide">{{ 'Validé' }}</span>
+                    <ng-container [ngSwitch]="documentEtudiant.typeDocument?.codetypedocument">
+                        <span *ngSwitchDefault [class.badge-danger]="!documentEtudiant?.estValide" class="badge">
+                            <span *ngIf="documentEtudiant?.estValide">{{ 'Validé' }}</span>
                         </span>
                     </ng-container>
 
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-center">
-                <button type="button" class="btn btn-info" (click)="sendMail(typeDocument)"
-                    *ngIf="typeDocument?.codetypedocument !== 'OTHER' && ['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil) && !isAlreadyAdded(typeDocument)">
+                <button type="button" class="btn btn-info" (click)="sendMail(documentEtudiant.typeDocument)"
+                    *ngIf="['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil)">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                 </button>
 
-                <button type="button"
-                    (click)=" typeDocument.codetypedocument === 'OTHER' ? displayAutreModal(typeDocument, 'create') : fileInput.click()"
-                    class="btn btn-primary ml-1">
+                <button type="button" (click)="fileInput.click()" class="btn btn-primary ml-1">
 
-                    <i *ngIf="typeDocument.codetypedocument!== 'OTHER' else faPlus " class="fa fa-upload"
-                        aria-hidden="true"></i>
-                    <ng-template #faPlus>
-                        <i #faPlus class="fa fa-plus-square" aria-hidden="true"></i>
-                    </ng-template>
+                    <i class="fa fa-upload" aria-hidden="true"></i>
                 </button>
 
-                <button type="button" (click)="deleteInputDocument(typeDocument)" class="btn btn-danger ml-1"
-                    *ngIf="isAlreadyAdded(typeDocument) && typeDocument?.codetypedocument !== 'OTHER'">
+                <button type="button" (click)="deleteDocumentEtudiant(documentEtudiant)" class="btn btn-danger ml-1">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
+                <input (click)="fileInput.value = null" name="fileInput" type="file" #fileInput hidden
+                    (change)="changeListener($event, documentEtudiant.typeDocument)">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngFor="let typeDocument of notAddedTypeDocument; let i = index ">
+        <div class="card" style="width: 100%;">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <span> {{ typeDocument?.libelletypedocument }} </span>
+                </h5>
+                <div class="sub-body">
+
+                    <ng-container>
+                        <span class="badge badge-info" style="white-space: normal;">
+                            Merci de cliquer sur le bouton bleu pour charger le document</span>
+                    </ng-container> &nbsp;
+
+
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-info" (click)="sendMail(typeDocument)"
+                    *ngIf="['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil)">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </button>
+
+                <button type="button" (click)="fileInput.click()" class="btn btn-primary ml-1">
+
+                    <i class="fa fa-upload" aria-hidden="true"></i>
+
+                </button>
+
                 <input (click)="fileInput.value = null" name="fileInput" type="file" #fileInput hidden
                     (change)="changeListener($event, typeDocument)">
             </div>
         </div>
+
     </div>
 
     <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngFor="let otherDocument of otherDocuments; let i = index ">
@@ -100,7 +120,7 @@
                     <i class="fa fa-upload" aria-hidden="true"></i>
                 </button>
 
-                <button type="button" (click)="delete(otherDocument)" class="btn btn-danger ml-1">
+                <button type="button" (click)="deleteOther(otherDocument)" class="btn btn-danger ml-1">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
                 <input (click)="fileInput.value = null" name="fileInput" type="file" #fileInput hidden
@@ -147,87 +167,6 @@
 
 </div>
 
-<!--<div class="card">
-    <div class="card-body">
-        <table class="table table-hover table-striped" style="width: 100%;">
-            <thead>
-                <tr>
-                    <th>Type document</th>
-                    <th>Etat</th>
-                    <th>Validité</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let typeDocument of typeDocuments; let i = index ">
-                    <td scope="row">
-                        <ng-container [ngSwitch]="isAlreadyAdded(typeDocument)">
-                            <a *ngSwitchCase="true" href="javascript:void(0)"
-                                (click)="displayDocumentViewer(typeDocument)">
-                                {{ typeDocument.libelletypedocument }}
-                            </a>
-                            <span *ngSwitchCase="false"> {{ typeDocument.libelletypedocument }} </span>
-                        </ng-container>
-
-
-                    </td>
-
-                    <td>
-                        <ng-container [ngSwitch]="isAlreadyAdded(typeDocument)">
-                            <span class="badge badge-success" *ngSwitchCase="true">Renseigné</span>
-                            <span class="badge badge-danger" *ngSwitchCase="false">Non renseigné</span>
-                        </ng-container>
-                    </td>
-
-                    <td>
-                        <ng-container [ngSwitch]="typeDocument?.codetypedocument">
-                            <span *ngSwitchCase="'OTHER'" class="text-center">
-                                -
-                            </span>
-                            <span *ngSwitchDefault
-                                [class.badge-danger]="!(findCorrespondingDocument(typeDocument))?.estValide"
-                                [class.badge-success]="(findCorrespondingDocument(typeDocument))?.estValide"
-                                class="badge">
-                                {{ findCorrespondingDocument(typeDocument)?.estValide ? 'Valide' : 'Invalide' }}
-                            </span>
-                        </ng-container>
-
-                    </td>
-
-                    <td>
-                        <button 
-                        type="button" 
-                        class="btn btn-info" 
-                        (click)="sendMail(typeDocument)"
-                        *ngIf="typeDocument?.codetypedocument !== 'OTHER' && ['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil)">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </button>
-
-                        <button type="button"
-                            (click)=" typeDocument?.codetypedocument === 'OTHER' ? displayAutreModal(typeDocument) : fileInput.click()"
-                            class="btn btn-primary ml-1">
-
-                            <i *ngIf="typeDocument.codetypedocument!== 'OTHER' else faPlus " class="fa fa-upload"
-                                aria-hidden="true"></i>
-                            <ng-template #faPlus>
-                                <i #faPlus class="fa fa-plus-square" aria-hidden="true"></i>
-                            </ng-template>
-                        </button>
-
-                        <button type="button" (click)="delete(typeDocument)" class="btn btn-danger ml-1"
-                            *ngIf="isAlreadyAdded(typeDocument) && typeDocument?.codetypedocument !== 'OTHER'">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                        <input (click)="fileInput.value = null" name="fileInput" type="file" #fileInput hidden
-                            (change)="changeListener($event, typeDocument)">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-    </div>
-</div>-->
-
 <ng-template #documentViewer let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">
@@ -245,123 +184,6 @@
         </button>
     </div>
     <div class="modal-body">
-        <!-- <ng-container [ngSwitch]="selectedTypeDocument?.codetypedocument">
-            <div *ngSwitchCase="'OTHER'">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card h3 mb-3">
-                            <div class="card-body row justify-content-end">
-                                <button type="button" (click)="showAutreForm()" class="btn btn-primary mr-3 ">
-                                    {{ canShowAutreForm ? 'Annuler' : 'Ajouter' }}
-                                    <i *ngIf="!canShowAutreForm" class="fa fa-plus-circle" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <table class="table table-striped table-inverse table-hover">
-                            <thead class="thead-inverse">
-                                <tr>
-                                    <th>Titre du document</th>
-                                    <th>Date Ajout</th>
-                                    <th>Validite</th>
-                                    <th *ngIf="selectedDocumentEtudiant?.estValide">Date Validation</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let documentEtudiant of otherDocuments">
-                                    <td scope="row">
-                                        {{ documentEtudiant?.titreDocument }}
-                                    </td>
-                                    <td> {{ documentEtudiant?.dateAjout | date:'dd/MM/yyyy'}} </td>
-                                    <td>
-                                        <span [class.badge-success]="documentEtudiant?.estValide"
-                                            [class.badge-danger]="!documentEtudiant?.estValide" class="badge">
-                                            {{ documentEtudiant?.estValide ? 'Valide' : 'Invalide' }}
-                                        </span>
-                                    </td>
-                                    <td *ngIf="documentEtudiant?.estValide">
-                                        {{ documentEtudiant?.dateValidation | date:'dd/MM/yyyy' }}
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-info"
-                                            (click)="canView = !canView; selectedDocumentEtudiant = documentEtudiant;">
-                                            <i *ngIf="!canView" class="fa fa-eye" aria-hidden="true"></i>
-                                            <i *ngIf="canView" class="fa fa-eye-slash" aria-hidden="true"></i>
-                                        </button>
-
-                                        <button type="button" (click)="showAutreForm(documentEtudiant, 'other')"
-                                            class="btn btn-primary ml-1">
-                                            <i class="fa fa-upload" aria-hidden="true"></i>
-                                        </button>
-                                        <button type="button" (click)="delete(selectedTypeDocument, documentEtudiant)"
-                                            class="btn btn-danger ml-1">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="card row ml-5 mr-5" *ngIf="canShowAutreForm">
-                    <div class="col-12 col-md-12 d-flex justify-content-center">
-                        <div class="card-body">
-                            <form ngForm="ngForm" role="form" autocomplete="off">
-
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Titre du document</label>
-                                    <input type="text" class="form-control" name="titreDocument"
-                                        [(ngModel)]="documentEtudiant.titreDocument" id="titreDocument">
-                                    <small id="emailHelp" class="form-text text-muted">Donner un nom permettant
-                                        d'identifier
-                                        clairement le document.</small>
-                                </div>
-                                <button type="button" class="btn btn-primary" (click)="fileAddOtherInput.click();">
-                                    <i class="fa fa-upload" aria-hidden="true"></i>
-                                </button>
-                                <button *ngIf="canUpload" type="button"
-                                    (click)="changeListener(fileToUpload, selectedTypeDocument, canReplaceOther ? 'other' : undefined)"
-                                    class="btn btn-success ml-2">
-                                    Valider
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </button>
-                                <input (click)="fileAddOtherInput.value = null" name="fileInput" type="file"
-                                    #fileAddOtherInput hidden (change)="beforeUpload($event); canUpload = true">&nbsp;
-                                {{ fileToUpload?.target?.files[0]?.name }} <i *ngIf="canUpload"
-                                    class="fa fa-check-circle ml-1 text-success" style="font-size: 20px;"
-                                    aria-hidden="true"></i>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row border border-secondary ml-3 mr-3 mt-3" *ngIf="canView">
-                    <div class="col-12">
-                        <ng-container [ngSwitch]="selectedDocumentEtudiant?.filename?.split('.')[1]!=='pdf'">
-                            <img *ngSwitchCase="true" [src]="selectedDocumentEtudiant?.url" />
-                            <object *ngSwitchCase="false"
-                                [data]="selectedDocumentEtudiant?.url + '#toolbar=0&navpanes=0' | safeUrl"
-                                type="application/pdf" width="100%" height="400px"></object>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-            <div *ngSwitchDefault>
-                <div class="row">
-                    <div class="col-12 col-md-12 d-flex justify-content-center">
-                        <ng-container [ngSwitch]="selectedDocumentEtudiant?.filename?.split('.')[1]!=='pdf'">
-                            <img *ngSwitchCase="true" [src]="selectedDocumentEtudiant?.url" style="width: 100%;" />
-                            <object *ngSwitchCase="false"
-                                [data]="selectedDocumentEtudiant?.url + '#toolbar=0&navpanes=0' | safeUrl"
-                                type="application/pdf" width="100%" height="400px"></object>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-        </ng-container>-->
         <div class="row">
             <div class="col-12 col-md-12 d-flex justify-content-center">
                 <ng-container [ngSwitch]="selectedDocumentEtudiant?.filename?.split('.')[1]!=='pdf'">
@@ -417,8 +239,7 @@
 <ng-template #queryDocument let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Mail</h4>
-        <button type="button" class="close" aria-label="Close"
-            (click)="modal.dismiss('Cross click')">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -429,8 +250,8 @@
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Titre du document</label>
-                        <input type="text" class="form-control" name="titreDocument"
-                            [(ngModel)]="queriedDocumentTitle" id="titreDocument">
+                        <input type="text" class="form-control" name="titreDocument" [(ngModel)]="queriedDocumentTitle"
+                            id="titreDocument">
                         <small id="emailHelp" class="form-text text-muted">Donner le titre du document</small>
                     </div>
                 </form>

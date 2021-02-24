@@ -16,6 +16,7 @@ import { TypedocumentService } from '../typedocument.service';
 export class DocumentUploadComponent implements OnInit {
   currentUser: FosUser;
   typeDocuments: Typedocument[] = [];
+  notAddedTypeDocument: Typedocument[] = [];
   selectedTypeDocument: Typedocument;
   selectedDocumentEtudiant: DocumentEtudiant;
   documentEtudiant: DocumentEtudiant = new DocumentEtudiant();
@@ -67,8 +68,7 @@ export class DocumentUploadComponent implements OnInit {
 
         this.typeDocuments = typeDocuments.filter(d => d.codetypedocument !== 'OTHER');
         this.autreTypeDocument = typeDocuments.find(d => d.codetypedocument === 'OTHER');
-        const otherTypeDocument = this.typeDocuments.find((td: Typedocument) => td.codetypedocument === 'OTHER');
-        this.typeDocuments.push(this.typeDocuments.splice(this.typeDocuments.indexOf(otherTypeDocument), 1)[0]);
+        this.typeDocuments.push(this.typeDocuments.splice(this.typeDocuments.indexOf(this.autreTypeDocument), 1)[0]);
 
       }, error => {
         this.typeDocumentSrv.httpSrv.handleError(error);
@@ -95,16 +95,16 @@ export class DocumentUploadComponent implements OnInit {
       if (other === 'other') {
         this.editOther();
       } else {
-        this.uploadFile(this.selectedTypeDocument);
+        this.uploadFile();
       }
     };
     myReader.readAsDataURL(file);
   }
 
-  uploadFile(typeDocument: Typedocument) {
+  uploadFile() {
     this.documentEtudiant.url = (this.base64EncodedFile as string).split(',')[1];
     this.documentEtudiant.etudiant = this.etudiant.id;
-    this.documentEtudiant.typeDocument = typeDocument.id;
+    this.documentEtudiant.typeDocument = this.selectedTypeDocument.id;
     this
       .documentEtudiantSrv
       .create(this.documentEtudiant)
@@ -115,7 +115,7 @@ export class DocumentUploadComponent implements OnInit {
         this.findAssociatedDocument();
         this.fileToUpload = null;
         this.canUpload = false;
-        if (typeDocument.codetypedocument === 'OTHER') {
+        if (this.selectedTypeDocument.codetypedocument === 'OTHER') {
           this.selectedDocumentEtudiant = documentEtudiant;
           this.displayOtherDocumentViewer(documentEtudiant);
         }
@@ -201,15 +201,22 @@ export class DocumentUploadComponent implements OnInit {
       .documentEtudiantSrv
       .findByEtudiant(this.etudiant)
       .subscribe((data: any) => {
-        this.associatedDocuments = data;
-        this.otherDocuments = this.associatedDocuments.filter(doc => doc.typeDocument.codetypedocument === 'OTHER');
+        this.associatedDocuments = data.filter(doc => doc.typeDocument.codetypedocument !== 'OTHER');
+        this.notAddedTypeDocument = [];
+        this.typeDocuments
+          .filter(td => td.codetypedocument !== 'OTHER')
+          .forEach(td => {
+            if (!this.associatedDocuments.map(ad => ad.typeDocument.codetypedocument).includes(td.codetypedocument)) {
+              this.notAddedTypeDocument.push(td);
+            }
+          });
+        this.otherDocuments = data.filter(doc => doc.typeDocument.codetypedocument === 'OTHER');
       }, error => {
         this.documentEtudiantSrv.httpSrv.handleError(error);
       });
   }
 
-  deleteInputDocument(typeDocument: Typedocument) {
-    const documentEtudiant = this.findCorrespondingDocument(typeDocument);
+  deleteDocumentEtudiant(documentEtudiant: DocumentEtudiant) {
     this
       .documentEtudiantSrv
       .remove(documentEtudiant)
@@ -217,12 +224,14 @@ export class DocumentUploadComponent implements OnInit {
         this.documentEtudiantSrv.httpSrv.notificationSrv.showSuccess('Suppression réussi');
         this.associatedDocuments = this.associatedDocuments
           .filter((doc) => doc.id !== documentEtudiant.id);
+        this.notAddedTypeDocument.push(documentEtudiant.typeDocument);
+        this.notAddedTypeDocument.sort(this.sortAlphaNum);
       }, error => {
         this.documentEtudiantSrv.httpSrv.handleError(error);
       })
   }
 
-  delete(documentEtudiant: DocumentEtudiant) {
+  deleteOther(documentEtudiant: DocumentEtudiant) {
     this
       .documentEtudiantSrv
       .remove(documentEtudiant)
@@ -235,18 +244,10 @@ export class DocumentUploadComponent implements OnInit {
       })
   }
 
-  isAlreadyAdded(typeDocument: Typedocument) {
-    return this.associatedDocuments.map((doc) => doc.typeDocument.id)
-    .includes(typeDocument.id);
-  }
 
-  findCorrespondingDocument(typeDocument: Typedocument) {
-    return this.associatedDocuments.find((doc) => doc.typeDocument.codetypedocument === typeDocument.codetypedocument && doc.typeDocument.codetypedocument !== 'OTHER');
-  }
-
-  displayDocumentViewer(typeDocument: Typedocument) {
-    this.selectedDocumentEtudiant = this.associatedDocuments.find((doc) => doc.typeDocument.codetypedocument === typeDocument.codetypedocument);
-    this.selectedTypeDocument = typeDocument;
+  displayDocumentViewer(documentEtudiant: DocumentEtudiant) {
+    this.selectedDocumentEtudiant = documentEtudiant;
+    this.selectedTypeDocument = documentEtudiant.typeDocument;
     this.modal.open(this.documentViewerRef, {
       size: 'lg',
       centered: true,
@@ -289,5 +290,19 @@ export class DocumentUploadComponent implements OnInit {
   beforeUpload(event: any) {
     this.fileToUpload = event;
   }
+
+  private sortAlphaNum(a, b) {
+  let reA = /[^a-zA-Z]/g;
+  let reN = /[^0-9]/g;
+  let aA = a.codetypedocument.replace(reA, "");
+  let bA = b.codetypedocument.replace(reA, "");
+  if (aA === bA) {
+    let aN = parseInt(a.replace(reN, ""), 10);
+    let bN = parseInt(b.replace(reN, ""), 10);
+    return aN === bN ? 0 : aN > bN ? 1 : -1;
+  } else {
+    return aA > bA ? 1 : -1;
+  }
+}
 
 }
