@@ -3,7 +3,7 @@ import { Etudiant } from "../../etudiant/etudiant";
 export class InscriptionTemporaire {
     id: any;
     passage: string;
-    montantinscriptionacad: string;
+    montantinscriptionacad: any;
     coutformation: string;
     numquittance: string;
     source: string;

@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { Etudiant } from '../../etudiant/etudiant';
-import { InscriptionTemporaire } from './inscriptiontemporaire';
+import { InscriptionTemporaire } from './inscription_temporaire';
 
 @Injectable({
   providedIn: 'root'
@@ -26,19 +26,19 @@ export class InscriptionTemporaireService {
   }
 
   update(inscription_temporaire: InscriptionTemporaire) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+inscription_temporaire.id+'/edit', inscription_temporaire);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + inscription_temporaire.id + '/edit', inscription_temporaire);
   }
 
   clone(original: InscriptionTemporaire, clone: InscriptionTemporaire) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+original.id+'/clone', clone);
+    return this.httpSrv.put(this.getRoutePrefixWithSlash() + original.id + '/clone', clone);
   }
 
   remove(inscription_temporaire: InscriptionTemporaire) {
-    return this.httpSrv.delete(this.getRoutePrefixWithSlash()+inscription_temporaire.id);
+    return this.httpSrv.delete(this.getRoutePrefixWithSlash() + inscription_temporaire.id);
   }
 
   removeSelection(inscription_temporaires: InscriptionTemporaire[]) {
-    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',inscription_temporaires);
+    return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash() + 'delete-selection/', inscription_temporaires);
   }
 
   findEncoursByEtudiant(etudiant: Etudiant) {
@@ -50,7 +50,11 @@ export class InscriptionTemporaireService {
   }
 
   private getRoutePrefixWithSlash(): string {
-    return this.routePrefix+'/';
+    return this.routePrefix + '/';
+  }
+
+  getInscriptionTempPreinscription(id) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'preinscription/' + id);
   }
 
 }

@@ -37,7 +37,7 @@
                     <update-perso-info (onUpdate)="next()" [etudiant]="etudiant"
                         *ngIf="(step.name=='Information Personnelle') && etudiant"></update-perso-info>
 
-                    <infos-inscription (onPrevious)="prev()" [inscriptionacad]="inscriptionacad"
+                    <infos-inscription (onPrevious)="prev()" [inscriptionTemporaire]="inscriptionTemporaire"
                         (onSave)="handleInscriptionChange($event)"
                         *ngIf="(step.name=='Information Inscription') && preinscription"
                         [preinscription]="preinscription" [etudiant]="etudiant"></infos-inscription>

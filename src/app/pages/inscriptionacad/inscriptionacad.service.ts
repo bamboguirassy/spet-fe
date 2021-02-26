@@ -4,6 +4,7 @@ import { HttpService } from 'src/app/shared/services/http.service';
 import { Classe } from '../classe/classe';
 import { Etudiant } from '../etudiant/etudiant';
 import { Inscriptionacad } from './inscriptionacad';
+import { InscriptionTemporaire } from './inscription_temporaire/inscription_temporaire';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +43,8 @@ export class InscriptionacadService {
     return this.httpSrv.put(this.getRoutePrefixWithSlash()+inscriptionacad.id+'/edit', inscriptionacad);
   }
 
-  confirmPrepaidInscription(inscriptionacad: Inscriptionacad) {
-    return this.httpSrv.put(this.getRoutePrefixWithSlash()+inscriptionacad.id+'/confirm-prepaid-inscription', inscriptionacad);
+  confirmPrepaidInscription(inscriptionTemporaire: InscriptionTemporaire) {
+    return this.httpSrv.put(this.getRoutePrefixWithSlash()+inscriptionTemporaire.id+'/confirm-prepaid-inscription', inscriptionTemporaire);
   }
 
   clone(original: Inscriptionacad, clone: Inscriptionacad) {

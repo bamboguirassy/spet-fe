@@ -7,6 +7,7 @@ import { EtudiantService } from '../../etudiant/etudiant.service';
 import { MessageService } from 'primeng/api';
 import { InscriptionTemporaire } from '../inscription_temporaire/inscription_temporaire';
 import { InscriptionTemporaireService } from '../inscription_temporaire/inscription_temporaire.service';
+import { InscriptionacadService } from '../inscriptionacad.service';
 declare var sendPaymentInfos: Function;
 @Component({
   selector: 'app-finaliser-inscription',
@@ -25,7 +26,9 @@ export class FinaliserInscriptionComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     public etudiantSrv: EtudiantService,
-    public inscriptionTemporaireSrv: InscriptionTemporaireService, public httpServ: HttpService) {
+    public inscriptionTemporaireSrv: InscriptionTemporaireService,
+     public httpServ: HttpService,
+     public inscriptionacadSrv: InscriptionacadService) {
     this.steps = [
       { name: 'Information Personnelle', icon: 'fa-user', active: true, valid: false, hasError: false },
       { name: 'Information Inscription', icon: 'fa-pencil', active: false, valid: false, hasError: false },
@@ -42,7 +45,7 @@ export class FinaliserInscriptionComponent implements OnInit {
   }
 
   findinscriptionTemporaireByPreinscription() {
-    this.inscriptionTemporaireSrv.getinscriptionTemporaireByPreinscription(this.preinscription.id)
+    this.inscriptionTemporaireSrv.getInscriptionTempPreinscription(this.preinscription.id)
       .subscribe((data: any) => {
         this.inscriptionTemporaire = data;
       }, error => this.inscriptionTemporaireSrv.httpSrv.handleError(error));
@@ -122,7 +125,7 @@ export class FinaliserInscriptionComponent implements OnInit {
 
   public confirm() {
     if (this.preinscription.paiementConfirme) {
-      this.inscriptionTemporaireSrv.confirmPrepaidInscription(this.inscriptionTemporaire)
+      this.inscriptionacadSrv.confirmPrepaidInscription(this.inscriptionTemporaire)
         .subscribe(() => {
           this.steps.forEach(step => step.valid = true);
           this.confirmed = true;
@@ -132,7 +135,7 @@ export class FinaliserInscriptionComponent implements OnInit {
     }
   }
 
-  handleInscriptionChange(inscriptionTemporaire: inscriptionTemporaire) {
+  handleInscriptionChange(inscriptionTemporaire: InscriptionTemporaire) {
     this.inscriptionTemporaire = inscriptionTemporaire;
     this.next();
   }
