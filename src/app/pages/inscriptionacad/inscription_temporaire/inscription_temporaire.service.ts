@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
+import { Etudiant } from '../../etudiant/etudiant';
 import { InscriptionTemporaire } from './inscriptiontemporaire';
 
 @Injectable({
@@ -38,6 +39,10 @@ export class InscriptionTemporaireService {
 
   removeSelection(inscription_temporaires: InscriptionTemporaire[]) {
     return this.httpSrv.deleteMultiple(this.getRoutePrefixWithSlash()+'delete-selection/',inscription_temporaires);
+  }
+
+  findEncoursByEtudiant(etudiant: Etudiant) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'en-cours/etudiant/' + etudiant.id);
   }
 
   public getRoutePrefix(): string {
