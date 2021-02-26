@@ -1,16 +1,21 @@
+import { Etudiant } from "../../etudiant/etudiant";
+
 export class InscriptionTemporaire {
     id: any;
-                                idclasse: string;
-                                        idspecialite: string;
-                                        idregimeinscription: string;
-                                        idmodaliteenseignement: string;
-                                        idetudiant: string;
-                                        idbourse: string;
-                                        passage: string;
-                                        idmodepaiement: string;
-                                        montantinscriptionacad: string;
-                                        coutformation: string;
-                                        numquittance: string;
-                                        source: string;
-                                        croust: string;
-                    }
+    passage: string;
+    montantinscriptionacad: string;
+    coutformation: string;
+    numquittance: string;
+    source: string;
+    croust: string;
+    idregimeinscription: any;
+    idetudiant: Etudiant;
+    idspecialite: any;
+    idclasse: any;
+    idmodaliteenseignement: any;
+    idmodepaiement: any;
+    idfiliere: any;
+    // temporal fields
+    preinscirptionId: any;
+
+}
