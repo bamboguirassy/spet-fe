@@ -54,7 +54,6 @@
                       </td>
                     </tr>
                     <tr>
-
                       <th>Genre</th>
                       <td>
                         <ng-container [ngSwitch]="selectedInscriptionacad?.idetudiant?.genre">
@@ -82,13 +81,12 @@
               </div>
             </div>
           </div>
-
           <div class="col-sm-6 col-lg-6 col-md-6">
             <div class="card">
               <div class="card-body">
                 <div class="row">
 
-                  <div class="col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="dateVisiteMedical">Date consultation</label>
                       <div class="input-group ">
@@ -101,49 +99,37 @@
                         </div>
                       </div>
                     </div>
-
                   </div>
-
-
-                  <div class="col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
-                      <label class="col-form-label form-control-label" for="handicap">Statut de l'étudiant</label>
+                      <label class="col-form-label form-control-label" for="handicap">Résultat de la visite</label>
                       <p-selectButton [style]="{'width':'100%'}" [options]="statuts" [(ngModel)]="selectedApte"
                         optionLabel="label" name="handicap" id="handicap"></p-selectButton>
                     </div>
                   </div>
-
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label class="col-form-label form-control-label" for="maladieChroniques">Maladies
+                        Chroniques</label>
+                      <p-multiSelect [defaultLabel]="'Selectionner les maladies'" [style]="{'width':'100%'}" name="maladieChroniques" [options]="maladieChroniques"
+                        [(ngModel)]="selectedMaladieChroniques" optionLabel="label" optionValue="code"></p-multiSelect>
+                    </div>
+                  </div>
                   <div class="col-md-12 col-lg-12">
                     <div class="form-group">
-                      <label lass="col-form-label form-control-label" for="commentaire">Commentaires</label>
+                      <label lass="col-form-label form-control-label" for="commentaire">Commentaires <b
+                          class="text-danger">(non visible pour l'université)</b></label>
                       <p-editor name="commentaire" [(ngModel)]="visiteMedicale.commentaire" required
                         [style]="{'height':'200px'}">
                       </p-editor>
                     </div>
                   </div>
 
-                  <div class="col-md-12 col-lg-12 d-flex justify-content-end">
-                    <ng-container [ngSwitch]="selectedInscriptionacad.visiteMedicale === null">
-                      <button *ngSwitchCase="true" type="button" class="btn btn-primary" (click)="save()">
-                        Soumettre
-                        <i class="fa fa-check-circle" aria-hidden="true"></i>
-                      </button>
-
-                      <button *ngSwitchCase="false" type="button" class="btn btn-primary" (click)="update()">
-                        Modifier
-                        <i class="fa fa-check-circle" aria-hidden="true"></i>
-                      </button>
-
-                    </ng-container>
-
-                  </div>
-                  
-
                   <div class="col-md-6 col-lg-6">
                     <div class="form-group">
                       <label class="col-form-label form-control-label" for="presenceHandicap">Présence Handicap</label>
                       <p-selectButton [style]="{'width':'100%'}" [options]="presenceHandicaps"
-                        [(ngModel)]="selectedPresenceHandicap" optionLabel="label" name="presenceHandicap"
+                        [(ngModel)]="selectedPresenceHandicap" optionLabel="label" optionValue="code" name="presenceHandicap"
                         id="presenceHandicap"></p-selectButton>
                     </div>
                   </div>
@@ -167,11 +153,26 @@
                     </div>
                   </div>
 
-                  <div class="col-md-12 col-lg-12 d-flex justify-content-end">
+                  <!-- <div class="col-md-12 col-lg-12 d-flex justify-content-end">
                     <button type="button" class="btn btn-primary" (click)="updateEtudiantInfos()">
                       Mettre à jour
                       <i class="fa fa-check-circle" aria-hidden="true"></i>
                     </button>
+                  </div> -->
+                  <div class="col-md-12 col-lg-12 d-flex justify-content-end">
+                    <ng-container [ngSwitch]="selectedInscriptionacad.visiteMedicale === null">
+                      <button *ngSwitchCase="true" type="button" class="btn btn-primary" (click)="save()">
+                        Enregistrer la visite
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                      </button>
+
+                      <button *ngSwitchCase="false" type="button" class="btn btn-primary" (click)="update()">
+                        Mettre à jour
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                      </button>
+
+                    </ng-container>
+
                   </div>
 
                 </div>

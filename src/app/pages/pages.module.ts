@@ -185,7 +185,8 @@ import { ServiceElectronicListComponent } from './dashboard/service-electronic-l
     DynamicDialogModule,
     MessagesModule,
     PanelModule,
-    InputSwitchModule
+    InputSwitchModule,
+    MultiSelectModule
   ],
   entryComponents: [
     ReclamationBourseNewComponent

@@ -37,8 +37,9 @@ export class VisiteMedicaleNewComponent implements OnInit {
   created: EventEmitter<any> = new EventEmitter<any>();
 
   statuts = [
-    { value: true, label: "Apte" },
-    { value: false, label: "Inapte" },
+    { value: 'Apte', label: "Apte" },
+    { value: 'Inapte', label: "Inapte" },
+    { value: 'Inaptitude temporaire', label: "Inaptitude temporaire" },
   ];
 
   presenceHandicaps = [
@@ -49,7 +50,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
   handicapTypes = [
     {
       type: "Handicap mental (ou déficience intellectuelle)",
-      libelle: "Handicap mental (ou déficience intellectuelle",
+      libelle: "Handicap mental (ou déficience intellectuelle)",
     },
     { type: "Handicap auditif", libelle: "Handicap auditif" },
     { type: "Handicap visuel", libelle: "Handicap visuel" },
@@ -58,13 +59,22 @@ export class VisiteMedicaleNewComponent implements OnInit {
       type: "Autisme et Troubles Envahissants du Développement",
       libelle: "Autisme et Troubles Envahissants du Développement",
     },
-    { type: "Handicap Psychique", libelle: "Handicap Psychique" },
     { type: "Plurihandicap", libelle: "Plurihandicap" },
-    { type: "Polyhandicap", libelle: "Polyhandicap" },
     { type: "Traumatismes crâniens", libelle: "Traumatismes crâniens" },
     { type: "Maladies dégénératives", libelle: "Maladies dégénératives" },
     { type: "Troubles dys", libelle: "Troubles dys" },
   ];
+
+  maladieChroniques = [
+    { label: 'Asthme', code: 'Asthme' },
+    { label: 'Diabète', code: 'Diabète' },
+    { label: 'Drépanocytose', code: 'Drépanocytose' },
+    { label: 'Hépatites', code: 'Hépatites' },
+    { label: 'Insuffisance Rénale', code: 'Insuffisance Rénale' },
+    { label: 'Autres', code: 'Autres' },
+  ];
+
+  selectedMaladieChroniques = [];
 
   constructor(
     public visiteMedicaleSrv: VisiteMedicaleService,
@@ -98,10 +108,11 @@ export class VisiteMedicaleNewComponent implements OnInit {
   }
 
   displayMedicalFile(etudiant: Etudiant) {
+    this.selectedMaladieChroniques = [];
     this.dateConsultation = {
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
-      day: new Date().getDay(),
+      day: new Date().getDate(),
     };
     this.selectedApte = this.statuts.find((vm) => vm.label === "Apte") as any;
     this.selectedInscriptionacad = null;
@@ -115,20 +126,19 @@ export class VisiteMedicaleNewComponent implements OnInit {
       .subscribe(
         (inscriptionacad: any) => {
           this.selectedInscriptionacad = inscriptionacad;
-
           if (this.selectedInscriptionacad.visiteMedicale) {
             this.visiteMedicale = {
               ...this.selectedInscriptionacad.visiteMedicale,
             };
-            this.selectedApte = this.visiteMedicale.apte
-              ? this.statuts.find((apt) => apt.value === true)
-              : this.statuts.find((apt) => apt.value === false);
+            this.selectedApte = this.statuts.find((vm) => vm.label === this.visiteMedicale.resultat) as any;
             this.visiteMedicale.date = new Date(this.visiteMedicale.date);
-
+            if(this.visiteMedicale.maladieChroniques) {
+              this.convertStringToMultiSelectValues(this.visiteMedicale.maladieChroniques);
+            }
             this.dateConsultation = {
               year: this.visiteMedicale.date.getFullYear(),
               month: this.visiteMedicale.date.getMonth(),
-              day: this.visiteMedicale.date.getDay(),
+              day: this.visiteMedicale.date.getDate(),
             };
           }
           this.selectedPresenceHandicap = this.presenceHandicaps.find(
@@ -159,20 +169,22 @@ export class VisiteMedicaleNewComponent implements OnInit {
   searchEtudiant(term: any) {
     this.searchInputTouched = true;
     this.searching = true;
-    this.etudiantSrv
-      .searchByNumInterne(term.query)
-      .pipe(
-        first(),
-        finalize(() => (this.searching = false))
-      )
-      .subscribe(
-        (etudiants: any) => {
-          this.filteredEtudiants = etudiants;
-        },
-        (error) => {
-          this.etudiantSrv.httpSrv.handleError(error);
-        }
-      );
+    if (term.query.length > 10) {
+      this.etudiantSrv
+        .searchByNumInterne(term.query)
+        .pipe(
+          first(),
+          finalize(() => (this.searching = false))
+        )
+        .subscribe(
+          (etudiants: any) => {
+            this.filteredEtudiants = etudiants;
+          },
+          (error) => {
+            this.etudiantSrv.httpSrv.handleError(error);
+          }
+        );
+    }
   }
 
   updateEtudiantInfos() {
@@ -180,7 +192,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
     if (this.selectedHandicap) {
       this.selectedEtudiant.typeHandicap = this.selectedHandicap.type;
     }
-    if(this.selectedEtudiant.handicap) {
+    if (this.selectedEtudiant.handicap) {
       this.selectedEtudiant.typeHandicap = null;
     }
 
@@ -202,10 +214,13 @@ export class VisiteMedicaleNewComponent implements OnInit {
   save() {
     this.visiteMedicale.inscriptionacad = this.selectedInscriptionacad
       .id as any;
-    this.visiteMedicale.apte = this.selectedApte.value;
+    this.visiteMedicale.resultat = this.selectedApte.value;
     this.visiteMedicale.date = new Date(
       `${this.dateConsultation.year}-${this.dateConsultation.month}-${this.dateConsultation.day}`
     );
+    if (this.selectedMaladieChroniques.length) {
+      this.visiteMedicale.maladieChroniques = this.convertSelectedMaladieChroniquesToString();
+    }
 
     this.visiteMedicaleSrv
       .create(this.visiteMedicale)
@@ -217,6 +232,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
           this.visiteMedicaleSrv.httpSrv.notificationSrv.showSuccess(
             "Vos observations ont bien été enregistrées."
           );
+          this.updateEtudiantInfos();
         },
         (error) => {
           this.visiteMedicaleSrv.httpSrv.handleError(error);
@@ -227,10 +243,13 @@ export class VisiteMedicaleNewComponent implements OnInit {
   update() {
     this.visiteMedicale.inscriptionacad = this.selectedInscriptionacad
       .id as any;
-    this.visiteMedicale.apte = this.selectedApte.value;
+    this.visiteMedicale.resultat = this.selectedApte.value;
     this.visiteMedicale.date = new Date(
       `${this.dateConsultation.year}-${this.dateConsultation.month}-${this.dateConsultation.day}`
     );
+    if (this.selectedMaladieChroniques.length) {
+      this.visiteMedicale.maladieChroniques = this.convertSelectedMaladieChroniquesToString();
+    }
     this.visiteMedicaleSrv
       .update(this.visiteMedicale)
       .pipe(first())
@@ -240,6 +259,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
           this.visiteMedicaleSrv.httpSrv.notificationSrv.showSuccess(
             "Vos observations ont bien été enregistrées mises à jour."
           );
+          this.updateEtudiantInfos();
         },
         (error) => {
           this.visiteMedicaleSrv.httpSrv.handleError(error);
@@ -282,5 +302,21 @@ export class VisiteMedicaleNewComponent implements OnInit {
       (data: any) => (this.visiteMedicales = data),
       (error) => this.visiteMedicaleSrv.httpSrv.handleError(error)
     );
+  }
+
+  convertSelectedMaladieChroniquesToString() {
+    let selectedMaladieString = '';
+    this.selectedMaladieChroniques.forEach((selectedmaladieChronique: any) => {
+      selectedMaladieString += selectedmaladieChronique.code + ',';
+    });
+    return selectedMaladieString;
+  }
+
+  convertStringToMultiSelectValues(maladieChroniques: string) {
+    this.selectedMaladieChroniques = [];
+    var selectedMaladies = maladieChroniques.split(",");
+    selectedMaladies.forEach((selectedMaladie) => {
+      this.selectedMaladieChroniques.push({ code: selectedMaladie, label: selectedMaladie });
+    });
   }
 }

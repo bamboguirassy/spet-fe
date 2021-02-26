@@ -72,8 +72,9 @@
                         {{ visiteMedicale?.inscriptionacad?.idclasse?.idniveau?.libelleniveau + ' ' +  visiteMedicale?.inscriptionacad?.idclasse?.idfiliere?.libellefiliere }}
                     </td>
                     <td class="ui-resizable-column">
-                        <span *ngIf="visiteMedicale.apte" class="badge badge-success">{{ visiteMedicale?.apte ? 'Apte' : 'Inapte' }}</span>
-                  <span *ngIf="!visiteMedicale.apte" class="badge badge-warning">{{ visiteMedicale?.apte ? 'Apte' : 'Inape' }}</span>
+                        <span *ngIf="visiteMedicale.resultat=='Apte'" class="badge badge-success">{{ visiteMedicale?.resultat }}</span>
+                        <span *ngIf="visiteMedicale.resultat=='Inapte'" class="badge badge-danger">{{ visiteMedicale?.resultat }}</span>
+                        <span *ngIf="visiteMedicale.resultat=='Inaptitude temporaire'" class="badge badge-warning">{{ visiteMedicale?.resultat }}</span>
                     </td>
                 </tr>
             </ng-template>
