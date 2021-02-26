@@ -1,4 +1,4 @@
-<form *ngIf="!inscriptionacad.id" #inscriptionForm="ngForm">
+<form *ngIf="!inscriptionTemporaire?.id" #inscriptionForm="ngForm">
     <div class="card">
         <div class="card-body">
             <fieldset class="border p-2">
@@ -6,7 +6,7 @@
                 <div class="form-row">
                     <div class="col-sm-12 col-md-12 col-lg-6 form-group">
                         <label style="font-weight: bold;">Spécialité:</label>
-                        <select required [(ngModel)]="inscriptionacad.idspecialite" class="custom-select"
+                        <select required [(ngModel)]="inscriptionTemporaire.idspecialite" class="custom-select"
                             name="specialite">
                             <option disabled selected>Selectionnez une spécialité</option>
                             <option *ngFor="let specialite of specialites" [value]="specialite.id">
@@ -24,12 +24,12 @@
                     <div *ngIf="preinscription?.idregimeinscription?.coderegimeinscription=='RNP' || preinscription?.idregimeinscription?.coderegimeinscription=='RPP'"
                         class="form-group col-sm-12 col-md-12 col-lg-6">
                         <label style="font-weight: bold;">Cout de la formation:</label>
-                        <input required [(ngModel)]="inscriptionacad.coutformation" class="form-control" type="number"
+                        <input required [(ngModel)]="inscriptionTemporaire.coutformation" class="form-control" type="number"
                             name="cout" />
                     </div>
                     <div class="form-group col-sm-12 col-md-12 col-lg-6" *ngIf="preinscription?.paiementConfirme">
                         <label style="font-weight: bold;">Mode de paiement</label>
-                        <select [disabled]="true" required [value]="inscriptionacad.idmodepaiement" class="custom-select"
+                        <select [disabled]="true" required [value]="inscriptionTemporaire.idmodepaiement" class="custom-select"
                             name="regime">
                             <option disabled selected>Selectionnez le mode de paiement </option>
                             <option [value]="modepaiement.id" *ngFor="let modepaiement of modepaiements">
@@ -61,7 +61,7 @@
         </div>
     </div>
 </form>
-<form *ngIf="inscriptionacad.id" #inscriptionEditForm="ngForm">
+<form *ngIf="inscriptionTemporaire.id" #inscriptionEditForm="ngForm">
     <div class="card">
         <div class="card-body">
             <fieldset class="border p-2">
@@ -69,7 +69,7 @@
                 <div class="form-row">
                     <div class="col-sm-12 col-md-12 col-lg-6 form-group">
                         <label style="font-weight: bold;">Spécialité:</label>
-                        <select required [(ngModel)]="inscriptionacad.idspecialite.id" class="custom-select"
+                        <select required [(ngModel)]="inscriptionTemporaire.idspecialite.id" class="custom-select"
                             name="specialite">
                             <option disabled selected>Selectionnez une spécialité</option>
                             <option *ngFor="let specialite of specialites" [value]="specialite.id">
@@ -86,7 +86,7 @@
                     </div>
                     <div class="form-group col-sm-12 col-md-12 col-lg-6" *ngIf="preinscription?.paiementConfirme">
                         <label style="font-weight: bold;">Mode de paiement</label>
-                        <select [disabled]="true" required [value]="inscriptionacad.idmodepaiement.id" class="custom-select"
+                        <select [disabled]="true" required [value]="inscriptionTemporaire.idmodepaiement.id" class="custom-select"
                             name="regime">
                             <option disabled selected>Selectionnez le mode de paiement </option>
                             <option [value]="modepaiement.id" *ngFor="let modepaiement of modepaiements">
@@ -102,13 +102,13 @@
                     <div *ngIf="preinscription?.paiementConfirme"
                         class="form-group col-sm-12 col-md-12 col-lg-6">
                         <label style="font-weight: bold;">Numéro de transaction ou reference de paiement:</label>
-                        <input [disabled]="true" required [value]="inscriptionacad.numquittance" class="form-control" type="text"
+                        <input [disabled]="true" required [value]="inscriptionTemporaire.numquittance" class="form-control" type="text"
                             name="numquittance" />
                     </div>
                     <div *ngIf="preinscription?.idregimeinscription?.coderegimeinscription=='RNP' || preinscription?.idregimeinscription?.coderegimeinscription=='RPP'"
                         class="form-group col-sm-12 col-md-12 col-lg-6">
                         <label style="font-weight: bold;">Cout de la formation:</label>
-                        <input required [(ngModel)]="inscriptionacad.coutformation" class="form-control" type="number"
+                        <input required [(ngModel)]="inscriptionTemporaire.coutformation" class="form-control" type="number"
                             name="cout" />
                     </div>
                 </div>

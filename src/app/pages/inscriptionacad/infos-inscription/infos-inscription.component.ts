@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Specialite } from '../../specialite/specialite';
-import { Inscriptionacad } from '../inscriptionacad';
 import { Preinscription } from '../../preinscription/preinscription';
 import { SpecialiteService } from '../../specialite/specialite.service';
 import { RegimeinscriptionService } from '../../regimeinscription/regimeinscription.service';
 import { Regimeinscription } from '../../regimeinscription/regimeinscription';
 import { Etudiant } from '../../etudiant/etudiant';
-import { InscriptionacadService } from '../inscriptionacad.service';
 import { Modepaiement } from '../../modepaiement/modepaiement';
 import { ModepaiementService } from '../../modepaiement/modepaiement.service';
+import { InscriptionTemporaire } from '../inscription_temporaire/inscription_temporaire';
+import { InscriptionTemporaireService } from '../inscription_temporaire/inscription_temporaire.service';
 
 @Component({
   selector: 'infos-inscription',
@@ -21,16 +21,16 @@ export class InfosInscriptionComponent implements OnInit {
   modepaiements: Modepaiement[] = [];
   @Input() preinscription: Preinscription;
   @Input() etudiant: Etudiant;
-  @Input() inscriptionacad: Inscriptionacad = new Inscriptionacad();
+  @Input() inscriptionTemporaire: InscriptionTemporaire = new InscriptionTemporaire();
   @Output() onSave: EventEmitter<any> = new EventEmitter();
   @Output() onPrevious: EventEmitter<any> = new EventEmitter();
 
   constructor(public specialiteSrv: SpecialiteService,
     public regimeinscriptionSrv: RegimeinscriptionService,
-    public inscriptionacadSrv: InscriptionacadService,
+    public inscriptionTemporaireSrv: InscriptionTemporaireService,
     public modepaiementSrv: ModepaiementService) {
-    if (!this.inscriptionacad.id) {
-      this.inscriptionacad = new Inscriptionacad();
+    if (!this.inscriptionTemporaire.id) {
+      this.inscriptionTemporaire = new InscriptionTemporaire();
     }
   }
 
@@ -44,10 +44,9 @@ export class InfosInscriptionComponent implements OnInit {
       }, err => this.modepaiementSrv.httpSrv.handleError(err));
       // si paiement déja effectué, mettre le montant payé
       let montantPlusFrais = ((this.preinscription.montant*100)/(100-1.25))+5;
-      this.inscriptionacad.montantinscriptionacad = Math.round(montantPlusFrais);
-      this.inscriptionacad.idregimeinscription = this.preinscription.idregimeinscription.id;
-      this.inscriptionacad.numquittance = this.preinscription.numeroTransaction;
-
+      this.inscriptionTemporaire.montantinscriptionacad = Math.round(montantPlusFrais);
+      this.inscriptionTemporaire.idregimeinscription = this.preinscription.idregimeinscription.id;
+      this.inscriptionTemporaire.numquittance = this.preinscription.numeroTransaction;
     }
   }
 
@@ -66,30 +65,30 @@ export class InfosInscriptionComponent implements OnInit {
   }
 
   createInscription() {
-    this.inscriptionacad.passage = this.preinscription.passage;
-    this.inscriptionacad.preinscirptionId = this.preinscription.id;
-    this.inscriptionacad.source = 'spet';
-    this.inscriptionacad.idregimeinscription = this.preinscription.idregimeinscription.id;
-    this.inscriptionacad.montantinscriptionacad = this.preinscription.montant;
-    this.inscriptionacad.numquittance = this.preinscription.numeroTransaction;
-    this.inscriptionacadSrv.create(this.inscriptionacad)
+    this.inscriptionTemporaire.passage = this.preinscription.passage;
+    this.inscriptionTemporaire.preinscirptionId = this.preinscription.id;
+    this.inscriptionTemporaire.source = 'spet';
+    this.inscriptionTemporaire.idregimeinscription = this.preinscription.idregimeinscription.id;
+    this.inscriptionTemporaire.montantinscriptionacad = this.preinscription.montant;
+    this.inscriptionTemporaire.numquittance = this.preinscription.numeroTransaction;
+    this.inscriptionTemporaireSrv.create(this.inscriptionTemporaire)
       .subscribe((data: any) => {
-        this.inscriptionacad = data;
+        this.inscriptionTemporaire = data;
         this.onSave.emit(data);
-      }, error => this.inscriptionacadSrv.httpSrv.handleError(error));
+      }, error => this.inscriptionTemporaireSrv.httpSrv.handleError(error));
   }
 
   updateInscription() {
-    this.inscriptionacad.idregimeinscription = this.inscriptionacad.idregimeinscription.id;
-    this.inscriptionacad.idspecialite = this.inscriptionacad.idspecialite.id;
-    this.inscriptionacad.idmodepaiement = this.inscriptionacad.idmodepaiement.id;
-    this.inscriptionacad.source = 'spet';
-    this.inscriptionacad.montantinscriptionacad = this.preinscription.montant;
-    this.inscriptionacadSrv.update(this.inscriptionacad)
+    this.inscriptionTemporaire.idregimeinscription = this.inscriptionTemporaire.idregimeinscription.id;
+    this.inscriptionTemporaire.idspecialite = this.inscriptionTemporaire.idspecialite.id;
+    this.inscriptionTemporaire.idmodepaiement = this.inscriptionTemporaire.idmodepaiement.id;
+    this.inscriptionTemporaire.source = 'spet';
+    this.inscriptionTemporaire.montantinscriptionacad = this.preinscription.montant;
+    this.inscriptionTemporaireSrv.update(this.inscriptionTemporaire)
       .subscribe((data: any) => {
-        this.inscriptionacad = data;
+        this.inscriptionTemporaire = data;
         this.onSave.emit(data);
-      }, error => this.inscriptionacadSrv.httpSrv.handleError(error));
+      }, error => this.inscriptionTemporaireSrv.httpSrv.handleError(error));
   }
 
   goToPrevious() {

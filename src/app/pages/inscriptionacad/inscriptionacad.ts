@@ -36,6 +36,5 @@ export class Inscriptionacad {
     idfiliere: any;
     source: string;
     // temporal fields
-    preinscirptionId: any;
     visiteMedicale: VisiteMedicale;
 }

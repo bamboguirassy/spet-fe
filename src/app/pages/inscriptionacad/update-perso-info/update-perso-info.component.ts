@@ -9,10 +9,10 @@ import { PaysService } from '../../pays/pays.service';
   templateUrl: './update-perso-info.component.html',
   styleUrls: ['./update-perso-info.component.scss']
 })
-export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
+export class UpdatePersoInfoComponent implements OnInit, OnDestroy {
   @Input() etudiant: Etudiant;
   situationMatrimoniales: any[] = [];
- handicaps: any[] = [];
+  handicaps: any[] = [];
   orphelins: any[] = [];
   typeHandicaps: any[] = [];
   pays: any[] = [];
@@ -103,16 +103,16 @@ export class UpdatePersoInfoComponent implements OnInit, OnDestroy{
         });
   }
 
- /* verifierEmailEtudiant(){
-    this.httpServ.verifierEmailEtudiant(this.etudiant.email)
-    .subscribe((data: any) => {
-          this.validerEmail = data.deliverable;
-          console.log('Teste validerEmail  '+ this.validerEmail);
-      },err=>{
-        console.log(err);
-      }
-      );
-}*/
+  /* verifierEmailEtudiant(){
+     this.httpServ.verifierEmailEtudiant(this.etudiant.email)
+     .subscribe((data: any) => {
+           this.validerEmail = data.deliverable;
+           console.log('Teste validerEmail  '+ this.validerEmail);
+       },err=>{
+         console.log(err);
+       }
+       );
+ }*/
 
 
 }

@@ -4,9 +4,10 @@ import { Preinscription } from '../../preinscription/preinscription';
 import { ActivatedRoute } from '@angular/router';
 import { Etudiant } from '../../etudiant/etudiant';
 import { EtudiantService } from '../../etudiant/etudiant.service';
-import { Inscriptionacad } from '../inscriptionacad';
-import { InscriptionacadService } from '../inscriptionacad.service';
 import { MessageService } from 'primeng/api';
+import { InscriptionTemporaire } from '../inscription_temporaire/inscription_temporaire';
+import { InscriptionTemporaireService } from '../inscription_temporaire/inscription_temporaire.service';
+import { InscriptionacadService } from '../inscriptionacad.service';
 declare var sendPaymentInfos: Function;
 @Component({
   selector: 'app-finaliser-inscription',
@@ -19,42 +20,44 @@ export class FinaliserInscriptionComponent implements OnInit {
   public steps: any[];
   public showConfirm: boolean;
   public confirmed: boolean;
-  inscriptionacad: Inscriptionacad;
+  inscriptionTemporaire: InscriptionTemporaire;
   preinscription: Preinscription;
   etudiant: Etudiant;
 
   constructor(private activatedRoute: ActivatedRoute,
     public etudiantSrv: EtudiantService,
-    public inscriptionacadSrv: InscriptionacadService, public httpServ: HttpService) {
+    public inscriptionTemporaireSrv: InscriptionTemporaireService,
+     public httpServ: HttpService,
+     public inscriptionacadSrv: InscriptionacadService) {
     this.steps = [
       { name: 'Information Personnelle', icon: 'fa-user', active: true, valid: false, hasError: false },
       { name: 'Information Inscription', icon: 'fa-pencil', active: false, valid: false, hasError: false },
       { name: 'Mise à jour photo', icon: 'fa-image', active: false, valid: false, hasError: false },
       { name: 'Paiement des frais', icon: 'fa-credit-card', active: false, valid: false, hasError: false },
     ];
-    this.inscriptionacad = new Inscriptionacad();
+    this.inscriptionTemporaire = new InscriptionTemporaire();
   }
 
   ngOnInit() {
     this.preinscription = this.activatedRoute.snapshot.data['preinscription'];
     this.findByCni();
-    this.findInscriptionacadByPreinscription();
+    this.findinscriptionTemporaireByPreinscription();
   }
 
-  findInscriptionacadByPreinscription() {
-    this.inscriptionacadSrv.getInscriptionacadByPreinscription(this.preinscription.id)
+  findinscriptionTemporaireByPreinscription() {
+    this.inscriptionTemporaireSrv.getInscriptionTempPreinscription(this.preinscription.id)
       .subscribe((data: any) => {
-        this.inscriptionacad = data;
-      }, error => this.inscriptionacadSrv.httpSrv.handleError(error));
+        this.inscriptionTemporaire = data;
+      }, error => this.inscriptionTemporaireSrv.httpSrv.handleError(error));
   }
 
   startPaymentProcess() {
-    if (!this.inscriptionacad.id) {
-      this.inscriptionacadSrv.httpSrv.notificationSrv.showError("Il faut d'abord valider l'inscription !!!");
+    if (!this.inscriptionTemporaire.id) {
+      this.inscriptionTemporaireSrv.httpSrv.notificationSrv.showError("Il faut d'abord valider l'inscription !!!");
     } else {
       let montant = Math.round(((this.preinscription.montant * 100) / (100 - 1.25)) + 5);
-      //OLD CONFIG - sendPaymentInfos(this.inscriptionacad.id, 'UNITH11586', '9Cev0^7!4Ikp@_6Wtk%zelWbY_zK9rGQDI2UnE?zfc5jOJfVmc', 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-failed', montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
-      sendPaymentInfos(this.inscriptionacad.id, 'UNITH11756', '7^rVpwCjP42Q@b#NGnuahuKAZBP^PqAECTlFLX1Uhu$LhyqY7U', 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-failed', montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
+      //OLD CONFIG - sendPaymentInfos(this.inscriptionTemporaire.id, 'UNITH11586', '9Cev0^7!4Ikp@_6Wtk%zelWbY_zK9rGQDI2UnE?zfc5jOJfVmc', 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-failed', montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
+      sendPaymentInfos(this.inscriptionTemporaire.id, 'UNITH11756', '7^rVpwCjP42Q@b#NGnuahuKAZBP^PqAECTlFLX1Uhu$LhyqY7U', 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-failed', montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
     }
   }
 
@@ -122,18 +125,18 @@ export class FinaliserInscriptionComponent implements OnInit {
 
   public confirm() {
     if (this.preinscription.paiementConfirme) {
-      this.inscriptionacadSrv.confirmPrepaidInscription(this.inscriptionacad)
+      this.inscriptionacadSrv.confirmPrepaidInscription(this.inscriptionTemporaire)
         .subscribe(() => {
           this.steps.forEach(step => step.valid = true);
           this.confirmed = true;
-        }, err => this.inscriptionacadSrv.httpSrv.handleError(err));
+        }, err => this.inscriptionTemporaireSrv.httpSrv.handleError(err));
     } else {
-      this.inscriptionacadSrv.httpSrv.notificationSrv.showError("Le paiement doit être confirmé d'abord !");
+      this.inscriptionTemporaireSrv.httpSrv.notificationSrv.showError("Le paiement doit être confirmé d'abord !");
     }
   }
 
-  handleInscriptionChange(inscriptionAcad: Inscriptionacad) {
-    this.inscriptionacad = inscriptionAcad;
+  handleInscriptionChange(inscriptionTemporaire: InscriptionTemporaire) {
+    this.inscriptionTemporaire = inscriptionTemporaire;
     this.next();
   }
 
