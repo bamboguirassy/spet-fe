@@ -57,7 +57,7 @@ export class FinaliserInscriptionComponent implements OnInit {
     } else {
       let montant = Math.round(((this.preinscription.montant * 100) / (100 - 1.25)) + 5);
       //OLD CONFIG - sendPaymentInfos(this.inscriptionTemporaire.id, 'UNITH11586', '9Cev0^7!4Ikp@_6Wtk%zelWbY_zK9rGQDI2UnE?zfc5jOJfVmc', 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-failed', montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
-      sendPaymentInfos(this.inscriptionTemporaire.id, 'UNITH11756', '7^rVpwCjP42Q@b#NGnuahuKAZBP^PqAECTlFLX1Uhu$LhyqY7U', 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-failed', montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, this.preinscription.tel);
+      sendPaymentInfos(this.inscriptionTemporaire.id, 'UNITH11756', '7^rVpwCjP42Q@b#NGnuahuKAZBP^PqAECTlFLX1Uhu$LhyqY7U', 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-failed', montant, 'ville', this.preinscription.email, this.preinscription.prenometudiant, this.preinscription.nometudiant, '');
     }
   }
 
