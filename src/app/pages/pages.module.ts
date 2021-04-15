@@ -23,7 +23,7 @@ import {
   AccordionModule,
   PanelModule,
   AutoCompleteModule,
-  OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule
+  OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule, ListboxModule
 } from 'primeng/primeng';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -188,7 +188,8 @@ import { GestionReclamationComponent } from './admin/reclamation-paiement/gestio
     MessagesModule,
     PanelModule,
     InputSwitchModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ListboxModule
   ],
   entryComponents: [
     ReclamationBourseNewComponent

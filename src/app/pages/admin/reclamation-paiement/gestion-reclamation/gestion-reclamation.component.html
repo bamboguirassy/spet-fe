@@ -1,1 +1,76 @@
-<p>gestion-reclamation works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card text-black bg-link">
+            <div class="card-body">
+                <h4 class="card-title">Bienvenue sur la page de gestion des réclamations de paiement</h4>
+                <p class="card-text">Merci de suivre les étapes</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card text-left">
+            <div class="card-body">
+                <form (submit)="getInscriptionTempsWithPreinscriptionByNumdossier()" method="post">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="numdossier">Saisir le numéro de dossier</label>
+                                <input [(ngModel)]="numdossier" required="required" type="text" name="numdossier"
+                                    id="numdossier" class="form-control" placeholder="" aria-describedby="numdossierId">
+                                <small id="numdossierId" class="text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 mt-md-2">
+                            <button type="submit" class="btn btn-primary">Rechercher <i class="fa fa-search-plus"
+                                    aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Liste des préinscriptions et des tentatives d'inscription</h4>
+                <p class="card-text">Sélectionner au moins une tentative pour finaliser</p>
+                <div *ngIf="tabPreinscription?.length">
+                    <div *ngFor="let itemPreinscription of tabPreinscription;">
+                        <h2>{{itemPreinscription?.preinscription?.idniveau?.codeniveau
+                            +'-'+itemPreinscription?.preinscription?.idfiliere?.codefiliere+'-'+itemPreinscription?.preinscription?.idanneeacad?.codeanneeacad}}
+                        </h2>
+                        <p-listbox [options]="getInscriptionTemps(itemPreinscription?.inscriptionTemps)"
+                            [(ngModel)]="selectedInscriptionTemp" optionLabel="name"></p-listbox>
+                        <a href="javascript:void(0)" (click)="setSelectedInscriptionTemp(itemPreinscription?.inscriptionTemps)">Gérer la réclamation pour cette inscription</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" *ngIf="selectedInscriptionTemp">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Assurez vous de rechercher le numéro de transaction fourni par l'étudiant 
+                    dans la base des paiements de InTouch, si le numéro de transaction est trouvé, merci 
+                    de le renseigner dans la colonne suivante :
+                </h4>
+                <form (submit)="validatePin()" method="post">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="numTransaction">Numéro de transaction</label>
+                                <input [(ngModel)]="numTransaction" type="text" name="numTransaction" id="numTransaction" class="form-control" placeholder="" aria-describedby="numTransactionId">
+                                <small id="numTransactionId" class="text-muted"></small>
+                              </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Valider le paiement <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                   
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
