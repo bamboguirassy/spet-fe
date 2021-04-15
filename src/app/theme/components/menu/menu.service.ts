@@ -10,7 +10,7 @@ import { FosUser } from 'src/app/pages/fos_user/fos_user';
 @Injectable()
 export class MenuService {
 
-  adminRoles = ['SA', 'ADSOS', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS'];
+  adminRoles = ['SA', 'ADSOS', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS','ADMIN','DSOS'];
   etudiantRole = 'ETU';
 
   constructor(private location: Location,
