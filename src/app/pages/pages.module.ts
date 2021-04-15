@@ -23,7 +23,7 @@ import {
   AccordionModule,
   PanelModule,
   AutoCompleteModule,
-  OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule
+  OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule, ListboxModule
 } from 'primeng/primeng';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -93,6 +93,7 @@ import { ArticleItemComponent } from './admin/article/article-item/article-item.
 import { ArticleItemListComponent } from './admin/article/article-item-list/article-item-list.component';
 import { RappelInfoSensibleComponent } from './dashboard/rappel-info-sensible/rappel-info-sensible.component';
 import { ServiceElectronicListComponent } from './dashboard/service-electronic-list/service-electronic-list.component';
+import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
 
 @NgModule({
   declarations: [
@@ -149,7 +150,8 @@ import { ServiceElectronicListComponent } from './dashboard/service-electronic-l
     ArticleItemComponent,
     ArticleItemListComponent,
     RappelInfoSensibleComponent,
-    ServiceElectronicListComponent
+    ServiceElectronicListComponent,
+    GestionReclamationComponent
   ],
   imports: [
     CommonModule,
@@ -186,7 +188,8 @@ import { ServiceElectronicListComponent } from './dashboard/service-electronic-l
     MessagesModule,
     PanelModule,
     InputSwitchModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ListboxModule
   ],
   entryComponents: [
     ReclamationBourseNewComponent

@@ -17,6 +17,10 @@ export class InscriptionTemporaireService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash());
   }
 
+  findWithPreinscriptionByNumDossier(numdossier) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'preinscription/'+numdossier);
+  }
+
   findOneById(id: number) {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }

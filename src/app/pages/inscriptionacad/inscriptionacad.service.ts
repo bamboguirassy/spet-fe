@@ -47,6 +47,10 @@ export class InscriptionacadService {
     return this.httpSrv.put(this.getRoutePrefixWithSlash()+inscriptionTemporaire.id+'/confirm-prepaid-inscription', inscriptionTemporaire);
   }
 
+  paymentInstantNotification(inscriptionTemp, numTransaction) {
+    return this.httpSrv.post(this.getRoutePrefixWithSlash()+'public/pin?payment_mode=INTOUCH_SERVICE_CODE&paid_sum='+inscriptionTemp.montantinscriptionacad+'&paid_amount='+inscriptionTemp.montantinscriptionacad+'&payment_token='+numTransaction+'&payment_status=200&command_number='+inscriptionTemp.id+'&payment_validation_date=1565251499748', null);
+  }
+
   clone(original: Inscriptionacad, clone: Inscriptionacad) {
     return this.httpSrv.put(this.getRoutePrefixWithSlash()+original.id+'/clone', clone);
   }

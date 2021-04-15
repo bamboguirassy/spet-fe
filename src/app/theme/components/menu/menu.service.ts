@@ -10,7 +10,7 @@ import { FosUser } from 'src/app/pages/fos_user/fos_user';
 @Injectable()
 export class MenuService {
 
-  adminRoles = ['SA', 'ADSOS', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS'];
+  adminRoles = ['SA', 'ADSOS', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS','ADMIN','DSOS'];
   etudiantRole = 'ETU';
 
   constructor(private location: Location,
@@ -36,8 +36,9 @@ export class MenuService {
       new Menu(60, 'Admin', null, null, 'cog', null, true, 0, this.adminRoles.includes(currentUser.idgroup.codegroupe)),
       // new Menu (61, 'Inscriptions', '/inscriptionacad', null, 'pencil', null, false, 60),
       // new Menu (62, 'Dossiers Etudiant', '/dossieretudiant', null, 'folder', null, false, 60),
-      new Menu(62, 'Classes', '/classe', null, 'folder', null, false, 60, true),
-      new Menu(63, 'Articles', '/article', null, 'file-o', null, false, 60, true),
+      new Menu(61, 'Classes', '/classe', null, 'folder', null, false, 60, true),
+      new Menu(62, 'Articles', '/article', null, 'file-o', null, false, 60, true),
+      new Menu(63, 'Reclamation Paie', '/reclamation-paiement', null, 'money', null, false, 60, true),
 
       // new Menu (45, 'Blank', '/blank', null, 'file-o', null, false, 40),
       // new Menu (46, 'Error', '/pagenotfound', null, 'exclamation-circle', null, false, 40),

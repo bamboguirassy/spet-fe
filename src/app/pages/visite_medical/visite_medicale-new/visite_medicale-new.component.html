@@ -85,6 +85,9 @@
             <div class="card">
               <div class="card-body">
                 <div class="row">
+                    <div class="col-12" *ngIf="visiteMedicale?.id">
+                    <p style="color: red;"> <b>La visite a été déjà effectuée  par : {{visiteMedicale?.user}} </b></p>
+                  </div> <br> <br>
 
                   <div class="col-12">
                     <div class="form-group">

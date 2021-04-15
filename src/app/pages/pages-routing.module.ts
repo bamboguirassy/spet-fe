@@ -32,6 +32,7 @@ import { articleRoutes } from './admin/article/article.routes';
 import { etudiantRoutes } from './etudiant/etudiant.routes';
 import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.component';
 import { OneEtudiantByIdResolver } from './etudiant/one-etudiant-by-id.resolver copy';
+import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
 
 
 
@@ -101,6 +102,7 @@ const routes: Routes = [
         data: { breadcrumb: 'Finaliser mon inscription' }, resolve: { preinscription: OnePreinscriptionResolver }
       },
       { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
+      { path: 'reclamation-paiement', component: GestionReclamationComponent, data: { breadcrumb: 'Réclamation Paiement' } },
       {
         path: 'contact', component: ContactComponent,
         resolve: {
