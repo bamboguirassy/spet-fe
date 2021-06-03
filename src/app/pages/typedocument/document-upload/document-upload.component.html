@@ -31,7 +31,7 @@
             </div>
             <div class="card-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-info" (click)="sendMail(documentEtudiant.typeDocument)"
-                    *ngIf="['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil)">
+                    *ngIf="['DSOS', 'ADMIN', 'ADSOS', 'SA', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS'].includes(currentUser?.profession?.codeprofil)">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                 </button>
 
