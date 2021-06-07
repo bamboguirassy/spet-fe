@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngFor="let documentEtudiant of associatedDocuments; let i = index ">
-        <div class="card" style="width: 100%;">
-
+        <div class="card" style="width: 100%;" >
+            
             <div class="img d-flex justify-content-center mt-1">
                 <img [src]="documentEtudiant.filename?.split('.')[1] === 'pdf' ? 'assets/img/pdf.png' : documentEtudiant?.url"
                     class="card-img-top" [class.pdf-width]="documentEtudiant?.filename?.split('.')[1] === 'pdf'">
@@ -9,7 +9,6 @@
 
             <div class="card-body">
                 <h5 class="card-title">
-
                     <a href="javascript:void(0)" (click)="displayDocumentViewer(documentEtudiant)">
                         {{ documentEtudiant?.typeDocument.libelletypedocument }}
                     </a>
@@ -48,41 +47,108 @@
             </div>
         </div>
     </div>
-
-    <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngFor="let typeDocument of notAddedTypeDocument; let i = index ">
-        <div class="card" style="width: 100%;">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <span> {{ typeDocument?.libelletypedocument }} </span>
-                </h5>
-                <div class="sub-body">
-
-                    <ng-container>
-                        <span class="badge badge-info" style="white-space: normal;">
-                            Merci de cliquer sur le bouton bleu pour charger le document</span>
-                    </ng-container> &nbsp;
-
-
+    <ng-container *ngFor="let typeDocument of notAddedTypeDocument; let i = index ">
+        <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngIf="inscriptionacad?.idclasse.idniveau.codeSigesr>='N01' && typeDocument?.codetypedocument=='RNB' || typeDocument?.codetypedocument=='CNI'">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">                
+                    <h5 class="card-title">
+                        <span> {{ typeDocument?.libelletypedocument }} </span>
+                    </h5>
+                    <div class="sub-body">
+    
+                        <ng-container>
+                            <span class="badge badge-info" style="white-space: normal;">
+                                Merci de cliquer sur le bouton bleu pour charger le document</span>
+                        </ng-container> &nbsp;
+    
+    
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-info" (click)="sendMail(typeDocument)"
+                        *ngIf="['DSOS', 'ADMIN', 'ADSOS', 'SA', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS'].includes(currentUser?.profession?.codeprofil)">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </button>
+    
+                    <button type="button" (click)="fileInput.click()" class="btn btn-primary ml-1">
+    
+                        <i class="fa fa-upload" aria-hidden="true"></i>
+    
+                    </button>
+    
+                    <input (click)="fileInput.value = null" name="fileInput" type="file" #fileInput hidden
+                        (change)="changeListener($event, typeDocument)">
                 </div>
             </div>
-            <div class="card-footer d-flex justify-content-center">
-                <button type="button" class="btn btn-info" (click)="sendMail(typeDocument)"
-                    *ngIf="['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil)">
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                </button>
-
-                <button type="button" (click)="fileInput.click()" class="btn btn-primary ml-1">
-
-                    <i class="fa fa-upload" aria-hidden="true"></i>
-
-                </button>
-
-                <input (click)="fileInput.value = null" name="fileInput" type="file" #fileInput hidden
-                    (change)="changeListener($event, typeDocument)">
+        </div>
+        <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngIf="inscriptionacad?.idclasse.idniveau.codeSigesr>'N03' && typeDocument?.codetypedocument=='AL'">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">                
+                    <h5 class="card-title">
+                        <span> {{ typeDocument?.libelletypedocument }} </span>
+                    </h5>
+                    <div class="sub-body">
+    
+                        <ng-container>
+                            <span class="badge badge-info" style="white-space: normal;">
+                                Merci de cliquer sur le bouton bleu pour charger le document</span>
+                        </ng-container> &nbsp;
+    
+    
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-info" (click)="sendMail(typeDocument)"
+                        *ngIf="['DSOS', 'ADMIN', 'ADSOS', 'SA', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS'].includes(currentUser?.profession?.codeprofil)">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </button>
+    
+                    <button type="button" (click)="fileInput.click()" class="btn btn-primary ml-1">
+    
+                        <i class="fa fa-upload" aria-hidden="true"></i>
+    
+                    </button>
+    
+                    <input (click)="fileInput.value = null" name="fileInput" type="file" #fileInput hidden
+                        (change)="changeListener($event, typeDocument)">
+                </div>
             </div>
         </div>
-
-    </div>
+        <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngIf="inscriptionacad?.idclasse.idniveau.codeSigesr>'N05' && typeDocument?.codetypedocument=='AM'">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">                
+                    <h5 class="card-title">
+                        <span> {{ typeDocument?.libelletypedocument }} </span>
+                    </h5>
+                    <div class="sub-body">
+    
+                        <ng-container>
+                            <span class="badge badge-info" style="white-space: normal;">
+                                Merci de cliquer sur le bouton bleu pour charger le document</span>
+                        </ng-container> &nbsp;
+    
+    
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-info" (click)="sendMail(typeDocument)"
+                        *ngIf="['DSOS', 'ADMIN', 'ADSOS', 'SA', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS'].includes(currentUser?.profession?.codeprofil)">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </button>
+    
+                    <button type="button" (click)="fileInput.click()" class="btn btn-primary ml-1">
+    
+                        <i class="fa fa-upload" aria-hidden="true"></i>
+    
+                    </button>
+    
+                    <input (click)="fileInput.value = null" name="fileInput" type="file" #fileInput hidden
+                        (change)="changeListener($event, typeDocument)">
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    
 
     <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngFor="let otherDocument of otherDocuments; let i = index ">
         <div class="card" style="width: 100%;">
@@ -111,7 +177,7 @@
             </div>
             <div class="card-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-info" (click)="''"
-                    *ngIf="['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil)">
+                    *ngIf="['DSOS', 'ADMIN', 'ADSOS', 'SA', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS'].includes(currentUser?.profession?.codeprofil)">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                 </button>
 
@@ -154,7 +220,7 @@
             <div class="card-footer d-flex justify-content-center">
 
                 <button type="button" class="btn btn-info" (click)="displaySendCustomMail()"
-                    *ngIf="['DSOS', 'ADMIN'].includes(currentUser?.profession?.codeprofil)">
+                    *ngIf="['DSOS', 'ADMIN', 'ADSOS', 'SA', 'ADMIN_DSOS', 'AG_DSOS', 'DIR_DSOS'].includes(currentUser?.profession?.codeprofil)">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                 </button>
 

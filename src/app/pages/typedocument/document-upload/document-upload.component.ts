@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Etudiant } from '../../etudiant/etudiant';
 import { FosUser } from '../../fos_user/fos_user';
+import { InscriptionacadService } from '../../inscriptionacad/inscriptionacad.service';
 import { DocumentEtudiantService } from '../document-etudiant.service';
 import { DocumentEtudiant } from '../documentetudiant';
 import { Typedocument } from '../typedocument';
@@ -33,17 +34,20 @@ export class DocumentUploadComponent implements OnInit {
   @ViewChild('documentViewer', { static: true }) documentViewerRef: TemplateRef<any>;
   @ViewChild('otherDocument', { static: true }) otherDocumentRef: TemplateRef<any>;
   @ViewChild('queryDocument', { static: true }) queryCustomDocumentRef: TemplateRef<any>;
+  inscriptionacad: any;
 
 
   constructor(
     public typeDocumentSrv: TypedocumentService, public documentEtudiantSrv: DocumentEtudiantService,
-    public modal: NgbModal, public authSrv: AuthService,
+    public modal: NgbModal, public authSrv: AuthService,public inscriptionacadSrv: InscriptionacadService
   ) { }
 
   ngOnInit() {
     this.findInputDocuments();
     this.findAssociatedDocument();
     this.fetchCurrentUser();
+    this.findInscriptionacadEncoursByEtudiant();
+    
   }
 
   fetchCurrentUser() {
@@ -214,6 +218,19 @@ export class DocumentUploadComponent implements OnInit {
       }, error => {
         this.documentEtudiantSrv.httpSrv.handleError(error);
       });
+  }
+
+  findInscriptionacadEncoursByEtudiant(){
+    if(this.etudiant){
+      this.typeDocumentSrv.findInscriptionacadByEnCours(this.etudiant)
+        .subscribe((data: any) => {
+          this.inscriptionacad = data;
+          
+        }, error => {
+          this.typeDocumentSrv.httpSrv.handleError(error);
+        })
+    }
+
   }
 
   deleteDocumentEtudiant(documentEtudiant: DocumentEtudiant) {
