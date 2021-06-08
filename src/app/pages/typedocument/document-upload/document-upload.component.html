@@ -48,7 +48,7 @@
         </div>
     </div>
     <ng-container *ngFor="let typeDocument of notAddedTypeDocument; let i = index ">
-        <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngIf="inscriptionacad?.idclasse.idniveau.codeSigesr>='N01' && typeDocument?.codetypedocument=='RNB' || typeDocument?.codetypedocument=='CNI'">
+        <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngIf="typeDocument?.codetypedocument=='RNB' || typeDocument?.codetypedocument=='CNI'">
             <div class="card" style="width: 100%;">
                 <div class="card-body">                
                     <h5 class="card-title">
