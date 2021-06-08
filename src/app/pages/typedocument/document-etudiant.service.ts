@@ -29,7 +29,7 @@ export class DocumentEtudiantService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'etudiant/' + etudiant.id)
   }
 
-
+  
   public getRoutePrefix(): string {
     return this.routePrefix;
   }
