@@ -62,9 +62,4 @@ export class TypedocumentService {
     return this.routePrefix + '/';
   }
 
-  findInscriptionacadByEnCours(etudiant: Etudiant) {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'inscruptionacad-en-cours-by-etudiant/' + etudiant.id);
-  }
-
-
 }

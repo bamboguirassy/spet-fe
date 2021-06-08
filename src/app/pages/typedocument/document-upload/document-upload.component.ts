@@ -222,7 +222,7 @@ export class DocumentUploadComponent implements OnInit {
 
   findInscriptionacadEncoursByEtudiant(){
     if(this.etudiant){
-      this.typeDocumentSrv.findInscriptionacadByEnCours(this.etudiant)
+      this.inscriptionacadSrv.findEncoursByEtudiant(this.etudiant)
         .subscribe((data: any) => {
           this.inscriptionacad = data;
           
