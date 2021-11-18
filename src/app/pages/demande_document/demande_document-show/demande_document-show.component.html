@@ -1,0 +1,64 @@
+<p-toast></p-toast>
+<p-fieldset legend="Suivi demande" [toggleable]="true">
+    <p-toolbar>
+        <button *ngIf="'DemandeDocument'|editable" type="button" class="btn btn-outline-warning pull-right ml-1"
+                [routerLink]="['/'+demande_documentSrv.getRoutePrefix(),demande_document.id,'edit']"><i
+                class="fa fa-pencil-square-o ml-1"></i>
+            Modifier
+        </button>
+        <button *ngIf="'DemandeDocument'|clonable"
+                [routerLink]="['/'+demande_documentSrv.getRoutePrefix(),demande_document.id,'clone']" type="button"
+                class="btn btn-outline-secondary pull-right ml-1">
+            <i class="fa fa-clone" aria-hidden="true"></i> Cloner
+        </button>
+        <button *ngIf="'DemandeDocument'|deletable" type="button" class="btn btn-outline-danger pull-right ml-1"
+                (click)="removeDemandeDocument()"><i class="fa fa-trash-o"></i> Supprimer
+        </button>
+        <button type="button" class="btn btn-outline-secondary pull-left ml-1" (click)="location.back()"><i
+                class="fa fa-reply"></i> Retour
+        </button>
+    </p-toolbar>
+    <p-fieldset [legend]="demande_document.intitule">
+        <table class="table">
+            <tr>
+                <th>Date</th>
+                <td>Le {{ demande_document.date | date: 'dd MMM, yyyy' }}</td>
+            </tr>
+            <tr>
+                <th>Intitule</th>
+                <td>{{ demande_document.intitule }}</td>
+            </tr>
+            <tr>
+                <th>État actuel</th>
+                <td><span class="badge"
+                          [ngStyle]="{'backgroundColor': demande_document.etatActuel.codeCouleur}">{{ demande_document.etatActuel.libelle }}</span>
+                </td>
+            </tr>
+        </table>
+    </p-fieldset>
+    <p-fieldset [legend]="'Historique des états'">
+        <ng-container *ngFor="let hed of historiqueEtats; let i = index">
+            <div class="card my-1"
+                 [ngStyle]="{'boxShadow': '0 2px 4px ' + hed.etat.codeCouleur}">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12"><span
+                                class="font-weight-bold text-uppercase">État: </span><span
+                                class="badge"
+                                [ngStyle]="{backgroundColor: hed.etat.codeCouleur}">{{ hed.etat.libelle }}</span>
+                        </div>
+                        <div class="col-md-6 col-sm-12"><span class="font-weight-bold text-uppercase">Date de mis en état: </span>
+                            <span class="text-capitalize"> le {{hed.date | date: 'dd MMM, yyyy'}}</span></div>
+                    </div>
+                </div>
+            </div> <!-- End of card -->
+            <div *ngIf="i >= 0 && historiqueEtats[i+1]" class="my-2"
+                 title="{{historiqueEtats.length-i-1 === 1 ? 'État initial': 'État précédent'}}"
+                 style="font-size: 1.5em"
+                 [ngStyle]="{color: colors[i]}">{{historiqueEtats.length - i - 1}}
+                <i class="fa fa-long-arrow-down"></i>
+            </div>
+        </ng-container>
+    </p-fieldset>
+</p-fieldset>
+

@@ -1,0 +1,35 @@
+<form (ngSubmit)="applyEmailChange()" #emailForm="ngForm">
+    <div class="card" style="height: 400px; overflow: auto;">
+        <div class="card-body">
+            <h4 class="card-title">Changer l'adresse email du compte</h4>
+            <code class="text-muted" style="font-size: 12px;">
+                Si vous avez déja tenté de créer votre compte et que vous aviez remarqué
+                 que l'adresse email à la quelle le mail de confirmation est envoyé
+                  n'est pas le votre ou que vous ne l'utilisez plus, alors vous êtes sur la bonne interface... 
+            </code>
+            <hr>
+            <div class="form-group">
+                <label for="derniereAnneeInscription">Dernière année inscription</label>
+                <p-dropdown [style]="{'width': '100%'}" name="derniereAnneeInscription" [required]="true"
+                    [options]="anneeacads" [(ngModel)]="recoveryData.selectedAnnee" id="derniereAnneeInscription"
+                    placeholder="Selectionner votre derniere année d'insccription" optionLabel="libelleanneeacad"
+                    [showClear]="true"></p-dropdown>
+            </div>
+            <div class="form-group">
+                <label for="idinscription">Numero Dernière Inscription</label>
+                <input [required]="true" type="number" [(ngModel)]="recoveryData.idInscription" name="idinscription"
+                    id="idinscription" class="form-control" aria-describedby="helpidinscriptionId">
+                <small id="helpidinscriptionId" class="text-danger">C'est le numéro qui accompagne le codebarre sous la
+                    photo de la carte d'étudiant ou les 5 derniers chiffres du numéro du certificat d'inscription académique.</small>
+            </div>
+            <div class="form-group">
+                <label for="email">Votre adresse email sur laquelle vous êtes joignables</label>
+                <input [required]="true" type="email" [(ngModel)]="recoveryData.email" name="email" id="email"
+                    class="form-control" placeholder="Email">
+            </div>
+        </div>
+        <div class="card-footer">
+            <button [disabled]="emailForm.invalid" type="submit" class="btn btn-primary pull-right">Confirmer</button>
+        </div>
+    </div>
+</form>

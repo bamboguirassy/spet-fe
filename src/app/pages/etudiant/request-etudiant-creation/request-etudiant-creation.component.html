@@ -1,0 +1,108 @@
+<p-toast></p-toast>
+<div class="d-flex justify-content-center align-items-center w-100 h-100 register-container">
+    <div class="col-12 col-xl-8 col-md-10">
+        <div class="card border-0 box-shadow rounded-0">
+            <div class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
+                <!-- <i class="fa fa-registered" aria-hidden="true"></i> -->
+                <img routerLink="/login" style="border-radius: 50%;margin-left: 5px;" width="150" height="150"
+                    src="/assets/img/logo_ut.jpg" alt="logo_ut">
+            </div>
+            <div class="card-body text-center pb-1">
+                <h2>Demande de génération de numéro de dossier et d'email universitaire pour l'étudiant
+                    {{etudiant?.prenometudiant+' '+etudiant?.nometudiant}}</h2>
+                <a routerLink="/login" class="transition">Si vous avez déjà un compte, cliquez ici !</a>
+                <form (submit)="createPrimoEntrant()" #form="ngForm" class="text-left mt-4">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label form-control-label" for="regionnaiss">Région de
+                                    naissance</label>
+                                <select name="regionnaiss" class="form-control" required=""
+                                    [(ngModel)]="etudiant.regionnaiss">
+                                    <option *ngFor="let region of regions" [value]="region.value">{{region.label}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="sexe">Sexe</label>
+                                <select name="sexe" class="form-control" required="" [(ngModel)]="etudiant.genre">
+                                    <option *ngFor="let sexe of sexes" [value]="sexe.value">{{sexe.label}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="idpays">Pays de résidence</label>
+                                <select [(ngModel)]="etudiant.idpays" required="" class="form-control" name="idpays"
+                                    id="idpays">
+                                    <option *ngFor="let pay of pays" [value]="pay.id">{{pay.nomFrFr}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="lyceedeprovenance">Lycée de provenance</label>
+                                <input [(ngModel)]="etudiant.lyceedeprovenance" required=""
+                                    class="form-control validation-field" type="text" name="lyceedeprovenance"
+                                    placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="anneeBac">Année Obtention BAC</label>
+                                <input [(ngModel)]="etudiant.anneeBac" min="2010" max="2100" required="" 
+                                    class="form-control validation-field" type="number" name="anneeBac" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="seriebac">Série BAC</label>
+                                <select name="seriebac" class="form-control" required=""  [(ngModel)]="etudiant.seriebac">
+                                    <option *ngFor="let serieBac of serieBacs" [value]="serieBac.value">
+                                        {{serieBac.label}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="moyennebac">Moyenne BAC</label>
+                                <input [(ngModel)]="etudiant.moyennebac" required=""  [min]="10" max="20"
+                                    class="form-control validation-field" type="number" step="any" name="moyennebac"
+                                    placeholder="moyennebac">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="mentionBac">Mention BAC</label>
+                                <select name="mentionBac" class="form-control" required=""  [(ngModel)]="etudiant.mentionbac">
+                                    <option *ngFor="let mentionBac of mentionbacs" [value]="mentionBac.value">
+                                        {{mentionBac.label}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="groupePassage">Groupe Passage</label>
+                                <select name="groupePassage" class="form-control" required=""  [(ngModel)]="etudiant.groupepassage">
+                                    <option *ngFor="let groupePassage of groupepassages" [value]="groupePassage.value">
+                                        {{groupePassage.label}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button id="registerBtn" [disabled]="!form.valid" class="btn btn-block" type="submit">Continuer
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

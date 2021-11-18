@@ -1,0 +1,76 @@
+<div class="row mb-4">
+    <div class="col">
+        <div widget class="card border-0 box-shadow">
+            <div class="card-header transparent border-0 text-muted">
+                <h5 class="mb-0"><b class="badge badge-info">Notes d'information</b></h5>
+            </div>
+            <div class="card-body pt-0 widget-body border-1">
+                <div *ngIf="etudiant">
+                    <p class="fs-13"><b>Votre adresse email institutionnelle est:
+                            <code style="font-weight: bolder;">{{etudiant?.emailUniv}}</code>.</b>
+                    </p>
+                    <h2>Bienvenue dans votre <b>Espace Etudiant</b></h2>
+                </div>
+
+                <!-- <h1>GPE</h1>
+                <div class="row">
+                    <div class="col">
+                        <div class="card-deck">
+                            <div class="card">
+                                <img class="card-img-top w-100" src="assets/img/app/4.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">Comment ça marche ?</h4>
+                                    <p class="card-text">This is a longer card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Découvrir GPE</small>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img class="card-img-top w-100" src="assets/img/app/6.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">Guide</h4>
+                                    <p class="card-text">This card has supporting text below as a natural lead-in to
+                                        additional content.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Comprendre la procédure</small>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img class="card-img-top w-100" src="assets/img/app/7.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">Contacts DSI</h4>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This card has even longer content than the first
+                                        to show that equal height action.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Université de Thiès</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-12 col-md-6" [hidden]="!articles?.length">
+        <app-article-item-list (onDataLoaded)="assignArticles($event)"></app-article-item-list>
+    </div>
+    <div [ngClass]="{'col-12': true, 'col-md-6':articles?.length}" class="col-12 col-md-6">
+        <div class="row">
+            <div [ngClass]="{'col-md-6': !articles?.length, 'col-12': articles?.length}">
+                <app-service-electronic-list></app-service-electronic-list>
+            </div>
+            <div [ngClass]="{'col-md-6': !articles?.length, 'col-12 mt-1': articles?.length}">
+                <app-rappel-info-sensible></app-rappel-info-sensible>
+            </div>
+        </div>
+    </div>
+</div>

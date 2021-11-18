@@ -1,0 +1,100 @@
+<p-toast></p-toast>
+<div class="d-flex justify-content-center align-items-center w-100 h-100 login-container">
+    <div class="col-xl-4 col-md-6 col-10">
+        <div class="card border-0 box-shadow rounded-0">
+            <div [routerLink]="['']" routerLinkActive="router-link-active"
+                class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
+                <!-- <i class="fa fa-sign-in" aria-hidden="true"></i> -->
+                <img style="border-radius: 50%;margin-left: 5px;" width="150" height="150" src="/assets/img/logo_ut.jpg"
+                    alt="logo_ut">
+            </div>
+            <div class="card-body text-center pb-0">
+                <h2 class="mt-0">Spet - Connexion</h2>
+                <div class="row">
+                    <div class="col-md-12 mt-2">
+                        <a id="spet-std-button" class="btn btn-primary btn-block transition mb-1"
+                            routerLink="/register">Créer un compte</a>
+                        <a id="spet-std-button" class="btn btn-primary btn-block transition"
+                            routerLink="/register/preconfirm-etudiant">Je suis nouveau à l'UT, obtenir mon numéro de
+                            dossier</a>
+                    </div>
+                    <!-- <div class="col-md-6 mt-2">
+                        <a id="spet-std-button" class="btn btn-secondary btn-block" (click)="openEmailChangeComponent()" href="javascript:void(0)">Problème d'émail ?</a>
+                    </div> -->
+                </div>
+                <!-- <a target="_blank" class="transition" href="http://wifi.univ-thies.sn/recherchermail.php">Trouver mon
+                    adresse email universitaire ?</a> -->
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-2"
+                    style="overflow-y: auto; overflow-x: auto">
+                    <div class="form-group ">
+                        <label for="username">Adresse email universitaire</label>
+                        <input [formControl]="username" class="form-control validation-field" placeholder="Email"
+                            type="text" id="username" name="username">
+                        <small class="text-danger"
+                            *ngIf="form.get('username').touched && form.get('username').hasError('required')">Email
+                            obligatoire</small>
+                        <small class="text-danger"
+                            *ngIf="form.get('username').touched && form.get('username').hasError('username')">Adresse
+                            email invalide</small>
+                    </div>
+
+                    <div class="d-flex justify-content-end" style="width: 100%;" *ngIf="!nextStep">
+                        <div class="form-group ">
+                            <button id="continuerButton" (click)="validateAccountByEmail()" type="button"
+                                class="btn btn-block">Continuer</button>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="nextStep">
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input [formControl]="password" class="form-control validation-field"
+                                placeholder="Mot de passe" type="password" id="password" name="password">
+                            <small class="text-danger"
+                                *ngIf="form.get('password').touched && form.get('password').hasError('required')">Mot de
+                                passe obligatoire</small>
+                            <small class="text-danger"
+                                *ngIf="form.get('password').touched && form.get('password').hasError('minlength')">Mot
+                                de
+                                passe court, 6 caracteres au minimum</small>
+                        </div>
+                        <div class="form-group d-flex justify-content-between">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="login-checkbox"
+                                    name="login-checkbox">
+                                <label class="custom-control-label" for="login-checkbox">Se souvenir de moi.</label>
+                            </div>
+                            <a class="transition pull-right" [routerLink]="['/forgotpassword']"
+                                routerLinkActive="router-link-active">Mot de passe oublié ?</a>
+                        </div>
+                        <div class="form-group">
+                            <button id="connectionButton" [disabled]="!form.valid" class="btn btn-block"
+                                type="submit">Se
+                                connecter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center bg-transparent">
+                <a class="mb-1 text-center" style="font-weight: bold; font-size: 18px; text-decoration: underline;"
+                 target="_blank" href="https://docs.google.com/document/d/e/2PACX-1vQi9uw6ghEFGi5AUHnP2J1_j7fMzg3v6hE-Ad2DCvMjWf057D9sappuDPFSE05gJQ/pub">Guide d'utilisation de la plateforme</a>
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <a target="_blank" href="https://facebook.com/univthies" class="fa-stack fa-lg">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a target="_blank" href="https://twitter.com/univthies" class="fa-stack fa-lg">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

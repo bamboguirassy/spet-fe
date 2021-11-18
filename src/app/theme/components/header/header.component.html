@@ -1,0 +1,41 @@
+ <nav class="navbar box-shadow app-header" [class.fixed-top]="settings.theme.navbarIsFixed" [class.logo-visible]="showInfoContent">
+    <div class="d-flex flex-column w-100">      
+        <div class="d-flex justify-content-start align-items-center top-navbar">                  
+            
+            <a class="logo" routerLink="/" (click)="closeSubMenus()">
+                <span class="start">sp</span><span class="ng">et</span>
+            </a>
+
+            <span class="navbar-text menu-icon transition ml-3 mr-3" [ngClass]="{'open': settings.theme.showMenu}"
+                (click)="settings.theme.showMenu = !settings.theme.showMenu">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </span>
+
+            <span class="ml-5 navbar-brand">
+                <img src="/assets/img/logo_ut.jpg" height="30px" alt="logo ut">
+            </span>
+            <span class="navbar-text" style="font-size: 16px;font-family: algerian;">Université de Thiès</span>
+
+
+            <div class="top-rigth-icons ml-auto"> 
+                <span class="hidden-xs-down">
+                    <app-user-menu></app-user-menu>
+                </span> 
+                <span class="pl-2 pr-2">
+                    <a (click)="logout()" >
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    </a>                   
+                </span> 
+            </div> 
+
+        </div>
+
+        <div class="horizontal-menu-outer" *ngIf="settings.theme.menu == 'horizontal'">
+            <app-horizontal-menu *ngIf="showHorizontalMenu && currentUser?.idgroup?.codegroupe !== 'MEDECIN' && menuItems?.length>0"  [menuItems]="menuItems"></app-horizontal-menu>        
+            <app-vertical-menu *ngIf="!showHorizontalMenu && currentUser?.idgroup?.codegroupe !== 'MEDECIN' && menuItems?.length>0"  [menuItems]="menuItems"></app-vertical-menu>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,69 @@
+<p-toast></p-toast>
+<div class="d-flex justify-content-center align-items-center w-100 h-100 register-container">
+    <div class="col-xl-4 col-md-6 col-10">
+        <div class="card border-0 box-shadow rounded-0">
+            <div class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
+                <!-- <i class="fa fa-registered" aria-hidden="true"></i> -->
+                <img style="border-radius: 50%;margin-left: 5px;" width="150" height="150"  src="/assets/img/logo_ut.jpg" alt="logo_ut">
+            </div>
+            <div class="card-body text-center pb-1">
+                <h2>Spet - Inscription</h2>
+                <a routerLink="/login" class="transition">Je posséde déja un compte !</a>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-4">
+                    <div class="form-group">
+                        <label for="identifiant">Numéro de dossier (Numéro carte étudiant)</label>
+                        <input  class="form-control validation-field" type="number" formControlName="identifiant" (keyup.enter)="findByNuminterne(identifiant.value)" (blur)="findByNuminterne(identifiant.value)" placeholder="Numéro de dossier (numéro carte étudiant)">
+                        <small class="text-danger" *ngIf="form.get('identifiant').touched">
+                            <span *ngIf="form.get('identifiant').hasError('required')">Ces informations sont obligatoires</span>
+                            <span *ngIf="form.get('identifiant').hasError('minlength')">11 caractères au minimum</span>
+                        </small>
+                        <span class="badge badge-pill badge-primary" *ngIf="etudiantTrouver" >{{etudiantVerifier?.prenometudiant}} {{etudiantVerifier?.nometudiant}}</span>
+                        <span class="badge badge-pill badge-danger" *ngIf="etudiantNonTrouver">Ce numéro de dossier ne correspond à aucun étudiant</span>       
+                    </div>
+                    <!-- <div class="form-group">
+                        <input [formControl]="email" class="form-control validation-field" placeholder="Email Universitaire" type="email"> 
+                        <small class="text-danger" *ngIf="form.get('email').touched">
+                            <span *ngIf="form.get('email').hasError('required')">L'émail est obligatoire</span>
+                            <span *ngIf="form.get('email').hasError('invalidEmail')">Adresse email invalide</span>
+                        </small> 
+                    </div> -->
+                    <div class="form-group">
+                        <label for="password">Nouveau mot de passe</label>
+                        <input  pPassword promptLabel="Saisir nouveau mot de passe" weakLabel="Mot de passe faible" mediumLabel="Mot de passe moyen" strongLabel="Mot de passe robuste" name="password" id="password" [formControl]="password" class="form-control validation-field" placeholder="Mot de passe" type="password" minlength="8">
+                         <small class="text-danger" *ngIf="form.get('password').touched">
+                            <span *ngIf="form.get('password').hasError('required')">Le mot de passe est obligatoire</span>
+                            <span *ngIf="form.get('password').hasError('minlength')">Le mot de passe est court, 8 caractères minimum exigés</span>
+                        </small>                     
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmation nouveau mot de passe</label>
+                        <input [formControl]="confirmPassword" class="form-control validation-field" placeholder="Confirmation mot de passe" type="password" name="confirmPassword" id="confirmPassword">
+                        <small class="text-danger" *ngIf="form.get('confirmPassword').touched">
+                            <span *ngIf="form.get('confirmPassword').hasError('required')">La confirmation du mot de passe est obligatoire</span>
+                            <span *ngIf="form.get('confirmPassword').hasError('mismatchedPasswords')">Les mots de passe ne correspondent pas.</span>
+                        </small> 
+                    </div>
+                    <div class="form-group">
+                        <p class="terms">En créant votre compte, vous acceptez les <a class="transition terms" href="javascript:void(0);">conditions d'utilisation</a></p>
+                    </div>
+                    <div class="form-group">
+                        <button id="registerBtn" [disabled]="!form.valid" class="btn btn-block" type="submit">Créer le compte</button>
+                    </div>
+                </form>  
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+    <p-footer>
+        <div class="row">
+            <div class="col-12">
+                <button class="pull-right" type="button" pButton icon="pi pi-times" label="Fermer" (click)="cd.reject()"></button>
+            </div>
+        </div>
+        <!-- <button class="ui-button-danger" type="button" pButton icon="pi pi-check" label="Ce mail ne m'appartient pas" (click)="cd.accept()"></button>
+        <button class="ui-button-warning mt-1" type="button" pButton icon="pi pi-check" label="Je n'utilise plus ce mail" (click)="cd.accept()"></button> -->
+    </p-footer>
+</p-confirmDialog>

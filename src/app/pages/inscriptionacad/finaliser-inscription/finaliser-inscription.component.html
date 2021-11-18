@@ -1,0 +1,126 @@
+<p-messages></p-messages>
+<h2>Bonjour {{preinscription?.prenometudiant+' '+preinscription?.nometudiant}} </h2>
+<p>
+    Vous êtes sur le point de finaliser votre inscription en <b>{{preinscription?.idniveau?.libelleniveau}}</b> pour
+    l'année académique
+    <b>{{preinscription?.idanneeacad?.libelleanneeacad}}</b> pour la filiere
+    <b>{{preinscription?.idfiliere?.codefiliere}}</b>.<br>
+    Vous êtes admis par <b>{{preinscription?.idtypeadmission?.libelletypeadmission}}</b> comme
+    <b>
+        <span class="badge badge-success" *ngIf="preinscription?.passage=='P'">Passant</span>
+        <span class="badge badge-danger" *ngIf="preinscription?.passage=='R'">Redoublant</span>
+        <span class="badge badge-warning" *ngIf="preinscription?.passage=='C'">Conditionnel</span>
+    </b>.
+    <br>
+    Le montant de votre inscription s'élève à <b>{{preinscription?.montant}} FCFA</b>.
+</p>
+<div class="row">
+    <div class="col">
+        <div class="card border-0 box-shadow">
+            <div *ngIf="!confirmed" class="card-body widget-body">
+                <div class="row">
+                    <div *ngFor="let step of steps; let last = last" class="col-md-3 col-sm-6 col-12 step text-center">
+                        <div class="d-flex justify-content-center align-items-center text-white pl-2 pr-2 mb-2 rounded step-content"
+                            [class.bg-success]="step.valid" [class.bg-danger]="step.active"
+                            [class.confirmed]="confirmed">
+                            <i class="fa {{ step.icon }} mr-2" aria-hidden="true"></i>
+                            <span class="step-name">{{step.name}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngFor="let step of steps" [hidden]="!step.active" class="col">
+                    <div class="row">
+                        <h4 class="mt-3 mb-3"><i class="fa {{ step.icon }}"></i> {{step.name}}</h4>
+                    </div>
+
+                    <update-perso-info (onUpdate)="next()" [etudiant]="etudiant"
+                        *ngIf="(step.name=='Information Personnelle') && etudiant"></update-perso-info>
+
+                    <infos-inscription (onPrevious)="prev()" [inscriptionTemporaire]="inscriptionTemporaire"
+                        (onSave)="handleInscriptionChange($event)"
+                        *ngIf="(step.name=='Information Inscription') && preinscription"
+                        [preinscription]="preinscription" [etudiant]="etudiant"></infos-inscription>
+
+                    <update-photo (onPrevious)="prev()" (onUpload)="next()" [etudiant]="etudiant"
+                        *ngIf="step.name=='Mise à jour photo'"></update-photo>
+
+                    <div class="row mt-3" *ngIf="step.name=='Paiement des frais'">
+                        <div class="col">
+                            <div class="row mb-2">
+                                <div class="col-12" *ngIf="preinscription?.paiementConfirme">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <blockquote class="blockquote">
+                                                <p>Vous avez déja procédé au paiement de vos frais d'inscription.</p>
+                                                <footer class="card-blockquote">Pour terminer votre inscription, cliquer
+                                                    sur le bouton <cite title="terminer l'inscription">Terminer
+                                                        l'inscription</cite> juste en bas.</footer>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12" *ngIf="!preinscription?.paiementConfirme">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <blockquote class="blockquote">
+                                                <p>Vous devez regler vos frais d'inscription sur la plateforme
+                                                    directement.
+                                                    Assurez-vous d'avoir réchargé votre moyen de paiement électronique
+                                                    avant de procéder à l'opération de paiement.
+                                                </p>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button *ngIf="steps[steps.length-1].active" class="btn btn-primary pull-left"
+                                (click)="prev()"><i class="fa fa-chevron-left arrow"></i>&nbsp; Etape
+                                précedente</button>
+                            <!-- <button *ngIf="!steps[steps.length-1].active" class="btn btn-primary pull-right"
+                                (click)="next()">Etape suivante &nbsp;<i class="fa fa-chevron-right arrow"></i></button> -->
+                            <button *ngIf="steps[steps.length-1].active && preinscription?.paiementConfirme"
+                                class="btn btn-primary pull-right" (click)="confirm()">Terminer l'inscription &nbsp;<i
+                                    class="fa fa-check arrow"></i></button>
+                            <button *ngIf="steps[steps.length-1].active && !preinscription?.paiementConfirme"
+                                (click)="startPaymentProcess()" type="button" class="btn btn-success pull-right">
+                                <i class="fa fa-money" aria-hidden="true"></i> Procéder au paiement
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+            <div *ngIf="confirmed" class="card-body widget-body">
+
+                <div class="col bg-light p-5" *ngIf="preinscription.paiementConfirme">
+                    <div
+                        class="d-flex justify-content-center align-items-center flex-column bg-light confirmed-content">
+                        <i class="fa fa-check text-success" aria-hidden="true"></i>
+                        <h2 class="p-3"><b>Inscription Reussie !</b></h2>
+                        <p>Vous pouvez suivre votre dossier sur votre espace étudiant. <br>
+                            Il faudra nécessairement téléverser tous les documents nécessaires à votre dossier à partir
+                            de votre espace étudiant. <br>
+                            Une fois l'inscription définitivement validée, la carte et le certificat d'inscription
+                            seront tirés et remis au Service de la scolarité de votre établissement ou à votre
+                            responsable de classe.<br>
+                            Pour les retirer il va falloir effectuer votre visite médicale pour l'année universitaire
+                            auprès du médecin du Crous, sauf si vous en êtes exempté. <br>
+                            Pour de plus amples informations, vous pouvez contacter <b> <a
+                                    href="mailto:dsos@univ-thies.sn">dsos@univ-thies.sn</a> </b> en précisant toujours
+                            votre numéro de dossier avec un objet clair et explicite.
+                        </p>
+
+                        <i class="fa fa-print text-muted" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

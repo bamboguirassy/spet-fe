@@ -1,0 +1,844 @@
+<div class="row">
+    <div class="col-12">
+        <preinscription-active *ngIf="preinscriptionData?.length" [preinscriptionData]="preinscriptionData">
+        </preinscription-active>
+        <hr>
+    </div>
+    <div class="col-lg-4">
+        <div class="card border-0 box-shadow mb-4">
+            <img class="card-img-top w-100" [src]="etudiantPhotoLink" alt="user">
+            <div class="card-body">
+                <h4 class="card-title text-center">{{etudiant?.prenometudiant}} {{etudiant?.nometudiant}}</h4>
+                <h5 class="card-title text-center text-info">Etudiant</h5>
+                <div class="dropdown-divider w-100"></div>
+                <div class="row">
+                    <div class="col-md-6 text-left">Numero dossier:</div>
+                    <div class="col-md-6 text-right"><strong class="d-inline-block">{{etudiant?.numinterne}}</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-left">Numero INE:</div>
+                    <div class="col-md-6 text-right"><strong class="d-inline-block">{{etudiant?.ine}}</strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-left">CNI/Passport:</div>
+                    <div class="col-md-6 text-right"><strong class="d-inline-block">{{etudiant?.cni}}</strong></div>
+                </div>
+                <div class="dropdown-divider w-100"></div>
+                <div *ngIf="isInscriptionActive"
+                    class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
+                    <!-- <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
+                        class="btn btn-outline-primary  btn-block mb-1 mr-2">
+                        <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
+                    </button> -->
+                    <button (click)="openModal(modalContent, null)" type="button"
+                        class="btn btn-outline-warning btn-block">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Mettre à jour mes informations
+                    </button>
+
+                </div>
+                <div *ngIf="isInscriptionActive"
+                    class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
+                    <!-- <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
+                    class="btn btn-outline-primary  btn-block mb-1 mr-2">
+                    <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
+                </button> -->
+                    <button (click)="openModal(updatePhotoModalContent, null)" type="button"
+                        class="btn btn-outline-info btn-block">
+                        <i class="fa fa-camera" aria-hidden="true"></i>
+                        Mettre à jour ma photo
+                    </button>
+
+                </div>
+                <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-2">
+                    <span class="badge badge-primary  mb-1 mr-2"> Vu dernierèment le
+                        {{user?.lastLogin|date:'dd/MM/yyyy à HH:mm:ss'}}
+
+                        <span *ngIf="!user?.email" class="badge badge-danger">Pas de compte</span>
+                    </span>
+                </div>
+
+                <!-- <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-1">
+                    <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
+                        class="btn btn-outline-primary btn-block mr-2">
+                        <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
+                    </button>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="row">
+            <div *ngIf="isInscriptionActive || currentUser?.profession?.codeprofil!='ETU'"
+                class="col-sm-12 mb-1 d-none d-sm-none d-md-none d-lg-block">
+                <p-toolbar>
+                    <div class="ui-toolbar-group-right">
+                        <!-- <button [routerLink]="['/mon-parcours']" routerLinkActive="router-link-active" type="button"
+                            class="btn btn-outline-primary mb-1 mr-2">
+                            <i class="fa fa-folder" aria-hidden="true"></i> Mon parcours
+                        </button> -->
+                        <button type="button" *ngIf="currentUser?.profession?.codeprofil!='ETU'"
+                            (click)="modalSendEmail(content)" class="btn btn-outline-primary mb-1">
+                            <i class="fa fa-envelope" aria-hidden="true"></i> Envoyer un email
+                        </button>
+                        <button *ngIf="isInscriptionActive" (click)="openModal(modalContent, null)" type="button"
+                            class="btn btn-outline-warning mb-1 ml-1">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Mettre à jour mes informations
+                        </button>
+                    </div>
+
+                </p-toolbar>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p-tabView>
+                        <p-tabPanel header="Information">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <fieldset>
+                                                <legend>Informations Personnelles</legend>
+                                                <table class="table table-responsive">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Date Naissance</th>
+                                                            <td>{{etudiant?.datenaiss|date:'dd/MM/yyyy'}}
+                                                                <span *ngIf="!etudiant?.datenaiss"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Lieu Naissance</th>
+                                                            <td>{{etudiant?.lieunaiss}}
+                                                                <span *ngIf="!etudiant?.lieunaiss"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Region Naissance</th>
+                                                            <td>{{etudiant?.regionnaiss}}
+                                                                <span *ngIf="!etudiant?.regionnaiss"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Pays Naissance</th>
+                                                            <td>{{etudiant?.idpays?.nomFrFr}}
+                                                                <span *ngIf="!etudiant?.idpays?.nomFrFr"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Genre</th>
+                                                            <td>
+                                                                <span *ngIf="etudiant?.genre=='M'">Masculin</span>
+                                                                <span *ngIf="etudiant?.genre=='F'">Feminin</span>
+                                                                <span *ngIf="!etudiant?.genre"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Nationalité</th>
+                                                            <td>{{etudiant?.nationalite?.nationalite}}
+                                                                <span *ngIf="!etudiant?.nationalite?.nationalite"
+                                                                    class="badge badge-info">Non renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Année Bac</th>
+                                                            <td>{{etudiant?.anneeBac}}
+                                                                <span *ngIf="!etudiant?.anneeBac"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Resultat du BAC</th>
+                                                            <td>{{etudiant?.moyennebac}}
+                                                                <span *ngIf="!etudiant?.moyennebac"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Serie BAC</th>
+                                                            <td>{{etudiant?.seriebac}}
+                                                                <span *ngIf="!etudiant?.seriebac"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Mention BAC</th>
+                                                            <td>{{etudiant?.mentionbac}}
+                                                                <span *ngIf="!etudiant?.mentionbac"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Groupe Passage</th>
+                                                            <td>{{etudiant?.groupepassage}}
+                                                                <span *ngIf="!etudiant?.groupepassage"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Lycée de provenance</th>
+                                                            <td>{{etudiant?.lyceedeprovenance}}
+                                                                <span *ngIf="!etudiant?.lyceedeprovenance"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Diplome d'entrée</th>
+                                                            <td>{{etudiant?.diplomeentree}}
+                                                                <span *ngIf="!etudiant?.diplomeentree"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Handicap</th>
+                                                            <td>{{etudiant?.handicap}}
+                                                                <span *ngIf="!etudiant?.handicap"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngIf="etudiant?.handicap=='Oui'">
+                                                            <th>Type Handicap</th>
+                                                            <td>{{etudiant?.typeHandicap}}
+                                                                <span *ngIf="!etudiant?.typeHandicap"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Description Handicap</th>
+                                                            <td>
+                                                                <div [innerHtml]="etudiant?.descriptionHandicap"></div>
+                                                                <span *ngIf="!etudiant?.descriptionHandicap"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Situation Matrimoniale</th>
+                                                            <td>
+                                                                <span
+                                                                    *ngIf="etudiant?.situationMatrimoniale=='M'">Marié(e)</span>
+                                                                <span
+                                                                    *ngIf="etudiant?.situationMatrimoniale=='C'">Célibataire</span>
+                                                                <span
+                                                                    *ngIf="etudiant?.situationMatrimoniale=='D'">Divorcé(e)</span>
+                                                                <span
+                                                                    *ngIf="etudiant?.situationMatrimoniale=='V'">Veuf(Ve)</span>
+                                                                <span *ngIf="!etudiant?.situationMatrimoniale"
+                                                                    class="badge badge-info">Non renseigné</span>
+                                                            </td>
+                                                            <th>Nombre d'enfants</th>
+                                                            <td>{{etudiant?.nbreenfant}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                <span *ngIf="etudiant?.situationMatrimoniale=='M'">Nom conjoint</span></th>
+                                                            <td> <span *ngIf="etudiant?.situationMatrimoniale=='M'">{{etudiant?.nomconjoint}}</span>
+                                                                <span *ngIf="!etudiant?.nomconjoint && etudiant?.situationMatrimoniale=='M'"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Orphelin</th>
+                                                            <td>{{etudiant?.orphelin}}
+                                                                <span *ngIf="!etudiant?.orphelin"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngIf="etudiant?.orphelin=='Oui'">
+                                                            <th>Type Orphelin</th>
+                                                            <td>{{etudiant?.typeOrphelin}}
+                                                                <span *ngIf="!etudiant?.typeOrphelin"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th></th>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <fieldset>
+                                                <legend>Contacts</legend>
+                                                <table class="table table-responsive">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Téléphone 1</th>
+                                                            <td>{{etudiant?.teletudiant}}
+                                                                <span *ngIf="!etudiant?.teletudiant"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Téléphone 2</th>
+                                                            <td>{{etudiant?.teletudiant2}}
+                                                                <span *ngIf="!etudiant?.teletudiant2"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Email Perso.</th>
+                                                            <td>{{etudiant?.email}}
+                                                                <span *ngIf="!etudiant?.email"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Email Univ.</th>
+                                                            <td>
+                                                                <span class="badge badge-danger">{{etudiant?.emailUniv}}
+                                                                    <span *ngIf="!etudiant?.emailUniv"
+                                                                        class="badge badge-info">Non
+                                                                        renseigné</span>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Personne à contacter en cas de bosoin</th>
+                                                            <td>{{etudiant?.nomcontact}}
+                                                                <span *ngIf="!etudiant?.nomcontact"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                            <th>Tél. Contact</th>
+                                                            <td>{{etudiant?.telcontact}}
+                                                                <span *ngIf="!etudiant?.telcontact"
+                                                                    class="badge badge-info">Non
+                                                                    renseigné</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Adresse</th>
+                                                            <td colspan="3">{{etudiant?.adruevilla}},
+                                                                {{etudiant?.adquartier}},
+                                                                {{etudiant?.adville}}, {{etudiant?.adpays?.nomFrFr}}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </fieldset>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="Parcours" *ngIf="inscriptions.length">
+                            <app-mon-parcours (parcoursLoaded)="inscriptions = $event" *ngIf="etudiant"
+                                [etudiant]="etudiant"></app-mon-parcours>
+                        </p-tabPanel>
+                        <p-tabPanel header="Documents">
+                            <div class="row">
+                                <div class="col-md-12 mt-2">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <fieldset>
+                                                <legend>Document</legend>
+                                                <app-document-upload [etudiant]="etudiant"
+                                                    (uploadEnd)="onUploadEnd($event)"></app-document-upload>
+                                            </fieldset>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+                    </p-tabView>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+<ng-template #modalContent>
+    <div class="modal-body bg-gray" style="height: 400px; overflow: auto;">
+        <form (ngSubmit)="updateEtudiant()" class="row px-3">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Contact</h3>
+                            <div class="card-text">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="email">Email</label>
+                                            <input [disabled]="updateForm?.email==currentUser?.email"
+                                                [(ngModel)]="updateForm.email" class="form-control" type="text"
+                                                name="email" id="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="teletudiant">Telephone
+                                                1</label>
+                                            <p-inputMask placeholder="Numéro téléphone primaire"
+                                                [style]="{'width':'100%'}" mask="+221999999999"
+                                                [(ngModel)]="updateForm.teletudiant" name="teletudiant"
+                                                id="teletudiant">
+                                            </p-inputMask>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label"
+                                                for="teletudiant2">Telephone
+                                                2</label>
+                                            <p-inputMask placeholder="Numéro téléphone sécondaire"
+                                                [style]="{'width':'100%'}" mask="+221999999999"
+                                                [(ngModel)]="updateForm.teletudiant2" name="teletudiant2"
+                                                id="teletudiant2">
+                                            </p-inputMask>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="nomcontact">Nom
+                                                Personne à
+                                                contacter en cas de besoin</label>
+                                            <input [(ngModel)]="updateForm.nomcontact" class="form-control" type="text"
+                                                name="nomcontact" id="nomcontact">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="telcontact">Téléphone
+                                                Contact</label>
+                                            <p-inputMask [unmask]="true" name="telcontact" id="telcontact"
+                                                placeholder="Téléphone personne contact" [style]="{'width':'100%'}"
+                                                mask="+221999999999" [(ngModel)]="updateForm.telcontact">
+                                            </p-inputMask>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Situation Matrimoniale</h3>
+                            <div class="card-text">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="regionnaiss">Région de
+                                                naissance</label>
+                                            <p-dropdown [style]="{'width':'100%'}" [options]="regions"
+                                                name="regionnaiss" id="regionnaiss" [(ngModel)]="selectedRegion"
+                                                placeholder="Selectionner une region" optionLabel="label"
+                                                [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label"
+                                                for="situationMatrimoniale">Situation
+                                                Matrimoniale</label>
+                                            <p-selectButton [style]="{'width':'100%'}" name="situationMatrimoniale"
+                                                id="situationMatrimoniale" [options]="situationMatrimoniales"
+                                                [(ngModel)]="selectedSituationMatromoniale" optionLabel="label">
+                                            </p-selectButton>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6" *ngIf="selectedSituationMatromoniale.value=='M'">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="nomconjoint">Nom
+                                                conjoint(e)</label>
+                                            <input [(ngModel)]="updateForm.nomconjoint" class="form-control" type="text"
+                                                name="nomconjoint" id="nomconjoint">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="nbreenfant">Nombre
+                                                d'enfants</label><br>
+                                            <p-spinner size="1" [(ngModel)]="updateForm.nbreenfant" name="nbreenfant"
+                                                id="nbreenfant">
+                                            </p-spinner>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Adresse</h3>
+                            <div class="card-text">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="adpays">Pays
+                                                adresse</label>
+                                            <input value="Sénégal" [disabled]="true" class="form-control" type="text"
+                                                name="adpays" id="adpays">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="adville">Ville</label>
+                                            <input [(ngModel)]="updateForm.adville" class="form-control" type="text"
+                                                name="adville" id="adville">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label"
+                                                for="adquartier">Quartier</label>
+                                            <input [(ngModel)]="updateForm.adquartier" class="form-control" type="text"
+                                                name="adquartier" id="adquartier">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label"
+                                                for="adruevilla">Rue</label>
+                                            <input [(ngModel)]="updateForm.adruevilla" class="form-control" type="text"
+                                                name="adruevilla" id="adruevilla">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Autres informations</h3>
+                            <div class="card-text">
+                                <div class="row">
+                                    <!-- <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="handicap">Avez vous un
+                                                handicap ?</label>
+                                            <p-selectButton [style]="{'width':'100%'}" [options]="handicaps"
+                                                [(ngModel)]="selectedHandicap" optionLabel="label" name="handicap"
+                                                id="handicap"></p-selectButton>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6" *ngIf="selectedHandicap?.value=='Oui'">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="typeHandicap">Type
+                                                Handicap</label><br>
+                                            <p-dropdown [style]="{'width':'100%'}" [options]="handicapTypes"
+                                                [(ngModel)]="selectedTypeHandicap"
+                                                placeholder="Selectionner type handicap" optionLabel="libelle"
+                                                [showClear]="true" name="typeHandicap" id="typeHandicap">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" *ngIf="selectedHandicap?.value=='Oui'">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label"
+                                                for="descriptionHandicap">Description
+                                                Handicap</label>
+                                            <textarea class="form-control" name="descriptionHandicap"
+                                                id="descriptionHandicap" cols="30" rows="10"></textarea>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="orphelin">Êtes-vous
+                                                orphelin
+                                                ?</label>
+                                            <p-selectButton [style]="{'width':'100%'}" name="orphelin" id="orphelin"
+                                                [options]="orphelins" [(ngModel)]="selectedOrphelin"
+                                                optionLabel="label">
+                                            </p-selectButton>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6" *ngIf="selectedOrphelin?.value=='Oui'">
+                                        <div class="form-group">
+                                            <label class="col-form-label form-control-label" for="typeOrphelin">Type
+                                                Orphelin</label><br>
+                                            <p-dropdown [style]="{'width':'100%'}" [options]="typeOrphelins"
+                                                [(ngModel)]="selectedTypeOrphelin"
+                                                placeholder="Selectionner type orphelin" optionLabel="libelle"
+                                                [showClear]="true" name="typeOrphelin" id="typeOrphelin">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card  bg-gray">
+                        <div class="card-body">
+                            <div class="card-text">
+                                <div class="col-12 text-center py-1">
+                                    <button class="btn btn-success mr-1" type="submit">Mettre à jour</button>
+                                    <button type="button" class="btn btn-danger" (click)="closeModal()">Annuler</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- <ul class="row">
+            <ul class="col-12 vertical-tabs">
+                <form (ngSubmit)="updateEtudiant()" class="row px-3">
+                    <ul class="nav flex-column left col-3 border-0 rounded-0 mr-0 bg-light">
+                        <img class="w-100" src="assets/img/users/default-user.jpg">
+                        <li class="nav-item bg-light">
+                            <a class="nav-link" href="#contacts" data-toggle="tab">Contacts</a>
+                        </li>
+                        <li class="nav-item bg-light">
+                            <a class="nav-link" href="#etatCivil" data-toggle="tab">Etat Civil</a>
+                        </li>
+                        <li class="nav-item bg-light">
+                            <a class="nav-link active" href="#adresse" data-toggle="tab">Adresse</a>
+                        </li>
+                        <li class="nav-item bg-light">
+                            <a class="nav-link" href="#autres" data-toggle="tab">Autres Informations utiles</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content col-9 border-0">
+                        <div class="tab-pane active" id="contacts">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label form-control-label" for="email">Email</label>
+                                        <input [disabled]="etudiant?.email==currentUser?.email"
+                                            [(ngModel)]="etudiant.email" class="form-control" type="text" name="email"
+                                            id="email">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label form-control-label" for="teletudiant">Telephone
+                                            1</label>
+                                        <p-inputMask placeholder="Numéro téléphone primaire" [style]="{'width':'100%'}"
+                                            mask="+221999999999" [(ngModel)]="etudiant.teletudiant" name="teletudiant"
+                                            id="teletudiant"></p-inputMask>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label form-control-label" for="teletudiant2">Telephone
+                                            2</label>
+                                        <p-inputMask placeholder="Numéro téléphone sécondaire"
+                                            [style]="{'width':'100%'}" mask="+221999999999"
+                                            [(ngModel)]="etudiant.teletudiant2" name="teletudiant2" id="teletudiant2">
+                                        </p-inputMask>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label form-control-label" for="nomcontact">Nom Personne à
+                                            contacter</label>
+                                        <input [(ngModel)]="etudiant.nomcontact" class="form-control" type="text"
+                                            name="nomcontact" id="nomcontact">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label form-control-label" for="telcontact">Téléphone
+                                            Contact</label>
+                                        <p-inputMask name="telcontact" id="telcontact"
+                                            placeholder="Téléphone personne contact" [style]="{'width':'100%'}"
+                                            mask="+221999999999" [(ngModel)]="etudiant.telcontact"></p-inputMask>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="etatCivil">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="regionnaiss">Région de
+                                        naissance</label>
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="regions" name="regionnaiss"
+                                        id="regionnaiss" [(ngModel)]="selectedRegion"
+                                        placeholder="Selectionner une region" optionLabel="label" [showClear]="true">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label"
+                                        for="situationMatrimoniale">Situation Matrimoniale</label>
+                                    <p-selectButton [style]="{'width':'100%'}" name="situationMatrimoniale"
+                                        id="situationMatrimoniale" [options]="situationMatrimoniales"
+                                        [(ngModel)]="selectedSituationMatromoniale" optionLabel="label">
+                                    </p-selectButton>
+                                </div>
+                            </div>
+                            <div class="col-md-12" *ngIf="selectedSituationMatromoniale.value=='M'">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="nomconjoint">Nom
+                                        conjoint(e)</label>
+                                    <input [(ngModel)]="etudiant.nomconjoint" class="form-control" type="text"
+                                        name="nomconjoint" id="nomconjoint">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="nbreenfant">Nombre
+                                        d'enfants</label><br>
+                                    <p-spinner size="1" [(ngModel)]="etudiant.nbreenfant" name="nbreenfant"
+                                        id="nbreenfant"></p-spinner>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="adresse">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="adpays">Pays adresse</label>
+                                    <input value="Sénégal" [disabled]="true" class="form-control" type="text"
+                                        name="adpays" id="adpays">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="adville">Ville</label>
+                                    <input [(ngModel)]="etudiant.adville" class="form-control" type="text"
+                                        name="adville" id="adville">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="adquartier">Quartier</label>
+                                    <input [(ngModel)]="etudiant.adquartier" class="form-control" type="text"
+                                        name="adquartier" id="adquartier">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="adruevilla">Rue</label>
+                                    <input [(ngModel)]="etudiant.adruevilla" class="form-control" type="text"
+                                        name="adruevilla" id="adruevilla">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="autres">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="handicap">Avez vous un
+                                        handicap ?</label>
+                                    <p-selectButton [style]="{'width':'100%'}" [options]="handicaps"
+                                        [(ngModel)]="selectedHandicap" optionLabel="label" name="handicap"
+                                        id="handicap"></p-selectButton>
+                                </div>
+                            </div>
+                            <div class="col-md-12" *ngIf="selectedHandicap?.value=='Oui'">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="typeHandicap">Type
+                                        Handicap</label><br>
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="handicapTypes"
+                                        [(ngModel)]="selectedTypeHandicap" placeholder="Selectionner type handicap"
+                                        optionLabel="libelle" [showClear]="true" name="typeHandicap" id="typeHandicap">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-md-12" *ngIf="selectedHandicap?.value=='Oui'">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label"
+                                        for="descriptionHandicap">Description Handicap</label>
+                                    <p-editor [(ngModel)]="etudiant.descriptionHandicap" [style]="{'height':'100px'}"
+                                        name="descriptionHandicap" id="descriptionHandicap"></p-editor>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="orphelin">Êtes-vous orphelin
+                                        ?</label>
+                                    <p-selectButton [style]="{'width':'100%'}" name="orphelin" id="orphelin"
+                                        [options]="orphelins" [(ngModel)]="selectedOrphelin" optionLabel="label">
+                                    </p-selectButton>
+                                </div>
+                            </div>
+                            <div class="col-md-12" *ngIf="selectedOrphelin?.value=='Oui'">
+                                <div class="form-group">
+                                    <label class="col-form-label form-control-label" for="typeOrphelin">Type
+                                        Orphelin</label><br>
+                                    <p-dropdown [style]="{'width':'100%'}" [options]="typeOrphelins"
+                                        [(ngModel)]="selectedTypeOrphelin" placeholder="Selectionner type orphelin"
+                                        optionLabel="libelle" [showClear]="true" name="typeOrphelin" id="typeOrphelin">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 bg-white text-center py-1">
+                        <button class="btn btn-success mr-1" type="submit">Mettre à jour</button>
+                        <button type="button" class="btn btn-danger" (click)="closeModal()">Annuler</button>
+                    </div>
+                </form>
+        </ul>
+        </div>-->
+    </div>
+</ng-template>
+<p-toast></p-toast>
+<ng-template #content>
+    <form style="width: 100%;" class="form" role="form" #emailForm="ngForm" autocomplete="off">
+        <div class="modal-header ">
+            <h4 class="modal-title">Envoyer un email</h4>
+        </div>
+        <div class="modal-body">
+            <div class="col-sm-12">
+                <div class="col-lg-12 ">
+                    <div class="form-group">
+
+                        <label class="col-form-label form-control-label" for="objet">Objet</label>
+                        <input type="text" class="form-control" [(ngModel)]="email.objet" id="objet" name="objet"
+                            required>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label lass="col-form-label form-control-label" for="contenu">Message</label>
+                        <p-editor name="contenu" [(ngModel)]="email.contenu" required [style]="{'height':'200px'}">
+                        </p-editor>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="emailForm.invalid" type="submit" (click)="sendEmail()"
+                    class="btn btn-outline-primary">
+                    Envoyer
+                </button>
+                <button type="button" class="btn btn-danger" (click)="closeModal1()">Annuler</button>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #updatePhotoModalContent>
+    <div style="width: 100%;">
+        <div class="modal-header ">
+            <h4 class="modal-title">Modifier ma photo</h4>
+        </div>
+        <div class="modal-body" style="width: 100%;">
+            <div class="col-sm-12 mr-2">
+                <update-photo [etudiant]="etudiant" (onUpload)="setEtudiant($event)" [isInscription]="false"> </update-photo>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModal1()">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+</ng-template>

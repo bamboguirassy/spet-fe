@@ -1,0 +1,67 @@
+
+<div class="card card-outline-danger bg-gray">
+    <div class="card-body">
+        <span class="title bg-white h6">Vous avez des préinscriptions actives.</span>
+        <!-- preinscription active -->
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive bg-white box-shadow">
+                    <table class="table table-hover" style="overflow: scroll;">
+                        <thead>
+                            <tr>
+                                <th>Date délai</th>
+                                <th>Filière</th>
+                                <th>Niveau</th>
+                                <th>Année académique</th>
+                                <th>Type admission</th>
+                                <th>Type Passage</th>
+                                <th>Montant</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let preinscriptionLine of preinscriptionData">
+                                <td class="align-middle">
+                                    <span class="badge badge-danger">
+                                        {{preinscriptionLine?.preinscription?.datedelai|date:'dd/MM/yyyy'}}
+                                    </span>
+                                </td>
+                                <td class="align-middle text-truncate">
+                                    {{preinscriptionLine?.preinscription?.idfiliere?.codefiliere}}</td>
+                                <td class="align-middle text-truncate">
+                                    {{preinscriptionLine?.preinscription?.idniveau?.libelleniveau}}</td>
+                                <td class="align-middle text-truncate">
+                                    {{preinscriptionLine?.preinscription?.idanneeacad?.libelleanneeacad}}</td>
+                                <td class="align-middle text-truncate">
+                                    {{preinscriptionLine?.preinscription?.idtypeadmission?.libelletypeadmission}}</td>
+                                <td class="align-middle text-truncate">
+                                    <span class="badge badge-success"
+                                        *ngIf="preinscriptionLine?.preinscription?.passage=='P'">Passant</span>
+                                    <span class="badge badge-danger"
+                                        *ngIf="preinscriptionLine?.preinscription?.passage=='R'">Redoublant</span>
+                                    <span class="badge badge-warning"
+                                        *ngIf="preinscriptionLine?.preinscription?.passage=='C'">Conditionnel</span>
+                                </td>
+                                <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.montant }}
+                                </td>
+                                <td class="align-middle" *ngIf="preinscriptionLine?.active">
+                                    <div class="btn-group" role="group">
+                                        <button (click)="startProcess(preinscriptionLine?.preinscription.id)"
+                                            class="btn btn-outline-primary">
+                                            <i class="fa fa-pencil-square" aria-hidden="true"></i> S'inscrire
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="align-middle" *ngIf="!preinscriptionLine?.active">
+                                    <span class="badge badge-danger">Inscription non autorisée</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- fin preinscription active -->
+    </div>
+</div>
+

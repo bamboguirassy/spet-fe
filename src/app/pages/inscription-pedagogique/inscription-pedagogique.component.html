@@ -1,0 +1,130 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header collapsed">
+        <i class="fa fa-folder-open"></i> Inscriptions pédagogiques -
+        {{data.inscriptionacad.idclasse.idniveau.libelleniveau}}
+        {{data.inscriptionacad.idclasse.idfiliere.libellefiliere}}
+        {{data.inscriptionacad.idclasse.idanneeacad.libelleanneeacad}}
+      </div>
+      <!-- .panel-heading -->
+      <div class="card-body">
+        <div class="row">
+          <!-- text accueil etudiant -->
+          <div class="col-12">
+            <ul style="list-style-type: none;">
+              <li>
+                Vous êtes sur l'interface de prévisualisation des unités d'enseignement aux quelles vous vous êtes
+                inscrits.
+                Notez bien que pour une année donnée, vous ne serez évalués qu'en fonction de ces inscriptions.<br>
+                <ul style="margin-left: 40px;">
+                  <li>
+                    Les passants sont inscrits à toutes les UEs de la classe.
+                  </li>
+                  <li>Les rédoublants sont inscrits uniquement aux UEs non validées et/ou aux UEs antérieures (du niveau
+                    précédent) non validées.</li>
+                  <li>Les conditionnels sont inscrits aux UEs précédement non validées (UEs antérieures) et aux UEs du
+                    niveau de
+                    la classe actuelle de l'inscription de l'étudiant.</li>
+                </ul>
+              </li>
+              <li>
+                Si vous vous rendez compte qu'une UE manque ou qu'on vous a inscrit à une UE par erreur, merci de
+                contacter le
+                service pédagogique de votre établissement.
+              </li>
+            </ul>
+            <hr>
+          </div>
+          <!-- fin text  -->
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-header collapsed">
+                <i class="fa fa-list"></i> Statistiques
+              </div>
+              <div class="card-body">
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Ues niveau Validées
+                    <span class="badge badge-success badge-pill">{{data.nombreUeNiveauValide}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Ues antérieures Validées
+                    <span class="badge badge-success badge-pill">{{data.nombreUeAnterieurValide}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Nombre total UE Inscrites
+                    <span class="badge badge-primary badge-pill">{{data.nombreUeInscrit}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Nombre Semestre
+                    <span class="badge badge-primary badge-pill">
+                      {{data.semestreData.length}}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <p-accordion>
+              <p-accordionTab *ngFor="let semestreData of data.semestreData; let i=index"
+                [header]="semestreData?.semestre?.libellesemestre" [selected]="i==0">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Libellé</th>
+                        <th>Type UE</th>
+                        <th>Crédit</th>
+                        <th>Validée</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let inscriptionpedagData of semestreData.inscriptionpedagData">
+                        <td>{{inscriptionpedagData?.ueanneeacad?.libelleue}}
+                          ({{inscriptionpedagData?.inspedag?.idue?.codeue}})</td>
+                        <td>{{inscriptionpedagData?.inspedag?.idue?.idtypeue?.libelletypeue}}</td>
+                        <td>{{inscriptionpedagData?.ueanneeacad?.credit}}</td>
+                        <td>
+                          <span class="badge badge-success" *ngIf="inscriptionpedagData.inspedag.valide">Validée</span>
+                          <span class="badge badge-warning" *ngIf="!inscriptionpedagData.inspedag.valide">Non encore
+                            validée</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </p-accordionTab>
+              <p-accordionTab header="UEs antérieurement non validées">
+                <div class="table-responsive">
+                  <table class="table table-hover" *ngIf="data.inspedagAnterieurs.length">
+                    <thead>
+                      <tr>
+                        <th>Libellé</th>
+                        <th>Type UE</th>
+                        <th>Crédit</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let insueAnt of data.inspedagAnterieurs">
+                        <td>{{insueAnt?.idue?.idtypeue?.libelletypeue}}</td>
+                        <td>{{insueAnt?.idue?.idtypeue?.libelletypeue}}</td>
+                        <td>{{insueAnt?.ueanneeacad?.credit}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <span class="badge badge-warning" *ngIf="!data.inspedagAnterieurs.length">Vous n'êtes inscrits à
+                    aucune UE antérieure</span>
+                </div>
+              </p-accordionTab>
+            </p-accordion>
+          </div>
+        </div>
+      </div>
+      <!-- .panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
