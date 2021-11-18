@@ -31,6 +31,10 @@ export class InscriptionacadService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash()+'inscriptions/'+etudiant.id+'/etudiant');
   }
 
+  getInscriptionPayantEtudiant(etudiant: Etudiant) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'inscriptions-payant/'+etudiant.id+'/etudiant');
+  }
+
   findOneById(id: number) {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }

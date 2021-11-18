@@ -1,13 +1,104 @@
-
 <div class="row">
     <div class="col-12">
         <div class="card text-left">
             <div class="card-body">
-              <h4 class="card-title">Title</h4>
-              <p class="card-text">Body</p>
+                <div class="table-responsive" *ngIf="inscriptionacads.length">
+                    <p-table #tt [value]="inscriptionacads" [paginator]="true" [rows]="50" sortMode="multiple"
+                        [resizableColumns]="true" [responsive]="true" [scrollable]="true" scrollHeight="400px"
+                        [globalFilterFields]="globalFilterFields" dataKey="id">
+                        <ng-template pTemplate="caption">
+                            Inscriptions académiques
+                            <br>
+                            <br>
+                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                            <input type="text" pInputText size="50" placeholder="Rechercher dans le tableau"
+                                (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                            <div class="ui-helper-clearfix" style="text-align: left">
+                                <button *ngIf="'Inscriptionacad'|listable" type="button" pButton icon="pi pi-file-pdf"
+                                    iconPos="left" label="PDF" (click)="exportPdf()"
+                                    class="ui-button-warning pull-right ml-1"></button>
+                                <button *ngIf="'Inscriptionacad'|listable" type="button" pButton icon="pi pi-file-excel"
+                                    iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;"
+                                    class="ui-button-success pull-right"></button>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="colgroup">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th [pSortableColumn]="'prenometudiant'" pResizableColumn>
+                                    Filiere <p-sortIcon [field]="'prenometudiant'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'nometudiant'" pResizableColumn>
+                                    Niveau <p-sortIcon [field]="'nometudiant'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'ine'" pResizableColumn>
+                                    Année académique <p-sortIcon [field]="'ine'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'numinterne'" pResizableColumn>
+                                    Nombre paiement effectué <p-sortIcon [field]="'numinterne'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'cni'" pResizableColumn>
+                                    Montant annuel <p-sortIcon [field]="'cni'"></p-sortIcon>
+                                </th>
+                                <th pResizableColumn>Actions</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-inscriptionacad let-editing="editing">
+                            <tr [pEditableRow]="inscriptionacad" [pSelectableRow]="inscriptionacad"
+                                [pContextMenuRow]="inscriptionacad">
+                                <td class="ui-resizable-column">
+                                    {{ inscriptionacad?.idclasse?.idfiliere?.libellefiliere }}
+                                </td>
+                                <td class="ui-resizable-column">
+                                    {{ inscriptionacad?.idclasse?.idniveau?.libelleniveau }}
+                                </td>
+                                <td class="ui-resizable-column">
+                                    {{  inscriptionacad?.idclasse?.idanneeacad?.libelleanneeacad }}
+                                </td>
+                                <td class="ui-resizable-column">
+                                    <span class="badge badge-secondary" style="font-size: 14px;">
+                                        {{ paymentCount | currency:'F CFA':'code':'3.2-2':'fr' }}
+                                    </span>
+                                </td>
+                                <td class="ui-resizable-column">
+                                    <span class="badge badge-secondary" style="font-size: 14px;">
+                                        {{ inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel | currency:'F CFA':'code':'3.2-2':'fr' }}
+                                    </span>
+                                </td>
+                                <td class="ui-resizable-column">
+                                    <a class="btn btn-lg btn-danger p-2"  role="button">
+                                        <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                        Paiements
+                                    </a>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer" let-columns>
+                            <tr>
+                                <td>Filiere</td>
+                                <td>Niveau</td>
+                                <td>Année académique</td>
+                                <td>Nombre paiement effectué</td>
+                                <td>Montant annuel</td>
+                                <td>Actions</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <div class="d-flex justify-content-center align-items-center" *ngIf="!inscriptionacads.length" >
+                    <i class="fa fa-exclamation-circle text-danger" aria-hidden="true" style="font-size: 60px;"></i> &nbsp; &nbsp;
+                    <h3 style="font-weight: bold;" >  Vous n'avez aucune inscription pour le moment </h3>
+                </div>
             </div>
-          </div>
+        </div>
     </div>
 </div>
-
-
