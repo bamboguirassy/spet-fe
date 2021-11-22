@@ -4,8 +4,11 @@ import { ExportService } from 'src/app/shared/services/export.service';
 import { Etudiant } from '../../etudiant/etudiant';
 import { EtudiantService } from '../../etudiant/etudiant.service';
 import { Inscriptionacad } from '../inscriptionacad';
-import { allowedInscriptionacadFieldsForFilter, inscriptionacadColumns } from '../inscriptionacad.columns';
 import { InscriptionacadService } from '../inscriptionacad.service';
+import {
+  allowedPaiementfraisencadrementFieldsForFilter,
+  paiementfraisencadrementColumns
+} from '../../paiementfraisencadrement/paiementfraisencadrement.columns';
 
 @Component({
   selector: 'app-payant-inscriptionacad-list',
@@ -14,8 +17,8 @@ import { InscriptionacadService } from '../inscriptionacad.service';
 })
 export class PayantInscriptionacadListComponent implements OnInit {
   inscriptionacads: Inscriptionacad[] = [];
-  globalFilterFields = allowedInscriptionacadFieldsForFilter;
-  tableColumns = inscriptionacadColumns;
+  globalFilterFields = allowedPaiementfraisencadrementFieldsForFilter;
+  tableColumns = paiementfraisencadrementColumns;
   etudiant: Etudiant;
   paymentCount = 0;
 

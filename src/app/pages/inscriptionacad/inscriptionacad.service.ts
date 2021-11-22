@@ -39,6 +39,10 @@ export class InscriptionacadService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
   }
 
+  findOne(id: number) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + id + '/find');
+  }
+
   create(inscriptionacad: Inscriptionacad) {
     return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', inscriptionacad);
   }

@@ -34,7 +34,7 @@ import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.co
 import { OneEtudiantByIdResolver } from './etudiant/one-etudiant-by-id.resolver copy';
 import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
 import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-inscriptionacad-list/payant-inscriptionacad-list.component';
-
+import {PaiementfraisencadrementListComponent} from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
 
 
 const routes: Routes = [
@@ -57,8 +57,19 @@ const routes: Routes = [
         data: { breadcrumb: 'Les modalités de paiement' }
       },
       {
-        path: 'espace-paiement', component: PayantInscriptionacadListComponent,
-        data: { breadcrumb: 'Inscriptions académiques' }
+        path: 'espace-paiement',
+        data: { breadcrumb: 'Espace paiement' },
+        children:[
+          {
+            path: '',
+            component: PayantInscriptionacadListComponent,
+            data: { breadcrumb: 'Inscriptions académiques' }
+          },
+          {
+            path: ':idInscriptionacad', component: PaiementfraisencadrementListComponent,
+            data: { breadcrumb: 'Paiements' }
+          },
+        ]
       },
       {
         path: 'mes-infos', component: MesInfosComponent,
