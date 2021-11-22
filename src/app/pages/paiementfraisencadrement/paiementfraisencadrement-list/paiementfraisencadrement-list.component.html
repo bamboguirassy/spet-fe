@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card text-left">
+            <div class="card-body">
+                <div class="table-responsive" *ngIf="paiementFraisEncadrememnts.length">
+                    <p-table #tt [value]="paiementFraisEncadrememnts" [paginator]="true" [rows]="50" sortMode="multiple"
+                             [resizableColumns]="true" [responsive]="true" [scrollable]="true" scrollHeight="400px"
+                             [globalFilterFields]="globalFilterFields" dataKey="id">
+                        <ng-template pTemplate="caption">
+                            Liste des paiements
+                            <br>
+                            <br>
+                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                            <input type="text" pInputText size="50" placeholder="Rechercher dans le tableau"
+                                   (input)="tt.filterGlobal($event.target['value'], 'contains')" style="width:auto">
+<!--                            <div class="ui-helper-clearfix" style="text-align: left">-->
+<!--                                <button *ngIf="'Inscriptionacad'|listable" type="button" pButton icon="pi pi-file-pdf"-->
+<!--                                        iconPos="left" label="PDF" (click)="exportPdf()"-->
+<!--                                        class="ui-button-warning pull-right ml-1"></button>-->
+<!--                                <button *ngIf="'Inscriptionacad'|listable" type="button" pButton icon="pi pi-file-excel"-->
+<!--                                        iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;"-->
+<!--                                        class="ui-button-success pull-right"></button>-->
+<!--                            </div>-->
+                        </ng-template>
+                        <ng-template pTemplate="colgroup">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th [pSortableColumn]="'datePaiement'" pResizableColumn>
+                                    Date Paiement <p-sortIcon [field]="'datePaiement'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'montantPaye'" pResizableColumn>
+                                    Montant payé <p-sortIcon [field]="'montantPaye'"></p-sortIcon>
+                                </th>
+                                <th pResizableColumn>
+                                    Methode de paiement
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-paiementFraisEncadrememnt let-editing="editing">
+                            <tr [pEditableRow]="paiementFraisEncadrememnt" [pSelectableRow]="paiementFraisEncadrememnt"
+                                [pContextMenuRow]="paiementFraisEncadrememnt">
+                                <td class="ui-resizable-column">
+                                    {{ paiementFraisEncadrememnt?.datePaiement | date:'dd/mm/yyyy'}}
+                                </td>
+                                <td class="ui-resizable-column">
+                                    <span class="badge badge-secondary" style="font-size: 14px;">
+                                        {{ paiementFraisEncadrememnt?.montantPaye | currency:'F CFA':'code':'3.2-2':'fr'}}
+                                    </span>
+
+                                </td>
+                                <td class="ui-resizable-column">
+                                    {{  paiementFraisEncadrememnt?.methodePaiement.codemodepaiement + '-' + paiementFraisEncadrememnt?.methodePaiement.libellemodepaiement}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer" let-columns>
+                            <tr>
+                                <td>Date paiement</td>
+                                <td>Montant payé</td>
+                                <td>Methode de paiement</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <div class="d-flex justify-content-center align-items-center" *ngIf="!paiementFraisEncadrememnts.length" >
+                    <i class="fa fa-exclamation-circle text-danger" aria-hidden="true" style="font-size: 60px;"></i> &nbsp; &nbsp;
+                    <h4 style="font-weight: bold;" > Aucune donnée disponible. </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

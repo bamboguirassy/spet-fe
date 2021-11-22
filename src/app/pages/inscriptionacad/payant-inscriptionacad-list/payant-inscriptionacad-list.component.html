@@ -75,8 +75,9 @@
                                         {{ inscriptionacadMap?.inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel | currency:'F CFA':'code':'3.2-2':'fr' }}
                                     </span>
                                 </td>
-                                <td class="ui-resizable-column text-center">
-                                    <a class="btn btn-lg btn-danger p-2" role="button">
+
+                                <td class="ui-resizable-column">
+                                    <a class="btn btn-lg btn-danger p-2" [routerLink]="[inscriptionacadMap.inscriptioncad.id]"  role="button">
                                         <i class="fa fa-credit-card" aria-hidden="true"></i>
                                         Détails
                                     </a>
