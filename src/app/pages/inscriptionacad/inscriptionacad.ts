@@ -37,4 +37,5 @@ export class Inscriptionacad {
     source: string;
     // temporal fields
     visiteMedicale: VisiteMedicale;
+    paiementFraisEncadrements: Array<any>;
 }
