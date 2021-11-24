@@ -49,7 +49,6 @@ export class PaiementfraisencadrementListComponent implements OnInit {
             .subscribe((data: any) => {
 
                 this.inscriptionacad = data;
-                console.log(this.inscriptionacad);
 
             }, err => {
                 this.inscriptionAcadSrv.httpSrv.handleError(err);
