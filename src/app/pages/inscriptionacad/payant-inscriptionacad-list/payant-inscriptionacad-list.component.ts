@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {first} from 'rxjs/operators';
+import {finalize, first} from 'rxjs/operators';
 import {ExportService} from 'src/app/shared/services/export.service';
 import {Etudiant} from '../../etudiant/etudiant';
 import {EtudiantService} from '../../etudiant/etudiant.service';
@@ -18,6 +18,7 @@ export class PayantInscriptionacadListComponent implements OnInit {
     tableColumns = inscriptionacadColumns;
     etudiant: Etudiant;
     paymentCount = 0;
+    fetched = false;
 
 
     constructor(
@@ -53,17 +54,26 @@ export class PayantInscriptionacadListComponent implements OnInit {
     }
 
     private _fetchInscriptionacad(): void {
-        this.inscriptionAcadSrv.getInscriptionPayantEtudiant(this.etudiant)
+        this.fetched = false;
+        this
+            .inscriptionAcadSrv
+            .getInscriptionPayantEtudiant(this.etudiant)
+            .pipe(finalize(() => this.fetched = true))
             .subscribe((data: any) => {
                 this.inscriptionacads = data;
+                console.log(this.inscriptionacads);
             }, err => {
                 this.inscriptionAcadSrv.httpSrv.handleError(err);
             });
     }
 
     private _fetchCurrentEtudiant(): void {
-        this.etudiantSrv.findMonCompteEtudiant()
-            .pipe(first())
+        this
+            .etudiantSrv
+            .findMonCompteEtudiant()
+            .pipe(
+                first(),
+            )
             .subscribe((data: any) => {
                 this.etudiant = data;
                 this._fetchInscriptionacad();
