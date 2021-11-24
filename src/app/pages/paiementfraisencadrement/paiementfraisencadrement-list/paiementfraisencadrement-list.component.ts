@@ -10,6 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 import {PaiementfraisencadrementService} from '../paiementfraisencadrement.service';
 import {PaiementFraisEncadrememnt} from '../paiementfraisencadrement';
 import localeFr from '@angular/common/locales/fr';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-paiementfraisinscription-list',
@@ -28,12 +29,16 @@ export class PaiementfraisencadrementListComponent implements OnInit {
     etudiant: Etudiant;
     paymentCount = 0;
     montantTotalPaye = 0;
+    paiementValidateErrorMessage: string = '';
+    ispaiementValidationValid = false;
+    montant = 0;
 
     constructor(
         public activatedRoute: ActivatedRoute,
         public inscriptionAcadSrv: InscriptionacadService,
         public aiementfraisencadrementSrv: PaiementfraisencadrementService,
-        public etudiantSrv: EtudiantService) {
+        public etudiantSrv: EtudiantService,
+        private modalService: NgbModal) {
     }
 
     ngOnInit() {
@@ -79,7 +84,7 @@ export class PaiementfraisencadrementListComponent implements OnInit {
             });
     }
 
-    public doFilter(value: string): void {
+    doFilter(value: string): void {
         if(value){
             this.paiementFraisEncadrememnts = this.paiementFraisEncadrememntsClone.filter((v) => {
                 return v.methodePaiement.codemodepaiement.toLocaleLowerCase().includes(value.toLocaleLowerCase()) ||
@@ -90,6 +95,53 @@ export class PaiementfraisencadrementListComponent implements OnInit {
             this.paiementFraisEncadrememnts = [...this.paiementFraisEncadrememntsClone];
         }
 
+    }
+
+    open(content) {
+        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+            // this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    }
+
+    validateNbrMois(value: number){
+        if(!value){
+            this.paiementValidateErrorMessage = 'Veuillez saisire le nombre de mois';
+            this.ispaiementValidationValid = false;
+            return;
+        }else if(value*this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.mensualite > (this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel - this.montantTotalPaye)){
+            this.paiementValidateErrorMessage = 'Le nombre de mois doit être inférieur ou égale à ' + (this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel - this.montantTotalPaye)/this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.mensualite;
+            this.ispaiementValidationValid = false;
+            return;
+        }
+        this.ispaiementValidationValid = true;
+
+
+    }
+
+    validateMontantAPaye(value: number){
+        if(!value){
+            this.paiementValidateErrorMessage = 'Veuillez saisire le montant à payé';
+            this.ispaiementValidationValid = false;
+            return;
+        }else if(value > (this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel - this.montantTotalPaye)){
+            this.paiementValidateErrorMessage = 'Le montant doit être inférieur ou égale à ' + (this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel - this.montantTotalPaye);
+
+            this.ispaiementValidationValid = false;
+            return;
+
+        }
+        this.ispaiementValidationValid = true;
+
+    }
+
+    startPaymentProcess(){
+        let motantfinale = this.montant;
+        if(this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.mensualite){
+            motantfinale = this.montant * this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.mensualite;
+        }
+        console.log(motantfinale);
     }
 
 }
