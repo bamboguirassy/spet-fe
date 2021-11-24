@@ -18,6 +18,8 @@ import localeFr from '@angular/common/locales/fr';
 })
 export class PaiementfraisencadrementListComponent implements OnInit {
     paiementFraisEncadrememnts: PaiementFraisEncadrememnt[] = [];
+    paiementFraisEncadrememntsClone: PaiementFraisEncadrememnt[] = [];
+    paiementFraisEncadrememntsLength = 0;
     idInscriptionacad: number;
     inscriptionacad: Inscriptionacad;
 
@@ -25,6 +27,7 @@ export class PaiementfraisencadrementListComponent implements OnInit {
     tableColumns = inscriptionacadColumns;
     etudiant: Etudiant;
     paymentCount = 0;
+    montantTotalPaye = 0;
 
     constructor(
         public activatedRoute: ActivatedRoute,
@@ -34,7 +37,7 @@ export class PaiementfraisencadrementListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.idInscriptionacad = + this.activatedRoute.snapshot.paramMap.get('idInscriptionacad');
+        this.idInscriptionacad = +this.activatedRoute.snapshot.paramMap.get('idInscriptionacad');
 
         this._fetchCurrentEtudiant();
         this._fetchInscriptionacad();
@@ -46,6 +49,7 @@ export class PaiementfraisencadrementListComponent implements OnInit {
             .subscribe((data: any) => {
 
                 this.inscriptionacad = data;
+                console.log(this.inscriptionacad);
 
             }, err => {
                 this.inscriptionAcadSrv.httpSrv.handleError(err);
@@ -56,7 +60,9 @@ export class PaiementfraisencadrementListComponent implements OnInit {
         this.aiementfraisencadrementSrv.findAllByInscriptionacadId(this.idInscriptionacad)
             .subscribe((data: any) => {
                 this.paiementFraisEncadrememnts = data.paiementfraisencadrements;
-
+                this.paiementFraisEncadrememntsLength = this.paiementFraisEncadrememnts.length;
+                this.paiementFraisEncadrememntsClone = [...this.paiementFraisEncadrememnts];
+                this.montantTotalPaye = this.paiementFraisEncadrememnts.reduce((acc, current) => acc + current.montantPaye, 0);
 
             }, err => {
                 this.aiementfraisencadrementSrv.httpSrv.handleError(err);
@@ -72,6 +78,19 @@ export class PaiementfraisencadrementListComponent implements OnInit {
             }, error => {
                 this.etudiantSrv.httpSrv.handleError(error);
             });
+    }
+
+    public doFilter(value: string): void {
+        if(value){
+            this.paiementFraisEncadrememnts = this.paiementFraisEncadrememntsClone.filter((v) => {
+                return v.methodePaiement.codemodepaiement.toLocaleLowerCase().includes(value.toLocaleLowerCase()) ||
+                    v.methodePaiement.libellemodepaiement.toLocaleLowerCase().includes(value.toLocaleLowerCase()) ||
+                    v.datePaiement.toLocaleLowerCase().includes(value.toLocaleLowerCase());
+            });
+        }else{
+            this.paiementFraisEncadrememnts = [...this.paiementFraisEncadrememntsClone];
+        }
+
     }
 
 }

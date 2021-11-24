@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card text-left">
             <div class="card-body">
-                <div class="table-responsive" *ngIf="paiementFraisEncadrememnts.length">
+                <div class="table-responsive" *ngIf="paiementFraisEncadrememntsLength">
                     <p-table #tt [value]="paiementFraisEncadrememnts" [paginator]="true" [rows]="50" sortMode="multiple"
                              [resizableColumns]="true" [responsive]="true" [scrollable]="true" scrollHeight="400px"
                              [globalFilterFields]="globalFilterFields" dataKey="id">
@@ -10,17 +10,25 @@
                             Liste des paiements
                             <br>
                             <br>
+                            <span class="badge badge-success" style="font-size: 14px;">
+                                        {{ montantTotalPaye | currency:'F CFA':'code':'3.2-2':'fr' }}
+                                    </span> /
+                            <span class="badge badge-secondary" style="font-size: 14px;">
+                                        {{inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel | currency:'F CFA':'code':'3.2-2':'fr'  || 'INCONNU'}}
+                                    </span>
+                            <br>
+                            <br>
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                             <input type="text" pInputText size="50" placeholder="Rechercher dans le tableau"
-                                   (input)="tt.filterGlobal($event.target['value'], 'contains')" style="width:auto">
-<!--                            <div class="ui-helper-clearfix" style="text-align: left">-->
-<!--                                <button *ngIf="'Inscriptionacad'|listable" type="button" pButton icon="pi pi-file-pdf"-->
-<!--                                        iconPos="left" label="PDF" (click)="exportPdf()"-->
-<!--                                        class="ui-button-warning pull-right ml-1"></button>-->
-<!--                                <button *ngIf="'Inscriptionacad'|listable" type="button" pButton icon="pi pi-file-excel"-->
-<!--                                        iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;"-->
-<!--                                        class="ui-button-success pull-right"></button>-->
-<!--                            </div>-->
+                                   (input)="doFilter($event.target['value'])" style="width:auto">
+                            <br>
+                            <br>
+                            <div class="d-flex justify-content-end" *ngIf="montantTotalPaye<inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel">
+                                <a class="btn btn-success p-1" (click)="null"  role="button">
+                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                    Payer
+                                </a>
+                            </div>
                         </ng-template>
                         <ng-template pTemplate="colgroup">
                             <colgroup>
