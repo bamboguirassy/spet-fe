@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="row">
     <div class="col-12">
         <div class="card text-left">
@@ -14,7 +15,7 @@
                                         {{ montantTotalPaye | currency:'F CFA':'code':'3.2-2':'fr' }}
                                     </span> /
                             <span class="badge badge-secondary" style="font-size: 14px;">
-                                        {{inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel | currency:'F CFA':'code':'3.2-2':'fr'  || 'INCONNU'}}
+                                        {{(inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel | currency:'F CFA':'code':'3.2-2':'fr')  || 'INCONNU'}}
                                     </span>
                             <br>
                             <br>
@@ -123,4 +124,3 @@
     </div>
 </ng-template>
 
-<a id="link-to-paytech" href="" target="_blank" style="display: none;"></a>

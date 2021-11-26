@@ -3,13 +3,11 @@ import {Inscriptionacad} from '../../inscriptionacad/inscriptionacad';
 import {allowedInscriptionacadFieldsForFilter, inscriptionacadColumns} from '../../inscriptionacad/inscriptionacad.columns';
 import {Etudiant} from '../../etudiant/etudiant';
 import {InscriptionacadService} from '../../inscriptionacad/inscriptionacad.service';
-import {ExportService} from '../../../shared/services/export.service';
 import {EtudiantService} from '../../etudiant/etudiant.service';
 import {first} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {PaiementfraisencadrementService} from '../paiementfraisencadrement.service';
 import {PaiementFraisEncadrememnt} from '../paiementfraisencadrement';
-import localeFr from '@angular/common/locales/fr';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -29,7 +27,6 @@ export class PaiementfraisencadrementListComponent implements OnInit {
     globalFilterFields = allowedInscriptionacadFieldsForFilter;
     tableColumns = inscriptionacadColumns;
     etudiant: Etudiant;
-    paymentCount = 0;
     montantTotalPaye = 0;
     paiementValidateErrorMessage: string = '';
     ispaiementValidationValid = false;
@@ -49,40 +46,35 @@ export class PaiementfraisencadrementListComponent implements OnInit {
         this.refCommand = this.activatedRoute.snapshot.paramMap.get('refCommand');
         if (this.typeEvent) {
             if (this.typeEvent == 'success') {
+                console.log('thiam1');
+
                 this.inscriptionAcadSrv.httpSrv.notificationSrv.showSuccess('Paiement effectué avec succée');
             } else {
                 this.paiementfraisencadrementSrv.cancelPaytechPayment(this.refCommand)
                     .subscribe((data: any) => {
                     }, err => {
                         this.inscriptionAcadSrv.httpSrv.handleError(err);
+                    }, () => {
+                        this.inscriptionAcadSrv.httpSrv.notificationSrv.showError('Le paiement à été annulé');
+                        setTimeout(()=>{
+                            window.location.href = 'http://localhost:4200/#/espace-paiement/'+this.idInscriptionacad;
+                        },1000)
                     });
-                this.inscriptionAcadSrv.httpSrv.notificationSrv.showError('Le paiement à été annulé');
 
             }
         }
         this._fetchCurrentEtudiant();
-        this._fetchInscriptionacad();
         this._fetchPaiementfraisInscriptinacad();
     }
 
-    private _fetchInscriptionacad() {
-        this.inscriptionAcadSrv.findOne(this.idInscriptionacad)
-            .subscribe((data: any) => {
-
-                this.inscriptionacad = data;
-
-            }, err => {
-                this.inscriptionAcadSrv.httpSrv.handleError(err);
-            });
-    }
-
     private _fetchPaiementfraisInscriptinacad(): void {
-        this.paiementfraisencadrementSrv.findAllByInscriptionacadId(this.idInscriptionacad)
+        this.paiementfraisencadrementSrv.findAllByInscriptionacadIdForStudent(this.idInscriptionacad)
             .subscribe((data: any) => {
                 this.paiementFraisEncadrememnts = data.paiementfraisencadrements;
+                this.montantTotalPaye = data.totalmontantpaye;
+                this.inscriptionacad = data.inscriptionacad;
                 this.paiementFraisEncadrememntsLength = this.paiementFraisEncadrememnts.length;
                 this.paiementFraisEncadrememntsClone = [...this.paiementFraisEncadrememnts];
-                this.montantTotalPaye = this.paiementFraisEncadrememnts.reduce((acc, current) => acc + current.montantPaye, 0);
 
             }, err => {
                 this.paiementfraisencadrementSrv.httpSrv.handleError(err);
@@ -94,7 +86,6 @@ export class PaiementfraisencadrementListComponent implements OnInit {
             .pipe(first())
             .subscribe((data: any) => {
                 this.etudiant = data;
-                this._fetchInscriptionacad();
             }, error => {
                 this.etudiantSrv.httpSrv.handleError(error);
             });
@@ -115,9 +106,9 @@ export class PaiementfraisencadrementListComponent implements OnInit {
 
     open(content) {
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-            // this.closeResult = `Closed with: ${result}`;
+            this.montant = null;
         }, (reason) => {
-            // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            this.montant = null;
         });
     }
 
