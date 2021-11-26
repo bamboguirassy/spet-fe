@@ -24,7 +24,7 @@
                             <br>
                             <br>
                             <div class="d-flex justify-content-end" *ngIf="montantTotalPaye<inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel">
-                                <a class="btn btn-success p-1" (click)="null"  role="button">
+                                <a class="btn btn-success p-1" (click)="open(paiementModalContent)"  role="button">
                                     <i class="fa fa-credit-card" aria-hidden="true"></i>
                                     Payer
                                 </a>
@@ -63,7 +63,7 @@
 
                                 </td>
                                 <td class="ui-resizable-column">
-                                    {{  paiementFraisEncadrememnt?.methodePaiement.codemodepaiement + '-' + paiementFraisEncadrememnt?.methodePaiement.libellemodepaiement}}
+                                    {{  paiementFraisEncadrememnt?.methodePaiement.codemodepaiement + '-' + paiementFraisEncadrememnt?.methodePaiement.libellemodepaiement + '-' + paiementFraisEncadrememnt?.operateur}}
                                 </td>
                             </tr>
                         </ng-template>
@@ -84,3 +84,43 @@
         </div>
     </div>
 </div>
+
+<ng-template #paiementModalContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Paiement</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <ng-template *ngIf="inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.mensualite; then first else second"></ng-template>
+                <ng-template  #first>
+                    <label for="nbrMois">Nombre de mois à payer: Il vous reste Il vous reste {{(inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel - montantTotalPaye)/inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.mensualite}} mois à payé(s)</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="montant" [class.is-invalid]="!ispaiementValidationValid" (input)="validatePaiement(+$event.target['value'])" id="nbrMois" ngbAutofocus  type="number" class="form-control" placeholder="Combient de mois voulez vous payer?" name="montant" required>
+                        <div class="invalid-feedback">
+                            {{paiementValidateErrorMessage}}
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template #second>
+                    <label for="montantAPaye">Montant à payé: Il vous reste {{(this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel - this.montantTotalPaye)}} FCFA à payés</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="montant" [class.is-invalid]="!ispaiementValidationValid" (input)="validatePaiement(+$event.target['value'])" id="montantAPaye" ngbAutofocus  type="number" class="form-control" placeholder="Veuillez saisir le montant à payé?" name="montant" required>
+                        <div class="invalid-feedback">
+                            {{paiementValidateErrorMessage}}
+
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" [disabled]="!ispaiementValidationValid" class="btn btn-outline-dark" (click)="startPaymentProcess(modal);">Suivant</button>
+    </div>
+</ng-template>
+
+<a id="link-to-paytech" href="" target="_blank" style="display: none;"></a>

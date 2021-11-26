@@ -66,6 +66,10 @@ const routes: Routes = [
             data: { breadcrumb: 'Inscriptions académiques' }
           },
           {
+            path: ':idInscriptionacad/:typeEvent/:refCommand', component: PaiementfraisencadrementListComponent,
+            data: { breadcrumb: 'Paiements' }
+          },
+          {
             path: ':idInscriptionacad', component: PaiementfraisencadrementListComponent,
             data: { breadcrumb: 'Paiements' }
           },
