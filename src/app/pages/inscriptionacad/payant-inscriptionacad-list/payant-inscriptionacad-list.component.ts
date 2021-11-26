@@ -4,8 +4,8 @@ import {ExportService} from 'src/app/shared/services/export.service';
 import {Etudiant} from '../../etudiant/etudiant';
 import {EtudiantService} from '../../etudiant/etudiant.service';
 import {Inscriptionacad} from '../inscriptionacad';
-import {allowedInscriptionacadFieldsForFilter, inscriptionacadColumns} from '../inscriptionacad.columns';
 import {InscriptionacadService} from '../inscriptionacad.service';
+import {CurrencyPipe} from '@angular/common';
 
 @Component({
     selector: 'app-payant-inscriptionacad-list',
@@ -14,8 +14,19 @@ import {InscriptionacadService} from '../inscriptionacad.service';
 })
 export class PayantInscriptionacadListComponent implements OnInit {
     inscriptionacads: { inscriptionacad: Inscriptionacad, paiementFraisEncadrement: Array<any> }[] = []; //inscriptionacads with paiementfraisencadrement
-    globalFilterFields = allowedInscriptionacadFieldsForFilter;
-    tableColumns = inscriptionacadColumns;
+    temp: { inscriptionacad: Inscriptionacad, paiementFraisEncadrement: Array<any> }[] = [];
+    globalFilterFields = [
+        'classe',
+        'montantPaye',
+        'montantRestant',
+        'montantAnnuel'
+    ];
+    tableColumns: Array<{ header: string, field: string, dataKey: string }> = [
+        {header: 'Classe', field: 'classe', dataKey: 'classe'},
+        {header: 'Montant Payé', field: 'montantPaye', dataKey: 'montantPaye'},
+        {header: 'Montant Restant', field: 'montantRestant', dataKey: 'montantRestant'},
+        {header: 'Coût annuel', field: 'montantAnnuel', dataKey: 'montantAnnuel'},
+    ];
     etudiant: Etudiant;
     paymentCount = 0;
     fetched = false;
@@ -24,7 +35,8 @@ export class PayantInscriptionacadListComponent implements OnInit {
     constructor(
         public inscriptionAcadSrv: InscriptionacadService,
         public exportSrv: ExportService,
-        public etudiantSrv: EtudiantService
+        public etudiantSrv: EtudiantService,
+        public currencyPipe: CurrencyPipe
     ) {
         this.etudiant = new Etudiant();
     }
@@ -41,16 +53,22 @@ export class PayantInscriptionacadListComponent implements OnInit {
             }, 0);
     }
 
-    public calculateRemainingAmount(inscriptionacadMap: any): number {
-        return (+inscriptionacadMap.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel) - this.calculatePaidAmounts(inscriptionacadMap);
+    public calculateRemainingAmount(inscriptionacadMap: any): number | string {
+        let remainingAmount: any = inscriptionacadMap.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement != null
+            ? ((+inscriptionacadMap.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel) - this.calculatePaidAmounts(inscriptionacadMap))
+            : "Inconnu";
+
+        if( typeof remainingAmount === 'number') {
+            remainingAmount = this.currencyPipe.transform(remainingAmount,'F CFA','code','3.2-2','fr')
+        }
+        return  remainingAmount;
     }
 
-    exportPdf() {
-        this.exportSrv.exportPdf(this.tableColumns, this.inscriptionacads, 'inscriptionacads');
-    }
 
-    exportExcel() {
-        this.exportSrv.exportExcel(this.inscriptionacads);
+    public updateFilter(event: any) {
+        const val = event.target.value.toLowerCase();
+        const temp = this.temp.filter((d) => d.inscriptionacad.idclasse.libelleclasse.toLowerCase().indexOf(val) !== -1 || false);
+        this.inscriptionacads = [...temp];
     }
 
     private _fetchInscriptionacad(): void {
@@ -61,7 +79,7 @@ export class PayantInscriptionacadListComponent implements OnInit {
             .pipe(finalize(() => this.fetched = true))
             .subscribe((data: any) => {
                 this.inscriptionacads = data;
-                console.log(this.inscriptionacads);
+                this.temp = data;
             }, err => {
                 this.inscriptionAcadSrv.httpSrv.handleError(err);
             });

@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card text-left">
             <div class="card-body">
-                <div class="table-responsive" *ngIf="inscriptionacads.length && fetched">
+                <div class="table-responsive" *ngIf="temp.length && fetched">
                     <p-table #tt [value]="inscriptionacads" [paginator]="true" [rows]="50" sortMode="multiple"
                              [resizableColumns]="true" [responsive]="true" [scrollable]="true" scrollHeight="400px"
                              [globalFilterFields]="globalFilterFields" dataKey="id">
@@ -12,16 +12,9 @@
                             <br>
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                             <input type="text" pInputText size="50" placeholder="Rechercher dans le tableau"
-                                   (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-                            <div class="ui-helper-clearfix" style="text-align: left">
-                                <button *ngIf="'Inscriptionacad'|listable" type="button" pButton icon="pi pi-file-pdf"
-                                        iconPos="left" label="PDF" (click)="exportPdf()"
-                                        class="ui-button-warning pull-right ml-1"></button>
-                                <button *ngIf="'Inscriptionacad'|listable" type="button" pButton icon="pi pi-file-excel"
-                                        iconPos="left" label="EXCEL" (click)="exportExcel()"
-                                        style="margin-right: 0.5em;"
-                                        class="ui-button-success pull-right"></button>
-                            </div>
+                                   (input)="updateFilter($event)" style="width:auto">
+                            <br>
+                            <br>
                         </ng-template>
                         <ng-template pTemplate="colgroup">
                             <colgroup>
@@ -42,7 +35,7 @@
                                     Montant Payé
                                     <p-sortIcon [field]="'montantPaye'"></p-sortIcon>
                                 </th>
-                                <th [pSortableColumn]="'anneeacad'" pResizableColumn>
+                                <th [pSortableColumn]="'montantRestant'" pResizableColumn>
                                     Montant Restant
                                     <p-sortIcon [field]="'montantRestant'"></p-sortIcon>
                                 </th>
@@ -59,7 +52,7 @@
                                 <td class="ui-resizable-column text-center">
                                     {{ inscriptionacadMap?.inscriptionacad?.idclasse?.libelleclasse + ' ' + inscriptionacadMap?.inscriptionacad?.idclasse?.idanneeacad?.libelleanneeacad }}
                                 </td>
-                                <td class="ui-resizable-column text-center" >
+                                <td class="ui-resizable-column text-center">
                                     <span class="badge badge-secondary" style="font-size: 14px;">
                                          {{ calculatePaidAmounts(inscriptionacadMap) | currency:'F CFA':'code':'3.2-2':'fr' }}
                                     </span>
@@ -67,17 +60,18 @@
                                 <td class="ui-resizable-column text-center">
                                     <span class="badge badge-secondary" style="font-size: 14px;"
                                           [ngStyle]="{'backgroundColor': calculateRemainingAmount(inscriptionacadMap) == 0 ? 'green' : 'red'}">
-                                        {{ calculateRemainingAmount(inscriptionacadMap) | currency:'F CFA':'code':'3.2-2':'fr' }}
+                                       <span >{{ calculateRemainingAmount(inscriptionacadMap)  }}</span>
                                     </span>
                                 </td>
                                 <td class="ui-resizable-column text-center">
                                     <span class="badge badge-secondary" style="font-size: 14px;">
-                                        {{ inscriptionacadMap?.inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel | currency:'F CFA':'code':'3.2-2':'fr' }}
+                                        {{ (inscriptionacadMap?.inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel | currency:'F CFA':'code':'3.2-2':'fr') || 'Inconnu' }}
                                     </span>
                                 </td>
 
                                 <td class="ui-resizable-column">
-                                    <a class="btn btn-lg btn-danger p-2" [routerLink]="[inscriptionacadMap?.inscriptionacad?.id]"  role="button">
+                                    <a class="btn btn-lg btn-danger p-2"
+                                       [routerLink]="[inscriptionacadMap?.inscriptionacad?.id]" role="button">
                                         <i class="fa fa-credit-card" aria-hidden="true"></i>
                                         Détails
                                     </a>
@@ -95,7 +89,7 @@
                         </ng-template>
                     </p-table>
                 </div>
-                <div class="d-flex justify-content-center align-items-center" *ngIf="!inscriptionacads.length && fetched">
+                <div class="d-flex justify-content-center align-items-center" *ngIf="!temp.length && fetched">
                     <i class="fa fa-exclamation-circle text-danger" aria-hidden="true" style="font-size: 60px;"></i>
                     &nbsp; &nbsp;
                     <h4 style="font-weight: bold;"> Vous n'avez aucune inscription payante pour le moment. </h4>
