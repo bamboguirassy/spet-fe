@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from '../../shared/services/http.service';
 import {Classe} from '../classe/classe';
 import {Etudiant} from '../etudiant/etudiant';
@@ -7,47 +7,51 @@ import {InscriptionTemporaire} from '../inscriptionacad/inscription_temporaire/i
 import {Paiementfraistemp} from './paiementfraistemp';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class PaiementfraisencadrementService {
 
-  private routePrefix: string = 'paiementfraisencadrement';
+    private routePrefix: string = 'paiementfraisencadrement';
 
-  constructor(public httpSrv: HttpService) { }
+    constructor(public httpSrv: HttpService) {
+    }
 
-  findAll() {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash());
-  }
+    findAll() {
+        return this.httpSrv.get(this.getRoutePrefixWithSlash());
+    }
 
-  findAllByInscriptionacadId(inscriptionacadId: number) {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash()+'inscriptionacad/'+inscriptionacadId);
-  }
+    findAllByInscriptionacadId(inscriptionacadId: number) {
+        return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'inscriptionacad/' + inscriptionacadId);
+    }
 
-  findOneById(id: number) {
-    return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
-  }
+    findAllByInscriptionacadIdForStudent(inscriptionacadId: number) {
+        return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'inscriptionacad/' + inscriptionacadId + '/student');
+    }
 
-  create(inscriptionacad: Inscriptionacad) {
-    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', inscriptionacad);
-  }
+    findOneById(id: number) {
+        return this.httpSrv.get(this.getRoutePrefixWithSlash() + id);
+    }
 
-
-  initPayment(paiementfraistemp: Paiementfraistemp){
-    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'init-payment', paiementfraistemp);
-  }
-
-  cancelPaytechPayment(refCommand: string){
-    return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'cancel-payetech-payment', {ref_command: refCommand});
-  }
+    create(inscriptionacad: Inscriptionacad) {
+        return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', inscriptionacad);
+    }
 
 
+    initPayment(paiementfraistemp: Paiementfraistemp) {
+        return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'init-payment', paiementfraistemp);
+    }
 
-  public getRoutePrefix(): string {
-    return this.routePrefix;
-  }
+    cancelPaytechPayment(refCommand: string) {
+        return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'cancel-payetech-payment', {ref_command: refCommand});
+    }
 
-  private getRoutePrefixWithSlash(): string {
-    return this.routePrefix+'/';
-  }
+
+    public getRoutePrefix(): string {
+        return this.routePrefix;
+    }
+
+    private getRoutePrefixWithSlash(): string {
+        return this.routePrefix + '/';
+    }
 
 }
