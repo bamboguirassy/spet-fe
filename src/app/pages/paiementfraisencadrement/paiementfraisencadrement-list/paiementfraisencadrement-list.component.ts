@@ -72,8 +72,8 @@ export class PaiementfraisencadrementListComponent implements OnInit {
                                 this.inscriptionAcadSrv.httpSrv.handleError(err);
                             }, () => {
                             });
+                        this.inscriptionAcadSrv.httpSrv.notificationSrv.showError('Le paiement à été annulé');
                     }
-                    this.inscriptionAcadSrv.httpSrv.notificationSrv.showError('Le paiement à été annulé');
                 }
             });
     }
