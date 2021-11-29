@@ -70,11 +70,11 @@
                                 </td>
 
                                 <td class="ui-resizable-column">
-                                    <a class="btn btn-lg btn-danger p-2"
+                                    <button class="btn btn-lg btn-danger p-2" [disabled]="inscriptionacadMap?.inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel === null"
                                        [routerLink]="[inscriptionacadMap?.inscriptionacad?.id]" role="button">
                                         <i class="fa fa-credit-card" aria-hidden="true"></i>
                                         Détails
-                                    </a>
+                                    </button>
                                 </td>
                             </tr>
                         </ng-template>
