@@ -61,11 +61,11 @@ export class PaiementfraisencadrementListComponent implements OnInit {
 
             }, err => {
                 this.paiementfraisencadrementSrv.httpSrv.handleError(err);
-            },()=>{
+            }, () => {
                 if (this.typeEvent) {
                     if (this.typeEvent == 'success') {
-                            this.inscriptionAcadSrv.httpSrv.notificationSrv.showSuccess('Paiement effectué avec succée');
-                    } else if(this.typeEvent == 'failed'){
+                        this.inscriptionAcadSrv.httpSrv.notificationSrv.showSuccess('Paiement effectué avec succée');
+                    } else if (this.typeEvent == 'failed') {
                         this.paiementfraisencadrementSrv.cancelPaytechPayment(this.refCommand)
                             .subscribe((data: any) => {
                             }, err => {
@@ -74,6 +74,9 @@ export class PaiementfraisencadrementListComponent implements OnInit {
                             });
                         this.inscriptionAcadSrv.httpSrv.notificationSrv.showError('Le paiement à été annulé');
                     }
+                    setTimeout(() => {
+                        this.router.navigate(['espace-paiement', this.idInscriptionacad]);
+                    }, 1000);
                 }
             });
     }
