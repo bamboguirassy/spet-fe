@@ -3,33 +3,41 @@
     <div class="col-12">
         <div class="card text-left">
             <div class="card-body">
-                <div class="table-responsive" *ngIf="paiementFraisEncadrememntsLength">
-                    <p-table #tt [value]="paiementFraisEncadrememnts" [paginator]="true" [rows]="50" sortMode="multiple"
+                <div class="table-responsive">
+                    <div class="card text-center d-flex">
+                        <div class="card-body d-flex justify-content-between">
+                            <div class="">
+                                <span class="badge badge-success" style="font-size: 14px;">
+                                        {{ montantTotalPaye | currency:'F CFA':'code':'3.2-2':'fr' }}
+                                    </span> /
+                                <span class="badge badge-secondary" style="font-size: 14px;">
+                                        {{(inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel | currency:'F CFA':'code':'3.2-2':'fr') || 'INCONNU'}}
+                                    </span>
+                            </div>
+
+                            <div class="d-flex justify-content-end"
+                                 *ngIf="montantTotalPaye<inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel">
+                                <a class="btn btn-success p-1" (click)="open(paiementModalContent)" role="button">
+                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                    Payer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <p-table *ngIf="paiementFraisEncadrememntsLength" #tt [value]="paiementFraisEncadrememnts"
+                             [paginator]="true" [rows]="50" sortMode="multiple"
                              [resizableColumns]="true" [responsive]="true" [scrollable]="true" scrollHeight="400px"
                              [globalFilterFields]="globalFilterFields" dataKey="id">
                         <ng-template pTemplate="caption">
                             Liste des paiements
                             <br>
-                            <br>
-                            <span class="badge badge-success" style="font-size: 14px;">
-                                        {{ montantTotalPaye | currency:'F CFA':'code':'3.2-2':'fr' }}
-                                    </span> /
-                            <span class="badge badge-secondary" style="font-size: 14px;">
-                                        {{(inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel | currency:'F CFA':'code':'3.2-2':'fr')  || 'INCONNU'}}
-                                    </span>
-                            <br>
-                            <br>
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                             <input type="text" pInputText size="50" placeholder="Rechercher dans le tableau"
                                    (input)="doFilter($event.target['value'])" style="width:auto">
                             <br>
-                            <br>
-                            <div class="d-flex justify-content-end" *ngIf="montantTotalPaye<inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel">
-                                <a class="btn btn-success p-1" (click)="open(paiementModalContent)"  role="button">
-                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
-                                    Payer
-                                </a>
-                            </div>
+
                         </ng-template>
                         <ng-template pTemplate="colgroup">
                             <colgroup>
@@ -41,10 +49,12 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th [pSortableColumn]="'datePaiement'" pResizableColumn>
-                                    Date Paiement <p-sortIcon [field]="'datePaiement'"></p-sortIcon>
+                                    Date Paiement
+                                    <p-sortIcon [field]="'datePaiement'"></p-sortIcon>
                                 </th>
                                 <th [pSortableColumn]="'montantPaye'" pResizableColumn>
-                                    Montant payé <p-sortIcon [field]="'montantPaye'"></p-sortIcon>
+                                    Montant payé
+                                    <p-sortIcon [field]="'montantPaye'"></p-sortIcon>
                                 </th>
                                 <th pResizableColumn>
                                     Methode de paiement
@@ -64,7 +74,7 @@
 
                                 </td>
                                 <td class="ui-resizable-column">
-                                    {{  paiementFraisEncadrememnt?.methodePaiement.codemodepaiement + '-' + paiementFraisEncadrememnt?.methodePaiement.libellemodepaiement + '-' + paiementFraisEncadrememnt?.operateur}}
+                                    {{  paiementFraisEncadrememnt?.methodePaiement.codemodepaiement + '-' + paiementFraisEncadrememnt?.methodePaiement.libellemodepaiement + ((paiementFraisEncadrememnt?.operateur) ? ('-' + paiementFraisEncadrememnt?.operateur) : '')}}
                                 </td>
                             </tr>
                         </ng-template>
@@ -77,9 +87,11 @@
                         </ng-template>
                     </p-table>
                 </div>
-                <div class="d-flex justify-content-center align-items-center" *ngIf="!paiementFraisEncadrememnts.length" >
-                    <i class="fa fa-exclamation-circle text-danger" aria-hidden="true" style="font-size: 60px;"></i> &nbsp; &nbsp;
-                    <h4 style="font-weight: bold;" > Aucune donnée disponible. </h4>
+                <div class="d-flex justify-content-center align-items-center"
+                     *ngIf="!paiementFraisEncadrememntsLength">
+                    <i class="fa fa-exclamation-circle text-danger" aria-hidden="true" style="font-size: 60px;"></i>
+                    &nbsp; &nbsp;
+                    <h4 style="font-weight: bold;"> Aucune donnée disponible. </h4>
                 </div>
             </div>
         </div>
@@ -96,20 +108,31 @@
     <div class="modal-body">
         <form>
             <div class="form-group">
-                <ng-template *ngIf="inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.mensualite; then first else second"></ng-template>
-                <ng-template  #first>
-                    <label for="nbrMois">Nombre de mois à payer: Il vous reste Il vous reste {{(inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel - montantTotalPaye)/inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.mensualite}} mois à payé(s)</label>
+                <ng-template
+                        *ngIf="inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.mensualite; then first else second"></ng-template>
+                <ng-template #first>
+                    <label for="nbrMois">Nombre de mois à payer: Il vous reste Il vous
+                        reste {{(inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel - montantTotalPaye) / inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.mensualite}}
+                        mois à payé(s)</label>
                     <div class="input-group">
-                        <input [(ngModel)]="montant" [class.is-invalid]="!ispaiementValidationValid" (input)="validatePaiement(+$event.target['value'])" id="nbrMois" ngbAutofocus  type="number" class="form-control" placeholder="Combient de mois voulez vous payer?" name="montant" required>
+                        <input [(ngModel)]="montant" [class.is-invalid]="!ispaiementValidationValid"
+                               (input)="validatePaiement(+$event.target['value'])" id="nbrMois" ngbAutofocus
+                               type="number" class="form-control" placeholder="Combient de mois voulez vous payer?"
+                               name="montant" required>
                         <div class="invalid-feedback">
                             {{paiementValidateErrorMessage}}
                         </div>
                     </div>
                 </ng-template>
                 <ng-template #second>
-                    <label for="montantAPaye">Montant à payé: Il vous reste {{(this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel - this.montantTotalPaye)}} FCFA à payés</label>
+                    <label for="montantAPaye">Montant à payé: Il vous
+                        reste {{(this.inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel - this.montantTotalPaye)}}
+                        FCFA à payés</label>
                     <div class="input-group">
-                        <input [(ngModel)]="montant" [class.is-invalid]="!ispaiementValidationValid" (input)="validatePaiement(+$event.target['value'])" id="montantAPaye" ngbAutofocus  type="number" class="form-control" placeholder="Veuillez saisir le montant à payé?" name="montant" required>
+                        <input [(ngModel)]="montant" [class.is-invalid]="!ispaiementValidationValid"
+                               (input)="validatePaiement(+$event.target['value'])" id="montantAPaye" ngbAutofocus
+                               type="number" class="form-control" placeholder="Veuillez saisir le montant à payé?"
+                               name="montant" required>
                         <div class="invalid-feedback">
                             {{paiementValidateErrorMessage}}
 
@@ -120,7 +143,9 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" [disabled]="!ispaiementValidationValid" class="btn btn-outline-dark" (click)="startPaymentProcess(modal);">Suivant</button>
+        <button type="button" [disabled]="!ispaiementValidationValid" class="btn btn-outline-dark"
+                (click)="startPaymentProcess(modal);">Suivant
+        </button>
     </div>
 </ng-template>
 

@@ -5,7 +5,7 @@ import {Etudiant} from '../../etudiant/etudiant';
 import {InscriptionacadService} from '../../inscriptionacad/inscriptionacad.service';
 import {EtudiantService} from '../../etudiant/etudiant.service';
 import {first} from 'rxjs/operators';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PaiementfraisencadrementService} from '../paiementfraisencadrement.service';
 import {PaiementFraisEncadrememnt} from '../paiementfraisencadrement';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -34,6 +34,7 @@ export class PaiementfraisencadrementListComponent implements OnInit {
 
     constructor(
         public activatedRoute: ActivatedRoute,
+        public router: Router,
         public inscriptionAcadSrv: InscriptionacadService,
         public paiementfraisencadrementSrv: PaiementfraisencadrementService,
         public etudiantSrv: EtudiantService,
@@ -44,25 +45,7 @@ export class PaiementfraisencadrementListComponent implements OnInit {
         this.idInscriptionacad = +this.activatedRoute.snapshot.paramMap.get('idInscriptionacad');
         this.typeEvent = this.activatedRoute.snapshot.paramMap.get('typeEvent');
         this.refCommand = this.activatedRoute.snapshot.paramMap.get('refCommand');
-        if (this.typeEvent) {
-            if (this.typeEvent == 'success') {
-                console.log('thiam1');
 
-                this.inscriptionAcadSrv.httpSrv.notificationSrv.showSuccess('Paiement effectué avec succée');
-            } else {
-                this.paiementfraisencadrementSrv.cancelPaytechPayment(this.refCommand)
-                    .subscribe((data: any) => {
-                    }, err => {
-                        this.inscriptionAcadSrv.httpSrv.handleError(err);
-                    }, () => {
-                        this.inscriptionAcadSrv.httpSrv.notificationSrv.showError('Le paiement à été annulé');
-                        setTimeout(()=>{
-                            window.location.href = 'http://localhost:4200/#/espace-paiement/'+this.idInscriptionacad;
-                        },1000)
-                    });
-
-            }
-        }
         this._fetchCurrentEtudiant();
         this._fetchPaiementfraisInscriptinacad();
     }
@@ -78,6 +61,20 @@ export class PaiementfraisencadrementListComponent implements OnInit {
 
             }, err => {
                 this.paiementfraisencadrementSrv.httpSrv.handleError(err);
+            },()=>{
+                if (this.typeEvent) {
+                    if (this.typeEvent == 'success') {
+                            this.inscriptionAcadSrv.httpSrv.notificationSrv.showSuccess('Paiement effectué avec succée');
+                    } else if(this.typeEvent == 'failed'){
+                        this.paiementfraisencadrementSrv.cancelPaytechPayment(this.refCommand)
+                            .subscribe((data: any) => {
+                            }, err => {
+                                this.inscriptionAcadSrv.httpSrv.handleError(err);
+                            }, () => {
+                            });
+                    }
+                    this.inscriptionAcadSrv.httpSrv.notificationSrv.showError('Le paiement à été annulé');
+                }
             });
     }
 
@@ -105,10 +102,10 @@ export class PaiementfraisencadrementListComponent implements OnInit {
     }
 
     open(content) {
+        this.montant = null;
+        this.validatePaiement(null);
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-            this.montant = null;
         }, (reason) => {
-            this.montant = null;
         });
     }
 
