@@ -74,7 +74,7 @@
 
                                 </td>
                                 <td class="ui-resizable-column">
-                                    {{  paiementFraisEncadrememnt?.methodePaiement.codemodepaiement + '-' + paiementFraisEncadrememnt?.methodePaiement.libellemodepaiement + ((paiementFraisEncadrememnt?.operateur) ? ('-' + paiementFraisEncadrememnt?.operateur) : '')}}
+                                    {{  paiementFraisEncadrememnt?.methodePaiement.codemodepaiement != 'PAYTECH'? (paiementFraisEncadrememnt?.methodePaiement.codemodepaiement + '-' + paiementFraisEncadrememnt?.methodePaiement.libellemodepaiement) : (paiementFraisEncadrememnt?.operateur || '')}}
                                 </td>
                             </tr>
                         </ng-template>
