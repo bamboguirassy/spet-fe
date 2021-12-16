@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {CommonModule, CurrencyPipe} from '@angular/common';
+import {CommonModule, CurrencyPipe, DatePipe} from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
@@ -199,7 +199,8 @@ import { PaiementfraisencadrementListComponent } from './paiementfraisencadremen
     ReclamationBourseNewComponent
   ],
   providers: [
-      CurrencyPipe
+      CurrencyPipe,
+      DatePipe
   ]
 })
 export class PagesModule { }

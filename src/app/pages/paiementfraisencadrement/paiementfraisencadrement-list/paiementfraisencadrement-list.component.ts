@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PaiementfraisencadrementService} from '../paiementfraisencadrement.service';
 import {PaiementFraisEncadrememnt} from '../paiementfraisencadrement';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-paiementfraisinscription-list',
@@ -33,6 +34,7 @@ export class PaiementfraisencadrementListComponent implements OnInit {
     montant = null;
 
     constructor(
+        public datePipe: DatePipe,
         public activatedRoute: ActivatedRoute,
         public router: Router,
         public inscriptionAcadSrv: InscriptionacadService,
@@ -94,9 +96,10 @@ export class PaiementfraisencadrementListComponent implements OnInit {
     doFilter(value: string): void {
         if (value) {
             this.paiementFraisEncadrememnts = this.paiementFraisEncadrememntsClone.filter((v) => {
-                return v.methodePaiement.codemodepaiement.toLocaleLowerCase().includes(value.toLocaleLowerCase()) ||
-                    v.methodePaiement.libellemodepaiement.toLocaleLowerCase().includes(value.toLocaleLowerCase()) ||
-                    v.datePaiement.toLocaleLowerCase().includes(value.toLocaleLowerCase());
+                return (v.methodePaiement.codemodepaiement.toLowerCase().includes(value.toLowerCase()) ||
+                    v.methodePaiement.libellemodepaiement.toLowerCase().includes(value.toLowerCase()) ||
+                    v.operateur.toLowerCase().includes(value.toLowerCase()) ||
+                    this.datePipe.transform(v.datePaiement, 'dd/MM/yyyy').includes(value.toLowerCase()));
             });
         } else {
             this.paiementFraisEncadrememnts = [...this.paiementFraisEncadrememntsClone];
@@ -155,6 +158,7 @@ export class PaiementfraisencadrementListComponent implements OnInit {
                 a.setAttribute('style', 'display: none');
                 a.setAttribute('target', '_blank');
                 a.click();
+                // window.location.href = data['redirect_url'];
             }, err => {
                 this.paiementfraisencadrementSrv.httpSrv.handleError(err);
             });

@@ -8,4 +8,5 @@ export class PaiementFraisEncadrememnt {
     montantPaye: any;
     methodePaiement: Modepaiement;
     inscriptionacad: Inscriptionacad;
+    operateur: string;
 }
