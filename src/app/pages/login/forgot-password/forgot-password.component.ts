@@ -52,7 +52,7 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit {
     if (this.form.valid) {
       this.fosuserSrv.resetPassword(values.email)
         .subscribe((data: any) => {
-          this.fosuserSrv.httpSrv.notificationSrv.showSuccess('Un mail de réinitialisation est envoyé à l\'adresse email indiquée. Merci de le vérifier d\'ici 48 heures');
+          this.fosuserSrv.httpSrv.notificationSrv.showSuccess('Un mail de réinitialisation est envoyé à l\'adresse email indiquée. Le lien est valable pour 48 heures.');
         }, error => this.fosuserSrv.httpSrv.handleError(error));
 
     }

@@ -48,7 +48,7 @@
         </div>
     </div>
     <ng-container *ngFor="let typeDocument of notAddedTypeDocument; let i = index ">
-        <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngIf="inscriptionacad?.idclasse.idniveau.codeSigesr>='N01' && typeDocument?.codetypedocument=='RNB' || typeDocument?.codetypedocument=='CNI'">
+        <div class="col-sm-4 col-lg-4 col-md-6 mb-4" *ngIf="typeDocument?.codetypedocument=='RNB' || typeDocument?.codetypedocument=='CNI'">
             <div class="card" style="width: 100%;">
                 <div class="card-body">                
                     <h5 class="card-title">
@@ -126,8 +126,7 @@
                             <span class="badge badge-info" style="white-space: normal;">
                                 Merci de cliquer sur le bouton bleu pour charger le document</span>
                         </ng-container> &nbsp;
-    
-    
+     
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-center">
@@ -163,9 +162,6 @@
                     </a>
                 </h5>
                 <div class="sub-body">
-
-                    <!-- <span class="badge badge-success">Renseigné</span> &nbsp; -->
-
                     <ng-container>
                         <span *ngIf="otherDocument?.estValide" [class.badge-danger]="!otherDocument?.estValide"
                             [class.badge-success]="otherDocument?.estValide" class="badge">
@@ -232,7 +228,6 @@
     </div>
 
 </div>
-
 <ng-template #documentViewer let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">
@@ -261,9 +256,7 @@
             </div>
         </div>
     </div>
-
 </ng-template>
-
 <ng-template #otherDocument let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Document</h4>
@@ -299,9 +292,7 @@
         <button type="button" [disabled]="!fileToUpload" class="btn btn-success"
             (click)=" currentOperation === 'update' ? changeListenerForUpdate(fileToUpload, selectedTypeDocument) : changeListener(fileToUpload, selectedTypeDocument)">Valider</button>
     </div>
-
 </ng-template>
-
 <ng-template #queryDocument let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Mail</h4>
@@ -328,5 +319,4 @@
         <button type="button" [disabled]="!queriedDocumentTitle" class="btn btn-success"
             (click)="sendCustomMail()">Valider</button>
     </div>
-
 </ng-template>

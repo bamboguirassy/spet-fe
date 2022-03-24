@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, CurrencyPipe, DatePipe} from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
@@ -94,6 +94,8 @@ import { ArticleItemListComponent } from './admin/article/article-item-list/arti
 import { RappelInfoSensibleComponent } from './dashboard/rappel-info-sensible/rappel-info-sensible.component';
 import { ServiceElectronicListComponent } from './dashboard/service-electronic-list/service-electronic-list.component';
 import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
+import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-inscriptionacad-list/payant-inscriptionacad-list.component';
+import { PaiementfraisencadrementListComponent } from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
 
 @NgModule({
   declarations: [
@@ -151,7 +153,9 @@ import { GestionReclamationComponent } from './admin/reclamation-paiement/gestio
     ArticleItemListComponent,
     RappelInfoSensibleComponent,
     ServiceElectronicListComponent,
-    GestionReclamationComponent
+    GestionReclamationComponent,
+    PayantInscriptionacadListComponent,
+    PaiementfraisencadrementListComponent
   ],
   imports: [
     CommonModule,
@@ -193,6 +197,10 @@ import { GestionReclamationComponent } from './admin/reclamation-paiement/gestio
   ],
   entryComponents: [
     ReclamationBourseNewComponent
+  ],
+  providers: [
+      CurrencyPipe,
+      DatePipe
   ]
 })
 export class PagesModule { }

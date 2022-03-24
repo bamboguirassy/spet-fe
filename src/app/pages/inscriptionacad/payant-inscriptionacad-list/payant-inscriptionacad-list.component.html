@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card text-left">
+            <div class="card-body">
+                <div class="table-responsive" *ngIf="temp.length && fetched">
+                    <p-table #tt [value]="inscriptionacads" [paginator]="true" [rows]="50" sortMode="multiple"
+                             [resizableColumns]="true" [responsive]="true" [scrollable]="true" scrollHeight="400px"
+                             [globalFilterFields]="globalFilterFields" dataKey="id">
+                        <ng-template pTemplate="caption">
+                            Inscriptions académiques
+                            <br>
+                            <br>
+                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                            <input type="text" pInputText size="50" placeholder="Rechercher dans le tableau"
+                                   (input)="updateFilter($event)" style="width:auto">
+                            <br>
+                            <br>
+                        </ng-template>
+                        <ng-template pTemplate="colgroup">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th [pSortableColumn]="'classe'" pResizableColumn>
+                                    Classe
+                                    <p-sortIcon [field]="'classe'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'montantPaye'" pResizableColumn>
+                                    Montant Payé
+                                    <p-sortIcon [field]="'montantPaye'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'montantRestant'" pResizableColumn>
+                                    Montant Restant
+                                    <p-sortIcon [field]="'montantRestant'"></p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'montantAnnuel'" pResizableColumn>
+                                    Coût annuel
+                                    <p-sortIcon [field]="'montantAnnuel'"></p-sortIcon>
+                                </th>
+                                <th pResizableColumn>Actions</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-inscriptionacadMap let-editing="editing">
+                            <tr [pEditableRow]="inscriptionacadMap" [pSelectableRow]="inscriptionacadMap"
+                                [pContextMenuRow]="inscriptionacadMap">
+                                <td class="ui-resizable-column text-center">
+                                    {{ inscriptionacadMap?.inscriptionacad?.idclasse?.libelleclasse + ' ' + inscriptionacadMap?.inscriptionacad?.idclasse?.idanneeacad?.libelleanneeacad }}
+                                </td>
+                                <td class="ui-resizable-column text-center">
+                                    <span class="badge badge-secondary" style="font-size: 14px;">
+                                         {{ calculatePaidAmounts(inscriptionacadMap) | currency:'F CFA':'code':'3.2-2':'fr' }}
+                                    </span>
+                                </td>
+                                <td class="ui-resizable-column text-center">
+                                    <span class="badge badge-secondary" style="font-size: 14px;"
+                                          [ngStyle]="{'backgroundColor': calculateRemainingAmount(inscriptionacadMap) == 0 ? 'green' : 'red'}">
+                                       <span >{{ calculateRemainingAmount(inscriptionacadMap)  }}</span>
+                                    </span>
+                                </td>
+                                <td class="ui-resizable-column text-center">
+                                    <span class="badge badge-secondary" style="font-size: 14px;">
+                                        {{ (inscriptionacadMap?.inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel | currency:'F CFA':'code':'3.2-2':'fr') || 'Inconnu' }}
+                                    </span>
+                                </td>
+
+                                <td class="ui-resizable-column">
+                                    <button class="btn btn-lg btn-danger p-2" [disabled]="inscriptionacadMap?.inscriptionacad?.idclasse?.idfiliere?.paramFraisEncadrement?.fraisAnnuel === null"
+                                       [routerLink]="[inscriptionacadMap?.inscriptionacad?.id]" role="button">
+                                        <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                        Détails
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer" let-columns>
+                            <tr>
+                                <td>Classe</td>
+                                <td>Montant Payé</td>
+                                <td>Montant Restant</td>
+                                <td>Coût annuel</td>
+                                <td>Actions</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <div class="d-flex justify-content-center align-items-center" *ngIf="!temp.length && fetched">
+                    <i class="fa fa-exclamation-circle text-danger" aria-hidden="true" style="font-size: 60px;"></i>
+                    &nbsp; &nbsp;
+                    <h4 style="font-weight: bold;"> Vous n'avez aucune inscription payante pour le moment. </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
