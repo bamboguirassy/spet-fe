@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-sm-12 col-lg-12 col-md-12">
             <p-autoComplete [(ngModel)]="numeroInterne" [suggestions]="filteredEtudiants"
-              (completeMethod)="searchEtudiant($event)" [size]="50" [minLength]="1" [field]="'unbounded'"
+              (completeMethod)="searchEtudiant($event)" [size]="50" [minLength]="8" [field]="'unbounded'"
               placeholder="Saisir un numéro de dossier">
               <ng-template let-etudiant pTemplate="item">
                 <div class="ui-helper-clearfix" (click)="displayMedicalFile(etudiant)"
