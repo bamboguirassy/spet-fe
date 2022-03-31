@@ -31,7 +31,7 @@ export class AuthService {
           if (this.currentUser.idgroup && this.currentUser.idgroup.codegroupe === 'MEDECIN') {
             this.httpSrv.router.navigate(['visite-medicale']);
           }
-          if (!['ADMIN', 'ETU', 'DSOS', 'SA', 'DIR_DSOS', 'ADSOS', 'MEDECIN'].includes(this.currentUser.idgroup.codegroupe)) {
+          if (!['ADMIN', 'ETU', 'DSOS','ADMIN_DSOS', 'SA', 'DIR_DSOS', 'ADSOS', 'MEDECIN'].includes(this.currentUser.idgroup.codegroupe)) {
             this.httpSrv.notificationSrv.showError("Vous n'êtes pas autorisé à vous connecter à cette application");
             this.logout();
           }
