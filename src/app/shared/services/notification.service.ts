@@ -13,11 +13,11 @@ export class NotificationService {
   }
 
   showError(message: any){
-    this.messageService.add({ severity: 'error', summary: 'Attention', detail: message });
+    this.messageService.add({ severity: 'error', summary: 'Danger', detail: message });
   }
   
   showSuccess(message: any){
-    this.messageService.add({ severity: 'success', summary: 'Attention', detail: message });
+    this.messageService.add({ severity: 'success', summary: 'Succès !', detail: message });
   }
 
   showInfo(message: any){
@@ -25,6 +25,6 @@ export class NotificationService {
   }
 
   showWarning(message: any){
-    this.messageService.add({ severity: 'warn', summary: 'Information', detail: message });
+    this.messageService.add({ severity: 'warn', summary: 'Attention', detail: message });
   }
 }

@@ -12,7 +12,7 @@ export class HttpService {
 
   url: string;
   httpOptions: any = null;
-  user: any;
+  user: any;  
   customUrl: string;
   pdfUrl: string;
   private retUrl = '';
@@ -55,23 +55,23 @@ export class HttpService {
   }
 
   get(url: string) {
-    return this.httpSrv.get(this.customUrl + url, this.createAuthorizationHeader());
+    return this.httpSrv.get(this.customUrl + url, this.createAuthorizationHeader()).pipe(first());
   }
 
   post(url: string, data: any) {
-    return this.httpSrv.post(this.customUrl + url, data, this.createAuthorizationHeader());
+    return this.httpSrv.post(this.customUrl + url, data, this.createAuthorizationHeader()).pipe(first());
   }
 
   put(url: string, data: any) {
-    return this.httpSrv.put(this.customUrl + url, data, this.createAuthorizationHeader());
+    return this.httpSrv.put(this.customUrl + url, data, this.createAuthorizationHeader()).pipe(first());
   }
 
   deleteMultiple(url: string, data: any) {
-    return this.httpSrv.post(this.customUrl + url, data, this.createAuthorizationHeader());
+    return this.httpSrv.post(this.customUrl + url, data, this.createAuthorizationHeader()).pipe(first());
   }
 
   delete(url: string) {
-    return this.httpSrv.delete(this.customUrl + url, this.createAuthorizationHeader());
+    return this.httpSrv.delete(this.customUrl + url, this.createAuthorizationHeader()).pipe(first());
   }
 
   handleError(error: any) {

@@ -13,6 +13,7 @@ import { Anneeacad } from "../../anneeacad/anneeacad";
 import { Inscriptionacad } from "../../inscriptionacad/inscriptionacad";
 import { InscriptionacadService } from "../../inscriptionacad/inscriptionacad.service";
 import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
+import { FosUser } from '../../fos_user/fos_user';
 
 @Component({
   selector: "app-visitemedicale-new",
@@ -32,9 +33,10 @@ export class VisiteMedicaleNewComponent implements OnInit {
   dateConsultation: NgbDateStruct;
   clonedVisiteMedicales: VisiteMedicale[];
   numeroInterne: number;
-  filteredEtudiants: Inscriptionacad[] = [];
+  filteredEtudiants: Etudiant[] = [];
   visiteMedicale: VisiteMedicale = new VisiteMedicale();
   created: EventEmitter<any> = new EventEmitter<any>();
+  currentUser: FosUser = null;
 
   statuts = [
     { value: 'Apte', label: "Apte" },
@@ -87,6 +89,8 @@ export class VisiteMedicaleNewComponent implements OnInit {
     public inscriptionacadSrv: InscriptionacadService
   ) {
     this.selectedApte = this.statuts.find((vm) => vm.label === "Apte") as any;
+    authSrv.currentUserProvider.pipe(first())
+    .subscribe(user=>this.currentUser = user);
   }
 
   ngOnInit() {
@@ -134,12 +138,12 @@ export class VisiteMedicaleNewComponent implements OnInit {
             this.visiteMedicale.date = new Date(this.visiteMedicale.date);
             if(this.visiteMedicale.maladieChroniques) {
               this.convertStringToMultiSelectValues(this.visiteMedicale.maladieChroniques);
-            }
-            this.dateConsultation = {
+            }            
+            /*this.dateConsultation = {
               year: this.visiteMedicale.date.getFullYear(),
               month: this.visiteMedicale.date.getMonth(),
               day: this.visiteMedicale.date.getDate(),
-            };
+            }; */
           }
           this.selectedPresenceHandicap = this.presenceHandicaps.find(
             (handicap) =>
@@ -166,12 +170,12 @@ export class VisiteMedicaleNewComponent implements OnInit {
       );
   }
 
-  searchEtudiant(term: any) {
+  searchEtudiant() {
     this.searchInputTouched = true;
     this.searching = true;
-    if (term.query.length > 10) {
+    if (this.numeroInterne) {
       this.etudiantSrv
-        .searchByNumInterne(term.query)
+        .searchByNumInterne(this.numeroInterne)
         .pipe(
           first(),
           finalize(() => (this.searching = false))
@@ -179,11 +183,29 @@ export class VisiteMedicaleNewComponent implements OnInit {
         .subscribe(
           (etudiants: any) => {
             this.filteredEtudiants = etudiants;
+            if(this.filteredEtudiants.length<1) {
+              this.visiteMedicale = new VisiteMedicale();
+              this.selectedInscriptionacad = null;
+              this.notificationSrv.showError("Aucun étudiant correspondant trouvé avec ce numero de dossier... Merci de vérifier !");
+            } else {
+              this.displayMedicalFile(this.filteredEtudiants[0]);
+            }
           },
           (error) => {
             this.etudiantSrv.httpSrv.handleError(error);
           }
         );
+    }
+  }
+
+  remove() {
+    if(confirm("Êtes-vous sûr de vouloir supprimer ?")) {
+      this.visiteMedicaleSrv.remove(this.visiteMedicale)
+      .subscribe(()=>{
+        this.visiteMedicale = new VisiteMedicale();
+        this.selectedInscriptionacad.visiteMedicale = null;
+        this.notificationSrv.showSuccess("Visite supprimée avec succès !");
+      });
     }
   }
 
@@ -228,6 +250,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
       .subscribe(
         (visiteMedicale: any) => {
           this.selectedInscriptionacad.visiteMedicale = visiteMedicale;
+          this.visiteMedicale = visiteMedicale;
           this.created.emit(visiteMedicale);
           this.visiteMedicaleSrv.httpSrv.notificationSrv.showSuccess(
             "Vos observations ont bien été enregistrées."
@@ -249,6 +272,9 @@ export class VisiteMedicaleNewComponent implements OnInit {
     );
     if (this.selectedMaladieChroniques.length) {
       this.visiteMedicale.maladieChroniques = this.convertSelectedMaladieChroniquesToString();
+    }
+    if(this.selectedHandicap) {
+      this.visiteMedicale.typeHandicap = this.selectedHandicap.type;
     }
     this.visiteMedicaleSrv
       .update(this.visiteMedicale)

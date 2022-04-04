@@ -8,4 +8,6 @@ export class VisiteMedicale {
     inscriptionacad: Inscriptionacad;
     resultat: string;
     maladieChroniques: string;
+    user: string;
+    typeHandicap: string;
 }
