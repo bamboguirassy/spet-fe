@@ -134,7 +134,7 @@ const routes: Routes = [
       },
       {
         path: 'payment-succeeded', component: PaymentSuccessComponent,
-        data: { breadcrumb: 'Paiement Réussi' },
+        data: { breadcrumb: 'Paiement en cours de vérification' },
         resolve: { etudiant: OneEtudiantResolver}
       },
       {

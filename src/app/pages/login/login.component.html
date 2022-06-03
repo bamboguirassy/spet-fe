@@ -38,8 +38,9 @@
                             *ngIf="form.get('username').touched && form.get('username').hasError('username')">Adresse
                             email invalide</small>
                     </div>
-
-                    <div class="d-flex justify-content-end" style="width: 100%;" *ngIf="!nextStep">
+                    <div class="d-flex justify-content-between" style="width: 100%;" *ngIf="!nextStep">
+                        <a class="transition pull-left" [routerLink]="['/forgotpassword']"
+                                    routerLinkActive="router-link-active">Mot de passe oublié ?</a>
                         <div class="form-group ">
                             <button id="continuerButton" (click)="validateAccountByEmail()" type="button"
                                 class="btn btn-block">Continuer</button>

@@ -8,6 +8,9 @@ import { MessageService } from 'primeng/api';
 import { InscriptionTemporaire } from '../inscription_temporaire/inscription_temporaire';
 import { InscriptionTemporaireService } from '../inscription_temporaire/inscription_temporaire.service';
 import { InscriptionacadService } from '../inscriptionacad.service';
+import { FosUser } from '../../fos_user/fos_user';
+import { AuthService } from '../../../shared/services/auth.service';
+import { first } from 'rxjs/operators';
 declare var sendPaymentInfos: Function;
 @Component({
   selector: 'app-finaliser-inscription',
@@ -23,9 +26,11 @@ export class FinaliserInscriptionComponent implements OnInit {
   inscriptionTemporaire: InscriptionTemporaire;
   preinscription: Preinscription;
   etudiant: Etudiant;
+  currentUser: FosUser;
 
   constructor(private activatedRoute: ActivatedRoute,
     public etudiantSrv: EtudiantService,
+    public authSrv: AuthService,
     public inscriptionTemporaireSrv: InscriptionTemporaireService,
      public httpServ: HttpService,
      public inscriptionacadSrv: InscriptionacadService) {
@@ -39,8 +44,13 @@ export class FinaliserInscriptionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.preinscription = this.activatedRoute.snapshot.data['preinscription'];
-    this.findByCni();
+    this.authSrv.currentUserProvider.pipe(first()).subscribe((user)=>{
+      this.preinscription = this.activatedRoute.snapshot.data['preinscription'];
+      this.currentUser = user;   
+      if(this.currentUser) {
+        this.findByCni();
+      }   
+    })
     this.findinscriptionTemporaireByPreinscription();
   }
 
@@ -62,9 +72,17 @@ export class FinaliserInscriptionComponent implements OnInit {
   }
 
   findByCni() {
+
     if (this.preinscription) {
       this.etudiantSrv.findByCni(this.preinscription.cni)
-        .subscribe((data: any) => this.etudiant = data,
+        .subscribe((data: any) =>{
+           this.etudiant = data;
+           if(this.etudiant.emailUniv!=this.currentUser.email && this.currentUser.idgroup.codegroupe!='SA') {
+             this.authSrv.httpSrv.router.navigate(['/']);
+             this.etudiantSrv.httpSrv.notificationSrv.showError("Vous n'êtes pas autorisé à visualiser ces informations !");
+             throw new Error("Vous n'êtes pas autorisé à visualiser ces informations !");
+           }
+        },
           error => this.etudiantSrv.httpSrv.handleError(error));
     } else {
       this.etudiantSrv.httpSrv.notificationSrv.showError("Cni introuvable dans préinscription");
