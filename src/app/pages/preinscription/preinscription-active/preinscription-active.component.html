@@ -9,6 +9,7 @@
                     <table class="table table-hover" style="overflow: scroll;">
                         <thead>
                             <tr>
+                                <th>Action</th>
                                 <th>Date délai</th>
                                 <th>Filière</th>
                                 <th>Niveau</th>
@@ -16,11 +17,21 @@
                                 <th>Type admission</th>
                                 <th>Type Passage</th>
                                 <th>Montant</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let preinscriptionLine of preinscriptionData">
+                                <td class="align-middle" *ngIf="!preinscriptionLine?.active">
+                                    <span class="badge badge-danger">Inscription non autorisée</span>
+                                </td>
+                                <td class="align-middle" *ngIf="preinscriptionLine?.active">
+                                    <div class="btn-group" role="group">
+                                        <button (click)="startProcess(preinscriptionLine?.preinscription.id)"
+                                            class="btn btn-outline-primary nowrap">
+                                            <i class="fa fa-pencil-square" aria-hidden="true"></i> S'inscrire
+                                        </button>
+                                    </div>
+                                </td>
                                 <td class="align-middle">
                                     <span class="badge badge-danger">
                                         {{preinscriptionLine?.preinscription?.datedelai|date:'dd/MM/yyyy'}}
@@ -44,17 +55,6 @@
                                 </td>
                                 <td class="align-middle text-truncate">{{preinscriptionLine?.preinscription?.montant }}
                                 </td>
-                                <td class="align-middle" *ngIf="preinscriptionLine?.active">
-                                    <div class="btn-group" role="group">
-                                        <button (click)="startProcess(preinscriptionLine?.preinscription.id)"
-                                            class="btn btn-outline-primary">
-                                            <i class="fa fa-pencil-square" aria-hidden="true"></i> S'inscrire
-                                        </button>
-                                    </div>
-                                </td>
-                                <td class="align-middle" *ngIf="!preinscriptionLine?.active">
-                                    <span class="badge badge-danger">Inscription non autorisée</span>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -64,4 +64,3 @@
         <!-- fin preinscription active -->
     </div>
 </div>
-

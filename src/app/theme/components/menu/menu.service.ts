@@ -31,7 +31,7 @@ export class MenuService {
       // new Menu (31, 'Les états', '/bourse', null, 'credit-card', null, false, 30),
       // new Menu (32, 'Mes réclamations', '/reclamationbourse', null, 'exclamation', null, false, 30),
       // new Menu (40, 'Demandes de documents', '/demandedocument', null, 'file-text-o', null, false, 0),
-      new Menu(70, 'Espace de paiement', '/espace-paiement', null, 'money', null, false, 0, currentUser.idgroup.codegroupe=='ETU'),
+      // new Menu(70, 'Espace de paiement', '/espace-paiement', null, 'money', null, false, 0, currentUser.idgroup.codegroupe=='ETU'),
       new Menu(50, 'Liens utiles', null, null, 'link', null, true, 0, true),
       new Menu(51, 'Le système LMD', '/systeme-lmd', null, 'bookmark-o', null, false, 50, true),
       new Menu(60, 'Admin', null, null, 'cog', null, true, 0, this.adminRoles.includes(currentUser.idgroup.codegroupe)),
