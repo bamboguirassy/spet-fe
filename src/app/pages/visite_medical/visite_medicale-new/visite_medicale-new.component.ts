@@ -77,6 +77,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
   ];
 
   selectedMaladieChroniques = [];
+  visiteMedicaleEditDisabled = false;
 
   constructor(
     public visiteMedicaleSrv: VisiteMedicaleService,
@@ -133,6 +134,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
             this.visiteMedicale = {
               ...this.selectedInscriptionacad.visiteMedicale,
             };
+            this.visiteMedicaleEditDisabled = (this.visiteMedicale.user!=this.currentUser.email);
 
             // this.selectedPresenceHandicap = this.visiteMedicale.resultat;
             this.selectedApte = this.statuts.find((vm) => vm.label === this.visiteMedicale.resultat) as any;
@@ -192,7 +194,7 @@ export class VisiteMedicaleNewComponent implements OnInit {
             if (this.filteredEtudiants.length < 1) {
               this.visiteMedicale = new VisiteMedicale();
               this.selectedInscriptionacad = null;
-              this.notificationSrv.showError("Aucun étudiant correspondant trouvé avec ce numero de dossier... Merci de vérifier !");
+              this.notificationSrv.showError("Aucun étudiant correspondant trouvé avec ce numero de dossier  pour l'année académique en cours... Merci de vérifier !");
             } else {
               this.displayMedicalFile(this.filteredEtudiants[0]);
             }

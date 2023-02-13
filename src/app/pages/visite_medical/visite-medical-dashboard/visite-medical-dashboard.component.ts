@@ -6,6 +6,7 @@ import { Anneeacad } from "../../anneeacad/anneeacad";
 import { AnneeacadService } from "../../anneeacad/anneeacad.service";
 import { VisiteMedicale } from "../visite_medicale";
 import { VisiteMedicaleService } from "../visite_medicale.service";
+import { FosUser } from 'src/app/pages/fos_user/fos_user';
 
 @Component({
   selector: "app-visite-medical-dashboard",
@@ -15,17 +16,23 @@ import { VisiteMedicaleService } from "../visite_medicale.service";
 export class VisiteMedicalDashboardComponent implements OnInit {
   anneeEnCours: Anneeacad;
   visiteMedicales: VisiteMedicale[] = [];
+  currentUser: FosUser = null;
+
   constructor(
     public anneeacadSrv: AnneeacadService,
     public activatedRoute: ActivatedRoute,
     public authSrv: AuthService,
     public visiteMedicalSrv: VisiteMedicaleService
-  ) {}
+  ) {
+    authSrv.currentUserProvider.pipe(first())
+      .subscribe(user => this.currentUser = user);
+  }
 
   ngOnInit() {
     this.visiteMedicales = this.activatedRoute.snapshot.data["visiteMedicales"];
     this.findAnneeEnCours();
   }
+
   refreshList() {
     this.visiteMedicalSrv.findWithAtLeastOneInsacad().subscribe(
       (data: any) => (this.visiteMedicales = data),

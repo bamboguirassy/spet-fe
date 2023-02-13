@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Statistique des visites médicales par mois pour l'année académique selectionnée
+                </h4>
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Totale Visite / {{anneeacad?.libelleanneeacad}}</h4>
+                                <span class="badge bg-primary text-white"><h1>{{totalVisits}} visites médicales</h1></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Mois</th>
+                                <th scope="col">Nombre de visites</th>
+                                <th scope="col">Taux</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="" *ngFor="let monthItem of monthData">
+                                <td scope="row">{{ monthItem.monthName }}</td>
+                                <td>
+                                    <span class="badge bg-primary text-white">
+                                        {{ monthItem.visitsCount }}
+                                    </span>
+                                </td>
+                                <td class="w-50">
+                                    <p-progressBar [value]="monthItem.percent"></p-progressBar>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -118,7 +118,10 @@
                   <div class="col-12" *ngIf="visiteMedicale?.id">
                     <p style="color: red;"> <b>La visite a déjà été effectuée par : {{visiteMedicale?.user}} </b></p>
                   </div> <br> <br>
-                  <ng-container *ngIf="(visiteMedicale?.id && visiteMedicale?.user==currentUser?.email) || !visiteMedicale?.id">
+                  <ng-container *ngIf="(visiteMedicale?.id && (visiteMedicale?.user==currentUser?.email || currentUser?.idgroup.codegroupe=='MedChef' || currentUser?.idgroup.codegroupe=='SA')) || !visiteMedicale?.id">
+                    <div class="description px-2 text-danger my-2" *ngIf="visiteMedicaleEditDisabled">
+                      Vous voyez la visite médicale en lecture seule car vous êtes médécin chef
+                    </div>
                     <div class="col-12">
                       <div class="form-group">
                         <label for="dateVisiteMedical">Date consultation</label>
@@ -126,7 +129,7 @@
                           <strong>{{ visiteMedicale?.date|date:'dd/MM/yyyy' }}</strong>
                         </div>
                         <div class="input-group" *ngIf="!visiteMedicale.id">
-                          <input class="form-control" placeholder="Saisir la date de la consultation" name="dp"
+                          <input [disabled]="visiteMedicaleEditDisabled" class="form-control" placeholder="Saisir la date de la consultation" name="dp"
                             [(ngModel)]="dateConsultation" id="dateVisiteMedical" ngbDatepicker #d="ngbDatepicker">
                           <div class="input-group-append">
                             <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
@@ -139,7 +142,7 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label class="col-form-label form-control-label" for="handicap">Résultat de la visite</label>
-                        <p-selectButton [style]="{'width':'100%'}" [options]="statuts" [(ngModel)]="selectedApte"
+                        <p-selectButton [disabled]="visiteMedicaleEditDisabled" [style]="{'width':'100%'}" [options]="statuts" [(ngModel)]="selectedApte"
                           optionLabel="label" name="handicap" id="handicap"></p-selectButton>
                       </div>
                     </div>
@@ -147,7 +150,7 @@
                       <div class="form-group">
                         <label class="col-form-label form-control-label" for="maladieChroniques">Maladies
                           Chroniques</label>
-                        <p-multiSelect [defaultLabel]="'Selectionner les maladies'" [style]="{'width':'100%'}"
+                        <p-multiSelect [disabled]="visiteMedicaleEditDisabled" [defaultLabel]="'Selectionner les maladies'" [style]="{'width':'100%'}"
                           name="maladieChroniques" [options]="maladieChroniques" [(ngModel)]="selectedMaladieChroniques"
                           optionLabel="label" optionValue="code"></p-multiSelect>
                       </div>
@@ -156,7 +159,7 @@
                       <div class="form-group">
                         <label lass="col-form-label form-control-label" for="commentaire">Commentaires <b
                             class="text-danger">(non visible pour l'université)</b></label>
-                        <p-editor name="commentaire" [(ngModel)]="visiteMedicale.commentaire" required
+                        <p-editor [readonly]="visiteMedicaleEditDisabled" name="commentaire" [(ngModel)]="visiteMedicale.commentaire" required
                           [style]="{'height':'200px'}">
                         </p-editor>
                       </div>
@@ -166,7 +169,7 @@
                       <div class="form-group">
                         <label class="col-form-label form-control-label" for="presenceHandicap">Présence
                           Handicap</label>
-                        <p-selectButton [style]="{'width':'100%'}" [options]="presenceHandicaps"
+                        <p-selectButton [disabled]="visiteMedicaleEditDisabled" [style]="{'width':'100%'}" [options]="presenceHandicaps"
                           [(ngModel)]="selectedPresenceHandicap" optionLabel="label" optionValue="code"
                           name="presenceHandicap" id="presenceHandicap"></p-selectButton>
                       </div>
@@ -176,7 +179,7 @@
                       <div class="form-group">
                         <label class="col-form-label form-control-label" for="typeHandicap">Type
                           Handicap</label><br>
-                        <p-dropdown [style]="{'width':'100%'}" [options]="handicapTypes" [(ngModel)]="selectedHandicap"
+                        <p-dropdown [disabled]="visiteMedicaleEditDisabled" [style]="{'width':'100%'}" [options]="handicapTypes" [(ngModel)]="selectedHandicap"
                           placeholder="Selectionner type handicap" optionLabel="libelle" [showClear]="true"
                           name="typeHandicap" id="typeHandicap">
                         </p-dropdown>
@@ -187,7 +190,7 @@
                       <div class="form-group">
                         <label lass="col-form-label form-control-label" for="message">Commentaires sur
                           l'handicap</label>
-                        <textarea [(ngModel)]="selectedInscriptionacad.idetudiant.descriptionHandicap"
+                        <textarea [disabled]="visiteMedicaleEditDisabled" [(ngModel)]="selectedInscriptionacad.idetudiant.descriptionHandicap"
                           class="form-control" name="" id="" rows="3"></textarea>
                       </div>
                     </div>
@@ -205,11 +208,11 @@
                           <i class="fa fa-check-circle" aria-hidden="true"></i>
                         </button>
 
-                        <button *ngSwitchCase="false" type="button" class="btn btn-primary" (click)="update()">
+                        <button [disabled]="visiteMedicaleEditDisabled" *ngSwitchCase="false" type="button" class="btn btn-primary" (click)="update()">
                           Mettre à jour
                           <i class="fa fa-check-circle" aria-hidden="true"></i>
                         </button>
-                        <button *ngSwitchCase="false" type="button" class="btn btn-danger ml-1" (click)="remove()">
+                        <button [disabled]="visiteMedicaleEditDisabled" *ngSwitchCase="false" type="button" class="btn btn-danger ml-1" (click)="remove()">
                           Supprimer
                           <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
