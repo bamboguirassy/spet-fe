@@ -23,7 +23,7 @@ import {
   AccordionModule,
   PanelModule,
   AutoCompleteModule,
-  OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule, ListboxModule
+  OverlayPanelModule, DialogModule, SplitButtonModule, InputTextModule, MessagesModule, ListboxModule, ProgressBarModule
 } from 'primeng/primeng';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -96,6 +96,10 @@ import { ServiceElectronicListComponent } from './dashboard/service-electronic-l
 import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
 import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-inscriptionacad-list/payant-inscriptionacad-list.component';
 import { PaiementfraisencadrementListComponent } from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
+import { VisiteMedicaleStatisticsPageComponent } from './visite_medical/statistique/visite-medicale-statistics-page/visite-medicale-statistics-page.component';
+import { VisiteMedicalMonthStatsComponent } from './visite_medical/statistique/visite-medical-month-stats/visite-medical-month-stats.component';
+import { VisiteMedicalDoctorsStatsComponent } from './visite_medical/statistique/visite-medical-doctors-stats/visite-medical-doctors-stats.component';
+import { VisiteMedicalHandicapStatsComponent } from './visite_medical/statistique/visite-medical-handicap-stats/visite-medical-handicap-stats.component';
 
 @NgModule({
   declarations: [
@@ -155,12 +159,17 @@ import { PaiementfraisencadrementListComponent } from './paiementfraisencadremen
     ServiceElectronicListComponent,
     GestionReclamationComponent,
     PayantInscriptionacadListComponent,
-    PaiementfraisencadrementListComponent
+    PaiementfraisencadrementListComponent,
+    VisiteMedicaleStatisticsPageComponent,
+    VisiteMedicalMonthStatsComponent,
+    VisiteMedicalDoctorsStatsComponent,
+    VisiteMedicalHandicapStatsComponent
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
     TableModule,
+    ProgressBarModule,
     ContextMenuModule,
     MenuModule,
     ToastModule,

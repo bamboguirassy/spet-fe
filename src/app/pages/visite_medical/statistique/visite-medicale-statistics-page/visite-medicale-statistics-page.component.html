@@ -1,0 +1,70 @@
+<p-toast></p-toast>
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <div widget class="card border-0 box-shadow">
+      <div class="card-body widget-body border-1">
+        <div class="row d-flex align-items-center">
+          <div class="col-sm-12 col-lg-12 col-md-12 align-items-center">
+            <div class="ml-1 mr-1 row d-flex justify-content-between">
+              <h5>
+                <b class="badge badge-red text-dark" style="font-size: 20px;">Visites Medicales - Statistique</b>
+              </h5>
+              <h5>
+                <b class="badge badge-red text-dark"
+                  >Année Académique : {{ anneeEnCours?.libelleanneeacad }}
+                </b>
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-sm-12 col-lg-12 col-md-12">
+    <p-tabView styleClass="tabview-custom">
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <i class="fa fa-user-md" style="font-size: 20px;" aria-hidden="true"></i> &nbsp;
+          <span>Statistique Générale</span>
+        </ng-template>
+        <br>
+        <app-visite-medical-month-stats *ngIf="anneeEnCours" [anneeacad]="anneeEnCours"></app-visite-medical-month-stats>
+      </p-tabPanel>
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <i class="fa fa-list" aria-hidden="true"></i>&nbsp;
+          <span>Statistiques par médécin</span>
+        </ng-template>
+        <div>
+          <div class="row ">
+            <div class="col-12  d-flex justify-content-end mb-2">
+                <button type="button" class="btn btn-outline-secondary" (click)="refreshList()">
+                  <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
+                </button>
+            </div>
+          </div>
+          <app-visite-medical-doctors-stats *ngIf="anneeEnCours" [anneeacad]="anneeEnCours"></app-visite-medical-doctors-stats>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <i class="fa fa-list" aria-hidden="true"></i>&nbsp;
+          <span>Statistiques d'handicap</span>
+        </ng-template>
+        <div>
+          <div class="row ">
+            <div class="col-12  d-flex justify-content-end mb-2">
+                <button type="button" class="btn btn-outline-secondary" (click)="refreshList()">
+                  <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
+                </button>
+            </div>
+          </div>
+          <app-visite-medical-handicap-stats *ngIf="anneeEnCours" [anneeacad]="anneeEnCours"></app-visite-medical-handicap-stats>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

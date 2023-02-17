@@ -10,13 +10,21 @@
                 <b class="badge badge-red text-white" style="font-size: 20px;">Visites Medicales - Etudiants</b>
               </h5>
               <h5>
-                <b class="badge badge-red text-white"
-                  >Année Académique : {{ anneeEnCours?.libelleanneeacad }}
+                <b class="badge badge-red text-white">Année Académique : {{ anneeEnCours?.libelleanneeacad }}
                 </b>
               </h5>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12" *ngIf="currentUser?.idgroupe?.codegroupe=='MedChef' || currentUser?.idgroup?.codegroupe=='SA'">
+    <div widget class="card border-0 box-shadow">
+      <div class="card-body widget-body border-1 d-flex justify-content-end">
+        <a style="font-size: 30px; font-weight: bold;" class="" routerLink="/visite-medicale/statistics">
+          Accedez aux statistiques <i class="fa fa-arrow-right fa-lg fa-fw"></i>
+        </a>
       </div>
     </div>
   </div>
@@ -31,7 +39,7 @@
           <span>Nouvelle Consultation</span>
         </ng-template>
         <br>
-        <app-visitemedicale-new (created)="onCreate($event)" ></app-visitemedicale-new>
+        <app-visitemedicale-new (created)="onCreate($event)"></app-visitemedicale-new>
       </p-tabPanel>
       <p-tabPanel>
         <ng-template pTemplate="header">
@@ -41,12 +49,12 @@
         <div>
           <div class="row ">
             <div class="col-12  d-flex justify-content-end mb-2">
-                <button type="button" class="btn btn-outline-secondary" (click)="refreshList()">
-                  <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
-                </button>
+              <button type="button" class="btn btn-outline-secondary" (click)="refreshList()">
+                <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
+              </button>
             </div>
           </div>
-          <app-visitemedicale-list [visiteMedicales]="visiteMedicales" ></app-visitemedicale-list>
+          <app-visitemedicale-list [visiteMedicales]="visiteMedicales"></app-visitemedicale-list>
         </div>
       </p-tabPanel>
     </p-tabView>

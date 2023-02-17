@@ -24,6 +24,18 @@ export class VisiteMedicaleService {
     return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'with-inscriptionacad');
   }
 
+  findMonthStatsByAnneeacad(anneeId: number) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'monthstats-anneeacad/'+anneeId);
+  }
+
+  findDoctorStatsByAnneeacad(anneeId: number) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'doctor-stats-annee/'+anneeId);
+  }
+
+  findHandicapStatsByAnneeacad(anneeId: number) {
+    return this.httpSrv.get(this.getRoutePrefixWithSlash() + 'handicap-stats-annee/'+anneeId);
+  }
+
   create(visite_medicale: VisiteMedicale) {
     return this.httpSrv.post(this.getRoutePrefixWithSlash() + 'create', visite_medicale);
   }
