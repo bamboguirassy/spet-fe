@@ -39,13 +39,13 @@
           <span>Statistiques par médécin</span>
         </ng-template>
         <div>
-          <div class="row ">
+          <!-- <div class="row ">
             <div class="col-12  d-flex justify-content-end mb-2">
                 <button type="button" class="btn btn-outline-secondary" (click)="refreshList()">
                   <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
                 </button>
             </div>
-          </div>
+          </div> -->
           <app-visite-medical-doctors-stats *ngIf="anneeEnCours" [anneeacad]="anneeEnCours"></app-visite-medical-doctors-stats>
         </div>
       </p-tabPanel>
@@ -56,11 +56,11 @@
         </ng-template>
         <div>
           <div class="row ">
-            <div class="col-12  d-flex justify-content-end mb-2">
+            <!-- <div class="col-12  d-flex justify-content-end mb-2">
                 <button type="button" class="btn btn-outline-secondary" (click)="refreshList()">
                   <i class="fa fa-refresh" aria-hidden="true"></i> Raffraichir les données
                 </button>
-            </div>
+            </div> -->
           </div>
           <app-visite-medical-handicap-stats *ngIf="anneeEnCours" [anneeacad]="anneeEnCours"></app-visite-medical-handicap-stats>
         </div>
