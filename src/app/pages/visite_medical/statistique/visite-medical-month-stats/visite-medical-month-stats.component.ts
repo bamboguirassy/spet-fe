@@ -27,6 +27,8 @@ export class VisiteMedicalMonthStatsComponent implements OnInit {
       this.totalVisits = data.reduce((acc: any,current: any)=>acc+parseInt(current.visitsCount),0);
       this.monthData = data.map((monthItem: any)=>{
         let percent = monthItem.visitsCount*100/this.totalVisits;
+        // arrondir à 2 chiffres après la virgule
+        percent = Math.round(percent * 100) / 100;
         monthItem.percent = percent;
         return monthItem;
       });
