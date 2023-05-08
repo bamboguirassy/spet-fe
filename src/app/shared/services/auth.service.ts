@@ -28,10 +28,11 @@ export class AuthService {
         .subscribe((data: any) => {
           this.currentUser = data;
           this.currentUserManager.next(data);
-          if (this.currentUser.idgroup && this.currentUser.idgroup.codegroupe === 'MEDECIN') {
+          
+          if (this.currentUser.idgroup && (this.currentUser.idgroup.codegroupe === 'MEDECIN' || this.currentUser.idgroup.codegroupe==='MedChef')) {
             this.httpSrv.router.navigate(['visite-medicale']);
           }
-          if (!['ADMIN', 'ETU', 'DSOS','ADMIN_DSOS', 'SA', 'DIR_DSOS', 'ADSOS', 'MEDECIN'].includes(this.currentUser.idgroup.codegroupe)) {
+          if (!['ADMIN', 'ETU', 'DSOS','ADMIN_DSOS', 'SA', 'DIR_DSOS', 'ADSOS', 'MEDECIN','MedChef'].includes(this.currentUser.idgroup.codegroupe)) {
             this.httpSrv.notificationSrv.showError("Vous n'êtes pas autorisé à vous connecter à cette application");
             this.logout();
           }

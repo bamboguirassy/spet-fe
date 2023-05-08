@@ -13,7 +13,7 @@ export class VisiteMedicalGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if ( this.currentUser.idgroup && !['SA', 'MEDECIN'].includes(this.currentUser.idgroup.codegroupe)) {
+    if ( this.currentUser.idgroup && !['SA', 'MEDECIN','MedChef'].includes(this.currentUser.idgroup.codegroupe)) {
       this.router.navigate(['']);
       return false;
     }
