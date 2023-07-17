@@ -34,7 +34,8 @@ import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.co
 import { OneEtudiantByIdResolver } from './etudiant/one-etudiant-by-id.resolver copy';
 import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
 import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-inscriptionacad-list/payant-inscriptionacad-list.component';
-import {PaiementfraisencadrementListComponent} from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
+import { PaiementfraisencadrementListComponent } from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
+import { TemporaryPaymentFormComponent } from './gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component';
 
 
 const routes: Routes = [
@@ -42,9 +43,11 @@ const routes: Routes = [
     path: '',
     component: PagesComponent,
     children: [
+      { path: 'payment-form', component: TemporaryPaymentFormComponent },
+
       {
         path: '', component: DashboardComponent, pathMatch: 'full',
-        resolve: { etudiant: OneEtudiantResolver /*, assistants: MultipleAssistanceEmailResolver*/}
+        resolve: { etudiant: OneEtudiantResolver /*, assistants: MultipleAssistanceEmailResolver*/ }
       },
       { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
       {
@@ -59,7 +62,7 @@ const routes: Routes = [
       {
         path: 'espace-paiement',
         data: { breadcrumb: 'Espace paiement' },
-        children:[
+        children: [
           {
             path: '',
             component: PayantInscriptionacadListComponent,
@@ -82,7 +85,7 @@ const routes: Routes = [
       {
         path: 'bourse', component: BourseComponent,
         data: { breadcrumb: 'Etat des bourses' },
-        resolve: {bourseData: MultipleBourseEtudiantResolver}
+        resolve: { bourseData: MultipleBourseEtudiantResolver }
       },
       {
         path: 'dossier-pedagogique', component: DossierPedagogiqueComponent,
@@ -135,12 +138,12 @@ const routes: Routes = [
       {
         path: 'payment-succeeded', component: PaymentSuccessComponent,
         data: { breadcrumb: 'Paiement en cours de vérification' },
-        resolve: { etudiant: OneEtudiantResolver}
+        resolve: { etudiant: OneEtudiantResolver }
       },
       {
         path: 'payment-failed', component: PaymentFailedComponent,
         data: { breadcrumb: 'Erreur Paiement' },
-        resolve: { etudiant: OneEtudiantResolver}
+        resolve: { etudiant: OneEtudiantResolver }
       },
       demandeDocumentRoutes,
       reclamationBourseRoutes,
@@ -148,7 +151,7 @@ const routes: Routes = [
       visiteMedicaleRoutes,
 
     ]
-  }
+  },
 ];
 
 @NgModule({

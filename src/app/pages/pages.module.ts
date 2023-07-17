@@ -101,6 +101,8 @@ import { VisiteMedicalMonthStatsComponent } from './visite_medical/statistique/v
 import { VisiteMedicalDoctorsStatsComponent } from './visite_medical/statistique/visite-medical-doctors-stats/visite-medical-doctors-stats.component';
 import { VisiteMedicalHandicapStatsComponent } from './visite_medical/statistique/visite-medical-handicap-stats/visite-medical-handicap-stats.component';
 import { FraisEncadrementStatusComponent } from './gestion-frais-encadrement/frais-encadrement-status/frais-encadrement-status.component';
+import { TemporaryPaymentDetailsComponent } from './gestion-frais-encadrement/temporary-payment-details/temporary-payment-details.component';
+import { TemporaryPaymentFormComponent } from './gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component';
 
 @NgModule({
   declarations: [
@@ -165,7 +167,9 @@ import { FraisEncadrementStatusComponent } from './gestion-frais-encadrement/fra
     VisiteMedicalMonthStatsComponent,
     VisiteMedicalDoctorsStatsComponent,
     VisiteMedicalHandicapStatsComponent,
-    FraisEncadrementStatusComponent
+    FraisEncadrementStatusComponent,
+    TemporaryPaymentDetailsComponent,
+    TemporaryPaymentFormComponent
   ],
   imports: [
     CommonModule,
@@ -204,7 +208,8 @@ import { FraisEncadrementStatusComponent } from './gestion-frais-encadrement/fra
     PanelModule,
     InputSwitchModule,
     MultiSelectModule,
-    ListboxModule
+    ListboxModule,
+    DropdownModule 
   ],
   entryComponents: [
     ReclamationBourseNewComponent
