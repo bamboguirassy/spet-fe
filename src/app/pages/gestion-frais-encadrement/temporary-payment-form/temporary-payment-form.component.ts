@@ -1,37 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItemGroup } from 'primeng/api';
+import { FormControl, FormGroup } from '@angular/forms';
+
+interface City {
+    name: number;
+    code: number;
+}
 
 
 
 @Component({
-  selector: 'app-temporary-payment-form',
-  templateUrl: './temporary-payment-form.component.html',
-  styleUrls: ['./temporary-payment-form.component.scss']
+    selector: 'app-temporary-payment-form',
+    templateUrl: './temporary-payment-form.component.html',
+    styleUrls: ['./temporary-payment-form.component.scss']
 })
 export class TemporaryPaymentFormComponent implements OnInit {
 
-  // constructor() { }
-  groupedCities: SelectItemGroup[];
+    cities: City[] | undefined;
 
-    selectedCity: string | undefined;
+    formGroup: FormGroup | undefined;
 
-    constructor() {
-        this.groupedCities = [
-            {
-                label: '',
-                // value: 'de',
-                items: [
-                    { label: '1', value: '1' },
-                    { label: '2', value: '2' },
-                    { label: '3', value: '3' },
-                    { label: '4', value: '4' }
-                ]
-            },
+    ngOnInit() {
+        this.cities = [
+            { name: 1, code: 1 },
+            { name: 2, code: 2 },
+            { name: 3, code: 3},
         ];
-    }
 
-  ngOnInit() {
-  }
+        this.formGroup = new FormGroup({
+            // selectedCity: new FormControl<City | null>(null)
+            selectedCity: new FormControl<City | null>(null)
+        });
+    }
 
 }
 

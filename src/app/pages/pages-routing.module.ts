@@ -36,6 +36,7 @@ import { GestionReclamationComponent } from './admin/reclamation-paiement/gestio
 import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-inscriptionacad-list/payant-inscriptionacad-list.component';
 import { PaiementfraisencadrementListComponent } from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
 import { TemporaryPaymentFormComponent } from './gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component';
+import { TemporaryPaymentDetailsComponent } from './gestion-frais-encadrement/temporary-payment-details/temporary-payment-details.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       { path: 'payment-form', component: TemporaryPaymentFormComponent },
+      { path: 'payment-detail', component: TemporaryPaymentDetailsComponent },
 
       {
         path: '', component: DashboardComponent, pathMatch: 'full',

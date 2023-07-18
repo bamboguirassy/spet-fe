@@ -1,1 +1,38 @@
-<p>temporary-payment-details works!</p>
+<div class="container main-content">
+    <div class="row mb-4">
+        <div class="col align-items-center">
+            <div class="card border-0 box-shadow">
+                <div class="card-header transparent border-0">
+                    <h3><b>Detail d'un paiement temporaire</b></h3>
+                    <hr>
+                </div>
+                <div class="card-body pt-0 widget-body border-1">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Numero de transaction</th>
+                                        <td>{{ transactionNumber }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Montant Payé</th>
+                                        <td>{{ amountPaid }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Moyen de paiement</th>
+                                        <td>{{ paymentMethod }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Date</th>
+                                        <td>{{ date }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

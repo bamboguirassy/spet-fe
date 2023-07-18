@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./temporary-payment-details.component.scss']
 })
 export class TemporaryPaymentDetailsComponent implements OnInit {
+  transactionNumber: string = 'STT12345';
+  amountPaid: string = '20000 FCFA';
+  paymentMethod: string = 'Touchpay';
+  date: string = '12/12/2023 a 12:00';
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }
