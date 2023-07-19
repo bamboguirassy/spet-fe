@@ -1,53 +1,22 @@
-<div class="container main-content">
-    <div class="row mb-4">
-        <div class="align-items-center">
-            <div class="card border-0 box-shadow">
-                <div class="modal-header">
-                    <h4 class="modal-title">Generer un paiement temporaire</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="fermerModal()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+<table class="table table-bordered   table-striped table-condensed">
+    <tbody>
+        <tr>
+            <th scope="row">Nombre de tranches</th>
+            <td>
+                <div class="justify-content-center">
+                    <p-dropdown [options]="tranches" [(ngModel)]="selectedTranche"
+                        placeholder="Choisir le nombre de tranches" optionLabel="name"></p-dropdown>
                 </div>
-
-                <div class="card-body pt-0 widget-body border-1">
-                    <div class="col">
-                        <div class="table-responsive">
-                            <div class="alert alert-primary mt-2" role="alert">
-                                <p>Le montant restant a payé est <b>20000 FCFA.</b>
-                                </p>
-                            </div>
-                            <table class="table table-bordered   table-striped table-condensed">
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Nombre de tranches</th>
-                                        <td>
-                                            <div class="justify-content-center">
-                                                <p-dropdown [options]="tranches" [(ngModel)]="selectedTranche"
-                                                    placeholder="Choisir le nombre de tranches"
-                                                    optionLabel="name"></p-dropdown>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Montant</th>
-                                        <td>
-                                            <div class="ui-inputgroup d-flex">
-                                                <input type="text"pInputText placeholder="Montant" disabled>
-                                                <span class="ui-inputgroup-addon">FCFA</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            (click)="fermerModal()">Annuler</button>
-                                        <button type="button" class="btn btn-primary">Valider</button>
-                                    </div>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Montant</th>
+            <td>
+                <div class="ui-inputgroup d-flex">
+                    <input type="text" pInputText placeholder="Montant" disabled>
+                    <span class="ui-inputgroup-addon">FCFA</span>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </td>
+        </tr>
+    </tbody>
+</table>
