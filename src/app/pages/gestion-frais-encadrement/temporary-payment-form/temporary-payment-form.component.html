@@ -1,24 +1,28 @@
 <div class="container main-content">
     <div class="row mb-4">
-        <div class="col align-items-center">
+        <div class="col-6 align-items-center">
             <div class="card border-0 box-shadow">
                 <div class="card-header transparent border-0">
                     <h3><b>Generer un paiement temporaire</b></h3>
                     <hr>
                 </div>
                 <div class="card-body pt-0 widget-body border-1">
-                    <div class="col-12">
+                    <div class="col">
                         <div class="table-responsive">
-                            <table class="table table-bordered  table-hover table-condensed">
+                            <div class="alert alert-primary" role="alert">
+                                <p>Le montant restant a payé est <b>20000 FCFA.</b>
+                                </p>
+                            </div>
+                            <table class="table table-bordered  table-hover">
                                 <tbody>
                                     <tr>
                                         <th scope="row">Nombre de tranches</th>
                                         <td>
-                                            <form [formGroup]="formGroup">
-                                                <p-dropdown placeholder="Choisir nombre de tranches"
-                                                    formControlName="city" [options]="cities"
+                                            <div class="justify-content-center">
+                                                <p-dropdown [options]="cities" [(ngModel)]="selectedCity"
+                                                    placeholder="Choisir le nombre de tranches" [editable]="true"
                                                     optionLabel="name"></p-dropdown>
-                                            </form>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -29,7 +33,7 @@
                                         </td>
                                     </tr>
                                     <div>
-                                        <button type="submit" class="btn btn-primary mt-2">Valider</button>
+                                        <button type="submit" class="btn btn-primary mt-3">Valider</button>
                                     </div>
                                 </tbody>
                             </table>
