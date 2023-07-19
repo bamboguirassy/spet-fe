@@ -34,7 +34,7 @@ import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.co
 import { OneEtudiantByIdResolver } from './etudiant/one-etudiant-by-id.resolver copy';
 import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
 import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-inscriptionacad-list/payant-inscriptionacad-list.component';
-import {FraisEncadrementStatusComponent} from './gestion-frais-encadrement/frais-encadrement-status/frais-encadrement-status.component';
+import { FraisEncadrementStatusComponent } from './gestion-frais-encadrement/frais-encadrement-status/frais-encadrement-status.component';
 import { PaiementfraisencadrementListComponent } from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
 import { TemporaryPaymentFormComponent } from './gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component';
 import { TemporaryPaymentDetailsComponent } from './gestion-frais-encadrement/temporary-payment-details/temporary-payment-details.component';
@@ -62,7 +62,7 @@ const routes: Routes = [
         path: 'modalite-paiement', component: ModalitePaiementComponent,
         data: { breadcrumb: 'Les modalités de paiement' }
       },
-      {path:'status', component:FraisEncadrementStatusComponent},
+      {path:'status', component: FraisEncadrementStatusComponent},
       {
         path: 'espace-paiement',
         data: { breadcrumb: 'Espace paiement' },
