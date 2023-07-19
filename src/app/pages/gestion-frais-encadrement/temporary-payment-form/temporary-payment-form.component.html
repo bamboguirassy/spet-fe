@@ -1,6 +1,6 @@
 <div class="container main-content">
     <div class="row mb-4">
-        <div class="col-6 align-items-center">
+        <div class="col-lg-6 align-items-center">
             <div class="card border-0 box-shadow">
                 <div class="card-header transparent border-0">
                     <h3><b>Generer un paiement temporaire</b></h3>
@@ -13,14 +13,14 @@
                                 <p>Le montant restant a payé est <b>20000 FCFA.</b>
                                 </p>
                             </div>
-                            <table class="table table-bordered  table-hover">
+                            <table class="table table-bordered   table-striped table-condensed">
                                 <tbody>
                                     <tr>
                                         <th scope="row">Nombre de tranches</th>
                                         <td>
                                             <div class="justify-content-center">
-                                                <p-dropdown [options]="cities" [(ngModel)]="selectedCity"
-                                                    placeholder="Choisir le nombre de tranches" [editable]="true"
+                                                <p-dropdown [options]="tranches" [(ngModel)]="selectedTranche"
+                                                    placeholder="Choisir le nombre de tranches"
                                                     optionLabel="name"></p-dropdown>
                                             </div>
                                         </td>
@@ -28,8 +28,10 @@
                                     <tr>
                                         <th scope="row">Montant</th>
                                         <td>
-                                            <input type="text" class="form-control" id="username" [(ngModel)]="value"
-                                                disabled>
+                                            <div class="ui-inputgroup d-flex">
+                                                <input type="text"pInputText placeholder="Montant" disabled>
+                                                <span class="ui-inputgroup-addon">FCFA</span>
+                                            </div>
                                         </td>
                                     </tr>
                                     <div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 
-interface City {
+interface Tranche {
     name: number;
     code: number;
 }
@@ -12,11 +12,11 @@ interface City {
     styleUrls: ['./temporary-payment-form.component.scss']
 })
 export class TemporaryPaymentFormComponent implements OnInit {
-    cities: City[] | undefined;
+    tranches: Tranche[] | undefined;
 
-    selectedCity: City | undefined;
+    selectedTranche: Tranche | undefined;
     ngOnInit() {
-        this.cities = [
+        this.tranches = [
             { name: 1, code: 1 },
             { name: 2, code: 2 },
             { name: 3, code: 3 },
