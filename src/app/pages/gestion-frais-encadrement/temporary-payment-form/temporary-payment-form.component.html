@@ -1,15 +1,18 @@
 <div class="container main-content">
     <div class="row mb-4">
-        <div class="col-lg-6 align-items-center">
+        <div class="align-items-center">
             <div class="card border-0 box-shadow">
-                <div class="card-header transparent border-0">
-                    <h3><b>Generer un paiement temporaire</b></h3>
-                    <hr>
+                <div class="modal-header">
+                    <h4 class="modal-title">Generer un paiement temporaire</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="fermerModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+
                 <div class="card-body pt-0 widget-body border-1">
                     <div class="col">
                         <div class="table-responsive">
-                            <div class="alert alert-primary" role="alert">
+                            <div class="alert alert-primary mt-2" role="alert">
                                 <p>Le montant restant a payé est <b>20000 FCFA.</b>
                                 </p>
                             </div>
@@ -34,8 +37,10 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <div>
-                                        <button type="submit" class="btn btn-primary mt-3">Valider</button>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            (click)="fermerModal()">Annuler</button>
+                                        <button type="button" class="btn btn-primary">Valider</button>
                                     </div>
                                 </tbody>
                             </table>
