@@ -101,6 +101,7 @@ import { VisiteMedicalMonthStatsComponent } from './visite_medical/statistique/v
 import { VisiteMedicalDoctorsStatsComponent } from './visite_medical/statistique/visite-medical-doctors-stats/visite-medical-doctors-stats.component';
 import { VisiteMedicalHandicapStatsComponent } from './visite_medical/statistique/visite-medical-handicap-stats/visite-medical-handicap-stats.component';
 import { FraisEncadrementStatusComponent } from './gestion-frais-encadrement/frais-encadrement-status/frais-encadrement-status.component';
+import { HistoricPaymentListComponent } from './gestion-frais-encadrement/historic-payment-list/historic-payment-list.component';
 
 @NgModule({
   declarations: [
@@ -165,7 +166,8 @@ import { FraisEncadrementStatusComponent } from './gestion-frais-encadrement/fra
     VisiteMedicalMonthStatsComponent,
     VisiteMedicalDoctorsStatsComponent,
     VisiteMedicalHandicapStatsComponent,
-    FraisEncadrementStatusComponent
+    FraisEncadrementStatusComponent,
+    HistoricPaymentListComponent
   ],
   imports: [
     CommonModule,

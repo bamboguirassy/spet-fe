@@ -35,6 +35,7 @@ import { OneEtudiantByIdResolver } from './etudiant/one-etudiant-by-id.resolver 
 import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
 import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-inscriptionacad-list/payant-inscriptionacad-list.component';
 import {PaiementfraisencadrementListComponent} from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
+import {FraisEncadrementStatusComponent} from './gestion-frais-encadrement/frais-encadrement-status/frais-encadrement-status.component';
 
 
 const routes: Routes = [
@@ -56,6 +57,7 @@ const routes: Routes = [
         path: 'modalite-paiement', component: ModalitePaiementComponent,
         data: { breadcrumb: 'Les modalités de paiement' }
       },
+      {path:'status', component:FraisEncadrementStatusComponent},
       {
         path: 'espace-paiement',
         data: { breadcrumb: 'Espace paiement' },

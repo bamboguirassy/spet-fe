@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FraisEncadrementStatusService } from 'src/app/pages/gestion-frais-encadrement/frais-encadrement-status.service';
 
 @Component({
   selector: 'app-frais-encadrement-status',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FraisEncadrementStatusComponent implements OnInit {
 
-  constructor() { }
+  data: any[] = [];
 
+  constructor(private statusService: FraisEncadrementStatusService) {}
+  
   ngOnInit() {
+    this.data = this.statusService.getFraisEncadrementStatus();
   }
 
 }

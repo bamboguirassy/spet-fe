@@ -1,1 +1,48 @@
-<p>frais-encadrement-status works!</p>
+<div class="container main-content" *ngFor="let item of data">
+  <div class="row mb-4">
+    <div class="col align-items-center">
+      <div class="card border-0 box-shadow">
+        <div class="card-header transparent border-0">
+          <h3><b>Details de mon status</b></h3>
+          <hr>
+        </div>
+        <div class="card-body pt-0 widget-body border-1">
+          <div class="col-6">
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-hover table-condensed">
+                <tbody>
+                  <tr>
+                    <th scope="row">Montant</th>
+                    <td>{{ item.montant }} FCFA</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Montant Payé</th>
+                    <td>{{ item.montant_paye }} FCFA</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Montant restant</th>
+                    <td>{{ item.montant_restant }} FCFA</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Nombre de tranches</th>
+                    <td>{{ item.nombre_tranche }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Nombre de tranches restantes</th>
+                    <td>{{ item.nombre_tranche_rest }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">En regle</th>
+                    <td *ngIf="item.etat =='non'"><span class="badge badge-danger">{{ item.etat }}</span></td>
+                    <td *ngIf="item.etat =='oui'"><span class="badge badge-success">{{ item.etat }}</span></td>
+                  </tr>
+                  <button class="btn btn-primary mt-3">Proceder au paiement</button>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
