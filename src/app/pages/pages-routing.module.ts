@@ -37,6 +37,7 @@ import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-ins
 import { FraisEncadrementStatusComponent } from './gestion-frais-encadrement/frais-encadrement-status/frais-encadrement-status.component';
 import { PaiementfraisencadrementListComponent } from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
 import { TemporaryPaymentFormComponent } from './gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component';
+import { FraisEncadrementMainPageComponent } from './gestion-frais-encadrement/frais-encadrement-main-page/frais-encadrement-main-page.component';
 import { TemporaryPaymentDetailsComponent } from './gestion-frais-encadrement/temporary-payment-details/temporary-payment-details.component';
 
 
@@ -63,6 +64,7 @@ const routes: Routes = [
         data: { breadcrumb: 'Les modalités de paiement' }
       },
       {path:'status', component: FraisEncadrementStatusComponent},
+      {path:'payment-formation', component: FraisEncadrementMainPageComponent},
       {
         path: 'espace-paiement',
         data: { breadcrumb: 'Espace paiement' },
