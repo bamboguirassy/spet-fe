@@ -42,7 +42,7 @@
                 <button class="btn btn-primary mt-3" (click)="ouvrirModal()">Proceder au paiement</button>
                 <!-- <button *ngIf="item.etat =='non'" class="btn btn-primary mt-3">Proceder au paiement</button> -->
                 <!-- Modal PrimeNG -->
-                <p-dialog header="Generer un paiement temporaire" [(visible)]="displayModal" modal="modal"
+                <p-dialog header="Initier un paiement" [(visible)]="displayModal" modal="modal"
                   [style]="{ width: '500px' }" [responsive]="true" [draggable]="false">
                   <div class="alert alert-primary mt-2" role="alert">
                     <p>Le montant restant a payé est <b>{{ item.montant_restant }} FCFA.</b></p>
@@ -81,6 +81,12 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="p-3">
+      <<div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Transaction en cours !</h4>
+        <p>Vous avez une transaction en cours, <a href="#" (click)="activerOnglet(1)">voir les détails.</a></p>
       </div>
     </div>
   </div>

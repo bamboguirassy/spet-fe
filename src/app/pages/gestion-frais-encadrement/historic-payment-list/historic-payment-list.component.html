@@ -1,1 +1,34 @@
-<p>historic-payment-list works!</p>
+<div class="container main-content">
+    <div class="row mb-4">
+      <div class="align-items-center">
+        <div class="card border-0 box-shadow">
+          <div class="modal-header">
+            <h4 class="modal-title">Mes transactions</h4>
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Numero de transaction</th>
+                  <th>Montant</th>
+                  <th>Moyen de paiement</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data">
+                  <td>{{item.id}}</td>
+                  <td>{{item.numero_transaction}}</td>
+                  <td>{{item.montant}}</td>
+                  <td>{{item.moyen_paiement}}</td>
+                  <td>{{item.date}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

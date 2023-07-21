@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-frais-encadrement-main-page',
@@ -7,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FraisEncadrementMainPageComponent implements OnInit {
 
+  selectedTabIndex = 0;
+
+  onTabChange(event) {
+    // Faites ici ce que vous souhaitez lorsque l'utilisateur change d'onglet
+  }
+
+  activerOnglet(ongletIndex: number) {
+    this.selectedTabIndex = ongletIndex;
+  }
   constructor() { }
 
   ngOnInit() {

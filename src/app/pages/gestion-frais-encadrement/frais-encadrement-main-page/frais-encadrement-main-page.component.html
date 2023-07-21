@@ -1,8 +1,8 @@
-<p-tabView>
+<p-tabView [activeIndex]="selectedTabIndex" (onChange)="onTabChange($event)">
     <p-tabPanel header="Mon status">
-       <app-frais-encadrement-status></app-frais-encadrement-status>
+        <app-frais-encadrement-status></app-frais-encadrement-status>
     </p-tabPanel>
-    <p-tabPanel header="Details Paie. Temp">
+    <p-tabPanel header="Details Transaction">
         <app-temporary-payment-details></app-temporary-payment-details>
     </p-tabPanel>
     <p-tabPanel header="Mes paiements">

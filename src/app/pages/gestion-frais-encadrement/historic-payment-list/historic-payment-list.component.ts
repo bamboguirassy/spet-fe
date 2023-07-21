@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FraisEncadrementStatusService } from 'src/app/pages/gestion-frais-encadrement/frais-encadrement-status.service';
 
 @Component({
   selector: 'app-historic-payment-list',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoricPaymentListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private paiementService : FraisEncadrementStatusService) { }
+
+  data: any[] = [];
 
   ngOnInit() {
+    this.data = this.paiementService.getPaiement();
   }
 
 }
