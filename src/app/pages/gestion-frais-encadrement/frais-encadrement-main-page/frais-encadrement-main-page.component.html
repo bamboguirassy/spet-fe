@@ -1,11 +1,13 @@
-<p-tabView [activeIndex]="selectedTabIndex" (onChange)="onTabChange($event)">
-    <p-tabPanel header="Mon status">
-        <app-frais-encadrement-status></app-frais-encadrement-status>
-    </p-tabPanel>
-    <p-tabPanel header="Details Transaction">
-        <app-temporary-payment-details></app-temporary-payment-details>
-    </p-tabPanel>
-    <p-tabPanel header="Mes paiements">
-        <app-historic-payment-list></app-historic-payment-list>
-    </p-tabPanel>
-</p-tabView>
+<div class="col-lg-8">
+    <p-tabView>
+        <p-tabPanel header="Mon status">
+           <app-frais-encadrement-status></app-frais-encadrement-status>
+        </p-tabPanel>
+        <p-tabPanel header="Details Paie. Temp">
+            <app-temporary-payment-details></app-temporary-payment-details>
+        </p-tabPanel>
+        <p-tabPanel header="Mes paiements">
+            <app-historic-payment-list></app-historic-payment-list>
+        </p-tabPanel>
+    </p-tabView>
+</div>
