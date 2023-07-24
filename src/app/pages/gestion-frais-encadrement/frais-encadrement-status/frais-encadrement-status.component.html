@@ -1,4 +1,5 @@
 <div class="container main-content" *ngFor="let item of data">
+<<<<<<< HEAD
   <div class="row mb-4">
     <div class="mb-2">
       <div class="alert alert-warning" role="alert">
@@ -7,13 +8,21 @@
       </div>
     </div>
     <div class="align-items-center mb-2">
+=======
+  <div class="row">
+    <div class="col-lg- align-center">
+>>>>>>> bddd406f86bd38687aaa74898bd588fdb0fa1540
       <div class="card border-0 box-shadow">
         <div class="card-header transparent border-0">
           <h3><b>Details de mon status</b></h3>
           <hr>
         </div>
         <div class="card-body pt-0 widget-body border-1">
-          <div class="">
+          <div class="col">
+            <div class="alert alert-warning " role="alert">
+              <h4 class="alert-heading">Transaction en cours !</h4>
+              <p>Vous avez une transaction en cours, <a href="#" (click)="activerOnglet(1)">voir les détails</a> </p>
+            </div>
             <div class="table-responsive">
               <table class="table table-bordered table-striped table-hover table-condensed">
                 <tbody>
@@ -65,16 +74,6 @@
           </div>
         </div>
       </div>
-      <div *ngIf="statutPaiement">
-        <h2>Statut de paiement</h2>
-        <p>Montant à payer : {{ statutPaiement.montant_a_payer }}</p>
-        <p>Montant payé : {{ statutPaiement.montant_paye }}</p>
-        <p>Nombre de tranches autorisées : {{ statutPaiement.nombre_tranches_autorisees }}</p>
-        <p>Nombre de tranches restantes : {{ statutPaiement.nombre_tranches_restantes }}</p>
-        <p>En règle : {{ statutPaiement.en_regle ? 'Oui' : 'Non' }}</p>
-      </div>
-      
     </div>
-    
   </div>
 </div>
