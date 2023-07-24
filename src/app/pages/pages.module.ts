@@ -105,6 +105,7 @@ import { HistoricPaymentListComponent } from './gestion-frais-encadrement/histor
 import { TemporaryPaymentDetailsComponent } from './gestion-frais-encadrement/temporary-payment-details/temporary-payment-details.component';
 import { TemporaryPaymentFormComponent } from './gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component';
 import { FraisEncadrementMainPageComponent } from './gestion-frais-encadrement/frais-encadrement-main-page/frais-encadrement-main-page.component';
+import { ReclamationPaymentComponent } from './gestion-frais-encadrement/reclamation-payment/reclamation-payment.component';
 
 @NgModule({
   declarations: [
@@ -173,7 +174,8 @@ import { FraisEncadrementMainPageComponent } from './gestion-frais-encadrement/f
     HistoricPaymentListComponent,
     TemporaryPaymentDetailsComponent,
     TemporaryPaymentFormComponent,
-    FraisEncadrementMainPageComponent
+    FraisEncadrementMainPageComponent,
+    ReclamationPaymentComponent
   ],
   imports: [
     CommonModule,
