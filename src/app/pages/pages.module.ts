@@ -105,6 +105,7 @@ import { HistoricPaymentListComponent } from './gestion-frais-encadrement/histor
 import { TemporaryPaymentDetailsComponent } from './gestion-frais-encadrement/temporary-payment-details/temporary-payment-details.component';
 import { TemporaryPaymentFormComponent } from './gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component';
 import { FraisEncadrementMainPageComponent } from './gestion-frais-encadrement/frais-encadrement-main-page/frais-encadrement-main-page.component';
+import { PaiementTemporaireService } from './gestion-frais-encadrement/services/paiement-temporaire.service';
 
 @NgModule({
   declarations: [
@@ -220,7 +221,8 @@ import { FraisEncadrementMainPageComponent } from './gestion-frais-encadrement/f
   ],
   providers: [
       CurrencyPipe,
-      DatePipe
+      DatePipe,
+      PaiementTemporaireService,
   ]
 })
 export class PagesModule { }
