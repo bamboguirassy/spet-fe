@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TokenManagerService } from 'src/app/shared/services/token-manager.service';
 import { DialogModule } from 'primeng/dialog';
 import { TemporaryPaymentFormComponent } from 'src/app/pages/gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component'
 import { FraisEncadrementStatusService } from 'src/app/pages/gestion-frais-encadrement/frais-encadrement-status.service';
@@ -16,9 +16,10 @@ export class FraisEncadrementStatusComponent implements OnInit {
 
   details: any
 
-  constructor(private statusService: FraisEncadrementStatusService, private modalService: DialogModule, private paiementService: PaiementEtudiantService) { }
+  constructor(private statusService: FraisEncadrementStatusService, private modalService: DialogModule,private tokenManager : TokenManagerService, private paiementService: PaiementEtudiantService) { }
 
   displayModal: boolean = false; // Propriété pour contrôler la visibilité du modal
+  token : any;
 
   ouvrirModal() {
     this.displayModal = true; // Afficher le modal en définissant la propriété à true
@@ -35,12 +36,14 @@ export class FraisEncadrementStatusComponent implements OnInit {
   ngOnInit() {
     this.data = this.statusService.getFraisEncadrementStatus();
     this.inscriptionId = 53377;
+    this.token = this.tokenManager.getToken()
 
-    this.paiementService.getStatus(this.inscriptionId).subscribe(
+    this.paiementService.getStatus(this.inscriptionId, this.token).subscribe(
       (data) => {
         // Récupérer les détails du statut de paiement depuis l'API et les stocker dans la variable statutPaiement
         this.statutPaiement = data;
         console.log(this.statutPaiement)
+        console.log(this.token)
 
       },
       (error) => {

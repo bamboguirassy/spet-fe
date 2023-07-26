@@ -11,11 +11,11 @@ export class GfcWebServiceService {
 
   constructor(private http: HttpClient) { }
 
-  private getDefaultHeaders(gpeToken?: string): HttpHeaders {
+  private getDefaultHeaders(token?: string): HttpHeaders {
     let defaultHeaders = new HttpHeaders();
 
-    if (gpeToken) {
-      defaultHeaders = defaultHeaders.set('Authorization', 'gpe ' + gpeToken);
+    if (token) {
+      defaultHeaders = defaultHeaders.set('Authorization', 'gpe ' + token);
     }
 
     return defaultHeaders;
@@ -31,7 +31,7 @@ export class GfcWebServiceService {
     return (source: Observable<any>): Observable<any> => {
       return source.pipe(
         catchError((error: HttpErrorResponse) => {
-          if (error.status === 401 && ['JWT Token not found', 'Invalid JWT Token'].includes(error.error?.message)) {
+          if (error.status === 401 && ['JWT Token not found', 'Invalid JWT Token'].includes(error.error && error.error.message)) {
             // Le token GPE est expiré ou invalide
             // Vous pouvez ajouter ici le code pour déconnecter l'utilisateur si nécessaire
             throw new Error('Votre session a expiré. Veuillez vous reconnecter.');
@@ -42,32 +42,32 @@ export class GfcWebServiceService {
     };
   }
 
-  public get(endpoint: string, gpeToken?: string): Observable<any> {
-    const headers = this.getDefaultHeaders(gpeToken);
+  public get(endpoint: string, token?: string): Observable<any> {
+    const headers = this.getDefaultHeaders(token);
     return this.http.get<any>(`${this.prefix}${endpoint}`, { headers }).pipe(
       this.checkForTokenError(),
       catchError(this.handleError)
     );
   }
 
-  public post(endpoint: string, data: any, gpeToken?: string): Observable<any> {
-    const headers = this.getDefaultHeaders(gpeToken);
+  public post(endpoint: string, data: any, token?: string): Observable<any> {
+    const headers = this.getDefaultHeaders(token);
     return this.http.post<any>(`${this.prefix}${endpoint}`, data, { headers }).pipe(
       this.checkForTokenError(),
       catchError(this.handleError)
     );
   }
 
-  public put(endpoint: string, data: any, gpeToken?: string): Observable<any> {
-    const headers = this.getDefaultHeaders(gpeToken);
+  public put(endpoint: string, data: any, token?: string): Observable<any> {
+    const headers = this.getDefaultHeaders(token);
     return this.http.put<any>(`${this.prefix}${endpoint}`, data, { headers }).pipe(
       this.checkForTokenError(),
       catchError(this.handleError)
     );
   }
 
-  public delete(endpoint: string, data: any, gpeToken?: string): Observable<any> {
-    const headers = this.getDefaultHeaders(gpeToken);
+  public delete(endpoint: string, data: any, token?: string): Observable<any> {
+    const headers = this.getDefaultHeaders(token);
     const options = { headers, body: data };
     return this.http.delete<any>(`${this.prefix}${endpoint}`, options).pipe(
       this.checkForTokenError(),
