@@ -13,7 +13,8 @@ export class FraisEncadrementMainPageComponent implements OnInit {
     // Faites ici ce que vous souhaitez lorsque l'utilisateur change d'onglet
   }
 
-  activerOnglet(ongletIndex: number) {
+  activerOnglet(ongletIndex: number, event: Event) {
+    event.preventDefault(); // Empêche la redirection par défaut du lien
     this.selectedTabIndex = ongletIndex;
   }
   constructor() { }
