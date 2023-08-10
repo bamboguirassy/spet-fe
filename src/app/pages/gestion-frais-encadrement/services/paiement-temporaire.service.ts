@@ -1,32 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { GfcWebServiceService } from './gfc-web-service.service';
+import { TokenManagerService } from 'src/app/shared/services/token-manager.service';
 
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class PaiementTemporaireService {
-
-//   constructor() { }
-// }
 @Injectable({
   providedIn: 'root'
 })
 export class PaiementTemporaireService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api'; 
+  constructor(private webService: GfcWebServiceService, private tokenManager: TokenManagerService) { }
 
-  constructor(private http: HttpClient) { }
+  public getDetailsTransactionEnCours(): Promise<any> {
+    // const transactionId = this.tokenManager.getTransactionId(); // Obtenez le numéro de transaction depuis le TokenManagerService
+    const transactionId = "15";
 
-  getPaymentDetails(transactionId: string): Observable<any> {
-    const url = `${this.apiUrl}/get-paiement-information/${transactionId}`;
-    return this.http.get<any>(url).pipe(
-      map(response => {
-        return response; 
-      })
-    );
+    const endpoint = `/etudiant/transaction-en-cours/${transactionId}`;
+    const token = this.tokenManager.getToken();
+
+    return this.webService.get(endpoint, token).toPromise();
   }
 
 }

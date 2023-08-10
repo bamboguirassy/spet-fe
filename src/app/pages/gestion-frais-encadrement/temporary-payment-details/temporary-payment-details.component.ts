@@ -16,31 +16,22 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
 
 
   constructor(private paiementTemporaireService: PaiementTemporaireService) { }
-
   ngOnInit(): void {
-    const transactionId = "15";
-    this.getTemporaryPaymentDetails(transactionId);
+    this.getTransactionDetails();
   }
 
-  getTemporaryPaymentDetails(transactionId: string): void {
-    this.paiementTemporaireService.getPaymentDetails(transactionId).subscribe(
-      (response) => {
-        // Mettez à jour les propriétés de la classe avec les détails du paiement temporaire
-        const details = response.content;
-        this.transactionNumber = details.numero_transaction;
-        this.amountPaid = details.montant;
-        // Vérifier le moyen de paiement et affecter la valeur appropriée à paymentMethod
-        if (details.touchpay_param_id === 1) {
-          this.paymentMethod = 'Touchpay';
-        } else if (details.paytech_param_id === 1) {
-          this.paymentMethod = 'Paytech';
-        }
-        this.date = details.created_at;
-      },
-      (error) => {
-        console.log('Erreur lors de la récupération des détails du paiement temporaire :', error);
-      }
-    );
+  getTransactionDetails(): void {
+    this.paiementTemporaireService.getDetailsTransactionEnCours()
+      .then(details => {
+        console.log("Details : ", details);
+        this.transactionNumber = details.content.numero_transaction;
+        this.amountPaid = details.content.montant_paye;
+        this.paymentMethod = details.content.moyen_paiement;
+        this.date = details.content.date;
+      })
+      .catch(error => {
+        console.error("Erreur lors de la récupération des détails de la transaction :", error);
+      });
   }
 
 }
