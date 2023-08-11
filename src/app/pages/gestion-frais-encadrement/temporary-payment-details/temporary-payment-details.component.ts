@@ -14,14 +14,15 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
   paymentMethod: string;
   date: string;
 
-
   constructor(private paiementTemporaireService: PaiementTemporaireService) { }
+
   ngOnInit(): void {
-    this.getTransactionDetails();
+    const transactionId = "15"; 
+    this.getTransactionDetails(transactionId);
   }
 
-  getTransactionDetails(): void {
-    this.paiementTemporaireService.getDetailsTransactionEnCours()
+  getTransactionDetails(transactionId: string): void {
+    this.paiementTemporaireService.getDetailsTransactionEnCours(transactionId)
       .then(details => {
         console.log("Details : ", details);
         this.transactionNumber = details.content.numero_transaction;

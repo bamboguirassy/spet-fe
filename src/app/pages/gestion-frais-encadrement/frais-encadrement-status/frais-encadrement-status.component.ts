@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenManagerService } from 'src/app/shared/services/token-manager.service';
 import { DialogModule } from 'primeng/dialog';
 import { TemporaryPaymentFormComponent } from 'src/app/pages/gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component'
 import { FraisEncadrementStatusService } from 'src/app/pages/gestion-frais-encadrement/frais-encadrement-status.service';
@@ -16,10 +15,10 @@ export class FraisEncadrementStatusComponent implements OnInit {
 
   details: any
 
-  constructor(private statusService: FraisEncadrementStatusService, private modalService: DialogModule,private tokenManager : TokenManagerService, private paiementService: PaiementEtudiantService) { }
+  constructor(private statusService: FraisEncadrementStatusService, private modalService: DialogModule,
+    private paiementService: PaiementEtudiantService) { }
 
   displayModal: boolean = false; // Propriété pour contrôler la visibilité du modal
-  token : any;
 
   ouvrirModal() {
     this.displayModal = true; // Afficher le modal en définissant la propriété à true
@@ -29,30 +28,23 @@ export class FraisEncadrementStatusComponent implements OnInit {
     this.displayModal = false; // Fermer le modal en définissant la propriété à false
   }
 
-  statutPaiement: any; // Variable pour stocker les détails du statut de paiement
-
-  inscriptionId: number
+  statutPaiement: any = {}; // Initialisation par défaut
+  paiements: any;
 
   ngOnInit() {
-    this.data = this.statusService.getFraisEncadrementStatus();
-    this.inscriptionId = 53377;
-    this.token = this.tokenManager.getToken()
+    this.data = this.statusService.getFraisEncadrementStatus()
 
-    this.paiementService.getStatus(this.inscriptionId, this.token).subscribe(
+    this.paiementService.getStatus().subscribe(
       (data) => {
         // Récupérer les détails du statut de paiement depuis l'API et les stocker dans la variable statutPaiement
-        this.statutPaiement = data;
+        this.statutPaiement = data.content;
         console.log(this.statutPaiement)
-        console.log(this.token)
-
       },
       (error) => {
         // Gérer les erreurs de requête ici
         console.error(error);
       }
     );
-
-    // this.details = this.paiementService.getStatus(inscriptionId);
   }
 
 }

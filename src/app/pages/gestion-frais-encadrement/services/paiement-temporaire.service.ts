@@ -7,16 +7,17 @@ import { TokenManagerService } from 'src/app/shared/services/token-manager.servi
 })
 export class PaiementTemporaireService {
 
+
   constructor(private webService: GfcWebServiceService, private tokenManager: TokenManagerService) { }
 
-  public getDetailsTransactionEnCours(): Promise<any> {
-    // const transactionId = this.tokenManager.getTransactionId(); // Obtenez le numéro de transaction depuis le TokenManagerService
-    const transactionId = "15";
-
-    const endpoint = `/etudiant/transaction-en-cours/${transactionId}`;
+  public getDetailsTransactionEnCours(numero_transaction: string): Promise<any> {
+    const endpoint = `/etudiant/transaction-en-cours/${numero_transaction}`;
     const token = this.tokenManager.getToken();
+    const data = { token: token }; 
 
-    return this.webService.get(endpoint, token).toPromise();
+    return this.webService.post(endpoint, data).toPromise();
   }
 
 }
+
+

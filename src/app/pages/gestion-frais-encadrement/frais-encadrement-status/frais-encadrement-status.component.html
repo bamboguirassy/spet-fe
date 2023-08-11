@@ -1,66 +1,68 @@
-<div class="container main-content" *ngFor="let item of data">
-  <div class="row mb-4">
-    <div class="mb-2">
-      <div class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">Transaction en cours !</h4>
-        <p>Vous avez une transaction en cours, <a href="#" (click)="activerOnglet(1)">voir les détails.</a></p>
-      </div>
-    </div>
-    <div class="align-items-center mb-2">
-      <div class="card border-0 box-shadow">
-        <div class="card-header transparent border-0">
-          <h3><b>Details de mon status</b></h3>
-          <hr>
+<div *ngIf="statutPaiement">
+  <div class="container main-content">
+    <div class="row mb-4">
+      <div class="mb-2">
+        <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading">Transaction en cours !</h4>
+          <p>Vous avez une transaction en cours, <a href="#" (click)="activerOnglet(1)">voir les détails.</a></p>
         </div>
-        <div class="card-body pt-0 widget-body border-1">
-          <div class="col">
-            <div class="table-responsive">
-              <table class="table table-bordered table-striped table-hover table-condensed">
-                <tbody>
-                  <tr>
-                    <th scope="row">Montant</th>
-                    <td>{{ item.montant }} FCFA</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Montant Payé</th>
-                    <td>{{ item.montant_paye }} FCFA</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Montant restant</th>
-                    <td>{{ item.montant_restant }} FCFA</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Nombre de tranches</th>
-                    <td>{{ item.nombre_tranche }}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Nombre de tranches restantes</th>
-                    <td>{{ item.nombre_tranche_rest }}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">En regle</th>
-                    <td *ngIf="item.etat =='non'">
-                      <span class="badge badge-danger">{{ item.etat }}</span>
-                    </td>
-                    <td *ngIf="item.etat =='oui'"><span class="badge badge-success">{{ item.etat }}</span></td>
-                  </tr>
-                </tbody>
-                <button class="btn btn-primary mt-3" (click)="ouvrirModal()">Proceder au paiement</button>
-                <!-- <button *ngIf="item.etat =='non'" class="btn btn-primary mt-3">Proceder au paiement</button> -->
-                <!-- Modal PrimeNG -->
-                <p-dialog header="Initier un paiement" [(visible)]="displayModal" modal="modal"
-                  [style]="{ width: '500px' }" [responsive]="true" [draggable]="false">
-                  <div class="alert alert-primary mt-2" role="alert">
-                    <p>Le montant restant a payé est <b>{{ item.montant_restant }} FCFA.</b></p>
-                  </div>
-                  <app-temporary-payment-form></app-temporary-payment-form>
-                  <div class="modal-footer">
-                    <button type="button" pButton icon="pi pi-times" label="Annuler" class="btn btn-secondary mt-3"
-                      (click)="fermerModal()"></button>
-                    <button type="button" type="button" pButton label="Valider" class="btn btn-primary mt-3"></button>
-                  </div>
-                </p-dialog>
-              </table>
+      </div>
+      <div class="align-items-center mb-2">
+        <div class="card border-0 box-shadow">
+          <div class="card-header transparent border-0">
+            <h3><b>Details de mon status</b></h3>
+            <hr>
+          </div>
+          <div class="card-body pt-0 widget-body border-1">
+            <div class="col">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover table-condensed">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Montant</th>
+                      <td>{{ statutPaiement.montant_a_payer }} FCFA</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Montant Payé</th>
+                      <td>{{ statutPaiement.montant_paye }} FCFA</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Montant restant</th>
+                      <td>{{statutPaiement.montant_restante }} FCFA</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nombre de tranches</th>
+                      <td>{{ statutPaiement.nombre_tranches_autorisees }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nombre de tranches restantes</th>
+                      <td>{{ statutPaiement.nombre_tranches_restantes }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">En regle</th>
+                      <td *ngIf="statutPaiement.en_regle == false">
+                        <span class="badge badge-danger">Non</span>
+                      </td>
+                      <td *ngIf="statutPaiement.en_regle == true"><span class="badge badge-success">oui</span></td>
+                    </tr>
+                  </tbody>
+                  <button class="btn btn-primary mt-3" (click)="ouvrirModal()">Proceder au paiement</button>
+                  <!-- <button *ngIf="item.etat =='non'" class="btn btn-primary mt-3">Proceder au paiement</button> -->
+                  <!-- Modal PrimeNG -->
+                  <p-dialog header="Initier un paiement" [(visible)]="displayModal" modal="modal"
+                    [style]="{ width: '500px' }" [responsive]="true" [draggable]="false">
+                    <div class="alert alert-primary mt-2" role="alert">
+                      <p>Le montant restant a payé est <b>{{ statutPaiement.montant_a_payer }} FCFA.</b></p>
+                    </div>
+                    <app-temporary-payment-form></app-temporary-payment-form>
+                    <div class="modal-footer">
+                      <button type="button" pButton icon="pi pi-times" label="Annuler" class="btn btn-secondary mt-3"
+                        (click)="fermerModal()"></button>
+                      <button type="button" type="button" pButton label="Valider" class="btn btn-primary mt-3"></button>
+                    </div>
+                  </p-dialog>
+                </table>
+              </div>
             </div>
           </div>
         </div>
