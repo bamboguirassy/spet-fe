@@ -1,33 +1,31 @@
 <div class="container main-content">
-    <div class="row mb-4">
-      <div class="col align-items-center">
-        <div class="card border-0 box-shadow">
-          <div class="modal-header">
-            <h4 class="modal-title">Mes transactions</h4>
-          </div>
-              <div class="table-responsive">
-                <table class="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Numero de transaction</th>
-                  <th>Montant</th>
-                  <th>Moyen de paiement</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of paiements">
-                  <td>{{item.id}}</td>
-                  <td>{{item.numero_transaction}}</td>
-                  <td>{{item.montant}}</td>
-                  <td>{{item.payment_mode}}</td>
-                  <td>{{item.created_at}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+  <div class="row mb-4">
+    <div class="col align-items-center">
+      <div class="card border-0 box-shadow">
+        <div class="modal-header">
+          <h4 class="modal-title">Mes transactions</h4>
+        </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Numero de transaction</th>
+                <th>Montant</th>
+                <th>Moyen de paiement</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ transactionNumber }}</td>
+                <td>{{ amountPaid }}</td>
+                <td>{{ paymentMethod }}</td>
+                <td>{{ date|date:'dd/MM/yyyy à HH:mm' }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
+</div>
