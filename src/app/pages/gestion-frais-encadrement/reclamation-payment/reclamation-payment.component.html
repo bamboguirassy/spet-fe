@@ -1,1 +1,32 @@
-<p>reclamation-payment works!</p>
+<div class="container main-content">
+    <div class="row mb-4">
+      <div class="col align-items-center">
+        <div class="card border-0 box-shadow">
+          <div class="modal-header">
+            <h4 class="modal-title">Mes reclamations</h4>
+          </div>
+              <div class="table-responsive">
+                <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Numero de reclamation</th>
+                  <th>Motif</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of reclamations ; let i = index">
+                  <td>{{i + 1}}</td>
+                  <td>{{item.numero_reclamation}}</td>
+                  <td>{{item.motif_reclamation}}</td>
+                  <td>{{item.traite}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
