@@ -31,14 +31,13 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">Date</th>
-                                        <td>{{ date }}</td>
+                                        <td>{{ date|date:'dd/MM/yyyy à HH:mm' }}</td>
                                     </tr>
                                 </tbody>
                                 <div>
                                     <button type="submit" class="btn btn-primary mt-3">Payé par
                                         Mobile Money</button>
                                 </div>
-
                             </table>
                         </div>
                     </div>
