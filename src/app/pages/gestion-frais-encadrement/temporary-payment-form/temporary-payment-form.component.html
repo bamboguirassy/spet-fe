@@ -1,22 +1,25 @@
 <table class="table table-bordered   table-striped table-condensed">
     <tbody>
         <tr>
-            <th scope="row">Nombre de tranches</th>
+          <th scope="row">Nombre de tranches</th>
             <td>
                 <div class="justify-content-center">
-                    <p-dropdown [options]="tranches" [(ngModel)]="selectedTranche"
-                        placeholder="Choisir le nombre de tranches" optionLabel="name"></p-dropdown>
+                     <p-dropdown [options]="tranches" [(ngModel)]="selectedTranche"
+                        (ngModelChange)="onTrancheSelectionChange()" placeholder="Choisir le nombre de tranches"
+                        optionLabel="name"></p-dropdown>
                 </div>
+              
             </td>
         </tr>
         <tr>
             <th scope="row">Montant</th>
             <td>
-                <div class="ui-inputgroup d-flex">
-                    <input type="text" pInputText placeholder="Montant" disabled>
+                 <div class="ui-inputgroup d-flex">
+                    <input type="text" pInputText [value]="montantAPayer" placeholder="Montant" disabled>
                     <span class="ui-inputgroup-addon">FCFA</span>
                 </div>
             </td>
         </tr>
     </tbody>
+
 </table>
