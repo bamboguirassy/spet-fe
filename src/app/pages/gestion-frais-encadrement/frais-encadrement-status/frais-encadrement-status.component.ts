@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
-import { TemporaryPaymentFormComponent } from 'src/app/pages/gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component'
 import { FraisEncadrementStatusService } from 'src/app/pages/gestion-frais-encadrement/frais-encadrement-status.service';
 import { PaiementEtudiantService } from 'src/app/pages/gestion-frais-encadrement/services/paiement-etudiant.service';
 
