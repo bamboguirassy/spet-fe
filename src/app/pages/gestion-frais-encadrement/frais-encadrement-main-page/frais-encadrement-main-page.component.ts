@@ -7,16 +7,6 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 })
 export class FraisEncadrementMainPageComponent implements OnInit {
 
-  selectedTabIndex = 0;
-
-  onTabChange(event) {
-    // Faites ici ce que vous souhaitez lorsque l'utilisateur change d'onglet
-  }
-
-  activerOnglet(ongletIndex: number, event: Event) {
-    event.preventDefault(); // Empêche la redirection par défaut du lien
-    this.selectedTabIndex = ongletIndex;
-  }
   constructor() { }
 
   ngOnInit() {

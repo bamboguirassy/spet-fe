@@ -20,7 +20,8 @@
                   <td>{{i + 1}}</td>
                   <td>{{item.numero_reclamation}}</td>
                   <td>{{item.motif_reclamation}}</td>
-                  <td>{{item.traite}}</td>
+                  <td *ngIf="item.traite == 0"><span class="badge badge-danger">Non traitee</span></td>
+                  <td *ngIf="item.traite == 1"><span class="badge badge-success">traite</span></td>
                 </tr>
               </tbody>
             </table>
