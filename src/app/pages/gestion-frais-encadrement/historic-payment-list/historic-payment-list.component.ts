@@ -29,7 +29,7 @@ export class HistoricPaymentListComponent implements OnInit {
       .then(details => {
         console.log("Details : ", details);
         this.transactionNumber = details.content.numero_transaction;
-        this.amountPaid = details.content.montant_paye;
+        this.amountPaid = details.content.montant;
         this.paymentMethod = details.content.moyen_paiement;
         this.date = details.content.date;
       })

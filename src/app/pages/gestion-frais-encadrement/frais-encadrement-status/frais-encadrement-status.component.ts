@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DialogModule } from 'primeng/dialog';
 import { FraisEncadrementStatusService } from 'src/app/pages/gestion-frais-encadrement/frais-encadrement-status.service';
 import { PaiementEtudiantService } from 'src/app/pages/gestion-frais-encadrement/services/paiement-etudiant.service';
 
@@ -13,7 +12,9 @@ export class FraisEncadrementStatusComponent implements OnInit {
 
   data: any[] = [];
 
-  details: any
+  details: any;
+
+  @Output() openPaiementTemp: EventEmitter<any> = new EventEmitter();
 
   constructor(private statusService: FraisEncadrementStatusService,
     private paiementService: PaiementEtudiantService, public activatedRoute: ActivatedRoute) { }
@@ -35,6 +36,10 @@ export class FraisEncadrementStatusComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  gotoPaymentTempTab() {
+    this.openPaiementTemp.emit(null);
   }
 
 }

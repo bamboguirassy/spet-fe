@@ -40,7 +40,7 @@
                                     </tr>
                                 </tbody>
                                 <div>
-                                    <button type="submit" class="btn btn-primary mt-3">Payer par
+                                    <button (click)="startPayment()" [disabled]="!loaded || noTransactionFound" type="submit" class="btn btn-primary mt-3">Payer par
                                         Mobile Money</button>
                                 </div>
                             </table>

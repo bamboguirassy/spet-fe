@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FraisEncadrementStatusService } from '../frais-encadrement-status.service';
 import { PaiementEtudiantService } from '../services/paiement-etudiant.service';
 import { ActivatedRoute } from '@angular/router';
@@ -20,6 +20,7 @@ export class TemporaryPaymentFormComponent implements OnInit {
     statutPaiement: any = {};
     displayModal: boolean = false;
     tranches: Tranche[] = [];
+    @Output() openPaiementTemp: EventEmitter<any> = new EventEmitter();
 
     constructor(
         private statusService: FraisEncadrementStatusService,
@@ -90,11 +91,14 @@ export class TemporaryPaymentFormComponent implements OnInit {
                             this.notificationSrv.showError("Erreur de validation");
                             return;
                         }
-                        this.notificationSrv.showError(response.data);
+                        this.notificationSrv.showError(response.content);
+                        this.fermerModal();
+                        this.openPaiementTemp.emit();
                         return;
                     }
                     this.notificationSrv.showSuccess("Paiement initialisé avec succès");
                     this.fermerModal();
+                    this.openPaiementTemp.emit();
                 },
                 (error) => {
                     console.error(error);

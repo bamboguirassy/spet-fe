@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-frais-encadrement-main-page',
@@ -7,9 +7,15 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 })
 export class FraisEncadrementMainPageComponent implements OnInit {
 
+  activeIndex: number = 0;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  activateIndex(index: number) {
+    this.activeIndex = index;
   }
 
 }
