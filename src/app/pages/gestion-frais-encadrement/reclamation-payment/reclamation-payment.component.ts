@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PaiementEtudiantService } from 'src/app/pages/gestion-frais-encadrement/services/paiement-etudiant.service';
 
 
@@ -9,14 +10,14 @@ import { PaiementEtudiantService } from 'src/app/pages/gestion-frais-encadrement
 })
 export class ReclamationPaymentComponent implements OnInit {
 
-  constructor(private paiementEtudSrv : PaiementEtudiantService) { }
+  constructor(private paiementEtudSrv : PaiementEtudiantService, private activatedRoute: ActivatedRoute) { }
 
   data: any[] = [];
 
   reclamations : any
 
   ngOnInit() {
-    this.paiementEtudSrv.getReclamations().subscribe(
+    this.paiementEtudSrv.getReclamations(this.activatedRoute.snapshot.params.id).subscribe(
       (data) => {
         this.reclamations = data.content
         // console.log(this.reclamations)

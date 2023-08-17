@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DialogModule } from 'primeng/dialog';
 import { FraisEncadrementStatusService } from 'src/app/pages/gestion-frais-encadrement/frais-encadrement-status.service';
 import { PaiementEtudiantService } from 'src/app/pages/gestion-frais-encadrement/services/paiement-etudiant.service';
@@ -15,7 +16,7 @@ export class FraisEncadrementStatusComponent implements OnInit {
   details: any
 
   constructor(private statusService: FraisEncadrementStatusService, private modalService: DialogModule,
-    private paiementService: PaiementEtudiantService) { }
+    private paiementService: PaiementEtudiantService, public activatedRoute: ActivatedRoute) { }
 
   displayModal: boolean = false; // Propriété pour contrôler la visibilité du modal
 
@@ -31,9 +32,9 @@ export class FraisEncadrementStatusComponent implements OnInit {
   paiements: any;
 
   ngOnInit() {
-    this.data = this.statusService.getFraisEncadrementStatus()
+    this.data = this.statusService.getFraisEncadrementStatus(this.activatedRoute.snapshot.params.id);
 
-    this.paiementService.getStatus().subscribe(
+    this.paiementService.getStatus(this.activatedRoute.snapshot.params.id).subscribe(
       (data) => {
         // Récupérer les détails du statut de paiement depuis l'API et les stocker dans la variable statutPaiement
         this.statutPaiement = data.content;

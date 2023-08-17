@@ -1,17 +1,22 @@
 <div class="container main-content">
     <div class="row mb-4">
-        <div class="col-lg- align-items-center">
+        <div class="col-lg-12 align-items-center">
             <div class="card border-0 box-shadow">
                 <div class="card-header transparent border-0">
                     <h3><b>Details de la transaction en cours</b></h3>
                     <hr>
                 </div>
-                <div class="card-body pt-0 widget-body border-1">
+
+                <div *ngIf="loaded && noTransactionFound" class="card-body">
+                    <h4 class="card-title">Aucune transaction en cours</h4>
+                    <p class="card-text">Aucune transaction en cours pour l'instant dans votre dossier.</p>
+                </div>
+                <div *ngIf="loaded && !noTransactionFound" class="card-body pt-0 widget-body border-1">
                     <div class="col">
                         <div class="alert alert-primary" role="alert">
                             <h4 class="alert-heading">Info Payment!</h4>
                             <p>Vous pouvez vous rendre dans un point touch muni de votre numéro de transaction pour
-                                procéder au paiement, ou cliquer sur le bouton <b>Payé par Mobile Money</b>.
+                                procéder au paiement, ou cliquer sur le bouton <b>Payer par Mobile Money</b>.
                             </p>
                         </div>
                         <div class="table-responsive">
@@ -35,7 +40,7 @@
                                     </tr>
                                 </tbody>
                                 <div>
-                                    <button type="submit" class="btn btn-primary mt-3">Payé par
+                                    <button type="submit" class="btn btn-primary mt-3">Payer par
                                         Mobile Money</button>
                                 </div>
                             </table>

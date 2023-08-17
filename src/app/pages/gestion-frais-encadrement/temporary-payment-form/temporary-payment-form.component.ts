@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FraisEncadrementStatusService } from '../frais-encadrement-status.service';
 import { PaiementEtudiantService } from '../services/paiement-etudiant.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface Tranche {
     name: number;
@@ -22,7 +23,8 @@ export class TemporaryPaymentFormComponent implements OnInit {
 
     constructor(
         private statusService: FraisEncadrementStatusService,
-        private paiementService: PaiementEtudiantService
+        private paiementService: PaiementEtudiantService,
+        private activatedRoute: ActivatedRoute
     ) { }
 
     selectedTranche: Tranche | undefined;
@@ -30,9 +32,9 @@ export class TemporaryPaymentFormComponent implements OnInit {
 
  
     ngOnInit() {
-        this.data = this.statusService.getFraisEncadrementStatus();
+        this.data = this.statusService.getFraisEncadrementStatus(this.activatedRoute.snapshot.params.id);
     
-        this.paiementService.getStatus().subscribe(
+        this.paiementService.getStatus(this.activatedRoute.snapshot.params.id).subscribe(
             (data) => {
                 this.statutPaiement = data.content;
     

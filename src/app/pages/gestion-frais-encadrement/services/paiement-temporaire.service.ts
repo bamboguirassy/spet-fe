@@ -10,8 +10,8 @@ export class PaiementTemporaireService {
 
   constructor(private webService: GfcWebServiceService, private tokenManager: TokenManagerService) { }
 
-  public getDetailsTransactionEnCours(numero_transaction: string): Promise<any> {
-    const endpoint = `/etudiant/transaction-en-cours/${numero_transaction}`;
+  public getDetailsTransactionEnCours(inscriptionId: number): Promise<any> {
+    const endpoint = `/etudiant/transaction-en-cours/${inscriptionId}`;
     const token = this.tokenManager.getToken();
     const data = { token: token }; 
 

@@ -11,30 +11,25 @@ export class PaiementEtudiantService {
 
   constructor(private gfcService: GfcWebServiceService, private tokenManager: TokenManagerService,) { }
 
-  inscriptionId: number = 53377;
-  inscriptionI: number = 28732;
-  token: string;
-
-  getStatus(): Observable<any> {
-    this.token = this.tokenManager.getToken()
+  getStatus(inscriptionId: number): Observable<any> {
     const requestData = {
-      token: this.token
+      token: this.tokenManager.getToken()
     };
     
-    return this.gfcService.post(`/get-paiement-details/${this.inscriptionId}`,requestData, this.token);
+    return this.gfcService.post(`/get-paiement-details/${inscriptionId}`,requestData, this.tokenManager.getToken());
   }
 
-  getPayments(): Observable<any> {
+  getPayments(inscriptionId: number): Observable<any> {
     const requestData = {
-      token: this.token
+      token: this.tokenManager.getToken()
     };
-    return this.gfcService.post(`/get-paiements/${this.inscriptionId}`,requestData, this.token)
+    return this.gfcService.post(`/get-paiements/${inscriptionId}`,requestData, this.tokenManager.getToken());
   }
 
-  getReclamations(): Observable<any> {
+  getReclamations(inscriptionId: number): Observable<any> {
     const requestData = {
-      token: this.token
+      token: this.tokenManager.getToken()
     };
-    return this.gfcService.post(`/reclamation/${this.inscriptionI}/inscription`,requestData, this.token)
+    return this.gfcService.post(`/reclamation/${inscriptionId}/inscription`,requestData, this.tokenManager.getToken());
   }
 }

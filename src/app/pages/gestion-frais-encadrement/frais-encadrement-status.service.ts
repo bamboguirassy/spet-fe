@@ -23,8 +23,8 @@ export class FraisEncadrementStatusService {
   getPaiement(){
     return this.paiements;
   }
-  getFraisEncadrementStatus(){
-    this.url ="http://127.0.0.1:8000/api/get-paiement-details/44798";
+  getFraisEncadrementStatus(inscriptionId: number){
+    this.url =`https://gfc.uidt.sn/api/get-paiement-details/${inscriptionId}`;
     return this.data;
   }
 }

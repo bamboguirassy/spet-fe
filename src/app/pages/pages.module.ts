@@ -95,7 +95,6 @@ import { RappelInfoSensibleComponent } from './dashboard/rappel-info-sensible/ra
 import { ServiceElectronicListComponent } from './dashboard/service-electronic-list/service-electronic-list.component';
 import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
 import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-inscriptionacad-list/payant-inscriptionacad-list.component';
-import { PaiementfraisencadrementListComponent } from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
 import { VisiteMedicaleStatisticsPageComponent } from './visite_medical/statistique/visite-medicale-statistics-page/visite-medicale-statistics-page.component';
 import { VisiteMedicalMonthStatsComponent } from './visite_medical/statistique/visite-medical-month-stats/visite-medical-month-stats.component';
 import { VisiteMedicalDoctorsStatsComponent } from './visite_medical/statistique/visite-medical-doctors-stats/visite-medical-doctors-stats.component';
@@ -166,7 +165,6 @@ import { ReclamationPaymentComponent } from './gestion-frais-encadrement/reclama
     ServiceElectronicListComponent,
     GestionReclamationComponent,
     PayantInscriptionacadListComponent,
-    PaiementfraisencadrementListComponent,
     VisiteMedicaleStatisticsPageComponent,
     VisiteMedicalMonthStatsComponent,
     VisiteMedicalDoctorsStatsComponent,

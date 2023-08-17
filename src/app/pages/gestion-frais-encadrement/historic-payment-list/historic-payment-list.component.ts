@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FraisEncadrementStatusService } from 'src/app/pages/gestion-frais-encadrement/frais-encadrement-status.service';
 import { PaiementEtudiantService } from 'src/app/pages/gestion-frais-encadrement/services/paiement-etudiant.service';
 import { PaiementTemporaireService } from '../services/paiement-temporaire.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -11,40 +12,20 @@ import { PaiementTemporaireService } from '../services/paiement-temporaire.servi
 })
 export class HistoricPaymentListComponent implements OnInit {
 
-  // constructor(private paiementService : FraisEncadrementStatusService) { }
-  // constructor(private paiementService : FraisEncadrementStatusService, private paiementSrv: PaiementEtudiantService) { }
-
-  // data: any[] = [];
-  // paiements : any
-
-  // ngOnInit() {
-  //   this.data = this.paiementService.getPaiement();
-
-  //   this.paiementSrv.getPayments().subscribe(
-  //     (data) => {
-  //       this.paiements = data.content
-  //       console.log(this.paiements)
-  //     },
-  //     (error) =>{
-  //       console.error(error)
-  //     }
-  //   )
-  // }
-
   transactionNumber: string;
   amountPaid: number;
   paymentMethod: string;
   date: string;
 
-  constructor(private paiementTemporaireService: PaiementTemporaireService) { }
+  constructor(private paiementTemporaireService: PaiementTemporaireService,
+     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const transactionId = "15";
-    this.getTransactionDetails(transactionId);
+    this.getTransactionEnCoursDetails(this.activatedRoute.snapshot.params.id);
   }
 
-  getTransactionDetails(transactionId: string): void {
-    this.paiementTemporaireService.getDetailsTransactionEnCours(transactionId)
+  getTransactionEnCoursDetails(inscriptionId: number): void {
+    this.paiementTemporaireService.getDetailsTransactionEnCours(inscriptionId)
       .then(details => {
         console.log("Details : ", details);
         this.transactionNumber = details.content.numero_transaction;

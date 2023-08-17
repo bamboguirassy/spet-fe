@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GfcWebServiceService {
-  private prefix = 'http://127.0.0.1:8000/api';
+  private prefix = 'https://gfc.uidt.sn/api';
 
   constructor(private http: HttpClient) { }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PaiementTemporaireService } from '../services/paiement-temporaire.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-temporary-payment-details',
@@ -13,22 +14,36 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
   amountPaid: number;
   paymentMethod: string;
   date: string;
+  noTransactionFound: boolean;
+  loaded: boolean;
 
-  constructor(private paiementTemporaireService: PaiementTemporaireService) { }
+  constructor(private paiementTemporaireService: PaiementTemporaireService,
+    private activatedRoute: ActivatedRoute) {
+      this.noTransactionFound = false;
+      this.loaded = false;
+     }
 
   ngOnInit(): void {
-    const transactionId = "15"; 
-    this.getTransactionDetails(transactionId);
+    this.getTransactionDetails(this.activatedRoute.snapshot.params.id);
   }
 
-  getTransactionDetails(transactionId: string): void {
-    this.paiementTemporaireService.getDetailsTransactionEnCours(transactionId)
-      .then(details => {
-        console.log("Details : ", details);
-        this.transactionNumber = details.content.numero_transaction;
-        this.amountPaid = details.content.montant_paye;
-        this.paymentMethod = details.content.moyen_paiement;
-        this.date = details.content.date;
+  getTransactionDetails(inscriptionId: number): void {
+    this.paiementTemporaireService.getDetailsTransactionEnCours(inscriptionId)
+      .then(response => {
+        this.loaded = true;
+        if (!response.error) {
+          if(response.content) {
+            let details = response.content;
+            this.transactionNumber = details.content.numero_transaction;
+            this.amountPaid = details.content.montant_paye;
+            this.paymentMethod = details.content.moyen_paiement;
+            this.date = details.content.date;
+          } else {
+            this.noTransactionFound = true;
+          }
+          return;
+        }
+        console.error("Erreur lors de la récupération des détails de la transaction :", response);
       })
       .catch(error => {
         console.error("Erreur lors de la récupération des détails de la transaction :", error);

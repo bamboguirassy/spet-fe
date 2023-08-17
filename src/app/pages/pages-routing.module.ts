@@ -29,13 +29,10 @@ import { visiteMedicaleRoutes } from './visite_medical/visite_medicale.routes';
 import { PaymentSuccessComponent } from './inscriptionacad/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './inscriptionacad/payment-failed/payment-failed.component';
 import { articleRoutes } from './admin/article/article.routes';
-import { etudiantRoutes } from './etudiant/etudiant.routes';
 import { EtudiantShowComponent } from './etudiant/etudiant-show/etudiant-show.component';
 import { OneEtudiantByIdResolver } from './etudiant/one-etudiant-by-id.resolver copy';
 import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
-import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-inscriptionacad-list/payant-inscriptionacad-list.component';
 import { FraisEncadrementStatusComponent } from './gestion-frais-encadrement/frais-encadrement-status/frais-encadrement-status.component';
-import { PaiementfraisencadrementListComponent } from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
 import { TemporaryPaymentFormComponent } from './gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component';
 import { FraisEncadrementMainPageComponent } from './gestion-frais-encadrement/frais-encadrement-main-page/frais-encadrement-main-page.component';
 import { TemporaryPaymentDetailsComponent } from './gestion-frais-encadrement/temporary-payment-details/temporary-payment-details.component';
@@ -64,26 +61,7 @@ const routes: Routes = [
         data: { breadcrumb: 'Les modalités de paiement' }
       },
       {path:'status', component: FraisEncadrementStatusComponent},
-      {path:'payment-formation', component: FraisEncadrementMainPageComponent},
-      {
-        path: 'espace-paiement',
-        data: { breadcrumb: 'Espace paiement' },
-        children: [
-          {
-            path: '',
-            component: PayantInscriptionacadListComponent,
-            data: { breadcrumb: 'Inscriptions académiques' }
-          },
-          {
-            path: ':idInscriptionacad/:typeEvent/:refCommand', component: PaiementfraisencadrementListComponent,
-            data: { breadcrumb: 'Paiements' }
-          },
-          {
-            path: ':idInscriptionacad', component: PaiementfraisencadrementListComponent,
-            data: { breadcrumb: 'Paiements' }
-          },
-        ]
-      },
+      {path:'payment-formation/:id', component: FraisEncadrementMainPageComponent},
       {
         path: 'mes-infos', component: MesInfosComponent,
         data: { breadcrumb: 'Mon compte' }
