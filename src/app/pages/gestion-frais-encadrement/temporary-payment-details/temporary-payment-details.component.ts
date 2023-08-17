@@ -31,13 +31,13 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
     this.paiementTemporaireService.getDetailsTransactionEnCours(inscriptionId)
       .then(response => {
         this.loaded = true;
-        if (!response.error) {
+        if (!response.error) {          
           if(response.content) {
             let details = response.content;
-            this.transactionNumber = details.content.numero_transaction;
-            this.amountPaid = details.content.montant_paye;
-            this.paymentMethod = details.content.moyen_paiement;
-            this.date = details.content.date;
+            this.transactionNumber = details.numero_transaction;
+            this.amountPaid = details.montant_paye;
+            this.paymentMethod = details.moyen_paiement;
+            this.date = details.date;
           } else {
             this.noTransactionFound = true;
           }

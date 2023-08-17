@@ -40,22 +40,8 @@
                       <td *ngIf="statutPaiement.en_regle == true"><span class="badge badge-success">oui</span></td>
                     </tr>
                   </tbody>
-                  <button class="btn btn-primary mt-3" (click)="ouvrirModal()">Proceder au paiement</button>
-                  <!-- <button *ngIf="item.etat =='non'" class="btn btn-primary mt-3">Proceder au paiement</button> -->
-                  <!-- Modal PrimeNG -->
-                  <p-dialog header="Initier un paiement" [(visible)]="displayModal" modal="modal"
-                    [style]="{ width: '500px' }" [responsive]="true" [draggable]="false">
-                    <div class="alert alert-primary mt-2" role="alert">
-                      <p>Le montant restant a payé est <b>{{ statutPaiement.montant_a_payer }} FCFA.</b></p>
-                    </div>
-                    <app-temporary-payment-form></app-temporary-payment-form>
-                    <div class="modal-footer">
-                      <button type="button" pButton icon="pi pi-times" label="Annuler" class="btn btn-secondary mt-3"
-                        (click)="fermerModal()"></button>
-                      <button type="button" type="button" pButton label="Valider" class="btn btn-primary mt-3"></button>
-                    </div>
-                  </p-dialog>
                 </table>
+                <app-temporary-payment-form></app-temporary-payment-form>
               </div>
             </div>
           </div>

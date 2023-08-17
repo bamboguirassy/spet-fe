@@ -15,18 +15,8 @@ export class FraisEncadrementStatusComponent implements OnInit {
 
   details: any
 
-  constructor(private statusService: FraisEncadrementStatusService, private modalService: DialogModule,
+  constructor(private statusService: FraisEncadrementStatusService,
     private paiementService: PaiementEtudiantService, public activatedRoute: ActivatedRoute) { }
-
-  displayModal: boolean = false; // Propriété pour contrôler la visibilité du modal
-
-  ouvrirModal() {
-    this.displayModal = true; // Afficher le modal en définissant la propriété à true
-  }
-
-  fermerModal() {
-    this.displayModal = false; // Fermer le modal en définissant la propriété à false
-  }
 
   statutPaiement: any = {}; // Initialisation par défaut
   paiements: any;

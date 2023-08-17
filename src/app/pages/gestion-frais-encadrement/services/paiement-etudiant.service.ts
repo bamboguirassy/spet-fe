@@ -32,4 +32,17 @@ export class PaiementEtudiantService {
     };
     return this.gfcService.post(`/reclamation/${inscriptionId}/inscription`,requestData, this.tokenManager.getToken());
   }
+
+  /**
+   * Author: Moussa FOFANA
+   * Date: 17/08/2023
+   */
+  initPayment({inscription_id, montant, token}): Observable<any> {
+    const requestData = {
+      token: this.tokenManager.getToken(),
+      inscription_id,
+      montant
+    };
+    return this.gfcService.post(`/init-payment`,requestData, this.tokenManager.getToken());
+  }
 }
