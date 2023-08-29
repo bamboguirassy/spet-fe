@@ -35,17 +35,6 @@ export class HistoricPaymentListComponent implements OnInit {
         console.error("Erreur lors de la récupération des données:",error)
       }
     );
-      // .then(details => {
-      //   console.log("Details : ", details);
-      //   this.transactionNumber = details.content.numero_transaction;
-      //   this.amountPaid = details.content.montant;
-      //   this.paymentMethod = details.content.moyen_paiement;
-      //   this.date = details.content.date;
-      // })
-      // .catch(error => {
-      //   console.error("Erreur lors de la récupération des détails de la transaction :", error);
-      // });
-  }
 
 }
-
+}
