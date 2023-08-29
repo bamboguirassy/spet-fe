@@ -1,33 +1,54 @@
 <div class="container main-content">
-    <div class="row mb-4">
-      <div class="col align-items-center">
-        <div class="card border-0 box-shadow">
-          <div class="modal-header">
-            <h4 class="modal-title">Mes reclamations</h4>
-          </div>
-              <div class="table-responsive">
-                <table class="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Numero de reclamation</th>
-                  <th>Motif</th>
-                  <th>Statut</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of reclamations ; let i = index">
-                  <td>{{i + 1}}</td>
-                  <td>{{item.numero_reclamation}}</td>
-                  <td>{{item.motif_reclamation}}</td>
-                  <td *ngIf="item.traite == 0"><span class="badge badge-danger">Non traitee</span></td>
-                  <td *ngIf="item.traite == 1"><span class="badge badge-success">traite</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+  <div class="row mb-4">
+    <div class="col align-items-center">
+      <div class="card border-0 box-shadow">
+        <div class="modal-header">
+          <h4 class="modal-title">Mes reclamations</h4>
+        </div>
+        <p *ngIf="reclamations.length === 0" class="alert alert-danger " role="alert">
+          Vous n'avez pas effectué de reclamations pour le moment.
+        </p>
+        <div class="table-responsive">
+          <!-- Bouton pour ouvrir la modal -->
+          <button *ngIf="load" class="btn btn-primary m-2" (click)="ouvrirModalReclamation()">Faire une réclamation</button>
+          <!-- Modal pour saisir le motif -->
+          <ng-template #modalReclamation let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">Nouvelle reclamation</h4>
+            </div>
+            <div class="modal-body">
+              <input type="text" class="form-control mb-2" [(ngModel)]="motifReclamation"
+                placeholder="Motif de la réclamation">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Annuler')">Annuler</button>
+              <button type="button" class="btn btn-primary"
+                (click)="soumettreReclamationAvecMotif(modal)">Soumettre</button>
+            </div>
+          </ng-template>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Numero de reclamation</th>
+                <th>Motif</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of reclamations ; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{item.numero_reclamation}}</td>
+                <td>{{item.motif_reclamation}}</td>
+                <td *ngIf="item.traite == 0"><span class="badge badge-danger">Non traitee</span></td>
+                <td *ngIf="item.traite == 1"><span class="badge badge-success">traite</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

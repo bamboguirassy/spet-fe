@@ -16,26 +16,35 @@ export class HistoricPaymentListComponent implements OnInit {
   amountPaid: number;
   paymentMethod: string;
   date: string;
+  paiements: any[] = [];
 
-  constructor(private paiementTemporaireService: PaiementTemporaireService,
+  constructor(private paiementEtudiantService: PaiementEtudiantService,
      private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getTransactionEnCoursDetails(this.activatedRoute.snapshot.params.id);
+    this.getPaiements(this.activatedRoute.snapshot.params.id);
   }
 
-  getTransactionEnCoursDetails(inscriptionId: number): void {
-    this.paiementTemporaireService.getDetailsTransactionEnCours(inscriptionId)
-      .then(details => {
-        console.log("Details : ", details);
-        this.transactionNumber = details.content.numero_transaction;
-        this.amountPaid = details.content.montant;
-        this.paymentMethod = details.content.moyen_paiement;
-        this.date = details.content.date;
-      })
-      .catch(error => {
-        console.error("Erreur lors de la récupération des détails de la transaction :", error);
-      });
+  getPaiements(inscriptionId: number): void {
+    this.paiementEtudiantService.getPayments(inscriptionId).subscribe(
+      (data )=> { 
+        this.paiements = []
+        console.log(this.paiements)
+       },
+      (error )=> {
+        console.error("Erreur lors de la récupération des données:",error)
+      }
+    );
+      // .then(details => {
+      //   console.log("Details : ", details);
+      //   this.transactionNumber = details.content.numero_transaction;
+      //   this.amountPaid = details.content.montant;
+      //   this.paymentMethod = details.content.moyen_paiement;
+      //   this.date = details.content.date;
+      // })
+      // .catch(error => {
+      //   console.error("Erreur lors de la récupération des détails de la transaction :", error);
+      // });
   }
 
 }
