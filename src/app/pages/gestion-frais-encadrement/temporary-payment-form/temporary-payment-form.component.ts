@@ -54,8 +54,8 @@ export class TemporaryPaymentFormComponent implements OnInit {
                 this.tranches = [];
                 for (let i = 1; i <= this.statutPaiement.nombre_tranches_restantes; i++) {
                     const montantTranche = (i === 1)
-                        ? this.statutPaiement.montant_a_payer / this.statutPaiement.nombre_tranches_restantes
-                        : this.statutPaiement.montant_a_payer / (this.statutPaiement.nombre_tranches_restantes - (i - 1));
+                        ? this.statutPaiement.montant_restante / this.statutPaiement.nombre_tranches_restantes
+                        : this.statutPaiement.montant_restante / (this.statutPaiement.nombre_tranches_restantes - (i - 1));
 
                     this.tranches.push({
                         name: i,
