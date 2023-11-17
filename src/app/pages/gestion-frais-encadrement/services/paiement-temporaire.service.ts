@@ -13,6 +13,7 @@ export class PaiementTemporaireService {
   public getDetailsTransactionEnCours(inscriptionId: number): Promise<any> {
     const endpoint = `/etudiant/transaction-en-cours/${inscriptionId}`;
     const token = this.tokenManager.getToken();
+    console.log(token)
     const data = { token: token }; 
 
     return this.webService.post(endpoint, data).toPromise();
