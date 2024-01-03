@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PaiementTemporaireService } from '../services/paiement-temporaire.service';
 import { ActivatedRoute } from '@angular/router';
 import { EtudiantService } from '../../etudiant/etudiant.service';
+import { FraisEncadrementStatusService } from '../frais-encadrement-status.service';
+import { PaiementEtudiantService } from '../services/paiement-etudiant.service';
 declare var sendPaymentInfos: Function;
 
 
@@ -25,16 +27,38 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
   email_universitaire: string;
   prenom: string;
   nom: string;
+  data: any[] = [];
+
+  details: any;
 
   constructor(private paiementTemporaireService: PaiementTemporaireService,
-    private activatedRoute: ActivatedRoute, public etudiantSrv: EtudiantService) {
+    private activatedRoute: ActivatedRoute, public etudiantSrv: EtudiantService, private statusService: FraisEncadrementStatusService,
+    private paiementService: PaiementEtudiantService) {
     this.noTransactionFound = false;
     this.loaded = false;
   }
 
+  statutPaiement: any = {}; // Initialisation par défaut
+  paiements: any;
+
   ngOnInit(): void {
     this.getTransactionDetails(this.activatedRoute.snapshot.params.id);
+
+    this.paiementService.getStatus(this.activatedRoute.snapshot.params.id).subscribe(
+      (data) => {
+        // Récupérer les détails du statut de paiement depuis l'API et les stocker dans la variable statutPaiement
+        this.statutPaiement = data.content;
+        console.log(this.statutPaiement)
+      },
+      (error) => {
+        // Gérer les erreurs de requête ici
+        console.error(error);
+      }
+    );
   }
+
+
+
 
   getTransactionDetails(inscriptionId: number): void {
     this.paiementTemporaireService.getDetailsTransactionEnCours(inscriptionId)

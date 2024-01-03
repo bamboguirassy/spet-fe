@@ -10,6 +10,7 @@ export class EtudiantService {
 
   private routePrefix: string = 'etudiant';
   public routerPrefixPreinscription: string = 'preinscription';
+  estEnRegle: boolean = false;
 
   constructor(public httpSrv: HttpService) { }
 
