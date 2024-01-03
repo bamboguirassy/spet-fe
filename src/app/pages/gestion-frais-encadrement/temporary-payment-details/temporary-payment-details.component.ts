@@ -48,7 +48,6 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
       (data) => {
         // Récupérer les détails du statut de paiement depuis l'API et les stocker dans la variable statutPaiement
         this.statutPaiement = data.content;
-        console.log(this.statutPaiement)
       },
       (error) => {
         // Gérer les erreurs de requête ici
