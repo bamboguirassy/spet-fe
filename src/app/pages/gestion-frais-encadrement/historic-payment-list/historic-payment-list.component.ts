@@ -12,10 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HistoricPaymentListComponent implements OnInit {
 
-  transactionNumber: string;
-  amountPaid: number;
-  paymentMethod: string;
-  date: string;
   paiements: any[] = [];
 
   constructor(private paiementEtudiantService: PaiementEtudiantService,
@@ -28,7 +24,7 @@ export class HistoricPaymentListComponent implements OnInit {
   getPaiements(inscriptionId: number): void {
     this.paiementEtudiantService.getPayments(inscriptionId).subscribe(
       (data )=> { 
-        this.paiements = []
+        this.paiements = data.content
         console.log(this.paiements)
        },
       (error )=> {
