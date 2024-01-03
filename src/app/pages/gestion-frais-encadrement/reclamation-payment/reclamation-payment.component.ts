@@ -106,7 +106,6 @@ export class ReclamationPaymentComponent implements OnInit {
     this.paiementEtudSrv.getReclamations(this.activatedRoute.snapshot.params.id).subscribe(
       (data) => {
         this.reclamations = data.content
-        console.log(this.reclamations)
       },
       (error) => {
         console.error(error)
