@@ -1,5 +1,18 @@
-<div *ngIf="paiements.length === 0" class="alert alert-danger" role="alert">
-  Vous n'avez pas effectué de paiements pour le moment.
+<div *ngIf="paiements.length === 0" role="alert">
+  <div class="container main-content">
+    <div class="row mb-4">
+      <div class="col align-items-center">
+        <div class="card border-0 box-shadow">
+          <div class="card-header transparent border-0">
+            <h3><b>Mes transactions</b></h3>
+            <hr>
+            <h4 class="card-title">Vous n'avez pas effectué de paiements pour le moment.
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="container main-content">
   <div class="row mb-4">
@@ -34,4 +47,3 @@
     </div>
   </div>
 </div>
-

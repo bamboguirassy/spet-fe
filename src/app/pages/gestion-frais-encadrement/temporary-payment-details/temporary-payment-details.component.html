@@ -55,10 +55,17 @@
     </div>
 </div>
 <div *ngIf="statutPaiement.en_regle == true">
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="alert alert-warning">
-                <p>Vous êtes déjà en règle. Aucune transaction temporaire n'est disponible.</p>
+    <div class="container main-content">
+        <div class="row mb-4">
+            <div class="col align-items-center">
+                <div class="card border-0 box-shadow">
+                    <div class="card-header transparent border-0">
+                        <h3><b>Details</b></h3>
+                        <hr>
+                        <h4 class="card-title">Vous êtes déjà en règle. Aucune transaction temporaire n'est disponible.
+                        </h4>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
