@@ -42,6 +42,7 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
   paiements: any;
 
   ngOnInit(): void {
+    
     this.getTransactionDetails(this.activatedRoute.snapshot.params.id);
 
     this.paiementService.getStatus(this.activatedRoute.snapshot.params.id).subscribe(

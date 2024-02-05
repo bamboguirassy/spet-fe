@@ -98,7 +98,9 @@ export class TemporaryPaymentFormComponent implements OnInit {
                     }
                     this.notificationSrv.showSuccess("Paiement initialisé avec succès");
                     this.fermerModal();
+                    // location.reload();
                     this.openPaiementTemp.emit();
+                  
                 },
                 (error) => {
                     console.error(error);
