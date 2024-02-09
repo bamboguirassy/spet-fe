@@ -27,6 +27,7 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
   email_universitaire: string;
   prenom: string;
   nom: string;
+  telephone : string
   data: any[] = [];
 
   details: any;
@@ -67,6 +68,7 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
         if (!response.error) {
           if (response.content) {
             let details = response.content;
+            console.log(details);
             this.transactionNumber = details.numero_transaction;
             this.amountPaid = details.montant;
             this.paymentMethod = details.nom_moyen_paiement;
@@ -76,6 +78,8 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
             this.secure_code = details.secure_code;
             this.email_universitaire = details.email_universitaire;
             this.prenom = details.prenom;
+            this.nom = details.nom
+            this.telephone = details.telephone
           } else {
             this.noTransactionFound = true;
           }
