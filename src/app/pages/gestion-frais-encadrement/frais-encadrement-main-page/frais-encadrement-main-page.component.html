@@ -1,0 +1,17 @@
+<div class="col-lg-12">
+    <p-messages></p-messages>
+    <p-tabView [(activeIndex)]="activeIndex">
+        <p-tabPanel header="Mon status">
+            <app-frais-encadrement-status (openPaiementTemp)="activateIndex(1)"></app-frais-encadrement-status>
+        </p-tabPanel>
+        <p-tabPanel header="Details Transaction en cours">
+            <app-temporary-payment-details></app-temporary-payment-details>
+        </p-tabPanel>
+        <p-tabPanel header="Mes paiements">
+            <app-historic-payment-list></app-historic-payment-list>
+        </p-tabPanel>
+        <p-tabPanel header="Mes Reclamations">
+           <app-reclamation-payment></app-reclamation-payment>
+        </p-tabPanel>
+    </p-tabView>
+</div>

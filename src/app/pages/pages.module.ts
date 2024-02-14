@@ -95,11 +95,17 @@ import { RappelInfoSensibleComponent } from './dashboard/rappel-info-sensible/ra
 import { ServiceElectronicListComponent } from './dashboard/service-electronic-list/service-electronic-list.component';
 import { GestionReclamationComponent } from './admin/reclamation-paiement/gestion-reclamation/gestion-reclamation.component';
 import { PayantInscriptionacadListComponent } from './inscriptionacad/payant-inscriptionacad-list/payant-inscriptionacad-list.component';
-import { PaiementfraisencadrementListComponent } from './paiementfraisencadrement/paiementfraisencadrement-list/paiementfraisencadrement-list.component';
 import { VisiteMedicaleStatisticsPageComponent } from './visite_medical/statistique/visite-medicale-statistics-page/visite-medicale-statistics-page.component';
 import { VisiteMedicalMonthStatsComponent } from './visite_medical/statistique/visite-medical-month-stats/visite-medical-month-stats.component';
 import { VisiteMedicalDoctorsStatsComponent } from './visite_medical/statistique/visite-medical-doctors-stats/visite-medical-doctors-stats.component';
 import { VisiteMedicalHandicapStatsComponent } from './visite_medical/statistique/visite-medical-handicap-stats/visite-medical-handicap-stats.component';
+import { FraisEncadrementStatusComponent } from './gestion-frais-encadrement/frais-encadrement-status/frais-encadrement-status.component';
+import { HistoricPaymentListComponent } from './gestion-frais-encadrement/historic-payment-list/historic-payment-list.component';
+import { TemporaryPaymentDetailsComponent } from './gestion-frais-encadrement/temporary-payment-details/temporary-payment-details.component';
+import { TemporaryPaymentFormComponent } from './gestion-frais-encadrement/temporary-payment-form/temporary-payment-form.component';
+import { FraisEncadrementMainPageComponent } from './gestion-frais-encadrement/frais-encadrement-main-page/frais-encadrement-main-page.component';
+import { PaiementTemporaireService } from './gestion-frais-encadrement/services/paiement-temporaire.service';
+import { ReclamationPaymentComponent } from './gestion-frais-encadrement/reclamation-payment/reclamation-payment.component';
 
 @NgModule({
   declarations: [
@@ -159,11 +165,16 @@ import { VisiteMedicalHandicapStatsComponent } from './visite_medical/statistiqu
     ServiceElectronicListComponent,
     GestionReclamationComponent,
     PayantInscriptionacadListComponent,
-    PaiementfraisencadrementListComponent,
     VisiteMedicaleStatisticsPageComponent,
     VisiteMedicalMonthStatsComponent,
     VisiteMedicalDoctorsStatsComponent,
-    VisiteMedicalHandicapStatsComponent
+    VisiteMedicalHandicapStatsComponent,
+    FraisEncadrementStatusComponent,
+    HistoricPaymentListComponent,
+    TemporaryPaymentDetailsComponent,
+    TemporaryPaymentFormComponent,
+    FraisEncadrementMainPageComponent,
+    ReclamationPaymentComponent
   ],
   imports: [
     CommonModule,
@@ -202,14 +213,16 @@ import { VisiteMedicalHandicapStatsComponent } from './visite_medical/statistiqu
     PanelModule,
     InputSwitchModule,
     MultiSelectModule,
-    ListboxModule
+    ListboxModule,
+    DropdownModule 
   ],
   entryComponents: [
     ReclamationBourseNewComponent
   ],
   providers: [
       CurrencyPipe,
-      DatePipe
+      DatePipe,
+      PaiementTemporaireService,
   ]
 })
 export class PagesModule { }

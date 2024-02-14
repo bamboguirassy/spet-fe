@@ -1,0 +1,49 @@
+<div *ngIf="paiements.length === 0" role="alert">
+  <div class="container main-content">
+    <div class="row mb-4">
+      <div class="col align-items-center">
+        <div class="card border-0 box-shadow">
+          <div class="card-header transparent border-0">
+            <h3><b>Mes transactions</b></h3>
+            <hr>
+            <h4 class="card-title">Vous n'avez pas effectué de paiements pour le moment.
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container main-content">
+  <div class="row mb-4">
+    <div class="col align-items-center">
+      <div class="card border-0 box-shadow">
+        <div *ngIf="paiements && paiements.length > 0">
+          <div class="modal-header">
+            <h4 class="modal-title">Mes transactions</h4>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Numero de transaction</th>
+                  <th>Montant</th>
+                  <th>Moyen de paiement</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let paiement of paiements">
+                  <td>{{ paiement.numero_transaction}}</td>
+                  <td>{{ paiement.montant }}</td>
+                  <td>{{ paiement.payment_mode }}</td>
+                  <td>{{ paiement.created_at|date:'dd/MM/yyyy à HH:mm' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

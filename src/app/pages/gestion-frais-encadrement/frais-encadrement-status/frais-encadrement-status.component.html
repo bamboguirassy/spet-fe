@@ -1,0 +1,54 @@
+<div *ngIf="statutPaiement">
+  <div class="container main-content">
+    <div class="row mb-4">
+      <div class="col-12 align-items-center mb-2">
+        <div class="card border-0 box-shadow">
+          <div class="card-header transparent border-0">
+            <h3><b>Details de mon statut</b></h3>
+            <hr>
+          </div>
+          <div class="card-body pt-0 widget-body border-1">
+            <div class="col">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover table-condensed">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Cout de la formation</th>
+                      <td>{{ statutPaiement.montant_a_payer }} FCFA</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Montant Payé</th>
+                      <td>{{ statutPaiement.montant_paye }} FCFA</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Montant restant</th>
+                      <td>{{statutPaiement.montant_restante }} FCFA</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nombre de tranches</th>
+                      <td>{{ statutPaiement.nombre_tranches_autorisees }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nombre de tranches restantes</th>
+                      <td>{{ statutPaiement.nombre_tranches_restantes }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">En regle</th>
+                      <td *ngIf="statutPaiement.en_regle == false">
+                        <span class="badge badge-danger">Non</span>
+                      </td>
+                      <td *ngIf="statutPaiement.en_regle == true"><span class="badge badge-success">oui</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="statutPaiement.en_regle == false">
+                  <app-temporary-payment-form (openPaiementTemp)="gotoPaymentTempTab()"></app-temporary-payment-form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
