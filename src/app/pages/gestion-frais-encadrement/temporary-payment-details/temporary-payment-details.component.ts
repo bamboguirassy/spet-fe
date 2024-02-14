@@ -97,7 +97,7 @@ export class TemporaryPaymentDetailsComponent implements OnInit {
    */
   startPayment(): void {
     if (this.loaded && !this.noTransactionFound && this.codeMoyenPaiement == 'TOUCHPAY') {
-      sendPaymentInfos(this.transactionNumber, this.agence_code, this.secure_code, 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-failed', this.amountPaid, 'ville', this.email_universitaire, this.prenom, this.nom, '');
+      sendPaymentInfos(this.transactionNumber, this.agence_code, this.secure_code, 'univ-thies.sn', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-succeeded', this.etudiantSrv.httpSrv.getClientUrl() + 'payment-failed', this.amountPaid, 'ville', this.email_universitaire, this.prenom, this.nom, this.telephone);
     } else {
       console.error("Erreur lors de la récupération des détails de la transaction");
     }
