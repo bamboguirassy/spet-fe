@@ -6,6 +6,7 @@ export class Inscriptionacad {
     dateinscacad: string;
     passage: string;
     etat: string;
+    regimePayant?: boolean;
     montantinscriptionacad: any;
     coutformation: string;
     numquittance: string;
