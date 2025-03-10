@@ -26,8 +26,10 @@
 <div class="card border-info" *ngIf="inscriptions.length">
     <div class="card-body">
         <h4 class="card-title">Mon Parcours
-            <span *ngIf="inscriptions[0]?.croust" class="badge badge-success float-right">Souscrit au service du Croust</span>
-            <span *ngIf="!inscriptions[0]?.croust" class="badge badge-danger float-right">Non souscrit au service du Croust</span>
+            <span *ngIf="inscriptions[0]?.croust" class="badge badge-success float-right">Souscrit au service du
+                Croust</span>
+            <span *ngIf="!inscriptions[0]?.croust" class="badge badge-danger float-right">Non souscrit au service du
+                Croust</span>
         </h4>
         <div class="col-md-12 col-lg-12 col-sm-12">
             <p-accordion>
@@ -55,7 +57,11 @@
                                     class="fa fa-eye"></i> Voir mes notes <span class="badge badge-danger">bientôt
                                     disponible</span>
                             </button>
-                            <button [routerLink]="['/payment-formation/',inscriptionacad?.id]" class="btn btn-sm-block btn-outline-primary">Paiement scolarite</button>
+                            <!-- BOUTON PAIEMENT SCOLAIRE -->
+                            <!-- <button [routerLink]="['/payment-formation/',inscriptionacad?.id]" class="btn btn-sm-block btn-outline-primary">Paiement scolarite</button> -->
+                            <button *ngIf="isUfrSantePayant(inscriptionacad)"
+                                [routerLink]="['/payment-formation/',inscriptionacad?.id]"
+                                class="btn btn-sm-block btn-outline-primary">Paiement scolarite</button>
                         </div>
                     </p-toolbar>
                     <hr>

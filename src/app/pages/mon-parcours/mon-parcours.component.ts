@@ -60,6 +60,24 @@ export class MonParcoursComponent implements OnInit {
             this.parcoursLoaded.emit(this.inscriptions);
         },err=>{this.inscriptionAcadSrv.httpSrv.handleError(err)});
     }
+    isUfrSantePayant(inscriptionacad: Inscriptionacad): boolean {
+        // Vérifie si l'établissement est l'UFR Santé
+        const isUfrSante = inscriptionacad && 
+                          inscriptionacad.idspecialite && 
+                          inscriptionacad.idspecialite.idfiliere && 
+                          inscriptionacad.idspecialite.idfiliere.identite && 
+                          inscriptionacad.idspecialite.idfiliere.identite.identiteparent && 
+                          inscriptionacad.idspecialite.idfiliere.identite.identiteparent.libelleentite === 'UFR SANTE';
+        
+        // Vérifie si l'inscription a des frais annuels (régime payant)
+        const isRegimePayant = inscriptionacad && 
+                              inscriptionacad.idclasse && 
+                              inscriptionacad.idclasse.idfiliere && 
+                              inscriptionacad.idclasse.idfiliere.paramFraisEncadrement && 
+                              inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel !== null;
+        
+        return isUfrSante && isRegimePayant;
+      }
 
     /*loadEtatDocuments() {
         this.etat_demande_documentSrv.findAll()
