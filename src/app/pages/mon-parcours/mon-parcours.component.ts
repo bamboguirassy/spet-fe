@@ -40,11 +40,11 @@ export class MonParcoursComponent implements OnInit {
 
     constructor(
         public inscriptionAcadSrv: InscriptionacadService,
-         public modal: NgbModal,
+        public modal: NgbModal,
         public activatedRoute: ActivatedRoute,
-         public demandeDocumentSrv: DemandeDocumentService,
-         public typedocumentSrv: TypedocumentService,
-         public etat_demande_documentSrv: EtatDemandeDocumentService) {
+        public demandeDocumentSrv: DemandeDocumentService,
+        public typedocumentSrv: TypedocumentService,
+        public etat_demande_documentSrv: EtatDemandeDocumentService) {
     }
 
     ngOnInit() {
@@ -55,29 +55,36 @@ export class MonParcoursComponent implements OnInit {
 
     loadInscriptionAcads() {
         this.inscriptionAcadSrv.getInscriptionsEtudiant(this.etudiant)
-        .subscribe((data: any)=>{
-            this.inscriptions = data;
-            this.parcoursLoaded.emit(this.inscriptions);
-        },err=>{this.inscriptionAcadSrv.httpSrv.handleError(err)});
+            .subscribe((data: any) => {
+                this.inscriptions = data;
+                this.parcoursLoaded.emit(this.inscriptions);
+            }, err => { this.inscriptionAcadSrv.httpSrv.handleError(err) });
     }
+
+
     isUfrSantePayant(inscriptionacad: Inscriptionacad): boolean {
-        // Vérifie si l'établissement est l'UFR Santé
-        const isUfrSante = inscriptionacad && 
-                          inscriptionacad.idspecialite && 
-                          inscriptionacad.idspecialite.idfiliere && 
-                          inscriptionacad.idspecialite.idfiliere.identite && 
-                          inscriptionacad.idspecialite.idfiliere.identite.identiteparent && 
-                          inscriptionacad.idspecialite.idfiliere.identite.identiteparent.libelleentite === 'UFR SANTE';
+        // Sécurité: vérifier que l’inscription n’est pas null / undefined
+        if (!inscriptionacad) {
+          return false;
+        }
         
-        // Vérifie si l'inscription a des frais annuels (régime payant)
-        const isRegimePayant = inscriptionacad && 
-                              inscriptionacad.idclasse && 
-                              inscriptionacad.idclasse.idfiliere && 
-                              inscriptionacad.idclasse.idfiliere.paramFraisEncadrement && 
-                              inscriptionacad.idclasse.idfiliere.paramFraisEncadrement.fraisAnnuel !== null;
-        
-        return isUfrSante && isRegimePayant;
+      
+        // 1) Vérifier si l’étudiant est dans l’UFR des Sciences de la Santé
+        const isUfrSante = inscriptionacad &&
+                inscriptionacad.idspecialite &&
+                inscriptionacad.idspecialite.idfiliere &&
+                inscriptionacad.idspecialite.idfiliere.identite &&
+                inscriptionacad.idspecialite.idfiliere.identite.identiteparent &&
+                inscriptionacad.idspecialite.idfiliere.identite.identiteparent.libelleentite === 'UFR des Sciences de la Santé';
+      
+        // 2) Vérifier si l’étudiant est en régime payant
+        const isPayant = inscriptionacad.typeRegimePaiement === 'Payant';
+      
+        // Retourner vrai uniquement si c'est UFR Santé + régime payant
+        return isUfrSante && isPayant;
       }
+      
+
 
     /*loadEtatDocuments() {
         this.etat_demande_documentSrv.findAll()
@@ -86,12 +93,12 @@ export class MonParcoursComponent implements OnInit {
         },err=>{this.inscriptionAcadSrv.httpSrv.handleError(err)});
     }*/
 
-   /* loadTypeDocuments() {
-        this.typedocumentSrv.findAll()
-        .subscribe((data: any)=>{
-            this.inscriptions = data;
-        },err=>{this.inscriptionAcadSrv.httpSrv.handleError(err)});
-    }*/
+    /* loadTypeDocuments() {
+         this.typedocumentSrv.findAll()
+         .subscribe((data: any)=>{
+             this.inscriptions = data;
+         },err=>{this.inscriptionAcadSrv.httpSrv.handleError(err)});
+     }*/
 
     /*showDocAdminRequestDialog(inscriptionacad: Inscriptionacad) {
         this.inscriptionacad = inscriptionacad;

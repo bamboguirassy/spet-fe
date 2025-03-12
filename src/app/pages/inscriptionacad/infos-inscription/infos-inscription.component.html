@@ -17,8 +17,8 @@
                         <label style="font-weight: bold;">Regime d'inscription</label>
                         <select class="custom-select" [disabled]="true"
                             name="regime">
-                            <option [selected]="preinscription?.idregimeinscription.id==regimeinscription.id" [value]="regimeinscription.id" *ngFor="let regimeinscription of regimeinscriptions">
-                                {{regimeinscription.libelleregimeinscription}}</option>
+                                <option [selected]="preinscription?.idregimeinscription.id==regimeinscription.id" [value]="regimeinscription.id" *ngFor="let regimeinscription of regimeinscriptions">
+                                    {{regimeinscription.libelleregimeinscription}}</option>
                         </select>
                     </div>
                     <div *ngIf="preinscription?.idregimeinscription?.coderegimeinscription=='RNP' || preinscription?.idregimeinscription?.coderegimeinscription=='RPP'"
